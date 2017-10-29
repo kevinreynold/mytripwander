@@ -1,0 +1,15 @@
+npm i -g npm-check-updates
+npm-check-updates -u
+npm install --no-bin-links
+npm update
+npm run dev
+
+npm install --only=dev
+
+
+Tambahan
+  child components
+  bootstrap
+  f7 icon
+  jquery
+  vue-resource (http request)
