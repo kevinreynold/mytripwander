@@ -1,6 +1,6 @@
 <template>
   <!-- Login Screen -->
-  <f7-login-screen id="login-screen" v-show="isShown">
+  <f7-login-screen id="login-screen" v-show="isShown" :opened=true>
     <f7-view>
       <f7-pages>
         <f7-page login-screen>

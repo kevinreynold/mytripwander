@@ -1,8 +1,8 @@
 <template>
   <f7-page>
+    <f7home_main_view/>
     <f7home_left_panel/>
     <f7home_right_panel/>
-    <f7home_main_view/>
     <f7home_popup/>
     <f7home_login_screen/>
   </f7-page>

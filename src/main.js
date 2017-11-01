@@ -9,11 +9,11 @@ import Framework7 from 'framework7'
 import Framework7Vue from 'framework7-vue'
 
 // Import F7 iOS Theme Styles
-import Framework7ThemeIOS from 'framework7/dist/css/framework7.ios.min.css'
-import Framework7ThemeColorsIOS from 'framework7/dist/css/framework7.ios.colors.min.css'
+// import Framework7ThemeIOS from 'framework7/dist/css/framework7.ios.min.css'
+// import Framework7ThemeColorsIOS from 'framework7/dist/css/framework7.ios.colors.min.css'
 // OR for Material Theme:
-// import Framework7ThemeMaterial from 'framework7/dist/css/framework7.material.min.css'
-// import Framework7ThemeColorsMaterial from 'framework7/dist/css/framework7.material.colors.min.css'
+import Framework7ThemeColorsMaterial from 'framework7/dist/css/framework7.material.colors.min.css'
+import Framework7ThemeMaterial from 'framework7/dist/css/framework7.material.min.css'
 
 
 // Import F7 Icons
@@ -25,6 +25,9 @@ import AppStyles from './css/app.css'
 // Import Bootstrap
 // import BootstrapCSS from './css/bootstrap.min.css'
 // import BootstrapJS from './js/bootstrap.min.js'
+
+// Import FontAwesome
+import FontAwesome from './assets/font-awesome/css/font-awesome.min.css'
 
 // Import Routes
 import Routes from './routes.js'
@@ -44,7 +47,7 @@ new Vue({
   framework7: {
     root: '#app',
     /* Uncomment to enable Material theme: */
-    // material: true,
+    material: true,
     routes: Routes,
   },
   // Register App Component

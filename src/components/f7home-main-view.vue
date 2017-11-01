@@ -1,7 +1,8 @@
 <template>
   <!-- Main Views -->
   <f7-views>
-    <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
+    <f7-view id="main-view" navbar-through :dynamic-navbar="true" theme='red' main>
+    <!-- <f7-view id="main-view" navbar-through :dynamic-navbar="true"> -->
       <!-- iOS Theme Navbar -->
       <f7-navbar v-if="$theme.ios">
         <f7-nav-left>
@@ -36,6 +37,7 @@
           <f7-list>
             <f7-list-item link="/about/" title="About"></f7-list-item>
             <f7-list-item link="/form/" title="Form"></f7-list-item>
+            <f7-list-item link="/login/" title="Login"></f7-list-item>
             <f7-list-item link="/dynamic-route/blog/45/post/125/?foo=bar#about" title="Dynamic Route"></f7-list-item>
           </f7-list>
           <f7-block-title>Side Panels</f7-block-title>
@@ -92,5 +94,4 @@
 </script>
 
 <style scoped>
-
 </style>
