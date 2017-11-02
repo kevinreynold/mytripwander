@@ -1,5 +1,5 @@
 <template>
-  <f7-login-screen id="login-screen" :opened='true'>
+  <f7-login-screen id="login-screen" :opened='shown'>
     <f7-view id="login">
       <f7-pages>
         <f7-page class="login-screen-self bg" theme="teal">
@@ -32,13 +32,13 @@
           </f7-grid>
 
           <f7-block>
-            <a class="button-fill button btn-social-media" v-on:click="doLogin" href="#">
+            <a class="button-fill button btn-social-media" v-on:click="closeLoginScreen" href="#">
               <f7-grid>
                 <f7-col width="10"><f7-icon fa="facebook"></f7-icon></f7-col>
                 <f7-col width="90">Sign in With Facebook</f7-col>
               </f7-grid>
             </a>
-            <p><a class="button-fill button btn-social-media" v-on:click="doLogin" href="#">
+            <p><a class="button-fill button btn-social-media" v-on:click="closeLoginScreen" href="#">
               <f7-grid>
                 <f7-col width="10"><f7-icon fa="google-plus"></f7-icon></f7-col>
                 <f7-col width="90">Sign in With Google+</f7-col>
@@ -59,7 +59,8 @@ export default {
   }),
   props:{
     shown: {
-      default: 'false'
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -69,7 +70,11 @@ export default {
         window.f7.hidePreloader();
         var mainView = Dom7('#login')[0].f7View;
         mainView.router.load({url: '/about/'});
+        // this.$f7.mainView.router.load({url: '/about/'});
       }, 1000);
+    },
+    closeLoginScreen: function () {
+        window.f7.closeModal('#login-screen', true);
     }
   },
   created(){
