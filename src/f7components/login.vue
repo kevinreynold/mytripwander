@@ -1,19 +1,19 @@
 <template>
-  <f7-login-screen id="login-screen" :opened='shown'>
+  <f7-login-screen id="login-screen" :opened='shown' @loginscreen:opened="backHome">
     <f7-view id="login">
       <f7-pages>
         <f7-page class="login-screen-self bg" theme="teal">
           <f7-login-screen-title class="app-title">Trip Wander</f7-login-screen-title>
 
-          <form_input_self :inputs="inputs">
-            <p class="forgot">Forgot Password?</p>
+          <form_input_self :inputs="inputs" fontColor="white" lineColor="teal">
+            <f7-link href="/forgotpass/" view="#main-view" :animate-pages="false" close-login-screen><p class="forgot">Forgot Password?</p></f7-link>
           </form_input_self>
 
           <f7-block>
             <f7-button fill v-on:click="doLogin">Sign In</f7-button>
           </f7-block>
 
-          <p class="sign-up">Don't have an account yet? Sign Up.</p>
+          <f7-link href="/register/" view="#main-view" :animate-pages="false" close-login-screen><p class="sign-up">Don't have an account yet? Sign Up.</p></f7-link>
 
           <f7-grid>
              <f7-col width="45"><hr></f7-col>
@@ -54,13 +54,15 @@ export default {
     inputs: [
       {
         title: 'Email Address',
-        type: 'email'
+        type: 'email',
+        req: true
       },
       {
         title: 'Password',
-        type: 'password'
+        type: 'password',
+        req: true
       }
-    ],
+    ]
   }),
   props:{
     shown: {
@@ -85,6 +87,10 @@ export default {
         window.f7.hidePreloader();
         window.f7.closeModal('#login-screen', true);
       }, 1000);
+    },
+    backHome: function () {
+      var mainView = Dom7('#main-view')[0].f7View;
+      mainView.router.back();
     }
   },
   created(){

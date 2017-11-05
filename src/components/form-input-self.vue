@@ -1,10 +1,10 @@
 <template>
-  <div class="login-input">
+  <div class="login-input" :class="[ffontColor,llineColor]">
     <div v-for="input in inputs" class="field-wrap">
       <label>
-        {{input.title}}<span class="req">*</span>
+        {{input.title}}<span v-if="input.req" class="req">*</span>
       </label>
-      <input :type="input.title"/>
+      <input :type="input.type"/>
     </div>
     <slot></slot>
   </div>
@@ -16,10 +16,27 @@ export default {
   props: {
       inputs: {
         type: Array
-      }
+      },
+      // Colors : White, Black (Default : White)
+      fontColor: {
+        type: String,
+        default: "white"
+      },
+      // Colors : White, Black, Teal (Default : White)
+      lineColor: {
+        type: String,
+        default: "white"
+      },
   },
   data: () => ({
+    ffontColor: '',
+    llineColor: ''
   }),
+  mounted() {
+    // supaya tidak mutating
+    this.ffontColor = "font-" + this.fontColor;
+    this.llineColor = "line-" + this.lineColor;
+  },
   created() {
     $(document).ready(function(){
       $('.login-input').find('input').on('keyup blur focus', function (e) {
@@ -63,18 +80,36 @@ export default {
   label {
     position: absolute;
     left: 10px;
+    font-size: 18px;
     -webkit-transform: translateY(6px);
             transform: translateY(6px);
-    color: rgba(255, 255, 255, 0.4);
     -webkit-transition: all 0.25s ease;
     transition: all 0.25s ease;
     -webkit-backface-visibility: hidden;
     pointer-events: none;
-    font-size: 18px;
+  }
+
+  /*COLOR*/
+  .font-white label{
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .font-black label{
+    color: rgba(0, 0, 0, 0.7);
   }
 
   label .req {
     margin: 2px;
+    color: #009688;
+  }
+
+  /*REQ COLOR*/
+  .line-white label .req {
+    color: #ffffff;
+  }
+  .line-black label .req {
+    color: #000000;
+  }
+  .line-teal label .req {
     color: #009688;
   }
 
@@ -89,8 +124,11 @@ export default {
     opacity: 0;
   }
 
-  label.highlight {
+  .font-white label.highlight {
     color: #ffffff;
+  }
+  .font-black label.highlight {
+    color: #000000;
   }
 
   input, textarea {
@@ -103,8 +141,9 @@ export default {
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-bottom: 1px solid #a0b3b0;
-    color: #ffffff;
+    border-bottom: 1px solid;
+    /*border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;*/
     border-radius: 0;
     -webkit-transition: border-color .25s ease, box-shadow .25s ease;
     transition: border-color .25s ease, box-shadow .25s ease;
@@ -112,6 +151,26 @@ export default {
 
   input:focus {
     outline: 0;
+    /*border-color: #1ab188;*/
+  }
+
+  /* INPUT COLOR */
+  .font-white input, textarea{
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+  }
+  .font-black input, textarea{
+    border-color: rgba(0, 0, 0, 0.7);
+    color: #000000;
+  }
+
+  .line-white input:focus{
+    border-color: #ffffff;
+  }
+  .line-black input:focus{
+    border-color: #000000;
+  }
+  .line-teal input:focus{
     border-color: #1ab188;
   }
 
