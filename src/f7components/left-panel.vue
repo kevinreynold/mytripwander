@@ -1,23 +1,22 @@
 <template>
   <!-- Left Panel -->
-  <f7-panel left reveal layout="dark">
+  <f7-panel left layout="dark" :opened='false'>
     <f7-view id="left-panel-view" navbar-through :dynamic-navbar="true">
-      <f7-navbar v-if="$theme.ios" title="Left Panel" sliding></f7-navbar>
       <f7-pages>
         <f7-page>
-          <f7-navbar v-if="$theme.material" title="Left Panel" sliding></f7-navbar>
-          <f7-block inner>
-            <p>Left panel content goes here</p>
-          </f7-block>
-          <f7-block-title>Load page in panel</f7-block-title>
+          <div class="profile">
+            <f7-card-content><img class="round-image" src="../assets/user.jpg" alt="John Doe" width="100px"></f7-card-content>
+            <f7-card-content><span class="size-double">John Doe</span></f7-card-content>
+          </div>
           <f7-list>
-            <f7-list-item link="/about/" title="About"></f7-list-item>
-            <f7-list-item link="/form/" title="Form"></f7-list-item>
-          </f7-list>
-          <f7-block-title>Load page in main view</f7-block-title>
-          <f7-list>
-            <f7-list-item link="/about/" title="About" link-view="#main-view" link-close-panel></f7-list-item>
-            <f7-list-item link="/form/" title="Form" link-view="#main-view" link-close-panel></f7-list-item>
+            <f7_list_item_media link="/about/" link_view="#main-view" icon="home" title="My Trip"/>
+            <f7_list_item_media link="/form/" link_view="#main-view" icon="map" title="Plan Trip"/>
+            <f7_list_item_media link="/about/" link_view="#main-view" icon="ticket" title="My Bookings"/>
+            <f7_list_item_media link="/about/" link_view="#main-view" icon="plane" title="Book Flight"/>
+            <f7_list_item_media link="/form/" link_view="#main-view" icon="hotel" title="Book Hotel"/>
+            <f7_list_item_media link="/form/" link_view="#main-view" icon="gear" title="Settings"/>
+            <!-- <f7_list_item_media link="/form/" link_view="#main-view" icon="question-circle" title="Tutorial"/> -->
+            <f7_list_item_media link="/form/" link_view="#main-view" icon="sign-out" title="Logout"/>
           </f7-list>
         </f7-page>
       </f7-pages>
@@ -26,11 +25,29 @@
 </template>
 
 <script>
+  import f7_list_item_media from '../components/f7-list-item-media'
+
   export default {
-    name: 'left-panel'
+    name: 'left-panel',
+    components: {
+      f7_list_item_media
+    }
   }
 </script>
 
 <style scoped>
+  .profile{
+    margin-top: -15%;
+    margin-bottom: -5%;
+    text-align: center;
+  }
 
+  .size-double{
+    font-size: 1.3em;
+  }
+
+  .round-image{
+    border-radius: 100%;
+    margin-bottom: -10%;
+  }
 </style>

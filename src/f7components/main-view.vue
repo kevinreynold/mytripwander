@@ -11,6 +11,9 @@
               <f7-link icon="icon-bars" open-panel="left"></f7-link>
             </f7-nav-left>
             <f7-nav-center sliding>Home</f7-nav-center>
+            <f7-nav-right>
+              <f7-link open-panel="right"><f7-icon f7="bell"/></f7-link>
+            </f7-nav-right>
           </f7-navbar>
           <!-- Page Content -->
           <f7-block-title>Welcome to my App</f7-block-title>

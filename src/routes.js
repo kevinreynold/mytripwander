@@ -10,13 +10,5 @@ export default [
   {
       path: '/dynamic-route/blog/:blogId/post/:postId/',
       component: require('./pages/dynamic-route.vue')
-  },
-  {
-      path: '/login/',
-      component: require('./pages/login.vue')
-  },
-  {
-      path: '/home/',
-      component: require('./components/f7home.vue')
   }
 ]

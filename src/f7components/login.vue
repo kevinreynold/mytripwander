@@ -5,25 +5,15 @@
         <f7-page class="login-screen-self bg" theme="teal">
           <f7-login-screen-title class="app-title">Trip Wander</f7-login-screen-title>
 
-          <div class="login-input">
-            <div class="field-wrap">
-              <label>
-                Email Address<span class="req">*</span>
-              </label>
-              <input type="email"/>
-            </div>
-            <div class="field-wrap">
-              <label>
-                Password<span class="req">*</span>
-              </label>
-              <input type="password"/>
-            </div>
+          <form_input_self :inputs="inputs">
             <p class="forgot">Forgot Password?</p>
-          </div>
+          </form_input_self>
 
           <f7-block>
             <f7-button fill v-on:click="doLogin">Sign In</f7-button>
           </f7-block>
+
+          <p class="sign-up">Don't have an account yet? Sign Up.</p>
 
           <f7-grid>
              <f7-col width="45"><hr></f7-col>
@@ -52,10 +42,25 @@
 </template>
 
 <script>
+import form_input_self from '../components/form-input-self'
+
 export default {
   name: "login",
+  components: {
+    form_input_self
+  },
   data: () => ({
-
+    // Form Input
+    inputs: [
+      {
+        title: 'Email Address',
+        type: 'email'
+      },
+      {
+        title: 'Password',
+        type: 'password'
+      }
+    ],
   }),
   props:{
     shown: {
@@ -68,44 +73,22 @@ export default {
       window.f7.showPreloader();
       setTimeout(function () {
         window.f7.hidePreloader();
-        var mainView = Dom7('#login')[0].f7View;
+        window.f7.closeModal('#login-screen', true);
+        var mainView = Dom7('#main-view')[0].f7View;
         mainView.router.load({url: '/about/'});
         // this.$f7.mainView.router.load({url: '/about/'});
       }, 1000);
     },
     closeLoginScreen: function () {
+      window.f7.showPreloader();
+      setTimeout(function () {
+        window.f7.hidePreloader();
         window.f7.closeModal('#login-screen', true);
+      }, 1000);
     }
   },
   created(){
-    $(document).ready(function(){
-      $('.login-input').find('input').on('keyup blur focus', function (e) {
-        var $this = $(this),
-            label = $this.prev('label');
 
-      	  if (e.type === 'keyup') {
-      			if ($this.val() === '') {
-                label.removeClass('active highlight');
-              } else {
-                label.addClass('active highlight');
-              }
-          } else if (e.type === 'blur') {
-          	if( $this.val() === '' ) {
-          		label.removeClass('active highlight');
-      			} else {
-      		    label.removeClass('highlight');
-      			}
-          } else if (e.type === 'focus') {
-
-            if( $this.val() === '' ) {
-          		label.removeClass('highlight');
-      			}
-            else if( $this.val() !== '' ) {
-      		    label.addClass('highlight');
-      			}
-          }
-      });
-    });
   }
 }
 </script>
@@ -127,75 +110,15 @@ export default {
     margin-top: 12%;
   }
 
-  .login-input {
-    width: 90%;
-    margin: auto;
-    margin-top: 10%;
-  }
-
-  label {
-    position: absolute;
-    left: 10px;
-    -webkit-transform: translateY(6px);
-            transform: translateY(6px);
-    color: rgba(255, 255, 255, 0.4);
-    -webkit-transition: all 0.25s ease;
-    transition: all 0.25s ease;
-    -webkit-backface-visibility: hidden;
-    pointer-events: none;
-    font-size: 18px;
-  }
-
-  label .req {
-    margin: 2px;
-    color: #009688;
-  }
-
-  label.active {
-    -webkit-transform: translateY(-15px);
-            transform: translateY(-15px);
-    left: 2px;
-    font-size: 14px;
-  }
-
-  label.active .req {
-    opacity: 0;
-  }
-
-  label.highlight {
-    color: #ffffff;
-  }
-
-  input, textarea {
-    font-size: 22px;
-    display: block;
-    width: 96%;
-    height: 100%;
-    padding: 7px 7px;
-    background: none;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 1px solid #a0b3b0;
-    color: #ffffff;
-    border-radius: 0;
-    -webkit-transition: border-color .25s ease, box-shadow .25s ease;
-    transition: border-color .25s ease, box-shadow .25s ease;
-  }
-
-  input:focus {
-    outline: 0;
-    border-color: #1ab188;
-  }
-
-  .field-wrap {
-    position: relative;
-    margin-bottom: 9%;
-  }
-
   .forgot {
-    margin-top: -4%;
+    margin-top: -7%;
     text-align: right;
+    color: #ffffff;
+  }
+
+  .sign-up {
+    margin-top: -4%;
+    text-align: center;
     color: #ffffff;
   }
 
