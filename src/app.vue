@@ -7,7 +7,7 @@
     <main_view/>
 
     <!-- LOGIN -->
-    <login :shown='true'/>
+    <login :shown='false'/>
 
     <!-- LEFT PANEL -->
     <left_panel/>

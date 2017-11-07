@@ -22,5 +22,9 @@ export default [
   {
       path: '/forgotpass/',
       component: require('./pages/forgotpass.vue')
+  },
+  {
+      path: '/settings/',
+      component: require('./pages/settings.vue')
   }
 ]

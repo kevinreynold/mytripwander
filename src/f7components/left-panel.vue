@@ -1,6 +1,6 @@
 <template>
   <!-- Left Panel -->
-  <f7-panel left layout="dark" :opened='false'>
+  <f7-panel id="left-panel" left layout="dark" :opened='false'>
     <f7-view id="left-panel-view" navbar-through :dynamic-navbar="true">
       <f7-pages>
         <f7-page>
@@ -14,9 +14,9 @@
             <f7_list_item_media link="/about/" link_view="#main-view" icon="ticket" title="My Bookings"/>
             <f7_list_item_media link="/about/" link_view="#main-view" icon="plane" title="Book Flight"/>
             <f7_list_item_media link="/form/" link_view="#main-view" icon="hotel" title="Book Hotel"/>
-            <f7_list_item_media link="/form/" link_view="#main-view" icon="gear" title="Settings"/>
+            <f7_list_item_media link="/settings/" link_view="#main-view" icon="gear" title="Settings"/>
             <!-- <f7_list_item_media link="/form/" link_view="#main-view" icon="question-circle" title="Tutorial"/> -->
-            <f7_list_item_media link="/form/" link_view="#main-view" icon="sign-out" title="Logout"/>
+            <f7_list_item_media log_out="true" icon="sign-out" title="Logout"/>
           </f7-list>
         </f7-page>
       </f7-pages>
@@ -31,6 +31,11 @@
     name: 'left-panel',
     components: {
       f7_list_item_media
+    },
+    methods: {
+      doLogOut() {
+        alert("");
+      }
     }
   }
 </script>
