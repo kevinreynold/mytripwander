@@ -40,7 +40,7 @@ export default {
         window.f7.showPreloader();
         setTimeout(function () {
           window.f7.hidePreloader();
-          window.f7.openModal('#login-screen', true);
+          window.f7.loginScreen();
         }, 1000);
     }
   }
