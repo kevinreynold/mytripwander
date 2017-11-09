@@ -4,6 +4,10 @@ export default [
       component: require('./app.vue')
   },
   {
+      path: '/mybookings/',
+      component: require('./pages/mybookings.vue')
+  },
+  {
       path: '/about/',
       component: require('./pages/about.vue')
   },
@@ -26,5 +30,9 @@ export default [
   {
       path: '/settings/',
       component: require('./pages/settings.vue')
+  },
+  {
+      path: '/changepassword/',
+      component: require('./pages/changepassword.vue')
   }
 ]
