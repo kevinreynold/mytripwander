@@ -13,7 +13,7 @@
             <f7_list_item_media link="/about/" link_view="#main-view" icon="home" title="My Trip"/>
             <f7_list_item_media link="/form/" link_view="#main-view" icon="map" title="Plan Trip"/>
             <f7_list_item_media link="/mybookings/" link_view="#main-view" icon="ticket" title="My Bookings"/>
-            <f7_list_item_media link="/about/" link_view="#main-view" icon="plane" title="Book Flight"/>
+            <f7_list_item_media link="/flight/" link_view="#main-view" icon="plane" title="Book Flight"/>
             <f7_list_item_media link="/form/" link_view="#main-view" icon="hotel" title="Book Hotel"/>
             <f7_list_item_media link="/settings/" link_view="#main-view" icon="gear" title="Settings"/>
             <!-- <f7_list_item_media link="/form/" link_view="#main-view" icon="question-circle" title="Tutorial"/> -->

@@ -14,6 +14,9 @@
 
     <!-- RIGHT PANEL -->
     <right_panel/>
+
+    <!-- POP UP FOR LOADING -->
+    <f7-popup id="popup-loading"/>
   </div>
 </template>
 

@@ -41,7 +41,7 @@
           <f7-block>
             <f7-grid>
               <f7-col width="50">
-                <f7-button open-popup="#popup">Popup</f7-button>
+                <f7-button open-popup="#popup-loading">Popup</f7-button>
               </f7-col>
               <f7-col width="50">
                 <f7-button open-login-screen="#login-screen">Login Screen</f7-button>

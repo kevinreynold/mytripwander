@@ -8,6 +8,10 @@ export default [
       component: require('./pages/mybookings.vue')
   },
   {
+      path: '/flight/',
+      component: require('./pages/flightbookings.vue')
+  },
+  {
       path: '/about/',
       component: require('./pages/about.vue')
   },
