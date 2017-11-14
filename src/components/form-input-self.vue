@@ -4,7 +4,7 @@
       <label>
         {{input.title}}<span v-if="input.req" class="req">*</span>
       </label>
-      <input :type="input.type"/>
+      <input :type="input.type" v-model="input.value"/>
     </div>
     <slot></slot>
   </div>
@@ -15,6 +15,7 @@ export default {
   name: "form-input-self",
   props: {
       inputs: {
+        // title, type, req, name, value
         type: Array
       },
       // Colors : White, Black (Default : White)

@@ -53,13 +53,17 @@ export default {
     // Form Input
     inputs: [
       {
+        name: 'email',
         title: 'Email Address',
         type: 'email',
+        value: '',
         req: true
       },
       {
+        name: 'password',
         title: 'Password',
         type: 'password',
+        value: '',
         req: true
       }
     ]

@@ -24,28 +24,38 @@ export default {
   data: () => ({
     inputs: [
       {
+        name: "username",
         title: "Username",
         type: "text",
+        value: "",
         req: true
       },
       {
+        name: "currency",
         title: "Currency",
         type: "text",
+        value: "",
         req: true
       },
       {
+        name: "email",
         title: "Email Address",
         type: "email",
+        value: "",
         req: true
       },
       {
+        name: "password",
         title: "Password",
         type: "password",
+        value: "",
         req: true
       },
       {
+        name: "confirm_password",
         title: "Confrim Password",
         type: "password",
+        value: "",
         req: true
       }
     ]

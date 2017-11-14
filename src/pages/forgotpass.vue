@@ -25,8 +25,10 @@ export default {
   data: () => ({
     inputs: [
       {
+        name: "email",
         title: "",
         type: "email",
+        value: "",
         req: false
       }
     ]

@@ -24,18 +24,24 @@ export default {
   data: () => ({
     inputs: [
       {
+        name: "old_password",
         title: "Old Password",
         type: "password",
+        value: "",
         req: true
       },
       {
+        name: "new_password",
         title: "New Password",
         type: "password",
+        value: "",
         req: true
       },
       {
+        name: "confirm_password",
         title: "Confrim Password",
         type: "password",
+        value: "",
         req: true
       }
     ]

@@ -12,8 +12,11 @@ import Framework7Vue from 'framework7-vue'
 // import Framework7ThemeIOS from 'framework7/dist/css/framework7.ios.min.css'
 // import Framework7ThemeColorsIOS from 'framework7/dist/css/framework7.ios.colors.min.css'
 // OR for Material Theme:
+// import Framework7ThemeColorsMaterial from 'framework7/dist/css/framework7.material.colors.min.css'
+// import Framework7ThemeMaterial from 'framework7/dist/css/framework7.material.min.css'
+// OR for Material Theme LOCAL:
 import Framework7ThemeColorsMaterial from 'framework7/dist/css/framework7.material.colors.min.css'
-import Framework7ThemeMaterial from 'framework7/dist/css/framework7.material.min.css'
+import Framework7ThemeMaterial from './css/framework7.material.css'
 
 
 // Import F7 Icons
@@ -49,7 +52,7 @@ new Vue({
     /* Uncomment to enable Material theme: */
     material: true,
     routes: Routes,
-    swipePanel: 'left'
+    // swipePanel: 'left'
   },
   // Register App Component
   components: {
