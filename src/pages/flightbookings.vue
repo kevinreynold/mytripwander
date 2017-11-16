@@ -97,9 +97,9 @@
             <div class="grid-head">
               <div class="grid-user">
                 <div>
-                    <select type="class-user">
-                      <option value="1">Economy</option>
-                      <option value="1">Business</option>
+                    <select type="class-user" id="booking-class">
+                      <option value="Y">Economy</option>
+                      <option value="C">Business</option>
                     </select>
                   <!-- <span class="class-user">Economy</span> -->
                 </div>
@@ -136,7 +136,7 @@
           <div class="passenger-counter">
             <div class="counter-dec" v-on:click="passenger.adults > 1 ? passenger.adults -= 1 : 1">-</div>
             <div class="counter-desc">{{passenger.adults}}</div>
-            <div class="counter-inc" v-on:click="passenger.adults += 1">+</div>
+            <div class="counter-inc" v-on:click="passenger.adults < 9 ? passenger.adults += 1 : 9">+</div>
           </div>
         </div>
         <div class="passenger-input">
@@ -150,12 +150,12 @@
           <div class="passenger-counter">
             <div class="counter-dec" v-on:click="passenger.children > 0 ? passenger.children -= 1 : 0">-</div>
             <div class="counter-desc">{{passenger.children}}</div>
-            <div class="counter-inc" v-on:click="passenger.children += 1">+</div>
+            <div class="counter-inc" v-on:click="passenger.children < 6 ? passenger.children += 1 : 6">+</div>
           </div>
         </div>
         <div class="passenger-input">
           <div class="passenger-icon">
-            <img src="../assets/flight-icon/adult.png" alt="adult" width="45px">
+            <img src="../assets/flight-icon/infant.png" alt="infant" width="45px">
           </div>
           <div class="passenger-desc">
             Infant<br>
@@ -164,7 +164,7 @@
           <div class="passenger-counter">
             <div class="counter-dec" v-on:click="passenger.infants > 0 ? passenger.infants -= 1 : 0">-</div>
             <div class="counter-desc">{{passenger.infants}}</div>
-            <div class="counter-inc" v-on:click="passenger.infants += 1">+</div>
+            <div class="counter-inc" v-on:click="passenger.infants < 6 ? passenger.infants += 1 : 6">+</div>
           </div>
         </div>
       </f7-block>
@@ -173,6 +173,8 @@
 </template>
 
 <script>
+import travelpayouts from "../js/flightsearch"
+
 let self;
 
 function animateRotate(element, degree, dur){
@@ -231,9 +233,6 @@ export default {
       e.preventDefault();
       e.target.value='';
     },
-    doSearch(){
-      console.log(self.from + ' - ' + self.to);
-    },
     swapDestination(){
       if (!self.isSwapped && self.new_from.trim().length>0 && self.new_to.trim().length>0) {
         self.isSwapped = !self.isSwapped;
@@ -260,6 +259,23 @@ export default {
     },
     closePassenger(){
       window.f7.closeModal("#picker-modal-passenger", true);
+    },
+    doSearch(){
+      var booking = {
+        origin: self.from,
+        destination: self.to,
+        mode: self.mode,
+        depart_date: self.depart_date,
+        return_date: self.return_date,
+        passengers: {
+          adults: self.passenger.adults,
+          children: self.passenger.children,
+          infants: self.passenger.infants
+        },
+        trip_class: document.getElementById("booking-class").options[document.getElementById("booking-class").selectedIndex].value
+      };
+      console.log(booking);
+      travelpayouts.getPriceList();
     },
   },
   mounted() {
@@ -345,8 +361,8 @@ export default {
                     }
                     // Hide Preoloader
                     autocomplete.hidePreloader();
-                    // Render items by passing array with result items
-                    render(results);
+                    var unique = results.filter((set => r => !set.has(r.city_fullname) && set.add(r.city_fullname))(new Set));
+                    render(unique);
                 }
             });
         },
