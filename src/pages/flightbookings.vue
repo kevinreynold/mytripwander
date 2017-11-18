@@ -199,8 +199,16 @@ export default {
   },
   data: () => ({
     mode: 'one-way',
-    from: 'SUB',
-    to: 'DPS',
+    from: {
+      city_code : "SUB",
+      city_name : "Surabaya",
+      country_name : "Indonesia"
+    },
+    to: {
+      city_code : "DPS",
+      city_name : "Denpasar",
+      country_name : "Indonesia"
+    },
     new_from: '',
     new_to: '',
     // swapDestinatiop
@@ -261,21 +269,60 @@ export default {
       window.f7.closeModal("#picker-modal-passenger", true);
     },
     doSearch(){
-      var booking = {
-        origin: self.from,
-        destination: self.to,
-        mode: self.mode,
-        depart_date: self.depart_date,
-        return_date: self.return_date,
-        passengers: {
-          adults: self.passenger.adults,
-          children: self.passenger.children,
-          infants: self.passenger.infants
-        },
-        trip_class: document.getElementById("booking-class").options[document.getElementById("booking-class").selectedIndex].value
-      };
-      console.log(booking);
-      travelpayouts.getPriceList();
+      //params
+      if (self.from.city_code === self.to.city_code) {
+        self.new_from = '';
+        self.new_to = '';
+        self.from = {
+          city_code : "SUB",
+          city_name : "Surabaya",
+          country_name : "Indonesia"
+        };
+        self.to = {
+          city_code : "DPS",
+          city_name : "Denpasar",
+          country_name : "Indonesia"
+        };
+        window.f7.addNotification({
+            message: 'Origin and Destination Points are the Same.'
+        });
+      }
+      else{
+        var flight_data = [];
+        var flight_from = {
+          origin: self.from.city_code,
+          destination: self.to.city_code,
+          date: new Date(self.depart_date),
+        };
+        flight_data.push(flight_from);
+        if (self.mode === "round-trip") {
+          var flight_to = {
+            origin: self.to.city_code,
+            destination: self.from.city_code,
+            date: new Date(self.return_date),
+          };
+          flight_data.push(flight_to);
+        }
+
+        //options
+        var passenger_data = {
+          host: 'mytripwander.com',
+          user_ip: '127.0.0.1',
+          locale: 'en',
+          trip_class: document.getElementById("booking-class").options[document.getElementById("booking-class").selectedIndex].value,
+          passengers: {
+            adults: self.passenger.adults,
+            children: self.passenger.children,
+            infants: self.passenger.infants
+          },
+          know_english: true
+        };
+
+        // console.log(flight_data);
+        // console.log(passenger_data);
+        travelpayouts.getPriceListLocal();
+        // travelpayouts.getPriceList(flight_data,passenger_data);
+      }
     },
   },
   mounted() {
@@ -319,10 +366,18 @@ export default {
             });
         },
         onChange: function(autocomplete, value){
-          self.from = value.city_code;
+          self.from = {
+            city_code : value.city_code,
+            city_name : value.city_name,
+            country_name : value.country_name
+          };
         },
         onOpen: function(autocomplete){
-          self.from = 'SUB';
+          self.from = {
+            city_code : "SUB",
+            city_name : "Surabaya",
+            country_name : "Indonesia"
+          };
         }
     });
     var autocompleteArrivals = window.f7.autocomplete({
@@ -367,10 +422,18 @@ export default {
             });
         },
         onChange: function(autocomplete, value){
-          self.to = value.city_code;
+          self.to = {
+            city_code : value.city_code,
+            city_name : value.city_name,
+            country_name : value.country_name
+          };
         },
         onOpen: function(autocomplete){
-          self.to = 'DPS';
+          self.to = {
+            city_code : "DPS",
+            city_name : "Denpasar",
+            country_name : "Indonesia"
+          };
         }
     });
   },
