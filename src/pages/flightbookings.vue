@@ -174,6 +174,7 @@
 
 <script>
 import travelpayouts from "../js/flightsearch"
+import store from "../js/store"
 
 let self;
 
@@ -220,7 +221,8 @@ export default {
       adults: 1,
       children: 0,
       infants: 0
-    }
+    },
+    search_result: []
   }),
   computed: {
     adults(){
@@ -320,6 +322,7 @@ export default {
 
         // console.log(flight_data);
         // console.log(passenger_data);
+
         travelpayouts.getPriceListLocal();
         // travelpayouts.getPriceList(flight_data,passenger_data);
       }
