@@ -38,25 +38,29 @@
     </f7-card-content>
     <f7-card-footer>
       <div class="ticket-host">{{flight_detail.host_name}}</div>
-      <div class="ticket-clicked"><f7-icon f7="chevron_down" size="150%"></f7-icon></div>
+      <div class="ticket-clicked" v-on:click="showTicketDetail(flight_detail)"><f7-icon f7="chevron_down" size="150%"></f7-icon></div>
     </f7-card-footer>
   </f7-card>
 </template>
 
 <script>
+import store from "../js/store"
+
 export default {
   name: "flight-card",
   props:{
     flight_detail: { type: Object },
   },
-  computed: {
-    image_url(){
-      return "http://pics.avs.io/200/200/"+ flight_detail.carriers[0] +".png";
-    }
-  },
   mounted() {
   },
   created() {
+  },
+  methods: {
+    showTicketDetail(flight_detail) {
+      store.flight_details = flight_detail;
+      var mainView = Dom7('#main-view')[0].f7View;
+      mainView.router.load({url: '/flight-detail/'});
+    }
   }
 }
 </script>

@@ -110,9 +110,14 @@
       </f7-grid>
 
     </f7-list>
-    <f7-block class="less-margin" inner no-hairlines>
+
+    <div class="fixed-bottom">
+      <f7-button fill big v-on:click="doSearch">Search Flight</f7-button>
+    </div>
+    <f7-button fill big color="white">Search Flight</f7-button>
+    <!-- <f7-block class="less-margin" inner no-hairlines>
       <p><f7-button fill round v-on:click="doSearch">Search Flight</f7-button></p>
-    </f7-block>
+    </f7-block> -->
 
     <f7-picker-modal id="picker-modal-passenger" theme="teal" overlay>
       <f7-navbar>
@@ -322,7 +327,7 @@ export default {
 
         // console.log(flight_data);
         // console.log(passenger_data);
-
+        store.flight_booking_data = flight_data;
         travelpayouts.getPriceListLocal();
         // travelpayouts.getPriceList(flight_data,passenger_data);
       }
@@ -654,4 +659,17 @@ export default {
   .passenger-counter .active-state {
     background-color: rgba(0,0,0,0.3);
   }
+
+  .fixed-bottom {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   overflow: auto;
+   z-index: 5000;
+ }
+
+ .fixed-bottom a{
+   font-size: 1.35em;
+ }
 </style>

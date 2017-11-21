@@ -16,6 +16,14 @@ export default [
       component: require('./pages/flight-search-result.vue')
   },
   {
+      path: '/flight-detail/',
+      component: require('./pages/flight-ticket-detail.vue')
+  },
+  {
+      path: '/flight-redirect/',
+      component: require('./pages/flight-redirect.vue')
+  },
+  {
       path: '/about/',
       component: require('./pages/about.vue')
   },

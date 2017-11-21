@@ -14,7 +14,7 @@ function goToSearchResult(){
 function changeFormatDuration(duration){
   var result = "";
   if (duration > 60) {
-    result += Math.floor(duration/60) + "h";
+    result += ("00" + (Math.floor(duration/60))).slice(-2) + "h ";
     result += duration % 60 + "m";
   }
   else{
@@ -32,6 +32,7 @@ function processData(data){
     if (Object.getOwnPropertyDescriptor (data[i],"proposals")) {
       var gates_info = data[i].gates_info;
       var airports = data[i].airports;
+      var airlines = data[i].airlines;
       if (Object.keys(data[i].proposals).length > 0) {
         for (var j = 0; j < Object.keys(data[i].proposals).length; j++) { // Dapat Data per Tiket
           var ticket_data = data[i].proposals[j];
@@ -41,12 +42,13 @@ function processData(data){
           //Info
           temp_ticket.display = [];
           temp_ticket.carriers = ticket_data.carriers;
+          temp_ticket.carriers_name = airlines[temp_ticket.carriers[0]].name;
           temp_ticket.image_url = "http://pics.avs.io/" + image_size + "/" + image_size + "/" + temp_ticket.carriers[0] + ".png";
           temp_ticket.is_direct = ticket_data.is_direct; //true or false
           temp_ticket.segment_durations = ticket_data.segment_durations; //true or false
           temp_ticket.total_duration = ticket_data.total_duration;
           temp_ticket.search_id = search_id; //true or false
-
+          
           //Price
           var terms  = ticket_data.terms;
           for(var propName in terms) {
@@ -55,7 +57,7 @@ function processData(data){
                   temp_ticket.price = Math.round(propValue.price * 100) / 100;
                   temp_ticket.unified_price = Math.round(propValue.unified_price * 100) / 100;
                   temp_ticket.currency = propValue.currency;
-                  temp_ticket.url = propValue.url;
+                  temp_ticket.url = "http://api.travelpayouts.com/v1/flight_searches/" + search_id + "/clicks/" + propValue.url + ".json";
               }
           }
 
@@ -75,6 +77,7 @@ function processData(data){
             for (var f = 0; f < Object.keys(ticket_data.segment[s].flight).length; f++) {
               var flight = {
                 operated_by : ticket_data.segment[s].flight[f].operated_by,
+                class : (ticket_data.segment[s].flight[f].trip_class === "Y")? "Economy" : "Business",
                 duration : ticket_data.segment[s].flight[f].duration,
                 delay : ticket_data.segment[s].flight[f].delay,
                 departure : {
@@ -188,6 +191,8 @@ travelpayouts.getPriceList = async function(flight_data,passenger_data){
   }
 };
 
+// flight-api-result
+// tokyo-round-trip
 travelpayouts.getPriceListLocal = function(json = "tokyo-round-trip"){
   window.f7.showPreloader();
   try {
@@ -196,7 +201,7 @@ travelpayouts.getPriceListLocal = function(json = "tokyo-round-trip"){
       dataType: "json",
       async: false
     }).responseText);
-
+    console.log(data);
 
     processData(data);
     setTimeout(function () {

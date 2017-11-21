@@ -1,6 +1,7 @@
 const store = {
+  flight_booking_data : [],
   flight_search_result : [],
-  coba : 10
+  flight_details : [],
 };
 
 export default store;
