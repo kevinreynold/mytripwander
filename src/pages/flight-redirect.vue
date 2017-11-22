@@ -1,7 +1,7 @@
 <template>
-  <f7-page>
+  <f7-page @page:beforeinit="test">
     <f7-navbar title="TICKET" back-link="Back" sliding></f7-navbar>
-    <iframe src="http:google.com" width="100%" height="100%"></iframe>
+    <iframe src="https://www.tiket.com/order/add/flight?flight=334509377&date=2017-11-23&ret_flight=339366511&ret_date=2017-11-30"></iframe>
   </f7-page>
 </template>
 
@@ -12,5 +12,23 @@ export default {
   },
   data: () => ({
   }),
+  methods: {
+    test() {
+      // console.log("masuk");
+      // $.get('https://www.tiket.com/order/add/flight?flight=334509377&date=2017-11-23&ret_flight=339366511&ret_date=2017-11-30', {}, function (data) {
+      //     $('.browser-own').html(data);
+      // });
+    }
+  }
 }
 </script>
+
+<style scoped>
+  iframe{
+    /*position: fixed;
+    top: 0px;
+    left: 0px;*/
+    width: 100%;
+    height: 100%;
+  }
+</style>

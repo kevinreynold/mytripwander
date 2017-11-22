@@ -1,7 +1,7 @@
 <template>
   <f7-page>
     <f7-navbar title="My Bookings" back-link="Back" sliding></f7-navbar>
-    
+
 
   </f7-page>
 </template>
@@ -33,6 +33,9 @@ export default {
 
 <style scoped>
   iframe{
+    position: fixed;
+    top: 0px;
+    left: 0px;
     width: 100%;
     height: 100%;
   }
