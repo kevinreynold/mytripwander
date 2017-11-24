@@ -1,5 +1,5 @@
 <template>
-  <f7-page tabbar-fixed>
+  <f7-page>
     <f7-navbar title="Flight Bookings" back-link="Back" @back-click="closePassenger" sliding no-shadow></f7-navbar>
 
     <f7-block tabs>

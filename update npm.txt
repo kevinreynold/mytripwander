@@ -13,3 +13,17 @@ Tambahan
   f7 icon
   jquery
   vue-resource (http request)
+
+
+//CORDOVA
+di config.xml
+<access origin="*" />
+<allow-navigation href="*" />
+<allow-navigation href="http://*/*" />
+<allow-navigation href="https://*/*" />
+<allow-navigation href="data:*" />
+<allow-intent href="*" />
+
+tambah Plugin
+$ cordova plugin add cordova-plugin-whitelist
+$ cordova prepare

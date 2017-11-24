@@ -4,9 +4,8 @@
     <f7-block inner>
       <p>Here is About page!</p>
       <p>You can go <f7-link back>back</f7-link>.</p>
-      <p>Mauris posuere sit amet metus id venenatis. Ut ante dolor, tempor nec commodo rutrum, varius at sem. Nullam ac nisi non neque ornare pretium. Nulla mauris mauris, consequat et elementum sit amet, egestas sed orci. In hac habitasse platea dictumst.</p>
-      <p>Fusce eros lectus, accumsan eget mi vel, iaculis tincidunt felis. Nulla tincidunt pharetra sagittis. Fusce in felis eros. Nulla sit amet aliquam lorem, et gravida ipsum. Mauris consectetur nisl non sollicitudin tristique. Praesent vitae metus ac quam rhoncus mattis vel et nisi. Aenean aliquet, felis quis dignissim iaculis, lectus quam tincidunt ligula, et venenatis turpis risus sed lorem. Morbi eu metus elit. Ut vel diam dolor.</p>
     </f7-block>
+    <!-- <f7-block-title v-for="user in users" :key="user.key">{{user.name}}</f7-block-title> -->
   </f7-page>
 </template>
 
@@ -16,6 +15,22 @@ export default {
   components: {
   },
   data: () => ({
+    users : []
   }),
+  created() {
+    //do something after creating vue instance
+    // this.$http.get('https://jsonplaceholder.typicode.com/users')
+    //   .then(function(response){
+    //     console.log(response); //header
+    //     console.log(response.data); //isi
+    //     this.users = response.data;
+    //     for (var i = 0; i < this.users.length; i++) {
+    //       if (i%2==0)
+    //         this.users[i].contacted = true;
+    //       else
+    //         this.users[i].contacted = false;
+    //     }
+    //   });
+  }
 }
 </script>

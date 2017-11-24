@@ -34,7 +34,7 @@ export default {
         var return_date = new Date(self.flight_data[1].date);
         title += " | ";
         // title += self.flight_data[1].origin + " - " + self.flight_data[1].destination;
-        title += " (" + depart_date.getDate() + "." + (depart_date.getMonth()+1) + ")";
+        title += " (" + return_date.getDate() + "." + (return_date.getMonth()+1) + ")";
       }
       return title;
     }

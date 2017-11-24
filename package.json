@@ -3,7 +3,12 @@
   "description": "Framework7 Vue + Webpack template",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node build/dev-server.js",
-    "build": "node build/build.js"
+    "distclean": "del /q dist\\* && for /d %p in (dist\\*.*) do rmdir \"%p\" /s /q",
+    "build": "cross-env NODE_ENV=development node build/build.js",
+    "pgclean": "del /q pg\\www\\* && for /d %p in (pg\\www\\*.*) do rmdir \"%p\" /s /q",
+    "pgcopy": "xcopy res pg\\www\\res /e /i /h /k && xcopy dist\\static\\fonts dist\\static\\css\\static\\fonts /e /i /h /k && xcopy dist pg\\www /e /i /h /k",
+    "pgrun": "cd pg && phonegap build android",
+    "pg": "npm run build && npm run pgclean && npm run pgcopy && npm run pgrun"
   },
   "author": "Reynold Kevin",
   "dependencies": {

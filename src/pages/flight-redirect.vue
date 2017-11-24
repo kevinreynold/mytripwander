@@ -19,6 +19,21 @@ export default {
       //     $('.browser-own').html(data);
       // });
     }
+  },
+  created() {
+    //do something after creating vue instance
+    $(document).ready(function(){
+      $('iframe').ready(function(){
+        window.f7.popup('#popup-loading',false,false);
+        window.f7.showPreloader();
+        console.log("IFRAME DONE");
+      });
+      $('iframe').on('load', function(){
+        window.f7.closeModal('#popup-loading', true);
+        window.f7.hidePreloader();
+        console.log("IFRAME LOAD");
+      });
+    });
   }
 }
 </script>
