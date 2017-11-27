@@ -1,4 +1,5 @@
 import store from "./store";
+import got from "got";
 
 var travelpayouts = {};
 
@@ -6,9 +7,9 @@ var TravelPayouts = require('travelpayouts-api');
 var search_timeout = 10;
 var api = new TravelPayouts('0852ce5f48b5d4158ed28dd23e7ddd44', '143764',{url: 'http://api.travelpayouts.com', timeout: (search_timeout * 1000)});
 
-function goToSearchResult(){
+function goTo(url_link = '/flight-result/'){
   var mainView = Dom7('#main-view')[0].f7View;
-  mainView.router.load({url: '/flight-result/'});
+  mainView.router.load({url: url_link});
 }
 
 function changeFormatDuration(duration){
@@ -147,7 +148,7 @@ function processData(data){
   ticket_list.sort((a, b) => a.unified_price - b.unified_price);
   // console.log(ticket_list);
   store.flight_search_result = ticket_list;
-  goToSearchResult();
+  goTo();
 }
 
 travelpayouts.api = api;
@@ -169,24 +170,24 @@ travelpayouts.getPriceList = async function(flight_data,passenger_data){
   window.f7.showPreloader();
   try {
     var data = await this.flight_search(flight_data,passenger_data);
-    console.log("Tunggu");
+    // console.log("Tunggu");
     if (data != null) {
       processData(data);
       window.f7.hidePreloader();
     }
     else{
-      console.log("ERROR TICKET LIST");
+      // console.log("ERROR TICKET LIST");
       window.f7.addNotification({
           message: 'No Internet Connection..'
       });
       window.f7.hidePreloader();
     }
   } catch (e) {
-    window.f7.addNotification({
-        message: 'No Internet Connection..'
-    });
     setTimeout(function () {
       window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
     }, 1000);
   }
 };
@@ -208,17 +209,37 @@ travelpayouts.getPriceListLocal = function(json = "tokyo-round-trip"){
       window.f7.hidePreloader();
     }, 100);
   } catch (e) {
-    window.f7.addNotification({
-        message: 'No Internet Connection..'
-    });
     setTimeout(function () {
       window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
     }, 1000);
   }
 };
 
-travelpayouts.getRedirectLink = function(){
-  store.coba = 10;
+travelpayouts.getRedirectLink = async function(url){
+  window.f7.showPreloader();
+  try {
+    var result = await got.get(url, {retries: 2})
+    .then(res => {
+      var res = JSON.parse(res.body);
+      return res;
+    });
+
+    store.flight_ticket_url = result;
+    goTo('/flight-redirect/');
+    setTimeout(function () {
+      // window.f7.hidePreloader();
+    }, 100);
+  } catch (e) {
+    setTimeout(function () {
+      window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
+    }, 1000);
+  }
 };
 
 

@@ -13,6 +13,7 @@
 <script>
 import flight_detail from '../components/flight-detail'
 import store from '../js/store'
+import travelpayouts from '../js/flightsearch'
 
 let self;
 
@@ -33,14 +34,14 @@ export default {
   created() {
     self = this;
     self.flight_details = store.flight_details;
-    console.log(self.flight_details);
+    // console.log(self.flight_details);
   },
   methods: {
     clearData(){
       store.flight_details = [];
     },
     buyTicket(){
-
+      // travelpayouts.getRedirectLink(self.flight_details.url);
 
       var mainView = Dom7('#main-view')[0].f7View;
       mainView.router.load({url: '/flight-redirect/'});
