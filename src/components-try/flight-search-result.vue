@@ -1,35 +1,58 @@
 <template>
-  <f7-page infinite-scroll>
+  <f7-page infinite-scroll data-distance="100">
     <f7-navbar :title="title" back-link="Back" sliding @back-click="clearData"></f7-navbar>
     <div id="scroll-to-top"/>
+    <!-- <flight_card v-for="flight_detail in flight_search_result" :key="flight_detail.url" :flight_detail="flight_detail"/> -->
 
     <f7-fab color="teal" @click="scrollUp">
       <f7-icon f7="arrow_up" size="250%"/>
     </f7-fab>
 
-    <div class="list-block flight-search-result">
-      <flight_card class="dynamic-component" v-for="flight_detail in flight_search_result" :key="flight_detail.url" :flight_detail="flight_detail"/>
+    <div class="list-block isi">
+      <f7-card class="coba-scroll" v-for="i in test" :title="'Item - ' + i" content="Card Content" footer="Card Footer"></f7-card>
+      <!-- <div class="item-inner coba-scroll"  v-for="i in 20">
+        <div class="item-title">Item {{i}}</div>
+      </div> -->
     </div>
+
+    <!-- <div class="list-block coba">
+    <ul>
+      <li class="item-content" v-for="i in 20">
+        <div class="item-inner">
+          <div class="item-title">Item {{i}}</div>
+        </div>
+      </li>
+    </ul>
+    </div> -->
+
+    <!-- <div class="infinite-scroll-preloader">
+      <div class="preloader"></div>
+    </div> -->
   </f7-page>
 </template>
 
 <script>
 import flight_card from '../components/flight-card'
 import store from '../js/store'
+import Vue from 'vue'
 
 let self;
 
-function doInfiniteScroll(items_per_load = 5){
+function doInfiniteScroll(){
+  var aa = store.flight_search_result.length;
+  console.log(aa);
   //INFINITE SCROLL
   var $$ = window.Dom7;
   // Loading flag
   var loading = false;
   // Last loaded index
-  var lastIndex = $$('.flight-search-result .dynamic-component').length;
-  // console.log(lastIndex);
-  var maxItems = store.flight_search_result.length;
+  // var lastIndex = $$('.coba li').length;
+  var lastIndex = $$('.isi .coba-scroll').length;
+  console.log(lastIndex);
+  // Max items to load
+  var maxItems = 60;
   // Append items per load
-  var itemsPerLoad = items_per_load;
+  var itemsPerLoad = 5;
   // Attach 'infinite' event handler
   $$('.infinite-scroll').on('infinite', function () {
 
@@ -47,7 +70,6 @@ function doInfiniteScroll(items_per_load = 5){
       if (lastIndex >= maxItems) {
         // Nothing more to load, detach infinite scroll events to prevent unnecessary loadings
         window.f7.detachInfiniteScroll($$('.infinite-scroll'));
-        $$(".flight-search-result").append("<div style='width: 100%;height: 30px;'></div>");
         // Remove preloader
         $$('.infinite-scroll-preloader').remove();
         return;
@@ -55,18 +77,24 @@ function doInfiniteScroll(items_per_load = 5){
 
       // Generate new items HTML
       var html = '';
-      // Check itemsPerLoad
-      itemsPerLoad = (maxItems - lastIndex) < itemsPerLoad ? (maxItems - lastIndex) : itemsPerLoad;
-      // console.log("IIII : " + itemsPerLoad);
-      for (var i = lastIndex; i <= lastIndex + itemsPerLoad - 1; i++) {
-        // console.log(i);
-        self.flight_search_result.push(store.flight_search_result[i]);
+      for (var i = lastIndex + 1; i <= lastIndex + itemsPerLoad; i++) {
+        self.test.push(i);
+        // var text = "Items - " + i;
+        // var child_component = '<f7-card class="coba-scroll" title="' + text + '" content="Card Content" footer="Card Footer"></f7-card>';
+        // html += child_component;
+        // html += '<li class="item-content"><div class="item-inner"><div class="item-title">Item ' + i + '</div></div></li>';
+        // html += '<div class="item-inner coba-scroll"><div class="item-title">Item ' + i + '</div></div>';
       }
+
+      // Append new items
+      // var element = $$('.isi').append(html);
+      // Vue.compile(element.get(0));
+
     }, 1000);
 
     // Update last loaded index
-    lastIndex = $$('.flight-search-result .dynamic-component').length;
-    // console.log("l :" + lastIndex);
+    lastIndex = $$('.isi .coba-scroll').length;
+    console.log("l :" + lastIndex);
   });
 }
 
@@ -101,14 +129,11 @@ export default {
   created() {
     //do something after creating vue instance
     self = this;
-    self.flight_data = store.flight_booking_data;
-
-    store.flight_search_result = store.flight_search_result.slice(0,12);
     self.flight_search_result = store.flight_search_result;
-    self.flight_search_result = self.flight_search_result.slice(0, 5);
+    self.flight_data = store.flight_booking_data;
+    // self.flight_search_result = self.flight_search_result.slice(0, 10);
     // console.log(self.flight_data);
-    // console.log(store.flight_search_result);
-    // console.log(self.flight_search_result);
+    console.log(self.flight_search_result);
   },
   methods: {
     scrollUp() {
@@ -127,5 +152,15 @@ export default {
 <style scoped>
   #scroll-to-top{
     display: none;
+  }
+
+  .infinite-scroll-preloader {
+    margin-top:-20px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .infinite-scroll-preloader .preloader {
+    width:34px;
+    height:34px;
   }
 </style>

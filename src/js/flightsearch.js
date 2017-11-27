@@ -48,7 +48,7 @@ function processData(data){
           temp_ticket.segment_durations = ticket_data.segment_durations; //true or false
           temp_ticket.total_duration = ticket_data.total_duration;
           temp_ticket.search_id = search_id; //true or false
-          
+
           //Price
           var terms  = ticket_data.terms;
           for(var propName in terms) {
@@ -201,7 +201,7 @@ travelpayouts.getPriceListLocal = function(json = "tokyo-round-trip"){
       dataType: "json",
       async: false
     }).responseText);
-    console.log(data);
+    // console.log(data);
 
     processData(data);
     setTimeout(function () {
@@ -217,7 +217,7 @@ travelpayouts.getPriceListLocal = function(json = "tokyo-round-trip"){
   }
 };
 
-travelpayouts.test = function(){
+travelpayouts.getRedirectLink = function(){
   store.coba = 10;
 };
 

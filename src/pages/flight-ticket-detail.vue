@@ -33,12 +33,15 @@ export default {
   created() {
     self = this;
     self.flight_details = store.flight_details;
+    console.log(self.flight_details);
   },
   methods: {
     clearData(){
       store.flight_details = [];
     },
     buyTicket(){
+
+
       var mainView = Dom7('#main-view')[0].f7View;
       mainView.router.load({url: '/flight-redirect/'});
     }
