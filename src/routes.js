@@ -4,6 +4,10 @@ export default [
       component: require('./app.vue')
   },
   {
+      path: '/createtrip/',
+      component: require('./pages/createtripplan.vue')
+  },
+  {
       path: '/mybookings/',
       component: require('./pages/mybookings.vue')
   },

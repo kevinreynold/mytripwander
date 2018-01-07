@@ -41,10 +41,10 @@ export default {
       store.flight_details = [];
     },
     buyTicket(){
-      // travelpayouts.getRedirectLink(self.flight_details.url);
+      travelpayouts.getRedirectLink(self.flight_details.url);
 
-      var mainView = Dom7('#main-view')[0].f7View;
-      mainView.router.load({url: '/flight-redirect/'});
+      // var mainView = Dom7('#main-view')[0].f7View;
+      // mainView.router.load({url: '/flight-redirect/'});
     }
   }
 }

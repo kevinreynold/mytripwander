@@ -62,7 +62,7 @@ function doInfiniteScroll(items_per_load = 5){
         // console.log(i);
         self.flight_search_result.push(store.flight_search_result[i]);
       }
-    }, 1000);
+    }, 750);
 
     // Update last loaded index
     lastIndex = $$('.flight-search-result .dynamic-component').length;
@@ -103,9 +103,10 @@ export default {
     self = this;
     self.flight_data = store.flight_booking_data;
 
-    store.flight_search_result = store.flight_search_result.slice(0,12);
+    // store.flight_search_result = store.flight_search_result.slice(0,23);
     self.flight_search_result = store.flight_search_result;
-    self.flight_search_result = self.flight_search_result.slice(0, 5);
+    // self.flight_search_result = self.flight_search_result.slice(0, 5);
+
     // console.log(self.flight_data);
     // console.log(store.flight_search_result);
     // console.log(self.flight_search_result);

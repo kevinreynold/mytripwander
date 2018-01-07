@@ -39,8 +39,8 @@ export default {
   created() {
     //do something after creating vue instance
     self = this;
-    // self.ticket_url = store.flight_ticket_url.url;
-    self.ticket_url = 'https://m.tiket.com/order/add/flight?flight=347200588&date=2017-12-07';
+    self.ticket_url = store.flight_ticket_url.url;
+    // self.ticket_url = 'https://m.tiket.com/order/add/flight?flight=347200588&date=2017-12-07';
     console.log(self.ticket_url);
   }
 }

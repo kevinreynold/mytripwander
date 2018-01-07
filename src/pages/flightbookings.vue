@@ -328,8 +328,8 @@ export default {
         // console.log(flight_data);
         // console.log(passenger_data);
         store.flight_booking_data = flight_data;
-        travelpayouts.getPriceListLocal();
-        // travelpayouts.getPriceList(flight_data,passenger_data);
+        // travelpayouts.getPriceListLocal();
+        travelpayouts.getPriceList(flight_data,passenger_data);
       }
     },
   },
