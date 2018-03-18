@@ -44,7 +44,7 @@
                 <img src="../assets/flight-icon/depature_date.png" alt="Departure" width="30px">
               </div>
               <div class="grid-input">
-                <input type="date" :min="today" v-model="depart_date"/>
+                <input type="date" :min="today" :max="return_date" v-model="depart_date"/>
               </div>
             </div>
           </div>
@@ -298,14 +298,18 @@ export default {
         var flight_data = [];
         var flight_from = {
           origin: self.from.city_code,
+          origin_name: self.from.city_name,
           destination: self.to.city_code,
+          destination_name: self.to.city_name,
           date: new Date(self.depart_date),
         };
         flight_data.push(flight_from);
         if (self.mode === "round-trip") {
           var flight_to = {
             origin: self.to.city_code,
+            origin_name: self.to.city_name,
             destination: self.from.city_code,
+            destination_name: self.from.city_name,
             date: new Date(self.return_date),
           };
           flight_data.push(flight_to);

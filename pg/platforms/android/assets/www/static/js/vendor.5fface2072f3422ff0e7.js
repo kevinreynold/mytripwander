@@ -110,9 +110,9 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 
 
-var base64 = __webpack_require__(203)
-var ieee754 = __webpack_require__(318)
-var isArray = __webpack_require__(220)
+var base64 = __webpack_require__(204)
+var ieee754 = __webpack_require__(320)
+var isArray = __webpack_require__(221)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -2005,7 +2005,7 @@ module.exports = function normalizeComponent (
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(414).Buffer;
+    Buffer = __webpack_require__(419).Buffer;
   } catch (e) {
   }
 
@@ -5381,7 +5381,7 @@ module.exports = function normalizeComponent (
   };
 })(typeof module === 'undefined' || module, this);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(78)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(81)(module)))
 
 /***/ }),
 /* 5 */
@@ -5419,15 +5419,15 @@ module.exports = g;
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(289).version;
-elliptic.utils = __webpack_require__(288);
-elliptic.rand = __webpack_require__(86);
+elliptic.version = __webpack_require__(290).version;
+elliptic.utils = __webpack_require__(289);
+elliptic.rand = __webpack_require__(89);
 elliptic.curve = __webpack_require__(47);
-elliptic.curves = __webpack_require__(280);
+elliptic.curves = __webpack_require__(281);
 
 // Protocols
-elliptic.ec = __webpack_require__(281);
-elliptic.eddsa = __webpack_require__(284);
+elliptic.ec = __webpack_require__(282);
+elliptic.eddsa = __webpack_require__(285);
 
 
 /***/ }),
@@ -5636,7 +5636,7 @@ if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store = __webpack_require__(107)('wks');
+var store = __webpack_require__(110)('wks');
 var uid = __webpack_require__(68);
 var Symbol = __webpack_require__(8).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
@@ -6156,10 +6156,10 @@ var inherits = __webpack_require__(0);
 
 inherits(Stream, EE);
 Stream.Readable = __webpack_require__(76);
-Stream.Writable = __webpack_require__(349);
-Stream.Duplex = __webpack_require__(344);
-Stream.Transform = __webpack_require__(348);
-Stream.PassThrough = __webpack_require__(347);
+Stream.Writable = __webpack_require__(351);
+Stream.Duplex = __webpack_require__(346);
+Stream.Transform = __webpack_require__(350);
+Stream.PassThrough = __webpack_require__(349);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -6479,8 +6479,8 @@ module.exports = __webpack_require__(18) ? function (object, key, value) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(20);
-var IE8_DOM_DEFINE = __webpack_require__(96);
-var toPrimitive = __webpack_require__(110);
+var IE8_DOM_DEFINE = __webpack_require__(99);
+var toPrimitive = __webpack_require__(113);
 var dP = Object.defineProperty;
 
 exports.f = __webpack_require__(18) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
@@ -17118,7 +17118,7 @@ var util = __webpack_require__(11);
 util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
-var Readable = __webpack_require__(139);
+var Readable = __webpack_require__(142);
 var Writable = __webpack_require__(75);
 
 util.inherits(Duplex, Readable);
@@ -17346,8 +17346,8 @@ var util = __webpack_require__(11);
 util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
-var Readable = __webpack_require__(144);
-var Writable = __webpack_require__(146);
+var Readable = __webpack_require__(147);
+var Writable = __webpack_require__(149);
 
 util.inherits(Duplex, Readable);
 
@@ -17432,7 +17432,7 @@ asn1.bignum = __webpack_require__(4);
 
 asn1.define = __webpack_require__(166).define;
 asn1.base = __webpack_require__(32);
-asn1.constants = __webpack_require__(81);
+asn1.constants = __webpack_require__(84);
 asn1.decoders = __webpack_require__(170);
 asn1.encoders = __webpack_require__(172);
 
@@ -17444,8 +17444,8 @@ asn1.encoders = __webpack_require__(172);
 var base = exports;
 
 base.Reporter = __webpack_require__(168).Reporter;
-base.DecoderBuffer = __webpack_require__(80).DecoderBuffer;
-base.EncoderBuffer = __webpack_require__(80).EncoderBuffer;
+base.DecoderBuffer = __webpack_require__(83).DecoderBuffer;
+base.EncoderBuffer = __webpack_require__(83).EncoderBuffer;
 base.Node = __webpack_require__(167);
 
 
@@ -17505,11 +17505,11 @@ module.exports = function (exec) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var ctx = __webpack_require__(21);
-var call = __webpack_require__(239);
-var isArrayIter = __webpack_require__(237);
+var call = __webpack_require__(240);
+var isArrayIter = __webpack_require__(238);
 var anObject = __webpack_require__(20);
 var toLength = __webpack_require__(66);
-var getIterFn = __webpack_require__(253);
+var getIterFn = __webpack_require__(254);
 var BREAK = {};
 var RETURN = {};
 var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
@@ -17543,7 +17543,7 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(97);
+var IObject = __webpack_require__(100);
 var defined = __webpack_require__(58);
 module.exports = function (it) {
   return IObject(defined(it));
@@ -18036,7 +18036,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(338);
+__webpack_require__(340);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
@@ -18297,10 +18297,10 @@ module.exports = function (it, tag, stat) {
 
 var curve = exports;
 
-curve.base = __webpack_require__(276);
-curve.short = __webpack_require__(279);
-curve.mont = __webpack_require__(278);
-curve.edwards = __webpack_require__(277);
+curve.base = __webpack_require__(277);
+curve.short = __webpack_require__(280);
+curve.mont = __webpack_require__(279);
+curve.edwards = __webpack_require__(278);
 
 
 /***/ }),
@@ -18308,7 +18308,7 @@ curve.edwards = __webpack_require__(277);
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
-var MD5 = __webpack_require__(322)
+var MD5 = __webpack_require__(324)
 
 /* eslint-disable camelcase */
 function EVP_BytesToKey (password, salt, keyBits, ivLen) {
@@ -18358,11 +18358,11 @@ module.exports = EVP_BytesToKey
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(325)
-var aesid = __webpack_require__(324)
-var fixProc = __webpack_require__(327)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(327)
+var aesid = __webpack_require__(326)
+var fixProc = __webpack_require__(329)
 var ciphers = __webpack_require__(53)
-var compat = __webpack_require__(130)
+var compat = __webpack_require__(133)
 module.exports = parseKeys
 
 function parseKeys (buffer) {
@@ -18495,8 +18495,8 @@ function decrypt (data, password) {
 
 
 
-var punycode = __webpack_require__(333);
-var util = __webpack_require__(367);
+var punycode = __webpack_require__(335);
+var util = __webpack_require__(370);
 
 exports.parse = urlParse;
 exports.resolve = urlResolve;
@@ -19735,7 +19735,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(369);
+exports.isBuffer = __webpack_require__(372);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -19779,7 +19779,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = __webpack_require__(368);
+exports.inherits = __webpack_require__(371);
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -19804,9 +19804,9 @@ function hasOwnProperty(obj, prop) {
 /* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ciphers = __webpack_require__(205)
-var deciphers = __webpack_require__(204)
-var modes = __webpack_require__(90)
+var ciphers = __webpack_require__(206)
+var deciphers = __webpack_require__(205)
+var modes = __webpack_require__(93)
 
 function getCiphers () {
   return Object.keys(modes)
@@ -19824,17 +19824,17 @@ exports.listCiphers = exports.getCiphers = getCiphers
 /***/ (function(module, exports, __webpack_require__) {
 
 var modeModules = {
-  ECB: __webpack_require__(211),
-  CBC: __webpack_require__(207),
-  CFB: __webpack_require__(208),
-  CFB8: __webpack_require__(210),
-  CFB1: __webpack_require__(209),
-  OFB: __webpack_require__(212),
-  CTR: __webpack_require__(89),
-  GCM: __webpack_require__(89)
+  ECB: __webpack_require__(212),
+  CBC: __webpack_require__(208),
+  CFB: __webpack_require__(209),
+  CFB8: __webpack_require__(211),
+  CFB1: __webpack_require__(210),
+  OFB: __webpack_require__(213),
+  CTR: __webpack_require__(92),
+  GCM: __webpack_require__(92)
 }
 
-var modes = __webpack_require__(90)
+var modes = __webpack_require__(93)
 
 for (var key in modes) {
   modes[key].module = modeModules[modes[key].mode]
@@ -19960,15 +19960,15 @@ module.exports = function (it) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(99);
+var LIBRARY = __webpack_require__(102);
 var $export = __webpack_require__(14);
-var redefine = __webpack_require__(248);
+var redefine = __webpack_require__(249);
 var hide = __webpack_require__(22);
 var has = __webpack_require__(28);
 var Iterators = __webpack_require__(38);
-var $iterCreate = __webpack_require__(240);
+var $iterCreate = __webpack_require__(241);
 var setToStringTag = __webpack_require__(46);
-var getPrototypeOf = __webpack_require__(245);
+var getPrototypeOf = __webpack_require__(246);
 var ITERATOR = __webpack_require__(9)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
@@ -20087,7 +20087,7 @@ module.exports = function (target, src, safe) {
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var shared = __webpack_require__(107)('keys');
+var shared = __webpack_require__(110)('keys');
 var uid = __webpack_require__(68);
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
@@ -20155,7 +20155,7 @@ module.exports = function (key) {
  * See http://pajhome.org.uk/crypt/md5 for more info.
  */
 
-var makeHash = __webpack_require__(265)
+var makeHash = __webpack_require__(266)
 
 /*
  * Calculate the MD5 of an array of little-endian words, and a bit length
@@ -20305,11 +20305,11 @@ module.exports = function md5 (buf) {
 "use strict";
 
 
-exports.utils = __webpack_require__(272);
-exports.Cipher = __webpack_require__(269);
-exports.DES = __webpack_require__(270);
-exports.CBC = __webpack_require__(268);
-exports.EDE = __webpack_require__(271);
+exports.utils = __webpack_require__(273);
+exports.Cipher = __webpack_require__(270);
+exports.DES = __webpack_require__(271);
+exports.CBC = __webpack_require__(269);
+exports.EDE = __webpack_require__(272);
 
 
 /***/ }),
@@ -20320,9 +20320,9 @@ var hash = exports;
 
 hash.utils = __webpack_require__(13);
 hash.common = __webpack_require__(41);
-hash.sha = __webpack_require__(313);
-hash.ripemd = __webpack_require__(312);
-hash.hmac = __webpack_require__(311);
+hash.sha = __webpack_require__(315);
+hash.ripemd = __webpack_require__(314);
+hash.hmac = __webpack_require__(313);
 
 // Proxy hash functions to the main object
 hash.sha1 = hash.sha.sha1;
@@ -20340,8 +20340,8 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(334);
-exports.encode = exports.stringify = __webpack_require__(335);
+exports.decode = exports.parse = __webpack_require__(336);
+exports.encode = exports.stringify = __webpack_require__(337);
 
 
 /***/ }),
@@ -20351,7 +20351,7 @@ exports.encode = exports.stringify = __webpack_require__(335);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 var inherits = __webpack_require__(0)
-var HashBase = __webpack_require__(310)
+var HashBase = __webpack_require__(312)
 
 function RIPEMD160 () {
   HashBase.call(this, 64)
@@ -20656,12 +20656,12 @@ var exports = module.exports = function SHA (algorithm) {
   return new Algorithm()
 }
 
-exports.sha = __webpack_require__(339)
-exports.sha1 = __webpack_require__(340)
-exports.sha224 = __webpack_require__(341)
-exports.sha256 = __webpack_require__(137)
-exports.sha384 = __webpack_require__(342)
-exports.sha512 = __webpack_require__(138)
+exports.sha = __webpack_require__(341)
+exports.sha1 = __webpack_require__(342)
+exports.sha224 = __webpack_require__(343)
+exports.sha256 = __webpack_require__(140)
+exports.sha384 = __webpack_require__(344)
+exports.sha512 = __webpack_require__(141)
 
 
 /***/ }),
@@ -20746,7 +20746,7 @@ var internalUtil = {
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(142);
+var Stream = __webpack_require__(145);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -20760,7 +20760,7 @@ function _isUint8Array(obj) {
 }
 /*</replacement>*/
 
-var destroyImpl = __webpack_require__(141);
+var destroyImpl = __webpack_require__(144);
 
 util.inherits(Writable, Stream);
 
@@ -21339,22 +21339,22 @@ Writable.prototype._destroy = function (err, cb) {
 /* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(139);
+exports = module.exports = __webpack_require__(142);
 exports.Stream = exports;
 exports.Readable = exports;
 exports.Writable = __webpack_require__(75);
 exports.Duplex = __webpack_require__(26);
-exports.Transform = __webpack_require__(140);
-exports.PassThrough = __webpack_require__(345);
+exports.Transform = __webpack_require__(143);
+exports.PassThrough = __webpack_require__(347);
 
 
 /***/ }),
 /* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var ClientRequest = __webpack_require__(350)
-var extend = __webpack_require__(413)
-var statusCodes = __webpack_require__(221)
+/* WEBPACK VAR INJECTION */(function(global) {var ClientRequest = __webpack_require__(352)
+var extend = __webpack_require__(418)
+var statusCodes = __webpack_require__(222)
 var url = __webpack_require__(50)
 
 var http = exports
@@ -21434,7 +21434,10 @@ http.METHODS = [
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 78 */
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -21462,8 +21465,8 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 79 */,
-/* 80 */
+/* 82 */,
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
@@ -21585,7 +21588,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
 
 
 /***/ }),
-/* 81 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = exports;
@@ -21610,7 +21613,7 @@ constants.der = __webpack_require__(169);
 
 
 /***/ }),
-/* 82 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
@@ -21940,7 +21943,7 @@ function derDecodeLen(buf, primitive, fail) {
 
 
 /***/ }),
-/* 83 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
@@ -22241,7 +22244,7 @@ function encodeTag(tag, primitive, cls, reporter) {
 
 
 /***/ }),
-/* 84 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22739,8 +22742,8 @@ var objectKeys = Object.keys || function (obj) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 85 */,
-/* 86 */
+/* 88 */,
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var r;
@@ -22798,7 +22801,7 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto = __webpack_require__(415);
+    var crypto = __webpack_require__(420);
     if (typeof crypto.randomBytes !== 'function')
       throw new Error('Not supported');
 
@@ -22811,16 +22814,16 @@ if (typeof self === 'object') {
 
 
 /***/ }),
-/* 87 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var aes = __webpack_require__(45)
 var Buffer = __webpack_require__(1).Buffer
 var Transform = __webpack_require__(17)
 var inherits = __webpack_require__(0)
-var GHASH = __webpack_require__(206)
+var GHASH = __webpack_require__(207)
 var xor = __webpack_require__(33)
-var incr32 = __webpack_require__(88)
+var incr32 = __webpack_require__(91)
 
 function xorTest (a, b) {
   var out = 0
@@ -22934,7 +22937,7 @@ module.exports = StreamCipher
 
 
 /***/ }),
-/* 88 */
+/* 91 */
 /***/ (function(module, exports) {
 
 function incr32 (iv) {
@@ -22955,12 +22958,12 @@ module.exports = incr32
 
 
 /***/ }),
-/* 89 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var xor = __webpack_require__(33)
 var Buffer = __webpack_require__(1).Buffer
-var incr32 = __webpack_require__(88)
+var incr32 = __webpack_require__(91)
 
 function getBlock (self) {
   var out = self._cipher.encryptBlockRaw(self._prev)
@@ -22991,8 +22994,8 @@ exports.encrypt = function (self, chunk) {
 
 
 /***/ }),
-/* 90 */,
-/* 91 */
+/* 93 */,
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var aes = __webpack_require__(45)
@@ -23025,9 +23028,9 @@ module.exports = StreamCipher
 
 
 /***/ }),
-/* 92 */,
-/* 93 */,
-/* 94 */
+/* 95 */,
+/* 96 */,
+/* 97 */
 /***/ (function(module, exports) {
 
 // IE 8- don't enum bug keys
@@ -23037,7 +23040,7 @@ module.exports = (
 
 
 /***/ }),
-/* 95 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var document = __webpack_require__(8).document;
@@ -23045,7 +23048,7 @@ module.exports = document && document.documentElement;
 
 
 /***/ }),
-/* 96 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = !__webpack_require__(18) && !__webpack_require__(36)(function () {
@@ -23054,7 +23057,7 @@ module.exports = !__webpack_require__(18) && !__webpack_require__(36)(function (
 
 
 /***/ }),
-/* 97 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
@@ -23066,7 +23069,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 
 /***/ }),
-/* 98 */
+/* 101 */
 /***/ (function(module, exports) {
 
 module.exports = function (done, value) {
@@ -23075,14 +23078,14 @@ module.exports = function (done, value) {
 
 
 /***/ }),
-/* 99 */
+/* 102 */
 /***/ (function(module, exports) {
 
 module.exports = true;
 
 
 /***/ }),
-/* 100 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var META = __webpack_require__(68)('meta');
@@ -23141,13 +23144,13 @@ var meta = module.exports = {
 
 
 /***/ }),
-/* 101 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 var anObject = __webpack_require__(20);
-var dPs = __webpack_require__(243);
-var enumBugKeys = __webpack_require__(94);
+var dPs = __webpack_require__(244);
+var enumBugKeys = __webpack_require__(97);
 var IE_PROTO = __webpack_require__(64)('IE_PROTO');
 var Empty = function () { /* empty */ };
 var PROTOTYPE = 'prototype';
@@ -23161,7 +23164,7 @@ var createDict = function () {
   var gt = '>';
   var iframeDocument;
   iframe.style.display = 'none';
-  __webpack_require__(95).appendChild(iframe);
+  __webpack_require__(98).appendChild(iframe);
   iframe.src = 'javascript:'; // eslint-disable-line no-script-url
   // createDict = iframe.contentWindow.Object;
   // html.removeChild(iframe);
@@ -23188,12 +23191,12 @@ module.exports = Object.create || function create(O, Properties) {
 
 
 /***/ }),
-/* 102 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys = __webpack_require__(246);
-var enumBugKeys = __webpack_require__(94);
+var $keys = __webpack_require__(247);
+var enumBugKeys = __webpack_require__(97);
 
 module.exports = Object.keys || function keys(O) {
   return $keys(O, enumBugKeys);
@@ -23201,7 +23204,7 @@ module.exports = Object.keys || function keys(O) {
 
 
 /***/ }),
-/* 103 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // most Object methods by ES6 should accept primitives
@@ -23217,7 +23220,7 @@ module.exports = function (KEY, exec) {
 
 
 /***/ }),
-/* 104 */
+/* 107 */
 /***/ (function(module, exports) {
 
 module.exports = function (exec) {
@@ -23230,7 +23233,7 @@ module.exports = function (exec) {
 
 
 /***/ }),
-/* 105 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var anObject = __webpack_require__(20);
@@ -23248,7 +23251,7 @@ module.exports = function (C, x) {
 
 
 /***/ }),
-/* 106 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23269,7 +23272,7 @@ module.exports = function (KEY) {
 
 
 /***/ }),
-/* 107 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(8);
@@ -23281,7 +23284,7 @@ module.exports = function (key) {
 
 
 /***/ }),
-/* 108 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
@@ -23296,12 +23299,12 @@ module.exports = function (O, D) {
 
 
 /***/ }),
-/* 109 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ctx = __webpack_require__(21);
-var invoke = __webpack_require__(236);
-var html = __webpack_require__(95);
+var invoke = __webpack_require__(237);
+var html = __webpack_require__(98);
 var cel = __webpack_require__(59);
 var global = __webpack_require__(8);
 var process = global.process;
@@ -23386,7 +23389,7 @@ module.exports = {
 
 
 /***/ }),
-/* 110 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.1 ToPrimitive(input [, PreferredType])
@@ -23404,7 +23407,7 @@ module.exports = function (it, S) {
 
 
 /***/ }),
-/* 111 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(15);
@@ -23415,18 +23418,18 @@ module.exports = function (it, TYPE) {
 
 
 /***/ }),
-/* 112 */
+/* 115 */
 /***/ (function(module, exports) {
 
 
 
 /***/ }),
-/* 113 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var $at = __webpack_require__(251)(true);
+var $at = __webpack_require__(252)(true);
 
 // 21.1.3.27 String.prototype[@@iterator]()
 __webpack_require__(60)(String, 'String', function (iterated) {
@@ -23445,10 +23448,10 @@ __webpack_require__(60)(String, 'String', function (iterated) {
 
 
 /***/ }),
-/* 114 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(254);
+__webpack_require__(255);
 var global = __webpack_require__(8);
 var hide = __webpack_require__(22);
 var Iterators = __webpack_require__(38);
@@ -23470,12 +23473,12 @@ for (var i = 0; i < DOMIterables.length; i++) {
 
 
 /***/ }),
-/* 115 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var captureStackTrace = __webpack_require__(222);
+var captureStackTrace = __webpack_require__(223);
 
 function inherits(ctor, superCtor) {
 	ctor.super_ = superCtor;
@@ -23521,13 +23524,13 @@ module.exports = function createErrorClass(className, setup) {
 
 
 /***/ }),
-/* 116 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var inherits = __webpack_require__(0)
-var Legacy = __webpack_require__(266)
+var Legacy = __webpack_require__(267)
 var Base = __webpack_require__(17)
 var Buffer = __webpack_require__(1).Buffer
 var md5 = __webpack_require__(69)
@@ -23590,7 +23593,7 @@ module.exports = function createHmac (alg, key) {
 
 
 /***/ }),
-/* 117 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var randomBytes = __webpack_require__(42);
@@ -23599,7 +23602,7 @@ findPrime.simpleSieve = simpleSieve;
 findPrime.fermatTest = fermatTest;
 var BN = __webpack_require__(4);
 var TWENTYFOUR = new BN(24);
-var MillerRabin = __webpack_require__(128);
+var MillerRabin = __webpack_require__(131);
 var millerRabin = new MillerRabin();
 var ONE = new BN(1);
 var TWO = new BN(2);
@@ -23701,7 +23704,7 @@ function findPrime(bits, gen) {
 
 
 /***/ }),
-/* 118 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23784,12 +23787,12 @@ module.exports.DuplexWrapper = DuplexWrapper;
 
 
 /***/ }),
-/* 119 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-const bufferStream = __webpack_require__(307);
+const bufferStream = __webpack_require__(309);
 
 function getStream(inputStream, opts) {
 	if (!inputStream) {
@@ -23842,7 +23845,7 @@ module.exports.array = (stream, opts) => getStream(stream, Object.assign({}, opt
 
 
 /***/ }),
-/* 120 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23850,7 +23853,7 @@ module.exports.array = (stream, opts) => getStream(stream, Object.assign({}, opt
 
 var utils = __webpack_require__(13);
 var common = __webpack_require__(41);
-var shaCommon = __webpack_require__(122);
+var shaCommon = __webpack_require__(125);
 var assert = __webpack_require__(10);
 
 var sum32 = utils.sum32;
@@ -23954,7 +23957,7 @@ SHA256.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 121 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24291,7 +24294,7 @@ function g1_512_lo(xh, xl) {
 
 
 /***/ }),
-/* 122 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24347,7 +24350,7 @@ exports.g1_256 = g1_256;
 
 
 /***/ }),
-/* 123 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var http = __webpack_require__(77);
@@ -24367,7 +24370,7 @@ https.request = function (params, cb) {
 
 
 /***/ }),
-/* 124 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24388,7 +24391,7 @@ module.exports = function (x) {
 
 
 /***/ }),
-/* 125 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24455,7 +24458,7 @@ module.exports = function (err) {
 
 
 /***/ }),
-/* 126 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24483,7 +24486,7 @@ isStream.transform = function (stream) {
 
 
 /***/ }),
-/* 127 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24501,11 +24504,11 @@ module.exports = function (obj) {
 
 
 /***/ }),
-/* 128 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var bn = __webpack_require__(4);
-var brorand = __webpack_require__(86);
+var brorand = __webpack_require__(89);
 
 function MillerRabin(rand) {
   this.rand = rand || new brorand.Rand();
@@ -24622,7 +24625,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
 
 
 /***/ }),
-/* 129 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24687,17 +24690,17 @@ utils.encode = function encode(arr, enc) {
 
 
 /***/ }),
-/* 130 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-exports.pbkdf2 = __webpack_require__(328)
+exports.pbkdf2 = __webpack_require__(330)
 
-exports.pbkdf2Sync = __webpack_require__(133)
+exports.pbkdf2Sync = __webpack_require__(136)
 
 
 /***/ }),
-/* 131 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var defaultEncoding
@@ -24714,7 +24717,7 @@ module.exports = defaultEncoding
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 132 */
+/* 135 */
 /***/ (function(module, exports) {
 
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -24738,15 +24741,15 @@ module.exports = function (iterations, keylen) {
 
 
 /***/ }),
-/* 133 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var md5 = __webpack_require__(69)
 var rmd160 = __webpack_require__(73)
 var sha = __webpack_require__(74)
 
-var checkParameters = __webpack_require__(132)
-var defaultEncoding = __webpack_require__(131)
+var checkParameters = __webpack_require__(135)
+var defaultEncoding = __webpack_require__(134)
 var Buffer = __webpack_require__(1).Buffer
 var ZEROS = Buffer.alloc(128)
 var sizes = {
@@ -24845,7 +24848,7 @@ module.exports = pbkdf2
 
 
 /***/ }),
-/* 134 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(40);
@@ -24867,7 +24870,7 @@ function i2ops(c) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 135 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(4);
@@ -24883,7 +24886,7 @@ module.exports = withPublic;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 136 */
+/* 139 */
 /***/ (function(module, exports) {
 
 module.exports = function xor(a, b) {
@@ -24896,7 +24899,7 @@ module.exports = function xor(a, b) {
 };
 
 /***/ }),
-/* 137 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -25037,7 +25040,7 @@ module.exports = Sha256
 
 
 /***/ }),
-/* 138 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0)
@@ -25303,7 +25306,7 @@ module.exports = Sha512
 
 
 /***/ }),
-/* 139 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25338,7 +25341,7 @@ var processNextTick = __webpack_require__(19);
 module.exports = Readable;
 
 /*<replacement>*/
-var isArray = __webpack_require__(343);
+var isArray = __webpack_require__(345);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -25356,7 +25359,7 @@ var EElistenerCount = function (emitter, type) {
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(142);
+var Stream = __webpack_require__(145);
 /*</replacement>*/
 
 // TODO(bmeurer): Change this back to const once hole checks are
@@ -25378,7 +25381,7 @@ util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(417);
+var debugUtil = __webpack_require__(422);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -25387,8 +25390,8 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(346);
-var destroyImpl = __webpack_require__(141);
+var BufferList = __webpack_require__(348);
+var destroyImpl = __webpack_require__(144);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -26317,7 +26320,7 @@ function indexOf(xs, x) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(7)))
 
 /***/ }),
-/* 140 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26537,7 +26540,7 @@ function done(stream, er, data) {
 }
 
 /***/ }),
-/* 141 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26615,14 +26618,14 @@ module.exports = {
 };
 
 /***/ }),
-/* 142 */
+/* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(24).EventEmitter;
 
 
 /***/ }),
-/* 143 */
+/* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {exports.fetch = isFunction(global.fetch) && isFunction(global.ReadableStream)
@@ -26698,7 +26701,7 @@ xhr = null // Help gc
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 144 */
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26733,7 +26736,7 @@ var processNextTick = __webpack_require__(19);
 module.exports = Readable;
 
 /*<replacement>*/
-var isArray = __webpack_require__(352);
+var isArray = __webpack_require__(354);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -26751,7 +26754,7 @@ var EElistenerCount = function (emitter, type) {
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(148);
+var Stream = __webpack_require__(151);
 /*</replacement>*/
 
 // TODO(bmeurer): Change this back to const once hole checks are
@@ -26773,7 +26776,7 @@ util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(418);
+var debugUtil = __webpack_require__(423);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -26782,8 +26785,8 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(354);
-var destroyImpl = __webpack_require__(147);
+var BufferList = __webpack_require__(356);
+var destroyImpl = __webpack_require__(150);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -27712,7 +27715,7 @@ function indexOf(xs, x) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(7)))
 
 /***/ }),
-/* 145 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27932,7 +27935,7 @@ function done(stream, er, data) {
 }
 
 /***/ }),
-/* 146 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28013,7 +28016,7 @@ var internalUtil = {
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(148);
+var Stream = __webpack_require__(151);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -28027,7 +28030,7 @@ function _isUint8Array(obj) {
 }
 /*</replacement>*/
 
-var destroyImpl = __webpack_require__(147);
+var destroyImpl = __webpack_require__(150);
 
 util.inherits(Writable, Stream);
 
@@ -28603,7 +28606,7 @@ Writable.prototype._destroy = function (err, cb) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(44).setImmediate, __webpack_require__(5)))
 
 /***/ }),
-/* 147 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28681,27 +28684,27 @@ module.exports = {
 };
 
 /***/ }),
-/* 148 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(24).EventEmitter;
 
 
 /***/ }),
-/* 149 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(144);
+exports = module.exports = __webpack_require__(147);
 exports.Stream = exports;
 exports.Readable = exports;
-exports.Writable = __webpack_require__(146);
+exports.Writable = __webpack_require__(149);
 exports.Duplex = __webpack_require__(30);
-exports.Transform = __webpack_require__(145);
-exports.PassThrough = __webpack_require__(353);
+exports.Transform = __webpack_require__(148);
+exports.PassThrough = __webpack_require__(355);
 
 
 /***/ }),
-/* 150 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28763,16 +28766,13 @@ module.exports = function (req, time) {
 
 
 /***/ }),
-/* 151 */,
-/* 152 */,
-/* 153 */,
 /* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var url = __webpack_require__(50);
-var prependHttp = __webpack_require__(329);
+var prependHttp = __webpack_require__(331);
 
 module.exports = function (x) {
 	var withProtocol = prependHttp(x);
@@ -28871,7 +28871,7 @@ function config (name) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * Framework7 Vue 0.9.3
+ * Framework7 Vue 0.9.4
  * Build full featured iOS & Android apps using Framework7 & Vue
  * http://www.framework7.io/vue/
  * 
@@ -28881,11 +28881,11 @@ function config (name) {
  * 
  * Licensed under MIT
  * 
- * Released on: September 7, 2017
+ * Released on: November 30, 2017
  */
-!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define(t):e.Framework7Vue=t()}(this,function(){function e(e,t){var o=arguments;if(void 0===e||null===e)throw new TypeError("Cannot convert first argument to object");for(var n=Object(e),a=1;a<arguments.length;a++){var i=o[a];if(void 0!==i&&null!==i)for(var r=Object.keys(Object(i)),s=0,l=r.length;s<l;s++){var c=r[s],u=Object.getOwnPropertyDescriptor(i,c);void 0!==u&&u.enumerable&&(n[c]=i[c])}}return n}function t(e,t,o){if(!e.allowPageChange)return!1;var n=t.url,a=t.pageElement;if(n&&a||!n||"#"===n)return!0;var i=e.history.indexOf(n)>=0,r=e.pagesCache[n];return!(!i||!r)||o(n,e,t)}Object.assign||Object.defineProperty(Object,"assign",{enumerable:!1,configurable:!0,writable:!0,value:e});var o={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"statusbar-overlay",class:e.theme?"theme-"+e.theme:void 0})},staticRenderFns:[],props:{theme:String}},n={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"panel",class:e.classesObject,on:{"panel:open":e.onOpen,"panel:opened":e.onOpened,"panel:close":e.onClose,"panel:closed":e.onClosed,"panel:overlay-click":e.onOverlayClick,"panel:swipe":e.onPanelSwipe}},[e._t("default")],2)},staticRenderFns:[],props:{side:String,effect:String,cover:Boolean,reveal:Boolean,left:Boolean,right:Boolean,theme:String,layout:String,opened:Boolean},computed:{classesObject:function(){var e=this,t=e.side||(e.left?"left":"right"),o=e.effect||(e.reveal?"reveal":"cover"),n={};return n["panel-"+t]=!0,n["panel-"+o]=!0,e.layout&&(n["layout-"+e.layout]=!0),e.theme&&(n["theme-"+e.theme]=!0),n.active=e.opened,n}},watch:{opened:function(e){var t=this;if(t.$f7){var o=t.side||(t.left?"left":"right");e?t.$f7.openPanel(o):t.$f7.closePanel(o)}}},mounted:function(){var e=this;e.opened&&(e.$el.style.display="block");var t=e.$$;if(t){var o=e.side||(e.left?"left":"right"),n=e.effect||(e.reveal?"reveal":"cover");e.opened&&t("body").addClass("with-panel-"+o+"-"+n)}},methods:{onOpen:function(e){this.$emit("panel:open",e)},onOpened:function(e){this.$emit("panel:opened",e)},onClose:function(e){this.$emit("panel:open",e)},onClosed:function(e){this.$emit("panel:closed",e)},onOverlayClick:function(e){this.$emit("panel:overlay-click",e)},onPanelSwipe:function(e){this.$emit("panel:swipe",e)},onF7Init:function(){var e=this.$$;e&&0===e(".panel-overlay").length&&e('<div class="panel-overlay"></div>').insertBefore(this.$el)},open:function(e){var t=this;if(t.$f7){var o=t.side||(t.left?"left":"right");t.$f7.openPanel(o,e)}},close:function(e){var t=this;t.$f7&&t.$f7.closePanel(e)}}},a={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"views",class:e.classObject},[e._t("default")],2)},staticRenderFns:[],props:{"navbar-fixed":Boolean,"navbar-through":Boolean,"toolbar-fixed":Boolean,"toolbar-through":Boolean,"tabbar-fixed":Boolean,"tabbar-through":Boolean,"tabbar-labels-fixed":Boolean,"tabbar-labels-through":Boolean,tabs:Boolean,theme:String,layout:String},computed:{classObject:function(){var e={tabs:this.tabs,"navbar-fixed":this.navbarFixed||this.navbarThrough&&this.$theme.material,"navbar-through":this.navbarThrough,"toolbar-fixed":this.toolbarFixed,"toolbar-through":this.toolbarThrough,"tabbar-fixed":this.tabbarFixed,"tabbar-through":this.tabbarThrough,"tabbar-labels-fixed":this.tabbarLabelsFixed,"tabbar-labels-through":this.tabbarLabelsThrough};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}}},i={render:function(e){var t,o,n,a,i=this;if(i.$slots.default)for(var r=0;r<i.$slots.default.length;r++){var s=i.$slots.default[r];s.tag&&s.tag.indexOf("navbar")>=0&&(t=!0),s.tag&&s.tag.indexOf("pages")>=0&&(o=!0)}return o||(n=e("f7-pages")),!t&&i.$theme.ios&&(i.dynamicNavbar||i.navbarThrough||i.params&&i.params.dynamicNavbar)&&(a=e("f7-navbar",{props:{inner:!1}})),e("div",{class:i.classesObject,on:{"swipeback:move":i.onSwipeBackMove,"swipeback:beforechange":i.onSwipeBackBeforeChange,"swipeback:afterchange":i.onSwipeBackAfterChange,"swipeback:beforereset":i.onSwipeBackBeforeReset,"swipeback:afterreset":i.onSwipeBackAfterReset,"tab:show":i.onTabShow,"tab:hide":i.onTabHide}},[a,n,i.$slots.default])},beforeDestroy:function(){var e=this;e.f7View&&e.f7View.destroy&&e.f7View.destroy()},props:{main:Boolean,"navbar-fixed":Boolean,"navbar-through":Boolean,"toolbar-fixed":Boolean,"toolbar-through":Boolean,"tabbar-fixed":Boolean,"tabbar-through":Boolean,"tabbar-labels-fixed":Boolean,"tabbar-labels-through":Boolean,tab:Boolean,active:Boolean,"dynamic-navbar":Boolean,"dom-cache":Boolean,"links-view":[String,Object],"reload-pages":Boolean,"unique-history":Boolean,"unique-history-ignore-get-parameters":Boolean,"allow-duplicate-urls":Boolean,"swipe-back-page":Boolean,"swipe-back-page-animate-shadow":Boolean,"swipe-back-page-animate-opacity":Boolean,"swipe-back-page-active-area":Boolean,"swipe-back-page-threshold":Boolean,"animate-pages":Boolean,"preload-previous-page":Boolean,name:String,params:Object,url:String,init:{type:Boolean,default:!0},theme:String,layout:String},computed:{classesObject:function(){var e={view:!0,"view-main":this.main,active:this.active,tab:this.tab,"navbar-fixed":this.navbarFixed||this.navbarThrough&&this.$theme.material,"navbar-through":this.navbarThrough,"toolbar-fixed":this.toolbarFixed,"toolbar-through":this.toolbarThrough,"tabbar-fixed":this.tabbarFixed,"tabbar-through":this.tabbarThrough,"tabbar-labels-fixed":this.tabbarLabelsFixed,"tabbar-labels-through":this.tabbarLabesThrough};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onF7Init:function(e){var t=this;if(t.init){var o=t.$options.propsData,n=t.params||{name:t.name,url:t.url,dynamicNavbar:o.dynamicNavbar,domCache:"undefined"==typeof o.domCache||o.domCache,linksView:o.linksView,reloadPages:o.reloadPages,uniqueHistory:o.uniqueHistory,uniqueHistoryIgnoreGetParameters:o.uniqueHistoryIgnoreGetParameters,allowDuplicateUrls:o.allowDuplicateUrls,swipeBackPage:o.swipeBackPage,swipeBackPageAnimateShadow:o.swipeBackPageAnimateShadow,swipeBackPageAnimateOpacity:o.swipeBackPageAnimateOpacity,swipeBackPageActiveArea:o.swipeBackPageActiveArea,swipeBackPageThreshold:o.swipeBackPageThreshold,animatePages:o.animatePages,preloadPreviousPage:o.preloadPreviousPage},a=t.$$,i=a(t.$el).find(".pages")[0];if(0===i.querySelectorAll(".page").length&&n.url){var r=t.$f7Router.findMatchingRoute(n.url);if(!r)return;var s=i.__vue__,l=(new Date).getTime();t.$set(s.pages,l,{component:r.route.component}),t.$nextTick(function(){var o=i.querySelector(".page:first-child");s.pages[l].pageElement=o;var r,c=t.$theme.ios&&n.dynamicNavbar;c&&(r=a(o).find(".navbar-inner:first-child"),a(t.$el).children(".navbar").append(r),a(o).find(".navbar").remove()),e.initPageWithCallback(o),c&&r&&e.initNavbarWithCallback(r)})}t.f7View=e.addView(t.$el,n)}},onSwipeBackMove:function(e){this.$emit("swipeback:move",e,e.detail)},onSwipeBackBeforeChange:function(e){this.$emit("swipeback:beforechange",e,e.detail)},onSwipeBackAfterChange:function(e){this.$emit("swipeback:afterchange",e,e.detail)},onSwipeBackBeforeReset:function(e){this.$emit("swipeback:beforereset",e,e.detail)},onSwipeBackAfterReset:function(e){this.$emit("swipeback:afterreset",e,e.detail)},onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)}}},r={render:function(e){var t=this,o=[];for(var n in t.pages){var a=t.pages[n];o.push(e(a.component,{tag:"component",props:t.$route&&t.$route.params,key:n}))}return e("div",{staticClass:"pages",ref:"pages",class:t.classesObject,on:{"page:beforeremove":t.onPageBeforeRemove}},[t.$slots.default,o])},props:{"navbar-fixed":Boolean,"navbar-through":Boolean,"toolbar-fixed":Boolean,"toolbar-through":Boolean,"tabbar-fixed":Boolean,"tabbar-through":Boolean,"tabbar-labels-fixed":Boolean,"tabbar-labels-through":Boolean,theme:String,layout:String},data:function(){return{pages:{}}},computed:{classesObject:function(){var e={"navbar-fixed":this.navbarFixed||this.navbarThrough&&this.$theme.material,"navbar-through":this.navbarThrough,"toolbar-fixed":this.toolbarFixed,"toolbar-through":this.toolbarThrough,"tabbar-fixed":this.tabbarFixed,"tabbar-through":this.tabbarThrough,"tabbar-labels-fixed":this.tabbarLabelsFixed,"tabbar-labels-through":this.tabbarLabesThrough};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onPageBeforeRemove:function(e){var t,o=this;for(var n in o.pages)if(e.target===o.pages[n].pageElement){t=n;break}t&&this.$delete(this.pages,t)},onRouteChange:function(e){var t=this,o=e.route.component,n=e.view,a=t.$parent.f7View||t.$parent.$el.f7View;if(n===a){var i=t.$f7Router.findMatchingRoute(n.url)||{route:{path:"/",pagePath:"/"}},r=i.route.pagePath!==e.route.pagePath,s=!r&&i.route.path!==e.route.path,l=r||!s&&(e.options.reload||n.params.allowDuplicateUrls);if(l){var c=(new Date).getTime();t.$set(t.pages,c,{component:o}),n.allowPageChange=!1,t.$nextTick(function(){var o=n.pagesContainer.querySelector(".page:last-child");t.pages[c].pageElement=o,n.allowPageChange=!0;var a=Object.assign(e.options,{pageElement:o});a.isBack?n.router.back(a):n.router.load(a)})}}}}},s={render:function(e){var t,o,n,a,i=[],r=[],s=this;s.pullToRefresh&&s.ptrLayer&&s.pullToRefreshLayer&&(n=e("div",{class:{"pull-to-refresh-layer":!0}},[e("div",{class:{preloader:!0}}),e("div",{class:{"pull-to-refresh-arrow":!0}})])),(s.infiniteScroll||""===s.infiniteScroll)&&s.infiniteScrollPreloader&&(a=e("div",{class:{"infinite-scroll-preloader":!0}},[e("div",{class:{preloader:!0}})]));var l,c,u,d,p,h,f,m="navbar toolbar tabbar subnavbar searchbar messagebar fab speed-dial floating-button".split(" ");if(s.$slots.default)for(h=0;h<s.$slots.default.length;h++)if(c=s.$slots.default[h],l=c.tag){var b=!1;for(l.indexOf("messages")>=0&&(d=!0),l.indexOf("subnavbar")>=0&&(u=!0),l.indexOf("searchbar")>=0&&(p=!0),f=0;f<m.length;f++)l.indexOf(m[f])>=0&&(b=!0);b?i.push(c):r.push(c)}else r.push(c);if(i.length>0&&p&&i.push(e("div",{class:{"searchbar-overlay":!0}})),d&&(s.classesObjectPageContent["messages-content"]=!0),s.noPageContent)if(o=[],s.$slots.default&&i.length>0)for(h=0;h<s.$slots.default.length;h++)i.indexOf(s.$slots.default[h])<0&&o.push(s.$slots.default[h]);else o=[s.$slots.default];else o=e("div",{staticClass:"page-content",class:s.classesObjectPageContent,attrs:{"data-ptr-distance":s.pullToRefreshDistance||s.ptrDistance,"data-distance":s.infiniteScrollDistance},on:{"ptr:pullstart":s.onPtrPullstart,"ptr:pullmove":s.onPtrPullmove,"ptr:pullend":s.onPtrPullend,"ptr:refresh":s.onPtrRefresh,"ptr:done":s.onPtrRefreshdone,infinite:s.onInfinite}},"top"===s.infiniteScroll?[n,a,s.$slots.static,r]:[n,s.$slots.static,r,a]);return i.push(s.$slots.fixed),u&&(s.classesObjectPage["with-subnavbar"]=!0),t=e("div",{staticClass:"page",class:s.classesObjectPage,attrs:{"data-page":s.name},on:{"page:beforeinit":s.onPageBeforeInit,"page:init":s.onPageInit,"page:reinit":s.onPageReinit,"page:beforeanimation":s.onPageBeforeAnimation,"page:afteranimation":s.onPageAfterAnimation,"page:beforeremove":s.onPageBeforeRemove,"page:back":s.onPageBack,"page:afterback":s.onPageAfterBack}},[i,o])},props:{name:String,cached:Boolean,"navbar-fixed":Boolean,"navbar-through":Boolean,"toolbar-fixed":Boolean,"toolbar-through":Boolean,"tabbar-fixed":Boolean,"tabbar-through":Boolean,"tabbar-labels-fixed":Boolean,"tabbar-labels-through":Boolean,"with-subnavbar":Boolean,subnavbar:Boolean,"no-navbar":Boolean,"no-toolbar":Boolean,"no-tabbar":Boolean,"pull-to-refresh":Boolean,"pull-to-refresh-distance":Number,"ptr-distance":Number,"pull-to-refresh-layer":{type:Boolean,default:!0},"ptr-layer":{type:Boolean,default:!0},"infinite-scroll":[Boolean,String],"infinite-scroll-distance":Number,"infinite-scroll-preloader":{type:Boolean,default:!0},"hide-bars-on-scroll":Boolean,"hide-navbar-on-scroll":Boolean,"hide-toolbar-on-scroll":Boolean,"hide-tabbar-on-scroll":Boolean,messages:Boolean,tabs:Boolean,"no-page-content":Boolean,"login-screen":Boolean,theme:String,layout:String,"no-swipeback":Boolean},computed:{classesObjectPage:function(){var e={cached:this.cached,"navbar-fixed":this.navbarFixed||this.navbarThrough&&this.$theme.material,"navbar-through":this.navbarThrough,"toolbar-fixed":this.toolbarFixed,"toolbar-through":this.toolbarThrough,"tabbar-fixed":this.tabbarFixed,"tabbar-through":this.tabbarThrough,"tabbar-labels-fixed":this.tabbarLabelsFixed,"tabbar-labels-through":this.tabbarLabelsThrough,"with-subnavbar":this.subnavbar||this.withSubnavbar,"no-navbar":this.noNavbar,"no-toolbar":this.noToolbar,"no-tabbar":this.noTabbar,tabs:this.tabs,"no-swipeback":this.noSwipeback};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e},classesObjectPageContent:function(){return{"pull-to-refresh-content":this.pullToRefresh,"infinite-scroll":this.infiniteScroll||""===this.infiniteScroll,"infinite-scroll-top":"top"===this.infiniteScroll,"hide-bars-on-scroll":this.hideBarsOnScroll,"hide-navbar-on-scroll":this.hideNavbarOnScroll,"hide-toolbar-on-scroll":this.hideToolbarOnScroll,"hide-tabbar-on-scroll":this.hideTabbarOnScroll,"messages-content":this.messages,"login-screen-content":this.loginScreen}}},methods:{onPtrPullstart:function(e){this.$emit("ptr:pullstart",e)},onPtrPullmove:function(e){this.$emit("ptr:pullmove",e)},onPtrPullend:function(e){this.$emit("ptr:pullend",e)},onPtrRefresh:function(e){this.$emit("ptr:refresh",e,e.detail.done)},onPtrRefreshdone:function(e){this.$emit("ptr:done",e)},onInfinite:function(e){this.$emit("infinite",e)},onPageBeforeInit:function(e){this.f7PageData=e.detail.page,this.$emit("page:beforeinit",e,e.detail.page)},onPageInit:function(e){this.$emit("page:init",e,e.detail.page)},onPageReinit:function(e){this.$emit("page:reinit",e,e.detail.page)},onPageBeforeAnimation:function(e){this.$emit("page:beforeanimation",e,e.detail.page)},onPageAfterAnimation:function(e){this.$emit("page:afteranimation",e,e.detail.page)},onPageBeforeRemove:function(e){this.$emit("page:beforeremove",e,e.detail.page)},onPageBack:function(e){this.$emit("page:back",e,e.detail.page)},onPageAfterBack:function(e){this.$emit("page:afterback",e,e.detail.page)}}},l={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"page-content",class:e.classesObject,on:{"tab:show":e.onTabShow,"tab:hide":e.onTabHide}},[e._t("default")],2)},staticRenderFns:[],props:{tab:Boolean,active:Boolean},computed:{classesObject:function(){var e=this;return{tab:e.tab,active:e.active}}},methods:{onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)}}},c={render:function(e){var t,o,n,a=this;return a.inner&&(a.backLink&&(o=e("f7-nav-left",{props:{backLink:a.backLink,sliding:a.sliding,backLinkHref:a.backLinkUrl||a.backLinkHref},on:{"back-click":a.onBackClick}})),a.title&&(n=e("f7-nav-center",{props:{title:a.title,sliding:a.sliding}})),t=e("div",{staticClass:"navbar-inner"},[o,n,a.$slots.default])),e("div",{staticClass:"navbar",class:a.classesObject,on:{"navbar:beforeinit":a.onBeforeInit,"navbar:init":a.onInit,"navbar:reinit":a.onReinit,"navbar:beforeremove":a.onBeforeRemove}},[a.$slots["before-inner"],t,a.$slots["after-inner"]])},updated:function(){var e=this;e.$nextTick(function(){e.$f7.sizeNavbars()})},props:{backLink:[Boolean,String],backLinkUrl:String,backLinkHref:String,sliding:Boolean,title:String,theme:String,layout:String,hidden:Boolean,noShadow:Boolean,inner:{type:Boolean,default:!0}},computed:{classesObject:function(){var e={"navbar-hidden":this.hidden};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),this.noShadow&&(e["no-shadow"]=!0),e}},methods:{hide:function(e){if(this.$f7)return this.$f7.hideNavbar(this.$el,e)},show:function(e){if(this.$f7)return this.$f7.showNavbar(this.$el,e)},size:function(){if(this.$f7&&!this.$theme.material)return this.$f7.sizeNavbars()},onBeforeInit:function(e){this.$emit("navbar:beforeinit",e)},onInit:function(e){this.$emit("navbar:init",e)},onReinit:function(e){this.$emit("navbar:reinit",e)},onBeforeRemove:function(e){this.$emit("navbar:beforeremove",e)},onBackClick:function(e){this.$emit("back-click",e),this.$emit("click:back",e)}}},u={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"center",class:{sliding:e.sliding}},[e._t("default",[e._v(e._s(e.title))])],2)},staticRenderFns:[],props:{sliding:Boolean,title:String}},d={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"left",class:{sliding:e.sliding}},[e.backLink?o("f7-link",{class:{"icon-only":e.backLink===!0||e.backLink&&e.$theme.material},attrs:{href:e.backLinkUrl||e.backLinkHref||"#",back:"",icon:"icon-back",text:e.backLink===!0||e.$theme.material?void 0:e.backLink},on:{click:e.onBackClick}}):e._e(),e._v(" "),e._t("default")],2)},staticRenderFns:[],props:{backLink:[Boolean,String],backLinkUrl:String,backLinkHref:String,sliding:Boolean},methods:{onBackClick:function(e){this.$emit("back-click",e),this.$emit("click:back",e)}}},p={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"right",class:{sliding:e.sliding}},[e._t("default")],2)},staticRenderFns:[],props:{sliding:Boolean}},h={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"subnavbar",class:!!e.sliding&&"sliding"},[e._t("default")],2)},staticRenderFns:[],props:{sliding:Boolean}},f={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"toolbar",class:e.classesObject},[e._t("before-inner"),e._v(" "),o("div",{staticClass:"toolbar-inner"},[e._t("default")],2),e._v(" "),e._t("after-inner")],2)},staticRenderFns:[],props:{bottom:Boolean,tabbar:Boolean,labels:Boolean,scrollable:Boolean,theme:String,layout:String,hidden:Boolean,noShadow:Boolean},computed:{classesObject:function(){var e={"toolbar-bottom":this.bottom,tabbar:this.tabbar,"tabbar-labels":this.labels,"tabbar-scrollable":this.scrollable,"toolbar-hidden":this.hidden};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),this.noShadow&&(e["no-shadow"]=!0),e}},methods:{hide:function(e){if(this.$f7)return this.$f7.hideToolbar(this.$el,e)},show:function(e){if(this.$f7)return this.$f7.showToolbar(this.$el,e)}}},m={render:function(e){var t,o,n,a,i=this;return i.title&&(t=e("f7-card-header",{domProps:{innerHTML:i.title}})),i.content&&(n=e("div",{domProps:{innerHTML:i.content}}),o=e("f7-card-content",{props:{inner:i.inner}},[n])),i.footer&&(a=e("f7-card-footer",{domProps:{innerHTML:i.footer}})),e("div",{staticClass:"card"},[t,o,a,i.$slots.default])},props:{title:[String,Number],content:[String,Number],footer:[String,Number],inner:{type:Boolean,default:!0}}},b={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"card-header"},[e._t("default")],2)},staticRenderFns:[]},g={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"card-footer"},[e._t("default")],2)},staticRenderFns:[]},v={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"card-content"},[e.inner?o("div",{staticClass:"card-content-inner"},[e._t("default")],2):e._t("default")],2)},staticRenderFns:[],props:{inner:{type:Boolean,default:!0}}},$={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"content-block",class:e.classesObject,on:{"tab:show":e.onTabShow,"tab:hide":e.onTabHide}},[e.inner?o("div",{staticClass:"content-block-inner"},[e._t("default")],2):e._t("default")],2)},staticRenderFns:[],props:{inset:Boolean,"tablet-inset":Boolean,inner:Boolean,tabs:Boolean,tab:Boolean,active:Boolean,"no-hairlines":Boolean,"no-hairlines-between":Boolean},computed:{classesObject:function(){var e=this;return{inset:e.inset,"tablet-inset":e.tabletInset,tabs:e.tabs,tab:e.tab,active:e.active,"no-hairlines":e.noHairlines,"no-hairlines-between":e.noHairlinesBetween}}},methods:{onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)}}},k={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"content-block-title"},[e._t("default")],2)},staticRenderFns:[]},S={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"badge",class:e.color?"color-"+e.color:""},[e._t("default")],2)},staticRenderFns:[],props:{color:String}},C={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("i",{staticClass:"icon",class:e.classesObject,style:{"font-size":e.sizeComputed}},[e._v(e._s(e.iconTextComputed)),e._t("default")],2)},staticRenderFns:[],props:{color:String,material:String,f7:String,ion:String,fa:String,icon:String,"if-material":String,"if-ios":String,size:[String,Number]},computed:{sizeComputed:function(){var e=this,t=e.size;return"number"!=typeof t&&parseFloat(t)!==1*t||(t+="px"),t},iconTextComputed:function(){var e=this,t=e.material||e.f7;return e.ifMaterial&&e.$theme.material&&(e.ifMaterial.indexOf("material:")>=0||e.ifMaterial.indexOf("f7:")>=0)?t=e.ifMaterial.split(":")[1]:e.ifIos&&e.$theme.ios&&(e.ifIos.indexOf("material:")>=0||e.ifIos.indexOf("f7:")>=0)&&(t=e.ifIos.split(":")[1]),t},classesObject:function(){var e={},t=this;if(t.ifMaterial||t.ifIos){var o=t[t.$theme.material?"ifMaterial":"ifIos"].split(":"),n=o[0],a=o[1];"material"!==n&&"fa"!==n&&"f7"!==n||(e.fa="fa"===n,e["material-icons"]="material"===n,e["f7-icons"]="f7"===n),"fa"!==n&&"ion"!==n||(e[n+"-"+a]=!0),"icon"===n&&(e[a]=!0)}else e={"material-icons":this.material,"f7-icons":this.f7,fa:this.fa},this.ion&&(e["ion-"+this.ion]=!0),this.fa&&(e["fa-"+this.fa]=!0),this.icon&&(e[this.icon]=!0);return this.color&&(e["color-"+this.color]=!0),e}}},B={beforeDestroy:function(){var e=this;e.virtual&&e.virtualInit&&e.f7VirtualList&&e.f7VirtualList.destroy&&e.f7VirtualList.destroy()},watch:{virtualItems:function(){var e=this;e.virtual&&e.virtualInit&&e.f7VirtualList&&e.f7VirtualList.replaceAllItems(e.virtualItems)}},render:function(e){var t,o,n=this;o=n.grouped?n.$slots.default:e("ul",{},n.$slots.default);var a=[],i=[];if(n.$slots.default)for(var r=0;r<n.$slots.default.length;r++){var s=n.$slots.default[r].tag;s&&!("li"==s||s.indexOf("list-item")>=0||s.indexOf("list-button")>=0)?a.push(n.$slots.default[r]):i.push(n.$slots.default[r])}return t=e(n.form?"form":"div",{staticClass:"list-block",class:{inset:n.inset,"tablet-inset":n.tabletInset,"media-list":n.mediaList,sortable:n.sortable,"accordion-list":n.accordion,"contacts-block":n.contacts,"virtual-list":n.virtual,tab:n.tab,active:n.active,"no-hairlines":n.noHairlines,"no-hairlines-between":n.noHairlinesBetween,"store-data":n.storeData},on:{"sortable:open":n.onSortableOpen,"sortable:close":n.onSortableClose,"sortable:sort":n.onSortableSort,"tab:show":n.onTabShow,"tab:hide":n.onTabHide}},[i.length>0?[e("ul",{},i),a]:a])},props:{inset:Boolean,"tablet-inset":Boolean,"media-list":Boolean,grouped:Boolean,sortable:Boolean,label:String,accordion:Boolean,contacts:Boolean,"no-hairlines":Boolean,"no-hairlines-between":Boolean,tab:Boolean,active:Boolean,form:Boolean,"store-data":Boolean,virtual:Boolean,"virtual-init":{type:Boolean,default:!0},"virtual-items":[Array,Object],"virtual-height":[Number,Function],"virtual-rows-before":Number,"virtual-rows-after":Number,"virtual-cols":{type:Number,default:1},"virtual-cache":{type:Boolean,default:!0},"virtual-filtered-only":{type:Boolean,default:!1},"virtual-search-by-item":Function,"virtual-search-all":Function,"virtual-render-item":Function,"virtual-empty-template":String,"virtual-render-external":Function},methods:{onSortableOpen:function(e){this.$emit("sortable:open",e)},onSortableClose:function(e){this.$emit("sortable:close",e)},onSortableSort:function(e){this.$emit("sortable:sort",e,e.detail)},onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)},onF7Init:function(e){var t=this;if(t.virtual&&t.virtualInit){var o=t.$$,n=o(t.$el),a=n.find("script"),i=a.html();!i&&a.length>0&&(i=a[0].outerHTML,i=/\<script type="text\/template7"\>(.*)<\/script>/.exec(i)[1]),(i||t.virtualRenderItem||t.virtualRenderExternal)&&(i&&(i=t.$t7.compile(i)),t.f7VirtualList=e.virtualList(t.$el,{items:t.virtualItems||[],template:i,height:t.virtualHeight||void 0,cols:t.virtualCols,rowsBefore:t.virtualRowsBefore||void 0,rowsAfter:t.virtualRowsAfter||void 0,showFilteredItemsOnly:t.virtualFilteredOnly,searchByItem:t.virtualSearchByItem,searchAll:t.virtualSearchAll,renderItem:t.virtualRenderItem,renderExternal:t.virtualRenderExternal,emptyTemplate:t.virtualEmptyTemplate,onItemBeforeInsert:function(e,o){t.$emit("virtual:itembeforeinsert",e,o)},onBeforeClear:function(e,o){t.$emit("virtual:beforeclear",e,o)},onItemsBeforeInsert:function(e,o){t.$emit("virtual:itemsbeforeinsert",e,o)},onItemsAfterInsert:function(e,o){t.$emit("virtual:itemsafterinsert",e,o)}}))}}}},y={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"list-block-group"},[o("ul",[e._t("default")],2)])},staticRenderFns:[],props:{"media-list":Boolean,sortable:Boolean},computed:{sortableComputed:function(){return this.sortable||this.$parent.sortable},mediaListComputed:function(){return this.mediaList||this.$parent.mediaList}},data:function(){return{}}},w={render:function(e){function t(e){return!(!e&&""!==e)}function o(e){return"string"==typeof e&&""!==e}var n,a,i,r=this;if(i=e("f7-list-item-content",{props:{title:r.title,text:r.text,media:r.media,subtitle:r.subtitle,after:r.after,badge:r.badge,"badge-color":r.badgeColor,"media-list":r.mediaListComputed,"accordion-item":r.accordionItem,checkbox:r.checkbox,checked:r.checkedComputed,radio:r.radio,name:r.name,value:r.valueComputed,readonly:r.readonly,required:r.required,disabled:r.disabled},on:r.link||r.accordionItem||r.smartSelect?{}:{click:r.onClick,change:r.onChange}},[r.$slots["content-start"],r.$slots.content,r.$slots["media-start"],r.$slots.media,r.$slots["inner-start"],r.$slots.inner,r.$slots["after-start"],r.$slots.after,r.swipeout||r.accordionItem?[]:r.$slots.default]),(r.link||r.accordionItem||r.smartSelect)&&(a=e("a",{attrs:{href:r.link===!0||r.accordionItem||r.smartSelect?"#":r.link,target:r.linkTarget,"data-searchbar":r.smartSelectSearchbar,"data-searchbar-placeholder":r.smartSelectSearchbarPlaceholder,"data-searchbar-cancel":r.smartSelectSearchbarCancel,"data-page-title":r.smartSelectPageTitle,"data-back-text":r.smartSelectBackText,"data-back-on-select":r.smartSelectBackOnSelect,"data-virtual-list":r.smartSelectVirtualList,"data-virtual-list-height":r.smartSelectVirtualListHeight,"data-open-in":r.smartSelectOpenIn,"data-navbar-theme":r.smartSelectNavbarTheme,"data-form-theme":r.smartSelectFormTheme,"data-view":!!o(r.linkView)&&r.linkView,"data-panel":!!o(r.linkOpenPanel)&&r.linkOpenPanel,"data-popup":!!o(r.linkOpenPopup)&&r.linkOpenPopup,"data-popover":!!o(r.linkOpenPopover)&&r.linkOpenPopover,"data-picker":!!o(r.linkOpenPicker)&&r.linkOpenPicker,"data-login-screen":!!o(r.linkOpenLoginScreen)&&r.linkOpenLoginScreen,"data-sortable":o(r.linkOpenSortable)?r.linkOpenSortable:!!o(r.linkToggleSortable)&&r.linkToggleSortable,"data-force":r.linkForce,"data-reload":r.linkReload,"data-animate-pages":"linkAnimatePages"in r.$options.propsData?r.linkAnimatePages.toString():void 0,"data-ignore-cache":r.linkIgnoreCache,"data-page-name":"string"==typeof r.linkPageName&&r.linkPageName,"data-template":"string"==typeof r.linkTemplate&&r.linkTemplate},class:{"item-link":!0,external:r.linkExternal,back:r.linkBack,"no-fastclick":r.linkNoFastclick,"smart-select":r.smartSelect,"close-panel":t(r.linkClosePanel),"open-panel":r.linkOpenPanel||""===r.linkOpenPanel,"close-popup":t(r.linkClosePopup),"open-popup":r.linkOpenPopup||""===r.linkOpenPopup,"close-popover":t(r.linkClosePopover),"open-popover":r.linkOpenPopover||""===r.linkOpenPopover,"close-picker":t(r.linkClosePicker),"open-picker":r.linkOpenPicker||""===r.linkOpenPicker,"close-login-screen":t(r.linkCloseLoginScreen),"open-login-screen":r.linkOpenLoginScreen||""===r.linkOpenLoginScreen,"close-sortable":t(r.linkCloseSortable),"open-sortable":r.linkOpenSortable||""===r.linkOpenSortable,"toggle-sortable":r.linkToggleSortable||""===r.linkToggleSortable},on:{click:r.onClick}},[i])),r.dividerOrGroupTitle)n=[e("span",r.$slots.default||r.title)];else{var s=r.link||r.smartSelect||r.accordionItem?a:i;n=r.swipeout?[e("div",{class:{"swipeout-content":!0}},[s])]:[s],r.sortableComputed&&n.push(e("div",{class:{"sortable-handler":!0}})),(r.swipeout||r.accordionItem)&&n.push(r.$slots.default),n.unshift(r.$slots["root-start"]),n.push(r.$slots.root)}return e("li",{class:{"item-divider":r.divider,"list-group-title":r.groupTitle,swipeout:r.swipeout,"accordion-item":r.accordionItem,"accordion-item-expanded":r.accordionExpanded},on:{"swipeout:open":r.onSwipeoutOpen,"swipeout:opened":r.onSwipeoutOpened,"swipeout:close":r.onSwipeoutClose,"swipeout:closed":r.onSwipeoutClosed,"swipeout:delete":r.onSwipeoutDelete,"swipeout:deleted":r.onSwipeoutDeleted,swipeout:r.onSwipeout,"accordion:open":r.onAccOpen,"accordion:opened":r.onAccOpened,"accordion:close":r.onAccClose,"accordion:closed":r.onAccClosed}},n)},props:{title:[String,Number],text:[String,Number],media:String,subtitle:[String,Number],link:[Boolean,String],"link-external":Boolean,"link-back":Boolean,"link-no-fastclick":Boolean,"link-force":Boolean,"link-reload":Boolean,"link-animate-pages":Boolean,"link-ignore-cache":Boolean,"link-page-name":String,"link-template":String,"link-target":String,"link-view":String,"link-open-panel":[Boolean,String],"link-close-panel":[Boolean,String],"link-open-popup":[Boolean,String],"link-close-popup":[Boolean,String],"link-open-popover":[Boolean,String],"link-close-popover":[Boolean,String],"link-open-login-screen":[Boolean,String],"link-close-login-screen":[Boolean,String],"link-open-picker":[Boolean,String],"link-close-picker":[Boolean,String],after:[String,Number],badge:[String,Number],"badge-color":String,"media-item":Boolean,"media-list-item":Boolean,"media-list":Boolean,divider:Boolean,"group-title":Boolean,swipeout:Boolean,sortable:Boolean,"accordion-item":Boolean,"accordion-expanded":Boolean,"smart-select":Boolean,"smart-select-searchbar":Boolean,"smart-select-searchbar-placeholder":String,"smart-select-searchbar-cancel":String,"smart-select-page-title":String,"smart-select-back-text":String,"smart-select-back-on-select":Boolean,"smart-select-virtual-list":Boolean,"smart-select-virtual-list-height":Number,"smart-select-open-in":String,"smart-select-navbar-theme":String,"smart-select-form-theme":String,checkbox:Boolean,checked:Boolean,radio:Boolean,name:String,value:[String,Number,Boolean,Array],"input-value":[String,Number],readonly:Boolean,required:Boolean,disabled:Boolean},computed:{dividerOrGroupTitle:function(){return this.divider||this.groupTitle},sortableComputed:function(){return this.sortable||this.$parent.sortable||this.$parent.sortableComputed},mediaListComputed:function(){return this.mediaList||this.mediaItem||this.$parent.mediaList||this.$parent.mediaListComputed},hasCheckboxModel:function(){var e=this;return e.checkbox&&("undefined"!=typeof e.$options.propsData.value&&"boolean"==typeof e.value||Array.isArray(e.value))},hasRadioModel:function(){var e=this;return e.radio&&"undefined"!=typeof e.inputValue},valueComputed:function(){var e=this;return e.inputValue?e.inputValue:e.hasCheckboxModel?void 0:e.value},checkedComputed:function(){var e=this;return e.hasCheckboxModel?e.inputValue&&Array.isArray(e.value)?e.value.indexOf(e.inputValue)>=0:e.value:e.hasRadioModel?typeof e.value!=typeof e.inputValue?e.value.toString()===e.inputValue.toString():e.value===e.inputValue:e.checked}},methods:{onClick:function(e){"input"!==e.target.tagName.toLowerCase()&&this.$emit("click",e);
-},onSwipeoutDeleted:function(e){this.$emit("swipeout:deleted",e)},onSwipeoutDelete:function(e){this.$emit("swipeout:delete",e)},onSwipeoutClose:function(e){this.$emit("swipeout:close",e)},onSwipeoutClosed:function(e){this.$emit("swipeout:closed",e)},onSwipeoutOpen:function(e){this.$emit("swipeout:open",e)},onSwipeoutOpened:function(e){this.$emit("swipeout:opened",e)},onSwipeout:function(e){this.$emit("swipeout",e)},onAccClose:function(e){this.$emit("accordion:close",e)},onAccClosed:function(e){this.$emit("accordion:closed",e)},onAccOpen:function(e){this.$emit("accordion:open",e)},onAccOpened:function(e){this.$emit("accordion:opened",e)},onChange:function(e){var t=this;t.hasCheckboxModel?(Array.isArray(t.value)?e.target.checked?t.value.push(e.target.value):t.value.splice(t.value.indexOf(e.target.value),1):t.$emit("input",e.target.checked),t.$emit("change",e)):t.hasRadioModel?t.$emit("input",e.target.value):t.$emit("change",e)}}},x={render:function(e){var t,o,n,a,i,r,s,l,c,u,d,p=this,h=[],f=[],m=[],b=[],g=[],v=[],$=[],k=[];if(p.$slots.default&&p.$slots.default.length>0)for(var S=0;S<p.$slots.default.length;S++){var C=p.$slots.default[S].data?p.$slots.default[S].data.slot:void 0;C&&"content-start"===C&&h.push(p.$slots.default[S]),C&&"content"===C&&f.push(p.$slots.default[S]),C&&"after-start"===C&&g.push(p.$slots.default[S]),C&&"after"===C&&v.push(p.$slots.default[S]),C&&"media-start"===C&&$.push(p.$slots.default[S]),C&&"media"===C&&k.push(p.$slots.default[S]),C&&"inner-start"===C&&m.push(p.$slots.default[S]),(!C||C&&"inner"===C)&&b.push(p.$slots.default[S])}if((p.radio||p.checkbox)&&(u=e("input",{attrs:{value:p.value,name:p.name,checked:p.checked,readonly:p.readonly,disabled:p.disabled,required:p.required,type:p.radio?"radio":"checkbox"},on:{change:p.onChange},domProps:{checked:p.checked}})),p.media||p.checkbox||p.radio&&p.$theme.material||$.length||k.length)if(p.checkbox||p.radio&&p.$theme.material)if(p.media)d='<i class="icon icon-form-'+(p.radio?"radio":"checkbox")+'"></i>',c=e("div",{class:{"item-media":!0},domProps:{innerHTML:d+(p.media?p.media:"")}});else{var B={icon:!0};B["icon-form-"+(p.radio?"radio":"checkbox")]=!0,d=e("i",{class:B}),c=e("div",{class:{"item-media":!0}},[$,d,k])}else c=p.media?e("div",{staticClass:"item-media",domProps:{innerHTML:p.media}}):e("div",{staticClass:"item-media"},[$,k]);return p.title&&(t=e("div",{staticClass:"item-title",domProps:{innerHTML:p.title}},[p.title])),p.subtitle&&(s=e("div",{staticClass:"item-subtitle",domProps:{innerHTML:p.subtitle}},[p.subtitle])),p.text&&(l=e("div",{staticClass:"item-text",domProps:{innerHTML:p.text}})),(p.after||p.badge||v.length)&&(p.after&&(n=e("span",{domProps:{innerHTML:p.after}})),p.badge&&(a=e("f7-badge",{props:{color:p.badgeColor}},[p.badge])),o=e("div",{staticClass:"item-after"},[g,n,a,v])),p.mediaList&&(r=e("div",{staticClass:"item-title-row"},[t,o])),i=e("div",{staticClass:"item-inner"},p.mediaList?[m,r,s,l,b]:[m,t,o,b]),e(p.checkbox||p.radio?"label":"div",{staticClass:"item-content",class:{"label-checkbox":p.checkbox,"label-radio":p.radio},on:{click:p.onClick}},[h,u,c,i,f])},props:{title:[String,Number],text:[String,Number],media:String,subtitle:[String,Number],after:[String,Number],badge:[String,Number],"badge-color":String,"media-list":Boolean,checkbox:Boolean,checked:Boolean,radio:Boolean,name:String,value:[String,Number,Boolean,Array],"input-value":[String,Number],readonly:Boolean,required:Boolean,disabled:Boolean},methods:{onClick:function(e){this.$emit("click",e)},onChange:function(e){this.$emit("change",e)}}},_={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{class:"swipeout-actions-"+e.sideComputed},[e._t("default")],2)},staticRenderFns:[],props:{left:Boolean,right:Boolean,side:String},computed:{sideComputed:function(){return this.side?this.side:this.left?"left":(this.right,"right")}},data:function(){return{}}},P={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("a",{class:e.classObject,attrs:{href:"#"},on:{click:e.onClick}},[e._t("default",[e._v(e._s(e.text))])],2)},staticRenderFns:[],props:{text:String,overswipe:Boolean,close:Boolean,delete:Boolean,color:String,bg:String},computed:{classObject:function(){var e={"swipeout-overswipe":this.overswipe,"swipeout-delete":this.delete,"swipeout-close":this.close};return this.color&&(e["bg-"+this.color]=!0),this.bg&&(e["bg-"+this.bg]=!0),e}},data:function(){return{}},methods:{onClick:function(e){this.$emit("click",e)}}},O={render:function(e){var t,o=this;return t=o.title?e("a",{staticClass:"item-link list-button",attrs:o.attrsObject,class:o.classesObject,domProps:{innerHTML:o.title},on:{click:o.onClick}}):e("a",{staticClass:"item-link list-button",attrs:o.attrsObject,class:o.classesObject,on:{click:o.onClick}},[o.$slots.default]),e("li",{},[t])},props:{title:[String,Number],link:[Boolean,String],href:[Boolean,String],tabindex:[Number,String],external:Boolean,"link-external":Boolean,back:Boolean,"link-back":Boolean,"no-fastclick":Boolean,"link-no-fastlick":Boolean,color:String,force:Boolean,reload:Boolean,animatePages:Boolean,ignoreCache:Boolean,pageName:String,template:String,view:String,openPanel:[Boolean,String],closePanel:[Boolean,String],openPopup:[Boolean,String],closePopup:[Boolean,String],openPopover:[Boolean,String],closePopover:[Boolean,String],openLoginScreen:[Boolean,String],closeLoginScreen:[Boolean,String],openPicker:[Boolean,String],closePicker:[Boolean,String],tabLink:[Boolean,String],openSortable:[Boolean,String],closeSortable:[Boolean,String],toggleSortable:[Boolean,String]},computed:{attrsObject:function(){function e(e){return"string"==typeof e&&""!==e}var t=this,o={href:"boolean"==typeof t.link&&"boolean"==typeof t.href?"#":t.link||t.href},n=t.$options.propsData;return"force"in n&&(o["data-force"]=t.force),"reload"in n&&(o["data-reload"]="true"),"animatePages"in n&&"boolean"==typeof n.animatePages&&(o["data-animate-pages"]=n.animatePages.toString()),"ignoreCache"in n&&(o["data-ignore-cache"]="true"),t.pageName&&(o["data-page-name"]=t.pageName),t.template&&(o["data-template"]=t.template),t.view&&(o["data-view"]=t.view),t.tabindex&&(o.tabindex=t.tabindex),e(t.openPanel)&&(o["data-panel"]=t.openPanel),e(t.openPopup)&&(o["data-popup"]=t.openPopup),e(t.openPopover)&&(o["data-popover"]=t.openPopover),e(t.openPicker)&&(o["data-picker"]=t.openPicker),e(t.openLoginScreen)&&(o["data-login-screen"]=t.openLoginScreen),e(t.openSortable)&&(o["data-sortable"]=t.openSortable),e(t.toggleSortable)&&(o["data-sortable"]=t.toggleSortable),e(t.closePopup)&&(o["data-popup"]=t.closePopup),e(t.closePopover)&&(o["data-popover"]=t.closePopover),e(t.closePicker)&&(o["data-picker"]=t.closePicker),e(t.closeLoginScreen)&&(o["data-login-screen"]=t.closeLoginScreen),e(t.closeSortable)&&(o["data-sortable"]=t.closeSortable),e(t.tabLink)&&(o["data-tab"]=t.tabLink),o},classesObject:function(){function e(e){return!(!e&&""!==e)}var t=this,o={external:t.external||t.linkExternal,back:t.back||t.linkBack,"no-fastclick":t.noFastclick||t.linkNoFastclick};return e(t.closePanel)&&(o["close-panel"]=!0),(t.openPanel||""===t.openPanel)&&(o["open-panel"]=!0),e(t.closePopup)&&(o["close-popup"]=!0),(t.openPopup||""===t.openPopup)&&(o["open-popup"]=!0),e(t.closePopover)&&(o["close-popover"]=!0),(t.openPopover||""===t.openPopover)&&(o["open-popover"]=!0),e(t.closePicker)&&(o["close-picker"]=!0),(t.openPicker||""===t.openPicker)&&(o["open-picker"]=!0),e(t.closeLoginScreen)&&(o["close-login-screen"]=!0),(t.openLoginScreen||""===t.openLoginScreen)&&(o["open-login-screen"]=!0),e(t.closeSortable)&&(o["close-sortable"]=!0),(t.openSortable||""===t.openSortable)&&(o["open-sortable"]=!0),(t.toggleSortable||""===t.toggleSortable)&&(o["toggle-sortable"]=!0),e(t.tabLink)&&(o["tab-link"]=!0),t.color&&(o["color-"+t.color]=!0),o}},methods:{onClick:function(e){this.$emit("click",e)}}},M={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"list-block-label"},[e._t("default")],2)},staticRenderFns:[]},T={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"accordion-list"},[e._t("default")],2)},staticRenderFns:[]},L={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"accordion-item",class:{"accordion-item-expanded":e.expanded},on:{"accordion:open":e.onOpen,"accordion:opened":e.onOpened,"accordion:close":e.onClose,"accordion:closed":e.onClosed}},[e._t("default")],2)},staticRenderFns:[],props:{expanded:Boolean},methods:{onOpen:function(e){this.$emit("accordion:open",e)},onOpened:function(e){this.$emit("accordion:opened",e)},onClose:function(e){this.$emit("accordion:close",e)},onClosed:function(e){this.$emit("accordion:closed",e)}}},F={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"accordion-item-toggle"},[e._t("default")],2)},staticRenderFns:[]},I={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"accordion-item-content"},[e._t("default")],2)},staticRenderFns:[]},R={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"buttons-row",class:e.colorComputed?"theme-"+e.colorComputed:""},[e._t("default")],2)},staticRenderFns:[],props:{color:String,theme:String,bg:String},computed:{colorComputed:function(){return this.color||this.theme||this.bg}}},j={data:function(){return{routeInfo:{activeTab:this.$route&&this.$route.route.tab}}},props:{noLinkClass:Boolean,noFastclick:Boolean,external:Boolean,color:String,bg:String,theme:String,text:String,iconOnly:Boolean,icon:String,iconMaterial:String,iconIon:String,iconFa:String,iconF7:String,iconIfMaterial:String,iconIfIos:String,iconSize:[String,Number],rippleColor:String,href:{type:String,default:"#"},round:Boolean,fill:Boolean,big:Boolean,raised:Boolean,force:Boolean,reload:Boolean,animatePages:Boolean,ignoreCache:Boolean,pageName:String,template:String,view:String,openPanel:[Boolean,String],closePanel:[Boolean,String],openPopup:[Boolean,String],closePopup:[Boolean,String],openPopover:[Boolean,String],closePopover:[Boolean,String],openLoginScreen:[Boolean,String],closeLoginScreen:[Boolean,String],openPicker:[Boolean,String],closePicker:[Boolean,String],tabLink:[Boolean,String],routeTabLink:[Boolean,String],openSortable:[Boolean,String],closeSortable:[Boolean,String],toggleSortable:[Boolean,String],active:Boolean,badge:[String,Number],iconBadge:[String,Number],badgeColor:[String],back:Boolean},computed:{attrsObject:function(){function e(e){return"string"==typeof e&&""!==e}var t=this,o={href:t.href},n=t.$options.propsData;return"force"in n&&(o["data-force"]=t.force),"reload"in n&&(o["data-reload"]="true"),"animatePages"in n&&"boolean"==typeof n.animatePages&&(o["data-animate-pages"]=n.animatePages.toString()),"ignoreCache"in n&&(o["data-ignore-cache"]="true"),t.pageName&&(o["data-page-name"]=t.pageName),t.template&&(o["data-template"]=t.template),t.view&&(o["data-view"]=t.view),e(t.openPanel)&&(o["data-panel"]=t.openPanel),e(t.openPopup)&&(o["data-popup"]=t.openPopup),e(t.openPopover)&&(o["data-popover"]=t.openPopover),e(t.openPicker)&&(o["data-picker"]=t.openPicker),e(t.openLoginScreen)&&(o["data-login-screen"]=t.openLoginScreen),e(t.openSortable)&&(o["data-sortable"]=t.openSortable),e(t.toggleSortable)&&(o["data-sortable"]=t.toggleSortable),e(t.closePopup)&&(o["data-popup"]=t.closePopup),e(t.closePopover)&&(o["data-popover"]=t.closePopover),e(t.closePicker)&&(o["data-picker"]=t.closePicker),e(t.closeLoginScreen)&&(o["data-login-screen"]=t.closeLoginScreen),e(t.closeSortable)&&(o["data-sortable"]=t.closeSortable),e(t.tabLink)&&(o["data-tab"]=t.tabLink),o},classesObject:function(){function e(e){return!(!e&&""!==e)}var t=this,o={back:t.back,external:t.external,"no-fastclick":t.noFastclick};t.$options.propsData;if(t.rippleColor&&(o["ripple-color-"+t.rippleColor]=!0),t.color&&(o["color-"+t.color]=!0),t.theme&&(o["theme-"+t.theme]=!0),t.bg&&(o["bg-"+t.bg]=!0),["round","fill","big","raised"].forEach(function(e,n){t[e]&&(o["button-"+e]=!0)}),t.routeInfo.activeTab){var n=t.routeTabLink&&t.routeTabLink.replace("#","")===t.routeInfo.activeTab.tabId;o.active=n}else o.active=t.active;return e(t.closePanel)&&(o["close-panel"]=!0),(t.openPanel||""===t.openPanel)&&(o["open-panel"]=!0),e(t.closePopup)&&(o["close-popup"]=!0),(t.openPopup||""===t.openPopup)&&(o["open-popup"]=!0),e(t.closePopover)&&(o["close-popover"]=!0),(t.openPopover||""===t.openPopover)&&(o["open-popover"]=!0),e(t.closePicker)&&(o["close-picker"]=!0),(t.openPicker||""===t.openPicker)&&(o["open-picker"]=!0),e(t.closeLoginScreen)&&(o["close-login-screen"]=!0),(t.openLoginScreen||""===t.openLoginScreen)&&(o["open-login-screen"]=!0),e(t.closeSortable)&&(o["close-sortable"]=!0),(t.openSortable||""===t.openSortable)&&(o["open-sortable"]=!0),(t.toggleSortable||""===t.toggleSortable)&&(o["toggle-sortable"]=!0),(t.tabLink||""===t.tabLink)&&(o["tab-link"]=!0),o}},methods:{onClick:function(e){this.$emit("click",e)},onRouteChange:function(e){e.route.tab&&this.$set(this.routeInfo,"activeTab",e.route.tab)}}},N={mixins:[j],render:function(e){var t,o,n,a,i,r=this;n=(r.tabLink||""===r.tabLink)&&r.$parent&&r.$parent.tabbar&&r.$parent.labels,r.text&&(r.badge&&(a=e("f7-badge",{props:{color:r.badgeColor}},r.badge)),o=e("span",{class:{"tabbar-label":n}},[r.text,a])),(r.icon||r.iconMaterial||r.iconIon||r.iconFa||r.iconF7||r.iconIfMaterial&&r.$theme.material||r.iconIfIos&&r.$theme.ios)&&(r.iconBadge&&(i=e("f7-badge",{props:{color:r.badgeColor}},r.iconBadge)),t=e("f7-icon",{props:{material:r.iconMaterial,ion:r.iconIon,fa:r.iconFa,f7:r.iconF7,icon:r.icon,ifMaterial:r.iconIfMaterial,ifIos:r.iconIfIos,size:r.iconSize}},[i])),(!r.text&&r.$slots.default&&0===r.$slots.default.length||r.iconOnly||!r.text&&!r.$slots.default)&&(r.classesObject["icon-only"]=!0),r.classesObject.link=!r.noLinkClass&&!n;var s=e("a",{class:r.classesObject,attrs:r.attrsObject,on:{click:r.onClick}},[t,o,r.$slots.default]);return s},methods:{onClick:function(e){this.$emit("click",e)}}},E={render:function(e){var t,o,n=this;n.text&&(o=e("span",{},n.text)),(n.icon||n.iconMaterial||n.iconIon||n.iconFa||n.iconF7||n.iconIfMaterial||n.iconIfIos)&&(t=e("f7-icon",{props:{material:n.iconMaterial,ion:n.iconIon,fa:n.iconFa,f7:n.iconF7,icon:n.icon,ifMaterial:n.iconIfMaterial,ifIos:n.iconIfIos,size:n.iconSize}})),n.classesObject.button=!0;var a=e("a",{class:n.classesObject,attrs:n.attrsObject,on:{click:n.onClick}},[t,o,n.$slots.default]);return a},mixins:[j],methods:{onClick:function(e){this.$emit("click",e)}}},A={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"row",class:{"no-gutter":e.noGutter}},[e._t("default")],2)},staticRenderFns:[],props:{"no-gutter":Boolean},data:function(){return{}}},D={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{class:"col-"+e.width+(e.tabletWidth?" tablet-"+e.tabletWidth:"")},[e._t("default")],2)},staticRenderFns:[],props:{width:{type:[Number,String],default:"auto"},"tablet-width":{type:[Number,String]}},data:function(){return{}}},H={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"preloader",class:e.color?"color-"+e.color+" preloader-"+e.color:"",style:{width:e.sizeComputed?e.sizeComputed+"px":"",height:e.sizeComputed?e.sizeComputed+"px":""}},[e.$theme.material?o("span",{staticClass:"preloader-inner"},[o("span",{staticClass:"preloader-inner-gap"}),e._v(" "),e._m(0),e._v(" "),e._m(1)]):e._e()])},staticRenderFns:[function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"preloader-inner-left"},[o("span",{staticClass:"preloader-inner-half-circle"})])},function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"preloader-inner-right"},[o("span",{staticClass:"preloader-inner-half-circle"})])}],props:{color:String,size:[Number,String]},computed:{sizeComputed:function(){var e=this.size;return e&&"string"==typeof e&&e.indexOf("px")>=0&&(e=e.replace("px","")),e}}},z={render:function(e){var t=this,o=t.color,n=t.progress,a=t.infinite;return e("span",{staticClass:"progressbar",class:[o?"color-"+o+" progressbar-"+o:"",a?"progressbar-infinite":""].join(" ")},[e("span",{style:{transform:n?"translate3d("+(-100+n)+"%,0,0)":""}})])},props:{color:String,progress:Number,infinite:Boolean},methods:{set:function(e,t){var o=this;if(o.$f7)return o.$f7.setProgressbar(o.$el,e,t)},show:function(e,t,o){var n=this;if(n.$f7)return n.$f7.showProgressbar(e,t,o)}}},V={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"item-title",class:{label:!e.floating,"floating-label":e.floating}},[e._t("default")],2)},staticRenderFns:[],props:{floating:Boolean}},q={render:function(e){var t,o=this,n={name:o.name,type:o.type,placeholder:o.placeholder,id:o.id,value:o.valueComputed,size:o.size,accept:o.accept,autocomplete:o.autocomplete,autocorrect:o.autocorrect,autocapitalize:o.autocapitalize,spellcheck:o.spellcheck,autofocus:o.autofocus,autosave:o.autosave,checked:o.checkedComputed,disabled:o.disabled,max:o.max,maxlength:o.maxlength,min:o.min,minlength:o.minlength,step:o.step,multiple:o.multiple,readonly:o.readonly,required:o.required,color:o.color,pattern:o.pattern,tabindex:o.tabindex},a={focus:o.onFocus,blur:o.onBlur,input:o.onInput,change:o.onChange,click:o.onClick,keypress:o.onKeyPress,keyup:o.onKeyUp,keydown:o.onKeyDown,beforeinput:o.onBeforeInput,compositionstart:o.onCompositionStart,compositionupdate:o.onCompositionUpdate,compositionend:o.onCompositionEnd,focusin:o.onFocusIn,focusout:o.onFocusOut,dblclick:o.onDblClick,mousedown:o.onMouseDown,mouseenter:o.onMouseEnter,mouseleave:o.onMouseLeave,mousemove:o.onMouseMove,mouseout:o.onMouseOut,mouseover:o.onMouseOver,mouseup:o.onMouseUp,wheel:o.onWheel,select:o.onSelect};"select"===o.type||"textarea"===o.type||"file"===o.type?(delete n.value,t="select"===o.type?o.hasSelectModel?e("select",{attrs:n,on:a,style:o.inputStyle},o.$slots.default):e("select",{attrs:n,on:a,style:o.inputStyle,domProps:{value:o.valueComputed}},o.$slots.default):"file"===o.type?e("input",{attrs:n,style:o.inputStyle,on:a},o.$slots.default):e("textarea",{attrs:n,style:o.inputStyle,on:a,class:{resizable:o.resizable},domProps:{value:o.valueComputed}},o.$slots.default)):t=o.$slots.default&&o.$slots.default.length>0||!o.type?o.$slots.default:"switch"===o.type?e("f7-switch",{props:n,on:a}):"range"===o.type?e("f7-range",{props:n,on:a}):e("input",{attrs:n,style:o.inputStyle,on:a,domProps:{value:o.valueComputed,checked:o.checkedComputed}});var i=o.wrap?e("div",{staticClass:"item-input"},[t]):t;return i},watch:{value:function(){var e=this;if(e.hasSelectModel){var t=e.$$;t(e.$el).find("option").each(function(t,o){e.value.indexOf(o.value)>=0?o.selected=!0:o.selected=!1})}}},mounted:function(){var e=this;if(e.hasSelectModel){var t=e.$$;t(e.$el).find("option").each(function(t,o){e.value.indexOf(o.value)>=0?o.selected=!0:o.selected=!1})}},props:{type:String,name:String,placeholder:String,id:String,value:[String,Number,Boolean,Array,Object],inputValue:[String,Number],size:[String,Number],accept:[String,Number],autocomplete:[String],autocorrect:[String],autocapitalize:[String],spellcheck:[String],autofocus:Boolean,autosave:String,checked:Boolean,disabled:Boolean,max:[String,Number],min:[String,Number],step:[String,Number],maxlength:[String,Number],minlength:[String,Number],multiple:Boolean,readonly:Boolean,required:Boolean,inputStyle:String,pattern:String,tabindex:[String,Number],resizable:Boolean,color:String,wrap:{type:Boolean,default:!0}},computed:{hasCheckboxModel:function(){var e=this;return("checkbox"===e.type||"switch"===e.type)&&("undefined"!=typeof e.$options.propsData.value&&"boolean"==typeof e.value||Array.isArray(e.value))},hasRadioModel:function(){var e=this;return"radio"===e.type&&"undefined"!=typeof e.inputValue},hasSelectModel:function(){var e=this;return"select"===e.type&&Array.isArray(e.value)},valueComputed:function(){var e=this;if(e.inputValue)return e.inputValue;if(!e.hasCheckboxModel)return e.$options.propsData&&void 0!==e.$options.propsData.value?e.value:!e.hasCheckboxModel&&!e.hasRadioModel&&!e.hasSelectModel&&"value"in e.$options.propsData?e.value:void 0},checkedComputed:function(){var e=this;return e.hasCheckboxModel?e.inputValue&&Array.isArray(e.value)?e.value.indexOf(e.inputValue)>=0:e.value:e.hasRadioModel?typeof e.value!=typeof e.inputValue?e.value.toString()===e.inputValue.toString():e.value===e.inputValue:e.checked}},methods:{onInput:function(e){this.hasSelectModel||(e&&e.type&&"input"===e.type?this.$emit("input",e.target.value):this.$emit("input",e))},onFocus:function(e){this.$emit("focus",e)},onBlur:function(e){this.$emit("blur",e)},onChange:function(e){var t=this;if(t.hasCheckboxModel)Array.isArray(t.value)?e.target.checked?t.value.push(e.target.value):t.value.splice(t.value.indexOf(e.target.value),1):t.$emit("input",e.target.checked),t.$emit("change",e);else if(t.hasRadioModel)t.$emit("input",e.target.value);else if(t.hasSelectModel){var o=Array.prototype.filter.call(e.target.options,function(e){return e.selected}).map(function(e){var t="_value"in e?e._value:e.value;return t});t.$emit("input",o)}else t.$emit("change",e)},onClick:function(e){this.$emit("click",e)},onKeyPress:function(e){this.$emit("keypress",e)},onKeyUp:function(e){this.$emit("keyup",e)},onKeyDown:function(e){this.$emit("keydown",e)},onBeforeInput:function(e){this.$emit("beforeinput",e)},onCompositionStart:function(e){this.$emit("compositionstart",e)},onCompositionUpdate:function(e){this.$emit("compositionupdate",e)},onCompositionEnd:function(e){this.$emit("compositionend",e)},onFocusIn:function(e){this.$emit("focusin",e)},onFocusOut:function(e){this.$emit("focusout",e)},onDblClick:function(e){this.$emit("dblclick",e)},onMouseDown:function(e){this.$emit("mousedown",e)},onMouseEnter:function(e){this.$emit("mouseenter",e)},onMouseLeave:function(e){this.$emit("mouseleave",e)},onMouseMove:function(e){this.$emit("mousemove",e)},onMouseOut:function(e){this.$emit("mouseout",e)},onMouseOver:function(e){this.$emit("mouseover",e)},onMouseUp:function(e){this.$emit("mouseup",e)},onWheel:function(e){this.$emit("wheel",e)},onSelect:function(e){this.$emit("select",e)}}},U={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("label",{staticClass:"label-switch",class:e.color?"color-"+e.color:"",on:{click:e.onClick}},[o("input",{style:e.inputStyle,attrs:{type:"checkbox",name:e.name,id:e.id,disabled:e.disabled,readonly:e.readonly,required:e.required},domProps:{value:e.valueComputed,checked:e.checkedComputed},on:{input:e.onInput,change:e.onChange}}),e._v(" "),o("div",{staticClass:"checkbox"})])},staticRenderFns:[],props:{name:String,id:String,value:[String,Number,Boolean,Array],inputValue:[String,Number],checked:Boolean,disabled:Boolean,readonly:Boolean,required:Boolean,inputStyle:String,color:String},computed:{hasCheckboxModel:function(){return"boolean"==typeof this.value||Array.isArray(this.value)},valueComputed:function(){var e=this;if(e.inputValue)return e.inputValue;if(!e.hasCheckboxModel)return e.$options.propsData&&e.$options.propsData.value?e.value:void 0},checkedComputed:function(){var e=this;return e.hasCheckboxModel?e.inputValue&&Array.isArray(e.value)?e.value.indexOf(e.inputValue)>=0:e.value:e.checked}},methods:{onInput:function(e){this.$emit("input",e)},onChange:function(e){var t=this;t.hasCheckboxModel?Array.isArray(t.value)?(e.target.checked?t.value.push(e.target.value):t.value.splice(t.value.indexOf(e.target.value),1),t.$emit("change",e)):t.$emit("input",e.target.checked):t.$emit("change",e)},onClick:function(e){this.$emit("click",e)}}},Y={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"range-slider",class:e.color?"color-"+e.color:""},[o("input",{style:e.inputStyle,attrs:{type:"range",name:e.name,id:e.id,disabled:e.disabled,readonly:e.readonly,required:e.required,max:e.max,min:e.min,step:e.step},domProps:{value:e.value},on:{input:e.onInput,change:e.onChange,click:e.onClick}})])},staticRenderFns:[],props:{name:String,id:String,value:[String,Number],disabled:Boolean,readonly:Boolean,required:Boolean,inputStyle:String,max:[String,Number],min:[String,Number],step:[String,Number],color:String},methods:{onInput:function(e){this.$emit("input",e.target.value)},onChange:function(e){this.$emit("change",e)},onClick:function(e){this.$emit("click",e)}}},G={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"chip",class:e.chipClassObject,on:{click:e.onClick}},[e.media?o("span",{staticClass:"chip-media",class:e.mediaClassObject,domProps:{innerHTML:e._s(e.media)}}):e._e(),e._v(" "),e.text?o("span",{staticClass:"chip-label",domProps:{innerHTML:e._s(e.text)}}):e._e(),e._v(" "),e.deleteable?o("a",{staticClass:"chip-delete",attrs:{href:"#"},on:{click:e.onDeleteClick}}):e._e()])},staticRenderFns:[],props:{media:String,text:[String,Number],deleteable:Boolean,color:String,bg:String,mediaBg:String,mediaColor:String},computed:{mediaClassObject:function(){var e={};return this.mediaColor&&(e["color-"+this.mediaColor]=!0),this.mediaBg&&(e["bg-"+this.mediaBg]=!0),e},chipClassObject:function(){var e={};return this.color&&(e["color-"+this.color]=!0),this.bg&&(e["bg-"+this.bg]=!0),e}},methods:{onClick:function(e){this.$emit("click",e)},onDeleteClick:function(e){this.$emit("delete",e)}}},K={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("a",{staticClass:"floating-button",class:!!e.color&&"color-"+e.color,attrs:{href:"#"},on:{click:e.onClick}},[e._t("default")],2)},staticRenderFns:[],props:{color:String},methods:{onClick:function(e){this.$emit("click",e)}}},W={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"speed-dial",class:!!e.theme&&"theme-"+e.theme},[e._t("default")],2)},staticRenderFns:[],props:{theme:String}},Z={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"speed-dial-buttons",class:!!e.theme&&"theme-"+e.theme},[e._t("default")],2)},staticRenderFns:[],props:{theme:String}},Q={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("a",{class:e.classesObject,attrs:{href:"#"},on:{click:e.onClick}},[e._t("default")],2)},staticRenderFns:[],props:{color:String,closeSpeedDial:Boolean},computed:{classesObject:function(){var e={};return this.color&&(e["color-"+this.color]=!0),this.closeSpeedDial&&(e["close-speed-dial"]=!0),e}},methods:{onClick:function(e){this.$emit("click",e)}}},J={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"swiper-container"},[o("div",{staticClass:"swiper-wrapper"},[e._t("default")],2),e._v(" "),e.paginationComputed===!0?o("div",{staticClass:"swiper-pagination"}):e._e(),e._v(" "),e.scrollbarComputed===!0?o("div",{staticClass:"swiper-scrollbar"}):e._e(),e._v(" "),e.nextButtonComputed===!0?o("div",{staticClass:"swiper-button-next"}):e._e(),e._v(" "),e.prevButtonComputed===!0?o("div",{staticClass:"swiper-button-prev"}):e._e()])},staticRenderFns:[],beforeDestroy:function(){var e=this;e.init&&e.swiper&&e.swiper.destroy&&e.swiper.destroy()},props:{params:Object,pagination:[Boolean,String,Object],scrollbar:[Boolean,String,Object],"next-button":[Boolean,String,Object],"prev-button":[Boolean,String,Object],init:{type:Boolean,default:!0}},computed:{paramsComputed:function(){return this.params||{}},paginationComputed:function(){var e=this;return e.pagination===!0||""===e.pagination?(e.paramsComputed.pagination=".swiper-pagination",!0):("object"==typeof e.pagination||"string"==typeof e.pagination)&&(e.paramsComputed.pagination=e.pagination,!0)},scrollbarComputed:function(){var e=this;return e.scrollbar||""===e.scrollbar?(e.paramsComputed.scrollbar=".swiper-scrollbar",!0):("object"==typeof e.scrollbar||"string"==typeof e.scrollbar)&&(e.paramsComputed.scrollbar=e.scrollbar,!0)},nextButtonComputed:function(){var e=this;return e.nextButton||""===e.nextButton?(e.paramsComputed.nextButton=".swiper-button-next",!0):("object"==typeof e.nextButton||"string"==typeof e.nextButton)&&(e.paramsComputed.nextButton=e.nextButton,!0)},prevButtonComputed:function(){var e=this;return e.prevButton||""===e.prevButton?(e.paramsComputed.prevButton=".swiper-button-prev",!0):("object"==typeof e.prevButton||"string"==typeof e.prevButton)&&(e.paramsComputed.prevButton=e.prevButton,!0)}},methods:{onF7Init:function(){this.init&&(this.swiper=new window.Swiper(this.$el,this.paramsComputed))}}},X={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"swiper-slide"},[e.zoom?o("div",{staticClass:"swiper-zoom-container"},[e._t("default")],2):e._t("default")],2)},staticRenderFns:[],props:{zoom:Boolean}},ee={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"messages"},[e._t("default")],2)},staticRenderFns:[],beforeDestroy:function(){this.f7Messages&&this.f7Messages.destroy&&this.f7Messages.destroy()},beforeUpdate:function(e,t){var o=this;o.init&&o.$children.forEach(function(e){o.$$(e.$el).addClass("message-appeared")})},updated:function(e,t){var o=this;o.init&&(o.$children.forEach(function(e){var t=o.$$(e.$el);t.hasClass("message-appeared")||t.addClass("message-appear-from-bottom")}),this.f7Messages&&this.f7Messages.layout&&this.autoLayout&&this.f7Messages.layout(),this.f7Messages&&this.f7Messages.scrollMessages&&this.scrollMessages&&this.f7Messages.scrollMessages())},props:{autoLayout:{type:Boolean,default:!0},newMessagesFirst:Boolean,messages:Array,scrollMessages:{type:Boolean,default:!0},scrollMessagesOnlyOnEdge:Boolean,init:{type:Boolean,default:!0}},methods:{addMessage:function(e,t,o){if(this.f7Messages)return this.f7Messages.addMessage(e,t,o)},appendMessage:function(e,t){if(this.f7Messages)return this.f7Messages.appendMessage(e,t)},prependMessage:function(e,t){if(this.f7Messages)return this.f7Messages.prependMessage(e,t)},addMessages:function(e,t,o){if(this.f7Messages)return this.f7Messages.addMessages(e,t,o)},removeMessage:function(e){if(this.f7Messages)return this.f7Messages.removeMessage(e)},removeMessages:function(e){if(this.f7Messages)return this.f7Messages.removeMessages(e)},scroll:function(){if(this.f7Messages)return this.f7Messages.scrollMessages()},layout:function(){if(this.f7Messages)return this.f7Messages.layout()},clean:function(){if(this.f7Messages)return this.f7Messages.clean()},onF7Init:function(e){var t=this;t.init&&(t.f7Messages=e.messages(t.$el,{autoLayout:t.autoLayout,newMessagesFirst:t.newMessagesFirst,messages:t.messages,scrollMessages:t.scrollMessages,scrollMessagesOnlyOnEdge:t.scrollMessagesOnlyOnEdge}))}}},te={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{class:e.classesObject,on:{click:e.onClick}},[e._v("\n  "+e._s(e.day)+" "),e.time?o("span",[e._v(e._s(e.time))]):e._e(),e._v(" "),e._t("start"),e._v(" "),e.name?o("div",{staticClass:"message-name",on:{click:e.onNameClick}},[e._v(e._s(e.name))]):e._e(),e._v(" "),o("div",{staticClass:"message-text",on:{click:e.onTextClick}},[e._t("default",[e._v(e._s(e.text))]),e._v(" "),e.date?o("div",{staticClass:"message-date"},[e._v(e._s(e.date))]):e._e()],2),e._v(" "),e.avatar?o("div",{staticClass:"message-avatar",style:{"background-image":"url("+e.avatar+")"},on:{click:e.onAvatarClick}}):e._e(),e._v(" "),e.label?o("div",{staticClass:"message-label"},[e._v(e._s(e.label))]):e._e(),e._v(" "),e._t("end")],2)},staticRenderFns:[],props:{text:String,name:String,avatar:String,type:{type:String,default:"sent"},label:String,day:String,date:String,time:String,last:{type:Boolean,default:!0},first:{type:Boolean,default:!0}},computed:{classesObject:function(){var e={},t=this;if(t.day||t.time)e["messages-date"]=t.day||t.time;else{var o="bottom";t.$parent.newFirst&&(o="top"),e["message-date"]=t.day||t.time,e.message=!(t.day||t.time),e["message-"+t.type]=!0,e["message-with-avatar"]=t.avatar,e["message-first"]=t.first,
-e["message-last"]=t.last,e["message-with-tail"]=t.last}return e}},methods:{onClick:function(e){this.$emit("click",e)},onNameClick:function(e){this.$emit("click:name",e)},onTextClick:function(e){this.$emit("click:text",e)},onAvatarClick:function(e){this.$emit("click:avatar",e)}}},oe={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"toolbar messagebar"},[e._t("before-inner"),e._v(" "),o("div",{staticClass:"toolbar-inner"},[e._t("before-textarea"),e._v(" "),o("textarea",{ref:"area",attrs:{placeholder:e.placeholder,disabled:e.disabled,name:e.name,readonly:e.readonly},on:{input:e.onInput,change:e.onChange,focus:e.onFocus,blur:e.onBlur}},[e._v(e._s(e.value))]),e._v(" "),e._t("after-textarea"),e._v(" "),e.sendLink&&e.sendLink.indexOf("<")>=0?o("f7-link",{domProps:{innerHTML:e._s(e.sendLink)},on:{click:e.onClick}}):o("f7-link",{on:{click:e.onClick}},[e._t("send-link",[e._v(e._s(e.sendLink))])],2),e._v(" "),e._t("default")],2),e._v(" "),e._t("after-inner")],2)},staticRenderFns:[],beforeDestroy:function(){this.f7Messagebar&&this.f7Messagebar.destroy&&this.f7Messagebar.destroy()},props:{placeholder:{type:String,default:"Message"},init:{type:Boolean,default:!0},maxHeight:Number,sendLink:String,value:[String,Number],disabled:Boolean,readonly:Boolean,name:String},methods:{getValue:function(){if(this.f7Messagebar)return this.f7Messagebar.value()},setValue:function(e){if(this.f7Messagebar)return this.f7Messagebar.value(e)},clear:function(){if(this.f7Messagebar)return this.f7Messagebar.clear()},onChange:function(e){this.$emit("change",e)},onInput:function(e){this.$emit("input",e.target.value)},onFocus:function(e){this.$emit("focus",e)},onBlur:function(e){this.$emit("blur",e)},onClick:function(e){var t=this.$refs.area.value,o=this.f7Messagebar?this.f7Messagebar.clear:function(){};this.$emit("submit",t,o),this.$emit("click",e)},onF7Init:function(){var e=this;e.init&&(e.f7Messagebar=e.$f7.messagebar(e.$el,{maxHeight:e.maxHeight}))}}},ne={render:function(e){var t,o,n,a,i=this;return n=e("input",{attrs:{placeholder:i.placeholder,type:"search"},on:{input:i.onInput,change:i.onChange,focus:i.onFocus,blur:i.onBlur}}),i.clearButtonComputed&&(t=e("a",{staticClass:"searchbar-clear",attrs:{href:"#"},on:{click:i.onClearClick}})),i.cancelLink&&(o=e("a",{staticClass:"searchbar-cancel",attrs:{href:"#"},domProps:{innerHTML:i.cancelLink},on:{click:i.onCancelClick}})),a=e("div",{staticClass:"searchbar-input"},[n,t]),e(i.form?"form":"div",{staticClass:"searchbar",class:{"no-shadow":i.noShadow},on:{submit:i.onSubmit,"searchbar:search":i.onSearch,"searchbar:enable":i.onEnable,"searchbar:disable":i.onDisable,"searchbar:clear":i.onClear}},[i.$slots["before-input"],a,i.$slots["after-input"],o,i.$slots.default])},beforeDestroy:function(){this.f7Searchbar&&this.f7Searchbar.destroy&&this.f7Searchbar.destroy()},props:{noShadow:Boolean,form:{type:Boolean,default:!0},placeholder:{type:String,default:"Search"},cancelLink:String,clear:Boolean,clearButton:{type:Boolean,default:!0},params:Object,searchList:[String,Object],searchIn:{type:String,default:".item-title"},searchBy:String,found:[String,Object],notFound:[String,Object],overlay:[String,Object],ignore:{type:String,default:".searchbar-ignore"},customSearch:{type:Boolean,default:!1},removeDiacritics:{type:Boolean,default:!1},hideDividers:{type:Boolean,default:!0},hideGroups:{type:Boolean,default:!0},init:{type:Boolean,default:!0}},computed:{clearButtonComputed:function(){var e=this,t=e.clearButton;return e.$options.propsData.clear===!1&&(t=!1),t}},methods:{search:function(e){if(this.f7Searchbar)return this.f7Searchbar.search(e)},enable:function(){if(this.f7Searchbar)return this.f7Searchbar.enable()},disable:function(){if(this.f7Searchbar)return this.f7Searchbar.disable()},empty:function(){if(this.f7Searchbar)return this.f7Searchbar.clear()},onChange:function(e){this.$emit("change",e)},onInput:function(e){this.$emit("input",e.target.value)},onFocus:function(e){this.$emit("focus",e)},onBlur:function(e){this.$emit("blur",e)},onSubmit:function(e){this.$emit("submit",e)},onSearch:function(e){e.detail&&this.$emit("searchbar:search",e.detail.query,e.detail.foundItems)},onClear:function(e){this.$emit("searchbar:clear",e)},onEnable:function(e){this.$emit("searchbar:enable",e)},onDisable:function(e){this.$emit("searchbar:disable",e)},onClearClick:function(e){this.$emit("click:clear",e)},onCancelClick:function(e){this.$emit("click:cancel",e)},onF7Init:function(){var e=this;e.init&&(e.f7Searchbar=e.$f7.searchbar(e.$el,e.params||{searchList:e.searchList,searchIn:e.searchIn,searchBy:e.searchBy,found:e.found,notFound:e.notFound,overlay:e.overlay,ignore:e.ignore,customSearch:e.customSearch,removeDiacritics:e.removeDiacritics,hideDividers:e.hideDividers,hideGroups:e.hideGroups}))}}},ae={render:function(e){var t=this,o=e("div",{staticClass:"tabs"},[t.$slots.default]);return t.animated||t.swipeable?e("div",{class:t.classesObject},[o]):o},props:{animated:Boolean,swipeable:Boolean},computed:{classesObject:function(){return{"tabs-animated-wrap":this.animated,"tabs-swipeable-wrap":this.swipeable}}}},ie={props:{active:Boolean,id:String},data:function(){return{routeInfo:{activeTab:this.$route&&this.$route.route.tab}}},render:function(e){var t=this,o=t.routeInfo.activeTab;return e("div",{staticClass:"tab",attrs:{id:t.id},class:{active:o?o.tabId===t.id:t.active},on:{"tab:show":t.onTabShow,"tab:hide":t.onTabHide}},[o&&o.tabId===t.id?e(o.component,{tag:"component",props:t.$route.params}):t.$slots.default])},methods:{show:function(e){this.$f7&&this.$f7.showTab(this.$el,e)},onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)},onRouteChange:function(e){if(e.route.tab){var t=this.routeInfo.activeTab&&this.routeInfo.activeTab.tabId,o=e.route.tab.tabId,n=this.id;n===t&&o!==n?this.$$(this.$el).trigger("tab:hide"):n!==t&&o===n&&this.$$(this.$el).trigger("tab:show"),this.$set(this.routeInfo,"activeTab",e.route.tab)}}}},re={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"popover",on:{"popover:open":e.onOpen,"popover:opened":e.onOpened,"popover:close":e.onClose,"popover:closed":e.onClosed}},[o("div",{staticClass:"popover-angle"}),e._v(" "),o("div",{staticClass:"popover-content"},[e._t("default")],2)])},staticRenderFns:[],methods:{onOpen:function(e){this.$emit("popover:open",e)},onOpened:function(e){this.$emit("popover:opened",e)},onClose:function(e){this.$emit("popover:close",e)},onClosed:function(e){this.$emit("popover:closed",e)},open:function(e,t){var o=this;if(o.$f7)return o.$f7.popover(o.$el,e,void 0,t)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},se={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"popup",class:e.classesObject,on:{"popup:open":e.onOpen,"popup:opened":e.onOpened,"popup:close":e.onClose,"popup:closed":e.onClosed}},[e.opened?e._t("default"):e._e()],2)},staticRenderFns:[],mounted:function(){var e=this;e.opened&&(e.$el.style.display="block")},watch:{opened:function(e){var t=this;if(t.$f7){var o=t.$$;if(e)t.$f7.popup(t.$el);else{if(!o(t.$el).hasClass("modal-in"))return;t.$f7.closeModal(t.$el)}}}},props:{"tablet-fullscreen":Boolean,theme:String,layout:String,opened:Boolean},computed:{classesObject:function(){var e={"tablet-fullscreen":this.tabletFullscreen,"modal-in":this.opened,"modal-out":!this.opened};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onOpen:function(e){this.$emit("popup:open",e)},onOpened:function(e){this.$emit("popup:opened",e)},onClose:function(e){this.$emit("popup:close",e)},onClosed:function(e){this.$emit("popup:closed",e)},onF7Init:function(){var e=this.$$;e&&0===e(".popup-overlay").length&&e(this.$root.$el).append('<div class="popup-overlay '+(this.opened?" modal-overlay-visible":"")+'"></div>')},open:function(e){var t=this;if(t.$f7)return t.$f7.popup(t.$el,void 0,e)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},le={render:function(e){var t,o,n,a=[],i=[],r=this,s="navbar toolbar tabbar subnavbar searchbar messagebar fab speed-dial floating-button".split(" ");if(r.$slots.default)for(var l=0;l<r.$slots.default.length;l++)if(n=r.$slots.default[l],o=n.tag){for(var c=!1,u=0;u<s.length;u++)o.indexOf(s[u])>=0&&(c=!0);c?a.push(n):i.push(n)}else i.push(n);return t=e("div",{staticClass:"picker-modal-inner"},i),e("div",{class:r.classesObject,staticClass:"picker-modal",on:{"picker:open":r.onOpen,"picker:opened":r.onOpened,"picker:close":r.onClose,"picker:closed":r.onClosed}},[a,t])},mounted:function(){var e=this;e.opened&&(e.$el.style.display="block")},watch:{opened:function(e){var t=this;t.$f7&&(e?t.$f7.pickerModal(t.$el):t.$f7.closeModal(t.$el))}},props:{opened:Boolean,theme:String,layout:String,overlay:Boolean},computed:{classesObject:function(){var e={"modal-in":this.opened,"modal-out":!this.opened};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onOpen:function(e){this.overlay&&this.$$(".picker-modal-overlay").addClass("modal-overlay-visible"),this.$emit("picker:open",e)},onOpened:function(e){this.$emit("picker:opened",e)},onClose:function(e){this.overlay&&this.$$(".picker-modal-overlay").removeClass("modal-overlay-visible"),this.$emit("picker:close",e)},onClosed:function(e){this.$emit("picker:closed",e)},onF7Init:function(){var e=this.$$;e&&0===e(".picker-modal-overlay").length&&(this.$theme&&this.$theme.material||this.overlay)&&e(this.$root.$el).append('<div class="picker-modal-overlay '+(this.opened?" modal-overlay-visible":"")+'"></div>')},open:function(e){var t=this;if(t.$f7)return t.$f7.pickerModal(t.$el,void 0,e)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},ce={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"login-screen",class:e.classesObject,on:{"loginscreen:open":e.onOpen,"loginscreen:opened":e.onOpened,"loginscreen:close":e.onClose,"loginscreen:closed":e.onClosed}},[e._t("default")],2)},staticRenderFns:[],mounted:function(){var e=this;e.opened&&(e.$el.style.display="block")},watch:{opened:function(e){var t=this;if(t.$f7){var o=t.$$;if(e)t.$f7.loginScreen(t.$el);else{if(!o(t.$el).hasClass("modal-in"))return;t.$f7.closeModal(t.$el)}}}},props:{theme:String,layout:String,opened:Boolean},computed:{classesObject:function(){var e={"modal-in":this.opened,"modal-out":!this.opened};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onOpen:function(e){this.$emit("loginscreen:open",e)},onOpened:function(e){this.$emit("loginscreen:opened",e)},onClose:function(e){this.$emit("loginscreen:close",e)},onClosed:function(e){this.$emit("loginscreen:closed",e)},open:function(e){var t=this;if(t.$f7)return t.$f7.loginScreen(t.$el,e)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},ue={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"login-screen-title"},[e._t("default")],2)},staticRenderFns:[]},de={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"actions-modal keep-on-close",class:{"modal-in":e.opened},on:{"actions:open":e.onOpen,"actions:opened":e.onOpened,"actions:close":e.onClose,"actions:closed":e.onClosed}},[e._t("default")],2)},staticRenderFns:[],mounted:function(){var e=this;e.opened?e.$el.style.display="block":e.$el.style.display="none"},watch:{opened:function(e){var t=this;t.$f7&&(e?(t.$el.style.display="block",t.$f7.openModal(t.$el)):(t.$el.style.display="none",t.$f7.closeModal(t.$el)))}},props:{opened:Boolean},methods:{onOpen:function(e){this.$emit("actions:open",e)},onOpened:function(e){this.$emit("actions:opened",e)},onClose:function(e){this.$emit("actions:close",e)},onClosed:function(e){this.$emit("actions:closed",e)},onF7Init:function(){var e=this.$$;e&&0===e(".modal-overlay").length&&e(this.$root.$el).append('<div class="modal-overlay'+(this.opened?" modal-overlay-visible":"")+'"></div>')},open:function(e){var t=this;if(t.$f7)return t.$f7.openModal(t.$el,e)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},pe={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"actions-modal-group"},[e._t("default")],2)},staticRenderFns:[]},he={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"actions-modal-button",class:e.classesObject,on:{click:e.onClick}},[e._t("default")],2)},staticRenderFns:[],props:{color:String,bold:Boolean,close:{type:Boolean,default:!0}},computed:{classesObject:function(){var e=this,t={"actions-modal-button-bold":e.bold};return e.color&&(t["color-"+e.color]=!0),t}},methods:{onClick:function(e){this.close&&this.$f7&&this.$f7.closeModal(this.$parent.$parent.$el),this.$emit("click",e)}}},fe={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"actions-modal-label",class:e.classesObject,on:{click:e.onClick}},[e._t("default")],2)},staticRenderFns:[],props:{color:String,bold:Boolean},computed:{classesObject:function(){var e=this,t={"actions-modal-button-bold":e.bold};return e.color&&(t["color-"+e.color]=!0),t}},methods:{onClick:function(e){this.$emit("click",e)}}},me={render:function(){},beforeDestroy:function(){var e=this;e.f7PhotoBrowser&&e.f7PhotoBrowser.destroy&&e.f7PhotoBrowser.destroy()},props:{init:{type:Boolean,default:!0},params:Object,photos:Array,initialSlide:Number,spaceBetween:Number,speed:Number,zoom:Boolean,zoomMax:Number,zoomMin:Number,exposition:Boolean,expositionHideCaptions:Boolean,type:String,navbar:Boolean,toolbar:Boolean,theme:String,captionsTheme:String,swipeToClose:Boolean,backLinkText:String,ofText:String,loop:Boolean,lazyLoading:Boolean,lazyLoadingInPrevNext:Boolean,lazyLoadingOnTransitionStart:Boolean},methods:{open:function(e){return this.f7PhotoBrowser.open(e)},close:function(){return this.f7PhotoBrowser.close()},toggleZoom:function(){return this.f7PhotoBrowser.toggleZoom()},toggleExposition:function(){return this.f7PhotoBrowser.toggleExposition()},enableExposition:function(){return this.f7PhotoBrowser.enableExposition()},disableExposition:function(){return this.f7PhotoBrowser.disableExposition()},onF7Init:function(e){var t=this;if(t.init){var o=t.$options.propsData;t.f7PhotoBrowser=e.photoBrowser(t.params||{photos:o.photos,initialSlide:o.initialSlide,spaceBetween:o.spaceBetween,speed:o.speed,zoom:o.zoom,zoomMax:o.zoomMax,zoomMin:o.zoomMin,exposition:o.exposition,expositionHideCaptions:o.expositionHideCaptions,type:o.type,navbar:o.navbar,toolbar:o.toolbar,theme:o.theme,captionsTheme:o.captionsTheme,swipeToClose:o.swipeToClose,backLinkText:o.backLinkText,ofText:o.ofText,loop:o.loop,lazyLoading:o.lazyLoading,lazyLoadingInPrevNext:o.lazyLoadingInPrevNext,lazyLoadingOnTransitionStart:o.lazyLoadingOnTransitionStart,onOpen:function(e){t.$emit("open",e)},onClose:function(e){t.$emit("close",e)},onSwipeToClose:function(e){t.$emit("swipeToClose",e)},onSlideChangeStart:function(e){t.$emit("slideChangeStart",e)},onSlideChangeEnd:function(e){t.$emit("slideChangeEnd",e)},onTransitionStart:function(e){t.$emit("transitionStart",e)},onTransitionEnd:function(e){t.$emit("transitionEnd",e)},onClick:function(e,o){t.$emit("click",e,o)},onTap:function(e,o){t.$emit("tap",e,o)},onDoubleTap:function(e,o){t.$emit("doubleTap",e,o)},onLazyImageLoad:function(e,o){t.$emit("lazyImageLoad",e,o)},onLazyImageReady:function(e,o){t.$emit("lazyImageReady",e,o)}})}}}},be={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"timeline",class:e.classesObject},[e._t("default")],2)},staticRenderFns:[],props:{sides:Boolean,"tablet-sides":Boolean,col:[Number,String],"tablet-col":[Number,String],horizontal:Boolean},computed:{classesObject:function(){var e={},t=this;return t.sides&&(e["timeline-sides"]=!0),t.tabletSides&&(e["tablet-sides"]=!0),t.horizontal&&(e["timeline-horizontal"]=!0),t.col&&(e["col-"+t.col]=!0),t.tabletCol&&(e["tablet-"+t.tabletCol]=!0),e}}},ge={render:function(e){var t,o,n,a,i,r,s,l,c=this;return i=c.day||c.month?e("div",{staticClass:"timeline-item-date",domProps:{innerHTML:[c.day,"<small>"+c.month+"</small>"].join(" ")}}):e("div",{staticClass:"timeline-item-date",domProps:{innerHTML:c.date}}),r=e("div",{staticClass:"timeline-item-divider"}),c.time&&(t=e("div",{staticClass:"timeline-item-time",domProps:{innerHTML:c.time}})),c.title&&(o=e("div",{staticClass:"timeline-item-title",domProps:{innerHTML:c.title}})),c.subtitle&&(n=e("div",{staticClass:"timeline-item-subtitle",domProps:{innerHTML:c.subtitle}})),c.text&&(a=e("div",{staticClass:"timeline-item-text",domProps:{innerHTML:c.text}})),l=c.inner?c.content?e("div",{staticClass:"timeline-item-inner",domProps:{innerHTML:c.content}}):e("div",{staticClass:"timeline-item-inner"},[t,o,n,a,c.$slots.default]):[t,o,n,a,c.$slots.default],s=c.content&&!c.inner?e("div",{staticClass:"timeline-item-content",domProps:{innerHTML:c.content}}):e("div",{staticClass:"timeline-item-content"},[l]),e("div",{staticClass:"timeline-item",class:{"timeline-item-left":"left"===c.side,"timeline-item-right":"right"===c.side}},[i,r,s])},props:{date:[String,Number,Date],day:[String,Number],month:[String,Number],inner:Boolean,content:String,side:String,time:String,title:String,subtitle:String,text:String}},ve={render:function(e){var t,o,n,a,i=this;return i.time&&(t=e("div",{staticClass:"timeline-item-time",domProps:{innerHTML:i.time}})),i.title&&(o=e("div",{staticClass:"timeline-item-title",domProps:{innerHTML:i.title}})),i.subtitle&&(n=e("div",{staticClass:"timeline-item-subtitle",domProps:{innerHTML:i.subtitle}})),i.text&&(a=e("div",{staticClass:"timeline-item-text",domProps:{innerHTML:i.text}})),i.content?e("div",{class:{"timeline-item-inner":i.inner,"timeline-item-child":!i.inner},domProps:{innerHTML:i.content}}):e("div",{class:{"timeline-item-inner":i.inner,"timeline-item-child":!i.inner}},[t,o,n,a,i.$slots.default])},props:{inner:Boolean,content:String,time:String,title:String,subtitle:String,text:String}},$e={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"timeline-year"},[e.year||e.title?o("div",{staticClass:"timeline-year-title"},[o("span",{domProps:{innerHTML:e._s(e.year||e.title)}})]):e._e(),e._v(" "),e._t("default")],2)},staticRenderFns:[],props:{year:[Number,String],title:[Number,String]}},ke={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"timeline-month"},[e.month||e.title?o("div",{staticClass:"timeline-month-title"},[o("span",{domProps:{innerHTML:e._s(e.month||e.title)}})]):e._e(),e._v(" "),e._t("default")],2)},staticRenderFns:[],props:{month:[Number,String],title:[Number,String]}},Se={props:{value:[String,Array,Number],monthNames:Array,monthNamesShort:Array,dayNames:Array,dayNamesShort:Array,firstDay:Number,weekendDays:Array,multiple:Boolean,rangePicker:Boolean,dateFormat:String,direction:String,minDate:[Date,String,Number],maxDate:[Date,String,Number],disabled:[Array,Function,Object],events:[Array,Function,Object],rangesClasses:[Array,Function,Object],touchMove:Boolean,animate:Boolean,closeOnSelect:Boolean,monthPicker:Boolean,yearPicker:Boolean,weekHeader:Boolean,closeByOutsideClick:Boolean,scrollToInput:Boolean,inputReadOnly:Boolean,convertToPopover:Boolean,onlyInPopover:Boolean,toolbar:Boolean,toolbarTemplate:String,toolbarCloseText:String,headerPlaceholder:String,header:Boolean,footer:Boolean},computed:{calendarValue:function(){var e=this;return e.value&&!Array.isArray(e.value)?[e.value]:e.value}},watch:{value:function(){var e=this;if(e.f7Calendar){var t=e.value;Array.isArray(e.value)||(t=[e.value]),e.$nextTick(function(){e.f7Calendar.setValue(t)})}}},beforeDestroy:function(){var e=this;e.f7Calendar&&e.f7Calendar.destroy&&e.f7Calendar.destroy()},methods:{getValue:function(){if(this.f7Calendar)return this.f7Calendar.value},setValue:function(e){if(this.f7Calendar)return this.f7Calendar.setValue(e)},nextMonth:function(e){if(this.f7Calendar)return this.f7Calendar.nextMonth(e)},prevMonth:function(e){if(this.f7Calendar)return this.f7Calendar.prevMonth(e)},nextYear:function(){if(this.f7Calendar)return this.f7Calendar.nextYear()},prevYear:function(){if(this.f7Calendar)return this.f7Calendar.prevYear()},setYearMonth:function(e,t,o){if(this.f7Calendar)return this.f7Calendar.setYearMonth(e,t,o)},open:function(){if(this.f7Calendar)return this.f7Calendar.open()},close:function(){if(this.f7Calendar)return this.f7Calendar.close()}}},Ce={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"item-input"},[o("input",{attrs:{type:"text",name:e.name},domProps:{value:e.value}})])},staticRenderFns:[],mixins:[Se],props:{name:String},methods:{onF7Init:function(e){var t=this,o=t.$$,n=o(t.$el).find("input"),a=Object.assign(t.$options.propsData,{input:n,value:t.calendarValue,onChange:function(e,o,n){t.$emit("change",e,o,n)},onMonthAdd:function(e,o){t.$emit("monthAdd",e,o)},onDayClick:function(e,o,n,a,i){t.$emit("dayClick",e,o,n,a,i)},onMonthYearChangeStart:function(e,o,n){t.$emit("monthYearChangeStart",e,o,n)},onMonthYearChangeEnd:function(e,o,n){t.$emit("monthYearChangeEnd",e,o,n)},onOpen:function(e){t.$emit("open",e)},onClose:function(e){t.$emit("close",e)}});t.f7Calendar=e.calendar(a)}}},Be={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"calendar-inline"})},staticRenderFns:[],mixins:[Se],methods:{onF7Init:function(e){var t=this;"undefined"==typeof t.$options.propsData.footer&&(t.$options.propsData.footer=!1),"undefined"==typeof t.$options.propsData.header&&(t.$options.propsData.header=!1);var o=Object.assign(t.$options.propsData,{container:t.$el,value:t.calendarValue,onChange:function(e,o,n){t.$emit("change",e,o,n)},onMonthAdd:function(e,o){t.$emit("monthAdd",e,o)},onDayClick:function(e,o,n,a,i){t.$emit("dayClick",e,o,n,a,i)},onMonthYearChangeStart:function(e,o,n){t.$emit("monthYearChangeStart",e,o,n)},onMonthYearChangeEnd:function(e,o,n){t.$emit("monthYearChangeEnd",e,o,n)},onOpen:function(e){t.$emit("open",e)},onClose:function(e){t.$emit("close",e)}});t.f7Calendar=e.calendar(o)}}},ye={render:function(e){var t,o=this,n=[],a=[],i=[],r=[],s=[],l=[];o.headings&&(t=[],o.headings.forEach(function(n,a){var i=o.columns[a]&&1*o.items[0][o.columns[a]]===parseFloat(o.items[0][o.columns[a]]);t.push(e("f7-table-cell",{props:{label:0===a&&!i,numeric:i}},[n]))}),a.push(e("f7-table-row",{props:{heading:!0,selectable:o.selectable}},t))),o.items&&(t=[],o.items.forEach(function(t){var n=[];o.columns.forEach(function(o,a){var i=1*t[o]===parseFloat(t[o]);n.push(e("f7-table-cell",{props:{label:0===a&&!i,numeric:i}},[t[o]]))}),r.push(e("f7-table-row",{props:{selectable:o.selectable}},n))})),o.title&&s.push(e("f7-table-header",{props:{title:o.title}}));for(var c=o.$slots.default||[],u=0;u<c.length;u++){var d=c[u],p=d.componentOptions&&d.componentOptions.tag,h=d.componentOptions&&d.componentOptions.propsData;"f7-table-row"===p?(""===h.heading||h.heading===!0?a.push(d):r.push(d),!o.selectable||"selectable"in h||(h.selectable=!0)):s.push(d),"f7-table-header"===p&&(o.hasSelected=h.selected)}a.length>0&&(n=e("thead",{},a)),i=e("tbody",{},r),s.push(o.$slots["before-table"]),l.push(o.$slots["after-table"]);var f=e("table",{},[n,i]);return e("div",{staticClass:"data-table",class:{"data-table-collapsible":o.collapsible,"data-table-has-checked":o.hasSelected,"data-table-has-selected":o.hasSelected,card:o.card}},[s,f,l])},props:{card:Boolean,collapsible:Boolean,selectable:Boolean,items:Array,title:String,headings:Array,columns:Array}},we={render:function(e){var t,o,n=this;return n.title&&(o=e("div",{class:{"data-table-title":!n.selected,"data-table-title-selected":n.selected}},[n.title])),n.$slots.default&&n.$slots.default.map(function(e){var t=e.componentOptions&&e.componentOptions.tag;"f7-table-title"===t&&e.componentOptions.propsData&&(e.componentOptions.propsData.selected=n.selected)}),t=e("div",{class:{"data-table-header":!n.selected,"data-table-header-selected":n.selected}},[o,n.$slots.default]),e("div",{staticClass:"card-header"},[t])},props:{title:String,selected:Boolean}},xe={render:function(e){var t=this,o=t.$parent&&t.$parent.heading;return e(o?"th":"td",{attrs:{"data-collapsible-title":t.collapsibleTitle},class:t.classesObject,on:{click:t.onClick}},[t.$slots.default])},props:{label:Boolean,numeric:Boolean,actions:Boolean,sortable:Boolean,checkbox:Boolean,order:{type:String,default:"asc"},"sortable-active":Boolean,"collapsible-title":String,"active-sorting":Boolean,"tablet-only":Boolean,"tablet-landscape-only":Boolean},computed:{classesObject:function(){var e=this;return{"checkbox-cell":e.checkbox,"label-cell":e.label,"numeric-cell":e.numeric,"actions-cell":e.actions,"sortable-cell":e.sortable,"sortable-asc":"asc"===e.order,"sortable-desc":"desc"===e.order,"sortable-active":e.sortableActive,"tablet-only":e.tabletOnly,"tablet-landscape-only":e.tabletLandscapeOnly}}},methods:{onClick:function(e){this.$emit("click",e)}}},_e={render:function(e){var t,o=this;return o.selectable&&(t=e("f7-table-cell",{props:{checkbox:!0}},[e("label",{staticClass:"form-checkbox"},[e("input",{attrs:{type:"checkbox"},domProps:{checked:o.selected},on:{change:o.onChange}}),e("i")])])),e("tr",{class:{"data-table-row-selected":o.selected}},[t,o.$slots.default])},props:{heading:Boolean,selectable:Boolean,selected:Boolean},methods:{onChange:function(e){var t=this;t.$emit("change",e)}}},Pe={render:function(e){var t=this;return e("div",{class:{"data-table-title":!t.selected,"data-table-title-selected":t.selected}},t.$slots.default)},props:{selected:Boolean}},Oe={render:function(e){var t=this;return e("div",{staticClass:"data-table-links"},t.$slots.default)}},Me={render:function(e){var t=this;return e("div",{staticClass:"data-table-actions"},t.$slots.default)}},Te={render:function(e){return e("script",{attrs:{type:"text/template7"}},this.$slots.default)}},Le=function(){for(var e=[],t=arguments.length;t--;)e[t]=arguments[t];return e.join("/").replace(/\/+/g,"/")},Fe=function(e,t,o){return o.map(function(o){return{path:Le(e.path,t.path,o.path),pagePath:e.path,component:e.component,tab:{tabId:t.tabId,component:o.component}}})},Ie=function(e,t){return t.reduce(function(t,o){var n;return n=o.routes?Fe(e,o,o.routes):[{path:Le(e.path,o.path),pagePath:e.path,component:e.component,tab:{tabId:o.tabId,component:o.component}}],t.concat(n)},[])},Re=function(e){return void 0===e&&(e=[]),e.reduce(function(e,t){var o;return o=t.tabs?Ie(t,t.tabs):[Object.assign({},t,{pagePath:t.path})],e.concat(o)},[])},je=function(e){var t=[];return e.split("/").forEach(function(e){""!==e&&(0===e.indexOf(":")?t.push({name:e.replace(":","")}):t.push(e))}),t},Ne=function(e,o,n){var a=this;this.routeChangeHandler=null,this.routes=Re(e),this.framework7=o,this.dom7=n;var i=o.params.preroute;o.params.routes=e,o.params.routerRemoveTimeout=!0,o.params.preroute=function(e,o){var n=!0;return i&&!o.pageElement&&(n=i(e,o)),!!n&&t(e,o,a.changeRoute.bind(a))}};Ne.prototype.setRouteChangeHandler=function(e){this.routeChangeHandler=e},Ne.prototype.changeRoute=function(e,t,o){var n=this;void 0===t&&(t=null);var a=function(){return n.framework7.views&&n.framework7.views.reduce(function(e,t){return t.main?t:e},null)},i=this.findMatchingRoute(e);return!i||this.routeChangeHandler(Object.assign({},i,{view:t||a(),options:o,router:this}))},Ne.prototype.findMatchingRoute=function(e){var t;if(!e)return t;e=""+e;var o,n,a=this.routes,i=this.dom7.parseUrlQuery(e),r=e.split("#")[1],s={},l=e.split("#")[0].split("?")[0],c=l.split("/").filter(function(e){if(""!==e)return e});for(o=0;o<a.length;o++)if(!t){var u=a[o],d=je(u.path);if(d.length===c.length){var p=0;for(n=0;n<d.length;n++)"string"==typeof d[n]&&c[n]===d[n]&&p++,"object"==typeof d[n]&&(s[d[n].name]=c[n],p++);p===c.length&&(t={query:i,hash:r,params:s,url:e,path:l,route:u})}}return t};var Ee={install:function(e,t){function j(t,o){window.Framework7&&(t=t||{},"undefined"==typeof t.material&&e.prototype.$theme.material&&(t.material=!0),"undefined"==typeof t.root&&o&&(t.root=o.$el),Ie=e.prototype.$f7=window.f7=new window.Framework7(t),Re=new Ne(t.routes,Ie,Le),Re.setRouteChangeHandler(function(e){je=e,Ee=e.view.router,Se.$emit("route-change",e);var t=e.view.pagesContainer.__vue__;return!t}),Ae=!0,Se.$emit("f7init",Ie))}t=t||{};var Se=new e,Le=window.Dom7;e.prototype.Dom7=Le,e.prototype.$$=Le,e.prototype.Template7=window.Template7,e.prototype.$t7=window.Template7,e.prototype.$device=window.Framework7.prototype.device;var Fe={ios:!1,material:!1};e.prototype.$theme=Fe,"auto"===t.theme&&(window&&window.navigator.userAgent.match(/(Android);?[\s\/]+([\d.]+)?/)?Fe.material=!0:Fe.ios=!0),"material"===t.theme?(Fe.ios=!1,Fe.material=!0):"ios"===t.theme&&(Fe.ios=!0,Fe.material=!1);var Ie,Re,je,Ee,Ae=!1;e.mixin({beforeCreate:function(){var e=this;Object.defineProperty(e,"$route",{get:function(){return je},enumerable:!0,configurable:!0}),Object.defineProperty(e,"$router",{get:function(){return Ee},enumerable:!0,configurable:!0}),Object.defineProperty(e,"$f7Router",{get:function(){return Re},enumerable:!0,configurable:!0}),Fe.ios===!1&&Fe.material===!1&&(e.$root.$options.framework7&&e.$root.$options.framework7.material||e.$f7&&e.$f7.params.material||"material"===t.theme?Fe.material=!0:Fe.ios=!0),Se.$on("route-change",function(t){e.onRouteChange&&e.onRouteChange(t)})},mounted:function(){var e=this;return Ae?void(e.onF7Init&&e.onF7Init(Ie)):(Se.$on("f7init",function(t){e.onF7Init&&e.onF7Init(t)}),void(e===e.$root&&j(e.$options.framework7,e.$root)))},components:{"f7-statusbar":o,"f7-views":a,"f7-panel":n,"f7-view":i,"f7-pages":r,"f7-page":s,"f7-page-content":l,"f7-navbar":c,"f7-nav-left":d,"f7-nav-center":u,"f7-nav-right":p,"f7-subnavbar":h,"f7-toolbar":f,"f7-block-title":k,"f7-content-block-title":k,"f7-list-block-title":k,"f7-content-block":$,"f7-block":$,"f7-card":m,"f7-card-header":b,"f7-card-footer":g,"f7-card-content":v,"f7-list":B,"f7-list-group":y,"f7-list-item":w,"f7-list-item-content":x,"f7-list-button":O,"f7-list-label":M,"f7-swipeout-actions":_,"f7-swipeout-button":P,"f7-accordion":T,"f7-accordion-item":L,"f7-accordion-toggle":F,"f7-accordion-content":I,"f7-badge":S,"f7-icon":C,"f7-link":N,"f7-buttons":R,"f7-segmented":R,"f7-button":E,"f7-grid":A,"f7-col":D,"f7-preloader":H,"f7-progressbar":z,"f7-label":V,"f7-input":q,"f7-switch":U,"f7-range":Y,"f7-chip":G,"f7-fab":K,"f7-fab-speed-dial":W,"f7-fab-action":Q,"f7-fab-actions":Z,"f7-swiper":J,"f7-swiper-slide":X,"f7-messages":ee,"f7-message":te,"f7-messagebar":oe,"f7-searchbar":ne,"f7-tabs":ae,"f7-tab":ie,"f7-popover":re,"f7-popup":se,"f7-login-screen":ce,"f7-login-screen-title":ue,"f7-picker-modal":le,"f7-actions":de,"f7-actions-group":pe,"f7-actions-label":fe,"f7-actions-button":he,"f7-photo-browser":me,"f7-timeline":be,"f7-timeline-item":ge,"f7-timeline-item-child":ve,"f7-timeline-year":$e,"f7-timeline-month":ke,"f7-datepicker":Ce,"f7-calendar":Be,"f7-table":ye,"f7-table-header":we,"f7-table-cell":xe,"f7-table-row":_e,"f7-table-title":Pe,"f7-table-links":Oe,"f7-table-actions":Me,"t7-template":Te}})}};return Ee});
+!function(e,t){ true?module.exports=t():"function"==typeof define&&define.amd?define(t):e.Framework7Vue=t()}(this,function(){function e(e,t){var o=arguments;if(void 0===e||null===e)throw new TypeError("Cannot convert first argument to object");for(var n=Object(e),a=1;a<arguments.length;a++){var i=o[a];if(void 0!==i&&null!==i)for(var r=Object.keys(Object(i)),s=0,l=r.length;s<l;s++){var c=r[s],u=Object.getOwnPropertyDescriptor(i,c);void 0!==u&&u.enumerable&&(n[c]=i[c])}}return n}function t(e,t,o){if(!e.allowPageChange)return!1;var n=t.url,a=t.pageElement;if(n&&a||!n||"#"===n)return!0;var i=e.history.indexOf(n)>=0,r=e.pagesCache[n];return!(!i||!r)||o(n,e,t)}Object.assign||Object.defineProperty(Object,"assign",{enumerable:!1,configurable:!0,writable:!0,value:e});var o={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"statusbar-overlay",class:e.theme?"theme-"+e.theme:void 0})},staticRenderFns:[],props:{theme:String}},n={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"panel",class:e.classesObject,on:{"panel:open":e.onOpen,"panel:opened":e.onOpened,"panel:close":e.onClose,"panel:closed":e.onClosed,"panel:overlay-click":e.onOverlayClick,"panel:swipe":e.onPanelSwipe}},[e._t("default")],2)},staticRenderFns:[],props:{side:String,effect:String,cover:Boolean,reveal:Boolean,left:Boolean,right:Boolean,theme:String,layout:String,opened:Boolean},computed:{classesObject:function(){var e=this,t=e.side||(e.left?"left":"right"),o=e.effect||(e.reveal?"reveal":"cover"),n={};return n["panel-"+t]=!0,n["panel-"+o]=!0,e.layout&&(n["layout-"+e.layout]=!0),e.theme&&(n["theme-"+e.theme]=!0),n.active=e.opened,n}},watch:{opened:function(e){var t=this;if(t.$f7){var o=t.side||(t.left?"left":"right");e?t.$f7.openPanel(o):t.$f7.closePanel(o)}}},mounted:function(){var e=this;e.opened&&(e.$el.style.display="block");var t=e.$$;if(t){var o=e.side||(e.left?"left":"right"),n=e.effect||(e.reveal?"reveal":"cover");e.opened&&t("body").addClass("with-panel-"+o+"-"+n)}},methods:{onOpen:function(e){this.$emit("panel:open",e)},onOpened:function(e){this.$emit("panel:opened",e)},onClose:function(e){this.$emit("panel:open",e)},onClosed:function(e){this.$emit("panel:closed",e)},onOverlayClick:function(e){this.$emit("panel:overlay-click",e)},onPanelSwipe:function(e){this.$emit("panel:swipe",e)},onF7Init:function(){var e=this.$$;e&&0===e(".panel-overlay").length&&e('<div class="panel-overlay"></div>').insertBefore(this.$el)},open:function(e){var t=this;if(t.$f7){var o=t.side||(t.left?"left":"right");t.$f7.openPanel(o,e)}},close:function(e){var t=this;t.$f7&&t.$f7.closePanel(e)}}},a={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"views",class:e.classObject},[e._t("default")],2)},staticRenderFns:[],props:{"navbar-fixed":Boolean,"navbar-through":Boolean,"toolbar-fixed":Boolean,"toolbar-through":Boolean,"tabbar-fixed":Boolean,"tabbar-through":Boolean,"tabbar-labels-fixed":Boolean,"tabbar-labels-through":Boolean,tabs:Boolean,theme:String,layout:String},computed:{classObject:function(){var e={tabs:this.tabs,"navbar-fixed":this.navbarFixed||this.navbarThrough&&this.$theme.material,"navbar-through":this.navbarThrough,"toolbar-fixed":this.toolbarFixed,"toolbar-through":this.toolbarThrough,"tabbar-fixed":this.tabbarFixed,"tabbar-through":this.tabbarThrough,"tabbar-labels-fixed":this.tabbarLabelsFixed,"tabbar-labels-through":this.tabbarLabelsThrough};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}}},i={render:function(e){var t,o,n,a,i=this;if(i.$slots.default)for(var r=0;r<i.$slots.default.length;r++){var s=i.$slots.default[r];s.tag&&s.tag.indexOf("navbar")>=0&&(t=!0),s.tag&&s.tag.indexOf("pages")>=0&&(o=!0)}return o||(n=e("f7-pages")),!t&&i.$theme.ios&&(i.dynamicNavbar||i.navbarThrough||i.params&&i.params.dynamicNavbar)&&(a=e("f7-navbar",{props:{inner:!1}})),e("div",{class:i.classesObject,on:{"swipeback:move":i.onSwipeBackMove,"swipeback:beforechange":i.onSwipeBackBeforeChange,"swipeback:afterchange":i.onSwipeBackAfterChange,"swipeback:beforereset":i.onSwipeBackBeforeReset,"swipeback:afterreset":i.onSwipeBackAfterReset,"tab:show":i.onTabShow,"tab:hide":i.onTabHide}},[a,n,i.$slots.default])},beforeDestroy:function(){var e=this;e.f7View&&e.f7View.destroy&&e.f7View.destroy()},props:{main:Boolean,"navbar-fixed":Boolean,"navbar-through":Boolean,"toolbar-fixed":Boolean,"toolbar-through":Boolean,"tabbar-fixed":Boolean,"tabbar-through":Boolean,"tabbar-labels-fixed":Boolean,"tabbar-labels-through":Boolean,tab:Boolean,active:Boolean,"dynamic-navbar":Boolean,"dom-cache":Boolean,"links-view":[String,Object],"reload-pages":Boolean,"unique-history":Boolean,"unique-history-ignore-get-parameters":Boolean,"allow-duplicate-urls":Boolean,"swipe-back-page":Boolean,"swipe-back-page-animate-shadow":Boolean,"swipe-back-page-animate-opacity":Boolean,"swipe-back-page-active-area":Boolean,"swipe-back-page-threshold":Boolean,"animate-pages":Boolean,"preload-previous-page":Boolean,name:String,params:Object,url:String,init:{type:Boolean,default:!0},theme:String,layout:String},computed:{classesObject:function(){var e={view:!0,"view-main":this.main,active:this.active,tab:this.tab,"navbar-fixed":this.navbarFixed||this.navbarThrough&&this.$theme.material,"navbar-through":this.navbarThrough,"toolbar-fixed":this.toolbarFixed,"toolbar-through":this.toolbarThrough,"tabbar-fixed":this.tabbarFixed,"tabbar-through":this.tabbarThrough,"tabbar-labels-fixed":this.tabbarLabelsFixed,"tabbar-labels-through":this.tabbarLabesThrough};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onF7Init:function(e){var t=this;if(t.init){var o=t.$options.propsData,n=t.params||{name:t.name,url:t.url,dynamicNavbar:o.dynamicNavbar,domCache:void 0===o.domCache||o.domCache,linksView:o.linksView,reloadPages:o.reloadPages,uniqueHistory:o.uniqueHistory,uniqueHistoryIgnoreGetParameters:o.uniqueHistoryIgnoreGetParameters,allowDuplicateUrls:o.allowDuplicateUrls,swipeBackPage:o.swipeBackPage,swipeBackPageAnimateShadow:o.swipeBackPageAnimateShadow,swipeBackPageAnimateOpacity:o.swipeBackPageAnimateOpacity,swipeBackPageActiveArea:o.swipeBackPageActiveArea,swipeBackPageThreshold:o.swipeBackPageThreshold,animatePages:o.animatePages,preloadPreviousPage:o.preloadPreviousPage},a=t.$$,i=a(t.$el).find(".pages")[0];if(0===i.querySelectorAll(".page").length&&n.url){var r=t.$f7Router.findMatchingRoute(n.url);if(!r)return;var s=i.__vue__,l=(new Date).getTime();t.$set(s.pages,l,{component:r.route.component}),t.$nextTick(function(){var o=i.querySelector(".page:first-child");s.pages[l].pageElement=o;var r,c=t.$theme.ios&&n.dynamicNavbar;c&&(r=a(o).find(".navbar-inner:first-child"),a(t.$el).children(".navbar").append(r),a(o).find(".navbar").remove()),e.initPageWithCallback(o),c&&r&&e.initNavbarWithCallback(r)})}t.f7View=e.addView(t.$el,n)}},onSwipeBackMove:function(e){this.$emit("swipeback:move",e,e.detail)},onSwipeBackBeforeChange:function(e){this.$emit("swipeback:beforechange",e,e.detail)},onSwipeBackAfterChange:function(e){this.$emit("swipeback:afterchange",e,e.detail)},onSwipeBackBeforeReset:function(e){this.$emit("swipeback:beforereset",e,e.detail)},onSwipeBackAfterReset:function(e){this.$emit("swipeback:afterreset",e,e.detail)},onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)}}},r={render:function(e){var t=this,o=[];for(var n in t.pages){var a=t.pages[n];o.push(e(a.component,{tag:"component",props:t.$route&&t.$route.params,key:n}))}return e("div",{staticClass:"pages",ref:"pages",class:t.classesObject,on:{"page:beforeremove":t.onPageBeforeRemove}},[t.$slots.default,o])},props:{"navbar-fixed":Boolean,"navbar-through":Boolean,"toolbar-fixed":Boolean,"toolbar-through":Boolean,"tabbar-fixed":Boolean,"tabbar-through":Boolean,"tabbar-labels-fixed":Boolean,"tabbar-labels-through":Boolean,theme:String,layout:String},data:function(){return{pages:{}}},computed:{classesObject:function(){var e={"navbar-fixed":this.navbarFixed||this.navbarThrough&&this.$theme.material,"navbar-through":this.navbarThrough,"toolbar-fixed":this.toolbarFixed,"toolbar-through":this.toolbarThrough,"tabbar-fixed":this.tabbarFixed,"tabbar-through":this.tabbarThrough,"tabbar-labels-fixed":this.tabbarLabelsFixed,"tabbar-labels-through":this.tabbarLabesThrough};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onPageBeforeRemove:function(e){var t,o=this;for(var n in o.pages)if(e.target===o.pages[n].pageElement){t=n;break}t&&this.$delete(this.pages,t)},onRouteChange:function(e){var t=this,o=e.route.component,n=e.view,a=t.$parent.f7View||t.$parent.$el.f7View;if(n===a){var i=t.$f7Router.findMatchingRoute(n.url)||{route:{path:"/",pagePath:"/"}},r=i.route.pagePath!==e.route.pagePath,s=!r&&i.route.path!==e.route.path;if(r||!s&&(e.options.reload||n.params.allowDuplicateUrls)){var l=(new Date).getTime();t.$set(t.pages,l,{component:o}),n.allowPageChange=!1,t.$nextTick(function(){var o=n.pagesContainer.querySelector(".page:last-child");t.pages[l].pageElement=o,n.allowPageChange=!0;var a=Object.assign(e.options,{pageElement:o});a.isBack?n.router.back(a):n.router.load(a)})}}}}},s={render:function(e){var t,o,n,a=[],i=[],r=this;r.pullToRefresh&&r.ptrLayer&&r.pullToRefreshLayer&&(o=e("div",{class:{"pull-to-refresh-layer":!0}},[e("div",{class:{preloader:!0}}),e("div",{class:{"pull-to-refresh-arrow":!0}})])),(r.infiniteScroll||""===r.infiniteScroll)&&r.infiniteScrollPreloader&&(n=e("div",{class:{"infinite-scroll-preloader":!0}},[e("div",{class:{preloader:!0}})]));var s,l,c,u,d,p,h,f="navbar toolbar tabbar subnavbar searchbar messagebar fab speed-dial floating-button".split(" ");if(r.$slots.default)for(p=0;p<r.$slots.default.length;p++)if(l=r.$slots.default[p],s=l.tag){var m=!1;for(s.indexOf("messages")>=0&&(u=!0),s.indexOf("subnavbar")>=0&&(c=!0),s.indexOf("searchbar")>=0&&(d=!0),h=0;h<f.length;h++)s.indexOf(f[h])>=0&&(m=!0);m?a.push(l):i.push(l)}else i.push(l);if(a.length>0&&d&&a.push(e("div",{class:{"searchbar-overlay":!0}})),u&&(r.classesObjectPageContent["messages-content"]=!0),r.noPageContent)if(t=[],r.$slots.default&&a.length>0)for(p=0;p<r.$slots.default.length;p++)a.indexOf(r.$slots.default[p])<0&&t.push(r.$slots.default[p]);else t=[r.$slots.default];else t=e("div",{staticClass:"page-content",class:r.classesObjectPageContent,attrs:{"data-ptr-distance":r.pullToRefreshDistance||r.ptrDistance,"data-distance":r.infiniteScrollDistance},on:{"ptr:pullstart":r.onPtrPullstart,"ptr:pullmove":r.onPtrPullmove,"ptr:pullend":r.onPtrPullend,"ptr:refresh":r.onPtrRefresh,"ptr:done":r.onPtrRefreshdone,infinite:r.onInfinite}},"top"===r.infiniteScroll?[o,n,r.$slots.static,i]:[o,r.$slots.static,i,n]);return a.push(r.$slots.fixed),c&&(r.classesObjectPage["with-subnavbar"]=!0),e("div",{staticClass:"page",class:r.classesObjectPage,attrs:{"data-page":r.name},on:{"page:beforeinit":r.onPageBeforeInit,"page:init":r.onPageInit,"page:reinit":r.onPageReinit,"page:beforeanimation":r.onPageBeforeAnimation,"page:afteranimation":r.onPageAfterAnimation,"page:beforeremove":r.onPageBeforeRemove,"page:back":r.onPageBack,"page:afterback":r.onPageAfterBack}},[a,t])},props:{name:String,cached:Boolean,"navbar-fixed":Boolean,"navbar-through":Boolean,"toolbar-fixed":Boolean,"toolbar-through":Boolean,"tabbar-fixed":Boolean,"tabbar-through":Boolean,"tabbar-labels-fixed":Boolean,"tabbar-labels-through":Boolean,"with-subnavbar":Boolean,subnavbar:Boolean,"no-navbar":Boolean,"no-toolbar":Boolean,"no-tabbar":Boolean,"pull-to-refresh":Boolean,"pull-to-refresh-distance":Number,"ptr-distance":Number,"pull-to-refresh-layer":{type:Boolean,default:!0},"ptr-layer":{type:Boolean,default:!0},"infinite-scroll":[Boolean,String],"infinite-scroll-distance":Number,"infinite-scroll-preloader":{type:Boolean,default:!0},"hide-bars-on-scroll":Boolean,"hide-navbar-on-scroll":Boolean,"hide-toolbar-on-scroll":Boolean,"hide-tabbar-on-scroll":Boolean,messages:Boolean,tabs:Boolean,"no-page-content":Boolean,"login-screen":Boolean,theme:String,layout:String,"no-swipeback":Boolean},computed:{classesObjectPage:function(){var e={cached:this.cached,"navbar-fixed":this.navbarFixed||this.navbarThrough&&this.$theme.material,"navbar-through":this.navbarThrough,"toolbar-fixed":this.toolbarFixed,"toolbar-through":this.toolbarThrough,"tabbar-fixed":this.tabbarFixed,"tabbar-through":this.tabbarThrough,"tabbar-labels-fixed":this.tabbarLabelsFixed,"tabbar-labels-through":this.tabbarLabelsThrough,"with-subnavbar":this.subnavbar||this.withSubnavbar,"no-navbar":this.noNavbar,"no-toolbar":this.noToolbar,"no-tabbar":this.noTabbar,tabs:this.tabs,"no-swipeback":this.noSwipeback};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e},classesObjectPageContent:function(){return{"pull-to-refresh-content":this.pullToRefresh,"infinite-scroll":this.infiniteScroll||""===this.infiniteScroll,"infinite-scroll-top":"top"===this.infiniteScroll,"hide-bars-on-scroll":this.hideBarsOnScroll,"hide-navbar-on-scroll":this.hideNavbarOnScroll,"hide-toolbar-on-scroll":this.hideToolbarOnScroll,"hide-tabbar-on-scroll":this.hideTabbarOnScroll,"messages-content":this.messages,"login-screen-content":this.loginScreen}}},methods:{onPtrPullstart:function(e){this.$emit("ptr:pullstart",e)},onPtrPullmove:function(e){this.$emit("ptr:pullmove",e)},onPtrPullend:function(e){this.$emit("ptr:pullend",e)},onPtrRefresh:function(e){this.$emit("ptr:refresh",e,e.detail.done)},onPtrRefreshdone:function(e){this.$emit("ptr:done",e)},onInfinite:function(e){this.$emit("infinite",e)},onPageBeforeInit:function(e){this.f7PageData=e.detail.page,this.$emit("page:beforeinit",e,e.detail.page)},onPageInit:function(e){this.$emit("page:init",e,e.detail.page)},onPageReinit:function(e){this.$emit("page:reinit",e,e.detail.page)},onPageBeforeAnimation:function(e){this.$emit("page:beforeanimation",e,e.detail.page)},onPageAfterAnimation:function(e){this.$emit("page:afteranimation",e,e.detail.page)},onPageBeforeRemove:function(e){this.$emit("page:beforeremove",e,e.detail.page)},onPageBack:function(e){this.$emit("page:back",e,e.detail.page)},onPageAfterBack:function(e){this.$emit("page:afterback",e,e.detail.page)}}},l={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"page-content",class:e.classesObject,on:{"tab:show":e.onTabShow,"tab:hide":e.onTabHide}},[e._t("default")],2)},staticRenderFns:[],props:{tab:Boolean,active:Boolean},computed:{classesObject:function(){var e=this;return{tab:e.tab,active:e.active}}},methods:{onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)}}},c={render:function(e){var t,o,n,a=this;return a.inner&&(a.backLink&&(o=e("f7-nav-left",{props:{backLink:a.backLink,sliding:a.sliding,backLinkHref:a.backLinkUrl||a.backLinkHref},on:{"back-click":a.onBackClick}})),a.title&&(n=e("f7-nav-center",{props:{title:a.title,sliding:a.sliding}})),t=e("div",{staticClass:"navbar-inner"},[o,n,a.$slots.default])),e("div",{staticClass:"navbar",class:a.classesObject,on:{"navbar:beforeinit":a.onBeforeInit,"navbar:init":a.onInit,"navbar:reinit":a.onReinit,"navbar:beforeremove":a.onBeforeRemove}},[a.$slots["before-inner"],t,a.$slots["after-inner"]])},updated:function(){var e=this;e.$nextTick(function(){e.$f7.sizeNavbars()})},props:{backLink:[Boolean,String],backLinkUrl:String,backLinkHref:String,sliding:Boolean,title:String,theme:String,layout:String,hidden:Boolean,noShadow:Boolean,inner:{type:Boolean,default:!0}},computed:{classesObject:function(){var e={"navbar-hidden":this.hidden};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),this.noShadow&&(e["no-shadow"]=!0),e}},methods:{hide:function(e){if(this.$f7)return this.$f7.hideNavbar(this.$el,e)},show:function(e){if(this.$f7)return this.$f7.showNavbar(this.$el,e)},size:function(){if(this.$f7&&!this.$theme.material)return this.$f7.sizeNavbars()},onBeforeInit:function(e){this.$emit("navbar:beforeinit",e)},onInit:function(e){this.$emit("navbar:init",e)},onReinit:function(e){this.$emit("navbar:reinit",e)},onBeforeRemove:function(e){this.$emit("navbar:beforeremove",e)},onBackClick:function(e){this.$emit("back-click",e),this.$emit("click:back",e)}}},u={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"center",class:{sliding:e.sliding}},[e._t("default",[e._v(e._s(e.title))])],2)},staticRenderFns:[],props:{sliding:Boolean,title:String}},d={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"left",class:{sliding:e.sliding}},[e.backLink?o("f7-link",{class:{"icon-only":!0===e.backLink||e.backLink&&e.$theme.material},attrs:{href:e.backLinkUrl||e.backLinkHref||"#",back:"",icon:"icon-back",text:!0===e.backLink||e.$theme.material?void 0:e.backLink},on:{click:e.onBackClick}}):e._e(),e._v(" "),e._t("default")],2)},staticRenderFns:[],props:{backLink:[Boolean,String],backLinkUrl:String,backLinkHref:String,sliding:Boolean},methods:{onBackClick:function(e){this.$emit("back-click",e),this.$emit("click:back",e)}}},p={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"right",class:{sliding:e.sliding}},[e._t("default")],2)},staticRenderFns:[],props:{sliding:Boolean}},h={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"subnavbar",class:!!e.sliding&&"sliding"},[e._t("default")],2)},staticRenderFns:[],props:{sliding:Boolean}},f={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"toolbar",class:e.classesObject},[e._t("before-inner"),e._v(" "),o("div",{staticClass:"toolbar-inner"},[e._t("default")],2),e._v(" "),e._t("after-inner")],2)},staticRenderFns:[],props:{bottom:Boolean,tabbar:Boolean,labels:Boolean,scrollable:Boolean,theme:String,layout:String,hidden:Boolean,noShadow:Boolean},computed:{classesObject:function(){var e={"toolbar-bottom":this.bottom,tabbar:this.tabbar,"tabbar-labels":this.labels,"tabbar-scrollable":this.scrollable,"toolbar-hidden":this.hidden};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),this.noShadow&&(e["no-shadow"]=!0),e}},methods:{hide:function(e){if(this.$f7)return this.$f7.hideToolbar(this.$el,e)},show:function(e){if(this.$f7)return this.$f7.showToolbar(this.$el,e)}}},m={render:function(e){var t,o,n,a,i=this;return i.title&&(t=e("f7-card-header",{domProps:{innerHTML:i.title}})),i.content&&(n=e("div",{domProps:{innerHTML:i.content}}),o=e("f7-card-content",{props:{inner:i.inner}},[n])),i.footer&&(a=e("f7-card-footer",{domProps:{innerHTML:i.footer}})),e("div",{staticClass:"card"},[t,o,a,i.$slots.default])},props:{title:[String,Number],content:[String,Number],footer:[String,Number],inner:{type:Boolean,default:!0}}},b={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"card-header"},[e._t("default")],2)},staticRenderFns:[]},g={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"card-footer"},[e._t("default")],2)},staticRenderFns:[]},v={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"card-content"},[e.inner?o("div",{staticClass:"card-content-inner"},[e._t("default")],2):e._t("default")],2)},staticRenderFns:[],props:{inner:{type:Boolean,default:!0}}},$={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"content-block",class:e.classesObject,on:{"tab:show":e.onTabShow,"tab:hide":e.onTabHide}},[e.inner?o("div",{staticClass:"content-block-inner"},[e._t("default")],2):e._t("default")],2)},staticRenderFns:[],props:{inset:Boolean,"tablet-inset":Boolean,inner:Boolean,tabs:Boolean,tab:Boolean,active:Boolean,"no-hairlines":Boolean,"no-hairlines-between":Boolean},computed:{classesObject:function(){var e=this;return{inset:e.inset,"tablet-inset":e.tabletInset,tabs:e.tabs,tab:e.tab,active:e.active,"no-hairlines":e.noHairlines,"no-hairlines-between":e.noHairlinesBetween}}},methods:{onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)}}},k={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"content-block-title"},[e._t("default")],2)},staticRenderFns:[]},S={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("span",{staticClass:"badge",class:e.color?"color-"+e.color:""},[e._t("default")],2)},staticRenderFns:[],props:{color:String}},C={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("i",{staticClass:"icon",class:e.classesObject,style:{"font-size":e.sizeComputed}},[e._v(e._s(e.iconTextComputed)),e._t("default")],2)},staticRenderFns:[],props:{color:String,material:String,f7:String,ion:String,fa:String,icon:String,"if-material":String,"if-ios":String,size:[String,Number]},computed:{sizeComputed:function(){var e=this,t=e.size;return"number"!=typeof t&&parseFloat(t)!==1*t||(t+="px"),t},iconTextComputed:function(){var e=this,t=e.material||e.f7;return e.ifMaterial&&e.$theme.material&&(e.ifMaterial.indexOf("material:")>=0||e.ifMaterial.indexOf("f7:")>=0)?t=e.ifMaterial.split(":")[1]:e.ifIos&&e.$theme.ios&&(e.ifIos.indexOf("material:")>=0||e.ifIos.indexOf("f7:")>=0)&&(t=e.ifIos.split(":")[1]),t},classesObject:function(){var e={},t=this;if(t.ifMaterial||t.ifIos){var o=t[t.$theme.material?"ifMaterial":"ifIos"].split(":"),n=o[0],a=o[1];"material"!==n&&"fa"!==n&&"f7"!==n||(e.fa="fa"===n,e["material-icons"]="material"===n,e["f7-icons"]="f7"===n),"fa"!==n&&"ion"!==n||(e[n+"-"+a]=!0),"icon"===n&&(e[a]=!0)}else e={"material-icons":this.material,"f7-icons":this.f7,fa:this.fa},this.ion&&(e["ion-"+this.ion]=!0),this.fa&&(e["fa-"+this.fa]=!0),this.icon&&(e[this.icon]=!0);return this.color&&(e["color-"+this.color]=!0),e}}},B={beforeDestroy:function(){var e=this;e.virtual&&e.virtualInit&&e.f7VirtualList&&e.f7VirtualList.destroy&&e.f7VirtualList.destroy()},watch:{virtualItems:function(){var e=this;e.virtual&&e.virtualInit&&e.f7VirtualList&&e.f7VirtualList.replaceAllItems(e.virtualItems)}},render:function(e){var t=this;t.grouped?t.$slots.default:e("ul",{},t.$slots.default);var o=[],n=[];if(t.$slots.default)for(var a=0;a<t.$slots.default.length;a++){var i=t.$slots.default[a].tag;i&&!("li"==i||i.indexOf("list-item")>=0||i.indexOf("list-button")>=0)?o.push(t.$slots.default[a]):n.push(t.$slots.default[a])}return e(t.form?"form":"div",{staticClass:"list-block",class:{inset:t.inset,"tablet-inset":t.tabletInset,"media-list":t.mediaList,sortable:t.sortable,"accordion-list":t.accordion,"contacts-block":t.contacts,"virtual-list":t.virtual,tab:t.tab,active:t.active,"no-hairlines":t.noHairlines,"no-hairlines-between":t.noHairlinesBetween,"store-data":t.storeData},on:{"sortable:open":t.onSortableOpen,"sortable:close":t.onSortableClose,"sortable:sort":t.onSortableSort,"tab:show":t.onTabShow,"tab:hide":t.onTabHide}},[n.length>0?[e("ul",{},n),o]:o])},props:{inset:Boolean,"tablet-inset":Boolean,"media-list":Boolean,grouped:Boolean,sortable:Boolean,label:String,accordion:Boolean,contacts:Boolean,"no-hairlines":Boolean,"no-hairlines-between":Boolean,tab:Boolean,active:Boolean,form:Boolean,"store-data":Boolean,virtual:Boolean,"virtual-init":{type:Boolean,default:!0},"virtual-items":[Array,Object],"virtual-height":[Number,Function],"virtual-rows-before":Number,"virtual-rows-after":Number,"virtual-cols":{type:Number,default:1},"virtual-cache":{type:Boolean,default:!0},"virtual-filtered-only":{type:Boolean,default:!1},"virtual-search-by-item":Function,"virtual-search-all":Function,"virtual-render-item":Function,"virtual-empty-template":String,"virtual-render-external":Function},methods:{onSortableOpen:function(e){this.$emit("sortable:open",e)},onSortableClose:function(e){this.$emit("sortable:close",e)},onSortableSort:function(e){this.$emit("sortable:sort",e,e.detail)},onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)},onF7Init:function(e){var t=this;if(t.virtual&&t.virtualInit){var o=t.$$,n=o(t.$el),a=n.find("script"),i=a.html();!i&&a.length>0&&(i=a[0].outerHTML,i=/\<script type="text\/template7"\>(.*)<\/script>/.exec(i)[1]),(i||t.virtualRenderItem||t.virtualRenderExternal)&&(i&&(i=t.$t7.compile(i)),t.f7VirtualList=e.virtualList(t.$el,{items:t.virtualItems||[],template:i,height:t.virtualHeight||void 0,cols:t.virtualCols,rowsBefore:t.virtualRowsBefore||void 0,rowsAfter:t.virtualRowsAfter||void 0,showFilteredItemsOnly:t.virtualFilteredOnly,searchByItem:t.virtualSearchByItem,searchAll:t.virtualSearchAll,renderItem:t.virtualRenderItem,renderExternal:t.virtualRenderExternal,emptyTemplate:t.virtualEmptyTemplate,onItemBeforeInsert:function(e,o){t.$emit("virtual:itembeforeinsert",e,o)},onBeforeClear:function(e,o){t.$emit("virtual:beforeclear",e,o)},onItemsBeforeInsert:function(e,o){t.$emit("virtual:itemsbeforeinsert",e,o)},onItemsAfterInsert:function(e,o){t.$emit("virtual:itemsafterinsert",e,o)}}))}}}},y={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"list-block-group"},[o("ul",[e._t("default")],2)])},staticRenderFns:[],props:{"media-list":Boolean,sortable:Boolean},computed:{sortableComputed:function(){return this.sortable||this.$parent.sortable},mediaListComputed:function(){return this.mediaList||this.$parent.mediaList}},data:function(){return{}}},w={render:function(e){function t(e){return!(!e&&""!==e)}function o(e){return"string"==typeof e&&""!==e}var n,a,i,r=this;if(i=e("f7-list-item-content",{props:{title:r.title,text:r.text,media:r.media,subtitle:r.subtitle,after:r.after,badge:r.badge,"badge-color":r.badgeColor,"media-list":r.mediaListComputed,"accordion-item":r.accordionItem,checkbox:r.checkbox,checked:r.checkedComputed,radio:r.radio,name:r.name,value:r.valueComputed,readonly:r.readonly,required:r.required,disabled:r.disabled},on:r.link||r.accordionItem||r.smartSelect?{}:{click:r.onClick,change:r.onChange}},[r.$slots["content-start"],r.$slots.content,r.$slots["media-start"],r.$slots.media,r.$slots["inner-start"],r.$slots.inner,r.$slots["after-start"],r.$slots.after,r.swipeout||r.accordionItem?[]:r.$slots.default]),(r.link||r.accordionItem||r.smartSelect)&&(a=e("a",{attrs:{href:!0===r.link||r.accordionItem||r.smartSelect?"#":r.link,target:r.linkTarget,"data-searchbar":r.smartSelectSearchbar,"data-searchbar-placeholder":r.smartSelectSearchbarPlaceholder,"data-searchbar-cancel":r.smartSelectSearchbarCancel,"data-page-title":r.smartSelectPageTitle,"data-back-text":r.smartSelectBackText,"data-back-on-select":r.smartSelectBackOnSelect,"data-virtual-list":r.smartSelectVirtualList,"data-virtual-list-height":r.smartSelectVirtualListHeight,"data-open-in":r.smartSelectOpenIn,"data-navbar-theme":r.smartSelectNavbarTheme,"data-form-theme":r.smartSelectFormTheme,"data-view":!!o(r.linkView)&&r.linkView,"data-panel":!!o(r.linkOpenPanel)&&r.linkOpenPanel,"data-popup":!!o(r.linkOpenPopup)&&r.linkOpenPopup,"data-popover":!!o(r.linkOpenPopover)&&r.linkOpenPopover,"data-picker":!!o(r.linkOpenPicker)&&r.linkOpenPicker,"data-login-screen":!!o(r.linkOpenLoginScreen)&&r.linkOpenLoginScreen,"data-sortable":o(r.linkOpenSortable)?r.linkOpenSortable:!!o(r.linkToggleSortable)&&r.linkToggleSortable,"data-force":r.linkForce,"data-reload":r.linkReload,"data-animate-pages":"linkAnimatePages"in r.$options.propsData?r.linkAnimatePages.toString():void 0,"data-ignore-cache":r.linkIgnoreCache,"data-page-name":"string"==typeof r.linkPageName&&r.linkPageName,"data-template":"string"==typeof r.linkTemplate&&r.linkTemplate},class:{"item-link":!0,external:r.linkExternal,back:r.linkBack,"no-fastclick":r.linkNoFastclick,"smart-select":r.smartSelect,"close-panel":t(r.linkClosePanel),"open-panel":r.linkOpenPanel||""===r.linkOpenPanel,"close-popup":t(r.linkClosePopup),"open-popup":r.linkOpenPopup||""===r.linkOpenPopup,"close-popover":t(r.linkClosePopover),"open-popover":r.linkOpenPopover||""===r.linkOpenPopover,"close-picker":t(r.linkClosePicker),"open-picker":r.linkOpenPicker||""===r.linkOpenPicker,"close-login-screen":t(r.linkCloseLoginScreen),"open-login-screen":r.linkOpenLoginScreen||""===r.linkOpenLoginScreen,"close-sortable":t(r.linkCloseSortable),"open-sortable":r.linkOpenSortable||""===r.linkOpenSortable,"toggle-sortable":r.linkToggleSortable||""===r.linkToggleSortable},on:{click:r.onClick}},[i])),r.dividerOrGroupTitle)n=[e("span",r.$slots.default||r.title)];else{var s=r.link||r.smartSelect||r.accordionItem?a:i;n=r.swipeout?[e("div",{class:{"swipeout-content":!0}},[s])]:[s],r.sortableComputed&&n.push(e("div",{class:{"sortable-handler":!0}})),(r.swipeout||r.accordionItem)&&n.push(r.$slots.default),n.unshift(r.$slots["root-start"]),n.push(r.$slots.root)}return e("li",{class:{"item-divider":r.divider,"list-group-title":r.groupTitle,swipeout:r.swipeout,"accordion-item":r.accordionItem,"accordion-item-expanded":r.accordionExpanded},on:{"swipeout:open":r.onSwipeoutOpen,"swipeout:opened":r.onSwipeoutOpened,"swipeout:close":r.onSwipeoutClose,"swipeout:closed":r.onSwipeoutClosed,"swipeout:delete":r.onSwipeoutDelete,"swipeout:deleted":r.onSwipeoutDeleted,swipeout:r.onSwipeout,"accordion:open":r.onAccOpen,"accordion:opened":r.onAccOpened,"accordion:close":r.onAccClose,"accordion:closed":r.onAccClosed}},n)},props:{title:[String,Number],text:[String,Number],media:String,subtitle:[String,Number],link:[Boolean,String],"link-external":Boolean,"link-back":Boolean,"link-no-fastclick":Boolean,"link-force":Boolean,"link-reload":Boolean,"link-animate-pages":Boolean,"link-ignore-cache":Boolean,"link-page-name":String,"link-template":String,"link-target":String,"link-view":String,"link-open-panel":[Boolean,String],"link-close-panel":[Boolean,String],"link-open-popup":[Boolean,String],"link-close-popup":[Boolean,String],"link-open-popover":[Boolean,String],"link-close-popover":[Boolean,String],"link-open-login-screen":[Boolean,String],"link-close-login-screen":[Boolean,String],"link-open-picker":[Boolean,String],"link-close-picker":[Boolean,String],after:[String,Number],badge:[String,Number],"badge-color":String,"media-item":Boolean,"media-list-item":Boolean,"media-list":Boolean,divider:Boolean,"group-title":Boolean,swipeout:Boolean,sortable:Boolean,"accordion-item":Boolean,"accordion-expanded":Boolean,"smart-select":Boolean,"smart-select-searchbar":Boolean,"smart-select-searchbar-placeholder":String,"smart-select-searchbar-cancel":String,"smart-select-page-title":String,"smart-select-back-text":String,"smart-select-back-on-select":Boolean,"smart-select-virtual-list":Boolean,"smart-select-virtual-list-height":Number,"smart-select-open-in":String,"smart-select-navbar-theme":String,"smart-select-form-theme":String,checkbox:Boolean,checked:Boolean,radio:Boolean,name:String,value:[String,Number,Boolean,Array],"input-value":[String,Number],readonly:Boolean,required:Boolean,disabled:Boolean},computed:{dividerOrGroupTitle:function(){return this.divider||this.groupTitle},sortableComputed:function(){return this.sortable||this.$parent.sortable||this.$parent.sortableComputed},mediaListComputed:function(){return this.mediaList||this.mediaItem||this.$parent.mediaList||this.$parent.mediaListComputed},hasCheckboxModel:function(){var e=this;return e.checkbox&&(void 0!==e.$options.propsData.value&&"boolean"==typeof e.value||Array.isArray(e.value))},hasRadioModel:function(){var e=this;return e.radio&&void 0!==e.inputValue},valueComputed:function(){var e=this;return e.inputValue?e.inputValue:e.hasCheckboxModel?void 0:e.value},checkedComputed:function(){var e=this;return e.hasCheckboxModel?e.inputValue&&Array.isArray(e.value)?e.value.indexOf(e.inputValue)>=0:e.value:e.hasRadioModel?typeof e.value!=typeof e.inputValue?e.value.toString()===e.inputValue.toString():e.value===e.inputValue:e.checked}},methods:{onClick:function(e){"input"!==e.target.tagName.toLowerCase()&&this.$emit("click",e)},onSwipeoutDeleted:function(e){
+this.$emit("swipeout:deleted",e)},onSwipeoutDelete:function(e){this.$emit("swipeout:delete",e)},onSwipeoutClose:function(e){this.$emit("swipeout:close",e)},onSwipeoutClosed:function(e){this.$emit("swipeout:closed",e)},onSwipeoutOpen:function(e){this.$emit("swipeout:open",e)},onSwipeoutOpened:function(e){this.$emit("swipeout:opened",e)},onSwipeout:function(e){this.$emit("swipeout",e)},onAccClose:function(e){this.$emit("accordion:close",e)},onAccClosed:function(e){this.$emit("accordion:closed",e)},onAccOpen:function(e){this.$emit("accordion:open",e)},onAccOpened:function(e){this.$emit("accordion:opened",e)},onChange:function(e){var t=this;t.hasCheckboxModel?(Array.isArray(t.value)?e.target.checked?t.value.push(e.target.value):t.value.splice(t.value.indexOf(e.target.value),1):t.$emit("input",e.target.checked),t.$emit("change",e)):t.hasRadioModel?t.$emit("input",e.target.value):t.$emit("change",e)}}},x={render:function(e){var t,o,n,a,i,r,s,l,c,u,d,p=this,h=[],f=[],m=[],b=[],g=[],v=[],$=[],k=[];if(p.$slots.default&&p.$slots.default.length>0)for(var S=0;S<p.$slots.default.length;S++){var C=p.$slots.default[S].data?p.$slots.default[S].data.slot:void 0;C&&"content-start"===C&&h.push(p.$slots.default[S]),C&&"content"===C&&f.push(p.$slots.default[S]),C&&"after-start"===C&&g.push(p.$slots.default[S]),C&&"after"===C&&v.push(p.$slots.default[S]),C&&"media-start"===C&&$.push(p.$slots.default[S]),C&&"media"===C&&k.push(p.$slots.default[S]),C&&"inner-start"===C&&m.push(p.$slots.default[S]),(!C||C&&"inner"===C)&&b.push(p.$slots.default[S])}if((p.radio||p.checkbox)&&(u=e("input",{attrs:{value:p.value,name:p.name,checked:p.checked,readonly:p.readonly,disabled:p.disabled,required:p.required,type:p.radio?"radio":"checkbox"},on:{change:p.onChange},domProps:{checked:p.checked}})),p.media||p.checkbox||p.radio&&p.$theme.material||$.length||k.length)if(p.checkbox||p.radio&&p.$theme.material)if(p.media)d='<i class="icon icon-form-'+(p.radio?"radio":"checkbox")+'"></i>',c=e("div",{class:{"item-media":!0},domProps:{innerHTML:d+(p.media?p.media:"")}});else{var B={icon:!0};B["icon-form-"+(p.radio?"radio":"checkbox")]=!0,d=e("i",{class:B}),c=e("div",{class:{"item-media":!0}},[$,d,k])}else c=p.media?e("div",{staticClass:"item-media",domProps:{innerHTML:p.media}}):e("div",{staticClass:"item-media"},[$,k]);return p.title&&(t=e("div",{staticClass:"item-title",domProps:{innerHTML:p.title}},[p.title])),p.subtitle&&(s=e("div",{staticClass:"item-subtitle",domProps:{innerHTML:p.subtitle}},[p.subtitle])),p.text&&(l=e("div",{staticClass:"item-text",domProps:{innerHTML:p.text}})),(p.after||p.badge||v.length)&&(p.after&&(n=e("span",{domProps:{innerHTML:p.after}})),p.badge&&(a=e("f7-badge",{props:{color:p.badgeColor}},[p.badge])),o=e("div",{staticClass:"item-after"},[g,n,a,v])),p.mediaList&&(r=e("div",{staticClass:"item-title-row"},[t,o])),i=e("div",{staticClass:"item-inner"},p.mediaList?[m,r,s,l,b]:[m,t,o,b]),e(p.checkbox||p.radio?"label":"div",{staticClass:"item-content",class:{"label-checkbox":p.checkbox,"label-radio":p.radio},on:{click:p.onClick}},[h,u,c,i,f])},props:{title:[String,Number],text:[String,Number],media:String,subtitle:[String,Number],after:[String,Number],badge:[String,Number],"badge-color":String,"media-list":Boolean,checkbox:Boolean,checked:Boolean,radio:Boolean,name:String,value:[String,Number,Boolean,Array],"input-value":[String,Number],readonly:Boolean,required:Boolean,disabled:Boolean},methods:{onClick:function(e){this.$emit("click",e)},onChange:function(e){this.$emit("change",e)}}},_={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{class:"swipeout-actions-"+e.sideComputed},[e._t("default")],2)},staticRenderFns:[],props:{left:Boolean,right:Boolean,side:String},computed:{sideComputed:function(){return this.side?this.side:this.left?"left":(this.right,"right")}},data:function(){return{}}},P={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("a",{class:e.classObject,attrs:{href:"#"},on:{click:e.onClick}},[e._t("default",[e._v(e._s(e.text))])],2)},staticRenderFns:[],props:{text:String,overswipe:Boolean,close:Boolean,delete:Boolean,color:String,bg:String},computed:{classObject:function(){var e={"swipeout-overswipe":this.overswipe,"swipeout-delete":this.delete,"swipeout-close":this.close};return this.color&&(e["bg-"+this.color]=!0),this.bg&&(e["bg-"+this.bg]=!0),e}},data:function(){return{}},methods:{onClick:function(e){this.$emit("click",e)}}},O={render:function(e){var t,o=this;return t=o.title?e("a",{staticClass:"item-link list-button",attrs:o.attrsObject,class:o.classesObject,domProps:{innerHTML:o.title},on:{click:o.onClick}}):e("a",{staticClass:"item-link list-button",attrs:o.attrsObject,class:o.classesObject,on:{click:o.onClick}},[o.$slots.default]),e("li",{},[t])},props:{title:[String,Number],link:[Boolean,String],href:[Boolean,String],tabindex:[Number,String],external:Boolean,"link-external":Boolean,back:Boolean,"link-back":Boolean,"no-fastclick":Boolean,"link-no-fastlick":Boolean,color:String,force:Boolean,reload:Boolean,animatePages:Boolean,ignoreCache:Boolean,pageName:String,template:String,view:String,openPanel:[Boolean,String],closePanel:[Boolean,String],openPopup:[Boolean,String],closePopup:[Boolean,String],openPopover:[Boolean,String],closePopover:[Boolean,String],openLoginScreen:[Boolean,String],closeLoginScreen:[Boolean,String],openPicker:[Boolean,String],closePicker:[Boolean,String],tabLink:[Boolean,String],openSortable:[Boolean,String],closeSortable:[Boolean,String],toggleSortable:[Boolean,String]},computed:{attrsObject:function(){function e(e){return"string"==typeof e&&""!==e}var t=this,o={href:"boolean"==typeof t.link&&"boolean"==typeof t.href?"#":t.link||t.href},n=t.$options.propsData;return"force"in n&&(o["data-force"]=t.force),"reload"in n&&(o["data-reload"]="true"),"animatePages"in n&&"boolean"==typeof n.animatePages&&(o["data-animate-pages"]=n.animatePages.toString()),"ignoreCache"in n&&(o["data-ignore-cache"]="true"),t.pageName&&(o["data-page-name"]=t.pageName),t.template&&(o["data-template"]=t.template),t.view&&(o["data-view"]=t.view),t.tabindex&&(o.tabindex=t.tabindex),e(t.openPanel)&&(o["data-panel"]=t.openPanel),e(t.openPopup)&&(o["data-popup"]=t.openPopup),e(t.openPopover)&&(o["data-popover"]=t.openPopover),e(t.openPicker)&&(o["data-picker"]=t.openPicker),e(t.openLoginScreen)&&(o["data-login-screen"]=t.openLoginScreen),e(t.openSortable)&&(o["data-sortable"]=t.openSortable),e(t.toggleSortable)&&(o["data-sortable"]=t.toggleSortable),e(t.closePopup)&&(o["data-popup"]=t.closePopup),e(t.closePopover)&&(o["data-popover"]=t.closePopover),e(t.closePicker)&&(o["data-picker"]=t.closePicker),e(t.closeLoginScreen)&&(o["data-login-screen"]=t.closeLoginScreen),e(t.closeSortable)&&(o["data-sortable"]=t.closeSortable),e(t.tabLink)&&(o["data-tab"]=t.tabLink),o},classesObject:function(){function e(e){return!(!e&&""!==e)}var t=this,o={external:t.external||t.linkExternal,back:t.back||t.linkBack,"no-fastclick":t.noFastclick||t.linkNoFastclick};return e(t.closePanel)&&(o["close-panel"]=!0),(t.openPanel||""===t.openPanel)&&(o["open-panel"]=!0),e(t.closePopup)&&(o["close-popup"]=!0),(t.openPopup||""===t.openPopup)&&(o["open-popup"]=!0),e(t.closePopover)&&(o["close-popover"]=!0),(t.openPopover||""===t.openPopover)&&(o["open-popover"]=!0),e(t.closePicker)&&(o["close-picker"]=!0),(t.openPicker||""===t.openPicker)&&(o["open-picker"]=!0),e(t.closeLoginScreen)&&(o["close-login-screen"]=!0),(t.openLoginScreen||""===t.openLoginScreen)&&(o["open-login-screen"]=!0),e(t.closeSortable)&&(o["close-sortable"]=!0),(t.openSortable||""===t.openSortable)&&(o["open-sortable"]=!0),(t.toggleSortable||""===t.toggleSortable)&&(o["toggle-sortable"]=!0),e(t.tabLink)&&(o["tab-link"]=!0),t.color&&(o["color-"+t.color]=!0),o}},methods:{onClick:function(e){this.$emit("click",e)}}},M={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"list-block-label"},[e._t("default")],2)},staticRenderFns:[]},T={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"accordion-list"},[e._t("default")],2)},staticRenderFns:[]},L={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"accordion-item",class:{"accordion-item-expanded":e.expanded},on:{"accordion:open":e.onOpen,"accordion:opened":e.onOpened,"accordion:close":e.onClose,"accordion:closed":e.onClosed}},[e._t("default")],2)},staticRenderFns:[],props:{expanded:Boolean},methods:{onOpen:function(e){this.$emit("accordion:open",e)},onOpened:function(e){this.$emit("accordion:opened",e)},onClose:function(e){this.$emit("accordion:close",e)},onClosed:function(e){this.$emit("accordion:closed",e)}}},F={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"accordion-item-toggle"},[e._t("default")],2)},staticRenderFns:[]},I={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"accordion-item-content"},[e._t("default")],2)},staticRenderFns:[]},R={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"buttons-row",class:e.colorComputed?"theme-"+e.colorComputed:""},[e._t("default")],2)},staticRenderFns:[],props:{color:String,theme:String,bg:String},computed:{colorComputed:function(){return this.color||this.theme||this.bg}}},j={data:function(){return{routeInfo:{activeTab:this.$route&&this.$route.route.tab}}},props:{noLinkClass:Boolean,noFastclick:Boolean,external:Boolean,color:String,bg:String,theme:String,text:String,iconOnly:Boolean,icon:String,iconMaterial:String,iconIon:String,iconFa:String,iconF7:String,iconIfMaterial:String,iconIfIos:String,iconSize:[String,Number],rippleColor:String,href:{type:String,default:"#"},round:Boolean,fill:Boolean,big:Boolean,raised:Boolean,force:Boolean,reload:Boolean,animatePages:Boolean,ignoreCache:Boolean,pageName:String,template:String,view:String,openPanel:[Boolean,String],closePanel:[Boolean,String],openPopup:[Boolean,String],closePopup:[Boolean,String],openPopover:[Boolean,String],closePopover:[Boolean,String],openLoginScreen:[Boolean,String],closeLoginScreen:[Boolean,String],openPicker:[Boolean,String],closePicker:[Boolean,String],tabLink:[Boolean,String],routeTabLink:[Boolean,String],openSortable:[Boolean,String],closeSortable:[Boolean,String],toggleSortable:[Boolean,String],active:Boolean,badge:[String,Number],iconBadge:[String,Number],badgeColor:[String],back:Boolean},computed:{attrsObject:function(){function e(e){return"string"==typeof e&&""!==e}var t=this,o={href:t.href},n=t.$options.propsData;return"force"in n&&(o["data-force"]=t.force),"reload"in n&&(o["data-reload"]="true"),"animatePages"in n&&"boolean"==typeof n.animatePages&&(o["data-animate-pages"]=n.animatePages.toString()),"ignoreCache"in n&&(o["data-ignore-cache"]="true"),t.pageName&&(o["data-page-name"]=t.pageName),t.template&&(o["data-template"]=t.template),t.view&&(o["data-view"]=t.view),e(t.openPanel)&&(o["data-panel"]=t.openPanel),e(t.openPopup)&&(o["data-popup"]=t.openPopup),e(t.openPopover)&&(o["data-popover"]=t.openPopover),e(t.openPicker)&&(o["data-picker"]=t.openPicker),e(t.openLoginScreen)&&(o["data-login-screen"]=t.openLoginScreen),e(t.openSortable)&&(o["data-sortable"]=t.openSortable),e(t.toggleSortable)&&(o["data-sortable"]=t.toggleSortable),e(t.closePopup)&&(o["data-popup"]=t.closePopup),e(t.closePopover)&&(o["data-popover"]=t.closePopover),e(t.closePicker)&&(o["data-picker"]=t.closePicker),e(t.closeLoginScreen)&&(o["data-login-screen"]=t.closeLoginScreen),e(t.closeSortable)&&(o["data-sortable"]=t.closeSortable),e(t.tabLink)&&(o["data-tab"]=t.tabLink),o},classesObject:function(){function e(e){return!(!e&&""!==e)}var t=this,o={back:t.back,external:t.external,"no-fastclick":t.noFastclick};if(t.rippleColor&&(o["ripple-color-"+t.rippleColor]=!0),t.color&&(o["color-"+t.color]=!0),t.theme&&(o["theme-"+t.theme]=!0),t.bg&&(o["bg-"+t.bg]=!0),["round","fill","big","raised"].forEach(function(e,n){t[e]&&(o["button-"+e]=!0)}),t.routeInfo.activeTab){var n=t.routeTabLink&&t.routeTabLink.replace("#","")===t.routeInfo.activeTab.tabId;o.active=n}else o.active=t.active;return e(t.closePanel)&&(o["close-panel"]=!0),(t.openPanel||""===t.openPanel)&&(o["open-panel"]=!0),e(t.closePopup)&&(o["close-popup"]=!0),(t.openPopup||""===t.openPopup)&&(o["open-popup"]=!0),e(t.closePopover)&&(o["close-popover"]=!0),(t.openPopover||""===t.openPopover)&&(o["open-popover"]=!0),e(t.closePicker)&&(o["close-picker"]=!0),(t.openPicker||""===t.openPicker)&&(o["open-picker"]=!0),e(t.closeLoginScreen)&&(o["close-login-screen"]=!0),(t.openLoginScreen||""===t.openLoginScreen)&&(o["open-login-screen"]=!0),e(t.closeSortable)&&(o["close-sortable"]=!0),(t.openSortable||""===t.openSortable)&&(o["open-sortable"]=!0),(t.toggleSortable||""===t.toggleSortable)&&(o["toggle-sortable"]=!0),(t.tabLink||""===t.tabLink)&&(o["tab-link"]=!0),o}},methods:{onClick:function(e){this.$emit("click",e)},onRouteChange:function(e){e.route.tab&&this.$set(this.routeInfo,"activeTab",e.route.tab)}}},N={mixins:[j],render:function(e){var t,o,n,a,i,r=this;return n=(r.tabLink||""===r.tabLink)&&r.$parent&&r.$parent.tabbar&&r.$parent.labels,r.text&&(r.badge&&(a=e("f7-badge",{props:{color:r.badgeColor}},r.badge)),o=e("span",{class:{"tabbar-label":n}},[r.text,a])),(r.icon||r.iconMaterial||r.iconIon||r.iconFa||r.iconF7||r.iconIfMaterial&&r.$theme.material||r.iconIfIos&&r.$theme.ios)&&(r.iconBadge&&(i=e("f7-badge",{props:{color:r.badgeColor}},r.iconBadge)),t=e("f7-icon",{props:{material:r.iconMaterial,ion:r.iconIon,fa:r.iconFa,f7:r.iconF7,icon:r.icon,ifMaterial:r.iconIfMaterial,ifIos:r.iconIfIos,size:r.iconSize}},[i])),(!r.text&&r.$slots.default&&0===r.$slots.default.length||r.iconOnly||!r.text&&!r.$slots.default)&&(r.classesObject["icon-only"]=!0),r.classesObject.link=!r.noLinkClass&&!n,e("a",{class:r.classesObject,attrs:r.attrsObject,on:{click:r.onClick}},[t,o,r.$slots.default])},methods:{onClick:function(e){this.$emit("click",e)}}},E={render:function(e){var t,o,n=this;return n.text&&(o=e("span",{},n.text)),(n.icon||n.iconMaterial||n.iconIon||n.iconFa||n.iconF7||n.iconIfMaterial||n.iconIfIos)&&(t=e("f7-icon",{props:{material:n.iconMaterial,ion:n.iconIon,fa:n.iconFa,f7:n.iconF7,icon:n.icon,ifMaterial:n.iconIfMaterial,ifIos:n.iconIfIos,size:n.iconSize}})),n.classesObject.button=!0,e("a",{class:n.classesObject,attrs:n.attrsObject,on:{click:n.onClick}},[t,o,n.$slots.default])},mixins:[j],methods:{onClick:function(e){this.$emit("click",e)}}},A={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"row",class:{"no-gutter":e.noGutter}},[e._t("default")],2)},staticRenderFns:[],props:{"no-gutter":Boolean},data:function(){return{}}},D={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{class:"col-"+e.width+(e.tabletWidth?" tablet-"+e.tabletWidth:"")},[e._t("default")],2)},staticRenderFns:[],props:{width:{type:[Number,String],default:"auto"},"tablet-width":{type:[Number,String]}},data:function(){return{}}},H={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"preloader",class:e.color?"color-"+e.color+" preloader-"+e.color:"",style:{width:e.sizeComputed?e.sizeComputed+"px":"",height:e.sizeComputed?e.sizeComputed+"px":""}},[e.$theme.material?o("span",{staticClass:"preloader-inner"},[o("span",{staticClass:"preloader-inner-gap"}),e._v(" "),e._m(0,!1,!1),e._v(" "),e._m(1,!1,!1)]):e._e()])},staticRenderFns:[function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"preloader-inner-left"},[o("span",{staticClass:"preloader-inner-half-circle"})])},function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"preloader-inner-right"},[o("span",{staticClass:"preloader-inner-half-circle"})])}],props:{color:String,size:[Number,String]},computed:{sizeComputed:function(){var e=this.size;return e&&"string"==typeof e&&e.indexOf("px")>=0&&(e=e.replace("px","")),e}}},z={render:function(e){var t=this,o=t.color,n=t.progress,a=t.infinite;return e("span",{staticClass:"progressbar",class:[o?"color-"+o+" progressbar-"+o:"",a?"progressbar-infinite":""].join(" ")},[e("span",{style:{transform:n?"translate3d("+(-100+n)+"%,0,0)":""}})])},props:{color:String,progress:Number,infinite:Boolean},methods:{set:function(e,t){var o=this;if(o.$f7)return o.$f7.setProgressbar(o.$el,e,t)},show:function(e,t,o){var n=this;if(n.$f7)return n.$f7.showProgressbar(e,t,o)}}},V={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"item-title",class:{label:!e.floating,"floating-label":e.floating}},[e._t("default")],2)},staticRenderFns:[],props:{floating:Boolean}},q={render:function(e){var t,o=this,n={name:o.name,type:o.type,placeholder:o.placeholder,id:o.id,value:o.valueComputed,size:o.size,accept:o.accept,autocomplete:o.autocomplete,autocorrect:o.autocorrect,autocapitalize:o.autocapitalize,spellcheck:o.spellcheck,autofocus:o.autofocus,autosave:o.autosave,checked:o.checkedComputed,disabled:o.disabled,max:o.max,maxlength:o.maxlength,min:o.min,minlength:o.minlength,step:o.step,multiple:o.multiple,readonly:o.readonly,required:o.required,color:o.color,pattern:o.pattern,tabindex:o.tabindex},a={focus:o.onFocus,blur:o.onBlur,input:o.onInput,change:o.onChange,click:o.onClick,keypress:o.onKeyPress,keyup:o.onKeyUp,keydown:o.onKeyDown,beforeinput:o.onBeforeInput,compositionstart:o.onCompositionStart,compositionupdate:o.onCompositionUpdate,compositionend:o.onCompositionEnd,focusin:o.onFocusIn,focusout:o.onFocusOut,dblclick:o.onDblClick,mousedown:o.onMouseDown,mouseenter:o.onMouseEnter,mouseleave:o.onMouseLeave,mousemove:o.onMouseMove,mouseout:o.onMouseOut,mouseover:o.onMouseOver,mouseup:o.onMouseUp,wheel:o.onWheel,select:o.onSelect};return"select"===o.type||"textarea"===o.type||"file"===o.type?(delete n.value,t="select"===o.type?o.hasSelectModel?e("select",{attrs:n,on:a,style:o.inputStyle},o.$slots.default):e("select",{attrs:n,on:a,style:o.inputStyle,domProps:{value:o.valueComputed}},o.$slots.default):"file"===o.type?e("input",{attrs:n,style:o.inputStyle,on:a},o.$slots.default):e("textarea",{attrs:n,style:o.inputStyle,on:a,class:{resizable:o.resizable},domProps:{value:o.valueComputed}},o.$slots.default)):t=o.$slots.default&&o.$slots.default.length>0||!o.type?o.$slots.default:"switch"===o.type?e("f7-switch",{props:n,on:a}):"range"===o.type?e("f7-range",{props:n,on:a}):e("input",{attrs:n,style:o.inputStyle,on:a,domProps:{value:o.valueComputed,checked:o.checkedComputed}}),o.wrap?e("div",{staticClass:"item-input"},[t]):t},watch:{value:function(){var e=this;if(e.hasSelectModel){(0,e.$$)(e.$el).find("option").each(function(t,o){e.value.indexOf(o.value)>=0?o.selected=!0:o.selected=!1})}}},mounted:function(){var e=this;if(e.hasSelectModel){(0,e.$$)(e.$el).find("option").each(function(t,o){e.value.indexOf(o.value)>=0?o.selected=!0:o.selected=!1})}},props:{type:String,name:String,placeholder:String,id:String,value:[String,Number,Boolean,Array,Object],inputValue:[String,Number],size:[String,Number],accept:[String,Number],autocomplete:[String],autocorrect:[String],autocapitalize:[String],spellcheck:[String],autofocus:Boolean,autosave:String,checked:Boolean,disabled:Boolean,max:[String,Number],min:[String,Number],step:[String,Number],maxlength:[String,Number],minlength:[String,Number],multiple:Boolean,readonly:Boolean,required:Boolean,inputStyle:String,pattern:String,tabindex:[String,Number],resizable:Boolean,color:String,wrap:{type:Boolean,default:!0}},computed:{hasCheckboxModel:function(){var e=this;return("checkbox"===e.type||"switch"===e.type)&&(void 0!==e.$options.propsData.value&&"boolean"==typeof e.value||Array.isArray(e.value))},hasRadioModel:function(){var e=this;return"radio"===e.type&&void 0!==e.inputValue},hasSelectModel:function(){var e=this;return"select"===e.type&&Array.isArray(e.value)},valueComputed:function(){var e=this;if(e.inputValue)return e.inputValue;if(!e.hasCheckboxModel)return e.$options.propsData&&void 0!==e.$options.propsData.value?e.value:!e.hasCheckboxModel&&!e.hasRadioModel&&!e.hasSelectModel&&"value"in e.$options.propsData?e.value:void 0},checkedComputed:function(){var e=this;return e.hasCheckboxModel?e.inputValue&&Array.isArray(e.value)?e.value.indexOf(e.inputValue)>=0:e.value:e.hasRadioModel?typeof e.value!=typeof e.inputValue?e.value.toString()===e.inputValue.toString():e.value===e.inputValue:e.checked}},methods:{onInput:function(e){this.hasSelectModel||(e&&e.type&&"input"===e.type?this.$emit("input",e.target.value):this.$emit("input",e))},onFocus:function(e){this.$emit("focus",e)},onBlur:function(e){this.$emit("blur",e)},onChange:function(e){var t=this;if(t.hasCheckboxModel)Array.isArray(t.value)?e.target.checked?t.value.push(e.target.value):t.value.splice(t.value.indexOf(e.target.value),1):t.$emit("input",e.target.checked),t.$emit("change",e);else if(t.hasRadioModel)t.$emit("input",e.target.value);else if(t.hasSelectModel){var o=Array.prototype.filter.call(e.target.options,function(e){return e.selected}).map(function(e){return"_value"in e?e._value:e.value});t.$emit("input",o)}else t.$emit("change",e)},onClick:function(e){this.$emit("click",e)},onKeyPress:function(e){this.$emit("keypress",e)},onKeyUp:function(e){this.$emit("keyup",e)},onKeyDown:function(e){this.$emit("keydown",e)},onBeforeInput:function(e){this.$emit("beforeinput",e)},onCompositionStart:function(e){this.$emit("compositionstart",e)},onCompositionUpdate:function(e){this.$emit("compositionupdate",e)},onCompositionEnd:function(e){this.$emit("compositionend",e)},onFocusIn:function(e){this.$emit("focusin",e)},onFocusOut:function(e){this.$emit("focusout",e)},onDblClick:function(e){this.$emit("dblclick",e)},onMouseDown:function(e){this.$emit("mousedown",e)},onMouseEnter:function(e){this.$emit("mouseenter",e)},onMouseLeave:function(e){this.$emit("mouseleave",e)},onMouseMove:function(e){this.$emit("mousemove",e)},onMouseOut:function(e){this.$emit("mouseout",e)},onMouseOver:function(e){this.$emit("mouseover",e)},onMouseUp:function(e){this.$emit("mouseup",e)},onWheel:function(e){this.$emit("wheel",e)},onSelect:function(e){this.$emit("select",e)}}},U={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("label",{staticClass:"label-switch",class:e.color?"color-"+e.color:"",on:{click:e.onClick}},[o("input",{style:e.inputStyle,attrs:{type:"checkbox",name:e.name,id:e.id,disabled:e.disabled,readonly:e.readonly,required:e.required},domProps:{value:e.valueComputed,checked:e.checkedComputed},on:{input:e.onInput,change:e.onChange}}),e._v(" "),o("div",{staticClass:"checkbox"})])},staticRenderFns:[],props:{name:String,id:String,value:[String,Number,Boolean,Array],inputValue:[String,Number],checked:Boolean,disabled:Boolean,readonly:Boolean,required:Boolean,inputStyle:String,color:String},computed:{hasCheckboxModel:function(){return"boolean"==typeof this.value||Array.isArray(this.value)},valueComputed:function(){var e=this;if(e.inputValue)return e.inputValue;if(!e.hasCheckboxModel)return e.$options.propsData&&e.$options.propsData.value?e.value:void 0},checkedComputed:function(){var e=this;return e.hasCheckboxModel?e.inputValue&&Array.isArray(e.value)?e.value.indexOf(e.inputValue)>=0:e.value:e.checked}},methods:{onInput:function(e){this.$emit("input",e)},onChange:function(e){var t=this;t.hasCheckboxModel?Array.isArray(t.value)?(e.target.checked?t.value.push(e.target.value):t.value.splice(t.value.indexOf(e.target.value),1),t.$emit("change",e)):t.$emit("input",e.target.checked):t.$emit("change",e)},onClick:function(e){this.$emit("click",e)}}},Y={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"range-slider",class:e.color?"color-"+e.color:""},[o("input",{style:e.inputStyle,attrs:{type:"range",name:e.name,id:e.id,disabled:e.disabled,readonly:e.readonly,required:e.required,max:e.max,min:e.min,step:e.step},domProps:{value:e.value},on:{input:e.onInput,change:e.onChange,click:e.onClick}})])},staticRenderFns:[],props:{name:String,id:String,value:[String,Number],disabled:Boolean,readonly:Boolean,required:Boolean,inputStyle:String,max:[String,Number],min:[String,Number],step:[String,Number],color:String},methods:{onInput:function(e){this.$emit("input",e.target.value)},onChange:function(e){this.$emit("change",e)},onClick:function(e){this.$emit("click",e)}}},G={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("span",{staticClass:"chip",class:e.chipClassObject,on:{click:e.onClick}},[e.media?o("span",{staticClass:"chip-media",class:e.mediaClassObject,domProps:{innerHTML:e._s(e.media)}}):e._e(),e._v(" "),e.text?o("span",{staticClass:"chip-label",domProps:{innerHTML:e._s(e.text)}}):e._e(),e._v(" "),e.deleteable?o("a",{staticClass:"chip-delete",attrs:{href:"#"},on:{click:e.onDeleteClick}}):e._e()])},staticRenderFns:[],props:{media:String,text:[String,Number],deleteable:Boolean,color:String,bg:String,mediaBg:String,mediaColor:String},computed:{mediaClassObject:function(){var e={};return this.mediaColor&&(e["color-"+this.mediaColor]=!0),this.mediaBg&&(e["bg-"+this.mediaBg]=!0),e},chipClassObject:function(){var e={};return this.color&&(e["color-"+this.color]=!0),this.bg&&(e["bg-"+this.bg]=!0),e}},methods:{onClick:function(e){this.$emit("click",e)},onDeleteClick:function(e){this.$emit("delete",e)}}},K={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("a",{staticClass:"floating-button",class:!!e.color&&"color-"+e.color,attrs:{href:"#"},on:{click:e.onClick}},[e._t("default")],2)},staticRenderFns:[],props:{color:String},methods:{onClick:function(e){this.$emit("click",e)}}},W={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"speed-dial",class:!!e.theme&&"theme-"+e.theme},[e._t("default")],2)},staticRenderFns:[],props:{theme:String}},Z={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"speed-dial-buttons",class:!!e.theme&&"theme-"+e.theme},[e._t("default")],2)},staticRenderFns:[],props:{theme:String}},Q={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("a",{class:e.classesObject,attrs:{href:"#"},on:{click:e.onClick}},[e._t("default")],2)},staticRenderFns:[],props:{color:String,closeSpeedDial:Boolean},computed:{classesObject:function(){var e={};return this.color&&(e["color-"+this.color]=!0),this.closeSpeedDial&&(e["close-speed-dial"]=!0),e}},methods:{onClick:function(e){this.$emit("click",e)}}},J={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"swiper-container"},[o("div",{staticClass:"swiper-wrapper"},[e._t("default")],2),e._v(" "),!0===e.paginationComputed?o("div",{staticClass:"swiper-pagination"}):e._e(),e._v(" "),!0===e.scrollbarComputed?o("div",{staticClass:"swiper-scrollbar"}):e._e(),e._v(" "),!0===e.nextButtonComputed?o("div",{staticClass:"swiper-button-next"}):e._e(),e._v(" "),!0===e.prevButtonComputed?o("div",{staticClass:"swiper-button-prev"}):e._e()])},staticRenderFns:[],beforeDestroy:function(){var e=this;e.init&&e.swiper&&e.swiper.destroy&&e.swiper.destroy()},props:{params:Object,pagination:[Boolean,String,Object],scrollbar:[Boolean,String,Object],"next-button":[Boolean,String,Object],"prev-button":[Boolean,String,Object],init:{type:Boolean,default:!0}},computed:{paramsComputed:function(){return this.params||{}},paginationComputed:function(){var e=this;return!0===e.pagination||""===e.pagination?(e.paramsComputed.pagination=".swiper-pagination",!0):("object"==typeof e.pagination||"string"==typeof e.pagination)&&(e.paramsComputed.pagination=e.pagination,!0)},scrollbarComputed:function(){var e=this;return e.scrollbar||""===e.scrollbar?(e.paramsComputed.scrollbar=".swiper-scrollbar",!0):("object"==typeof e.scrollbar||"string"==typeof e.scrollbar)&&(e.paramsComputed.scrollbar=e.scrollbar,!0)},nextButtonComputed:function(){var e=this;return e.nextButton||""===e.nextButton?(e.paramsComputed.nextButton=".swiper-button-next",!0):("object"==typeof e.nextButton||"string"==typeof e.nextButton)&&(e.paramsComputed.nextButton=e.nextButton,!0)},prevButtonComputed:function(){var e=this;return e.prevButton||""===e.prevButton?(e.paramsComputed.prevButton=".swiper-button-prev",!0):("object"==typeof e.prevButton||"string"==typeof e.prevButton)&&(e.paramsComputed.prevButton=e.prevButton,!0)}},methods:{onF7Init:function(){this.init&&(this.swiper=new window.Swiper(this.$el,this.paramsComputed))}}},X={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"swiper-slide"},[e.zoom?o("div",{staticClass:"swiper-zoom-container"},[e._t("default")],2):e._t("default")],2)},staticRenderFns:[],props:{zoom:Boolean}},ee={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"messages"},[e._t("default")],2)},staticRenderFns:[],beforeDestroy:function(){this.f7Messages&&this.f7Messages.destroy&&this.f7Messages.destroy()},beforeUpdate:function(e,t){var o=this;o.init&&o.$children.forEach(function(e){o.$$(e.$el).addClass("message-appeared")})},updated:function(e,t){var o=this;o.init&&(o.$children.forEach(function(e){var t=o.$$(e.$el);t.hasClass("message-appeared")||t.addClass("message-appear-from-bottom")}),this.f7Messages&&this.f7Messages.layout&&this.autoLayout&&this.f7Messages.layout(),this.f7Messages&&this.f7Messages.scrollMessages&&this.scrollMessages&&this.f7Messages.scrollMessages())},props:{autoLayout:{type:Boolean,default:!0},newMessagesFirst:Boolean,messages:Array,scrollMessages:{type:Boolean,default:!0},scrollMessagesOnlyOnEdge:Boolean,init:{type:Boolean,default:!0}},methods:{addMessage:function(e,t,o){if(this.f7Messages)return this.f7Messages.addMessage(e,t,o)},appendMessage:function(e,t){if(this.f7Messages)return this.f7Messages.appendMessage(e,t)},prependMessage:function(e,t){if(this.f7Messages)return this.f7Messages.prependMessage(e,t)},addMessages:function(e,t,o){if(this.f7Messages)return this.f7Messages.addMessages(e,t,o)},removeMessage:function(e){if(this.f7Messages)return this.f7Messages.removeMessage(e)},removeMessages:function(e){if(this.f7Messages)return this.f7Messages.removeMessages(e)},scroll:function(){if(this.f7Messages)return this.f7Messages.scrollMessages()},layout:function(){if(this.f7Messages)return this.f7Messages.layout()},clean:function(){if(this.f7Messages)return this.f7Messages.clean()},onF7Init:function(e){var t=this;t.init&&(t.f7Messages=e.messages(t.$el,{autoLayout:t.autoLayout,newMessagesFirst:t.newMessagesFirst,messages:t.messages,scrollMessages:t.scrollMessages,scrollMessagesOnlyOnEdge:t.scrollMessagesOnlyOnEdge}))}}},te={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{class:e.classesObject,on:{click:e.onClick}},[e._v("\n  "+e._s(e.day)+" "),e.time?o("span",[e._v(e._s(e.time))]):e._e(),e._v(" "),e._t("start"),e._v(" "),e.name?o("div",{staticClass:"message-name",on:{click:e.onNameClick}},[e._v(e._s(e.name))]):e._e(),e._v(" "),o("div",{staticClass:"message-text",on:{click:e.onTextClick}},[e._t("default",[e._v(e._s(e.text))]),e._v(" "),e.date?o("div",{staticClass:"message-date"},[e._v(e._s(e.date))]):e._e()],2),e._v(" "),e.avatar?o("div",{staticClass:"message-avatar",style:{"background-image":"url("+e.avatar+")"},on:{click:e.onAvatarClick}}):e._e(),e._v(" "),e.label?o("div",{staticClass:"message-label"},[e._v(e._s(e.label))]):e._e(),e._v(" "),e._t("end")],2)},staticRenderFns:[],props:{text:String,name:String,avatar:String,type:{type:String,default:"sent"},label:String,day:String,date:String,time:String,last:{type:Boolean,default:!0},first:{type:Boolean,default:!0}},computed:{classesObject:function(){var e={},t=this;return t.day||t.time?e["messages-date"]=t.day||t.time:(e["message-date"]=t.day||t.time,e.message=!(t.day||t.time),e["message-"+t.type]=!0,e["message-with-avatar"]=t.avatar,e["message-first"]=t.first,e["message-last"]=t.last,e["message-with-tail"]=t.last),e}},methods:{onClick:function(e){this.$emit("click",e)},onNameClick:function(e){this.$emit("click:name",e)},onTextClick:function(e){
+this.$emit("click:text",e)},onAvatarClick:function(e){this.$emit("click:avatar",e)}}},oe={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"toolbar messagebar"},[e._t("before-inner"),e._v(" "),o("div",{staticClass:"toolbar-inner"},[e._t("before-textarea"),e._v(" "),o("textarea",{ref:"area",attrs:{placeholder:e.placeholder,disabled:e.disabled,name:e.name,readonly:e.readonly},on:{input:e.onInput,change:e.onChange,focus:e.onFocus,blur:e.onBlur}},[e._v(e._s(e.value))]),e._v(" "),e._t("after-textarea"),e._v(" "),e.sendLink&&e.sendLink.indexOf("<")>=0?o("f7-link",{domProps:{innerHTML:e._s(e.sendLink)},on:{click:e.onClick}}):o("f7-link",{on:{click:e.onClick}},[e._t("send-link",[e._v(e._s(e.sendLink))])],2),e._v(" "),e._t("default")],2),e._v(" "),e._t("after-inner")],2)},staticRenderFns:[],beforeDestroy:function(){this.f7Messagebar&&this.f7Messagebar.destroy&&this.f7Messagebar.destroy()},props:{placeholder:{type:String,default:"Message"},init:{type:Boolean,default:!0},maxHeight:Number,sendLink:String,value:[String,Number],disabled:Boolean,readonly:Boolean,name:String},methods:{getValue:function(){if(this.f7Messagebar)return this.f7Messagebar.value()},setValue:function(e){if(this.f7Messagebar)return this.f7Messagebar.value(e)},clear:function(){if(this.f7Messagebar)return this.f7Messagebar.clear()},onChange:function(e){this.$emit("change",e)},onInput:function(e){this.$emit("input",e.target.value)},onFocus:function(e){this.$emit("focus",e)},onBlur:function(e){this.$emit("blur",e)},onClick:function(e){var t=this.$refs.area.value,o=this.f7Messagebar?this.f7Messagebar.clear:function(){};this.$emit("submit",t,o),this.$emit("click",e)},onF7Init:function(){var e=this;e.init&&(e.f7Messagebar=e.$f7.messagebar(e.$el,{maxHeight:e.maxHeight}))}}},ne={render:function(e){var t,o,n,a,i=this;return n=e("input",{attrs:{placeholder:i.placeholder,type:"search"},on:{input:i.onInput,change:i.onChange,focus:i.onFocus,blur:i.onBlur}}),i.clearButtonComputed&&(t=e("a",{staticClass:"searchbar-clear",attrs:{href:"#"},on:{click:i.onClearClick}})),i.cancelLink&&(o=e("a",{staticClass:"searchbar-cancel",attrs:{href:"#"},domProps:{innerHTML:i.cancelLink},on:{click:i.onCancelClick}})),a=e("div",{staticClass:"searchbar-input"},[n,t]),e(i.form?"form":"div",{staticClass:"searchbar",class:{"no-shadow":i.noShadow},on:{submit:i.onSubmit,"searchbar:search":i.onSearch,"searchbar:enable":i.onEnable,"searchbar:disable":i.onDisable,"searchbar:clear":i.onClear}},[i.$slots["before-input"],a,i.$slots["after-input"],o,i.$slots.default])},beforeDestroy:function(){this.f7Searchbar&&this.f7Searchbar.destroy&&this.f7Searchbar.destroy()},props:{noShadow:Boolean,form:{type:Boolean,default:!0},placeholder:{type:String,default:"Search"},cancelLink:String,clear:Boolean,clearButton:{type:Boolean,default:!0},params:Object,searchList:[String,Object],searchIn:{type:String,default:".item-title"},searchBy:String,found:[String,Object],notFound:[String,Object],overlay:[String,Object],ignore:{type:String,default:".searchbar-ignore"},customSearch:{type:Boolean,default:!1},removeDiacritics:{type:Boolean,default:!1},hideDividers:{type:Boolean,default:!0},hideGroups:{type:Boolean,default:!0},init:{type:Boolean,default:!0}},computed:{clearButtonComputed:function(){var e=this,t=e.clearButton;return!1===e.$options.propsData.clear&&(t=!1),t}},methods:{search:function(e){if(this.f7Searchbar)return this.f7Searchbar.search(e)},enable:function(){if(this.f7Searchbar)return this.f7Searchbar.enable()},disable:function(){if(this.f7Searchbar)return this.f7Searchbar.disable()},empty:function(){if(this.f7Searchbar)return this.f7Searchbar.clear()},onChange:function(e){this.$emit("change",e)},onInput:function(e){this.$emit("input",e.target.value)},onFocus:function(e){this.$emit("focus",e)},onBlur:function(e){this.$emit("blur",e)},onSubmit:function(e){this.$emit("submit",e)},onSearch:function(e){e.detail&&this.$emit("searchbar:search",e.detail.query,e.detail.foundItems)},onClear:function(e){this.$emit("searchbar:clear",e)},onEnable:function(e){this.$emit("searchbar:enable",e)},onDisable:function(e){this.$emit("searchbar:disable",e)},onClearClick:function(e){this.$emit("click:clear",e)},onCancelClick:function(e){this.$emit("click:cancel",e)},onF7Init:function(){var e=this;e.init&&(e.f7Searchbar=e.$f7.searchbar(e.$el,e.params||{searchList:e.searchList,searchIn:e.searchIn,searchBy:e.searchBy,found:e.found,notFound:e.notFound,overlay:e.overlay,ignore:e.ignore,customSearch:e.customSearch,removeDiacritics:e.removeDiacritics,hideDividers:e.hideDividers,hideGroups:e.hideGroups}))}}},ae={render:function(e){var t=this,o=e("div",{staticClass:"tabs"},[t.$slots.default]);return t.animated||t.swipeable?e("div",{class:t.classesObject},[o]):o},props:{animated:Boolean,swipeable:Boolean},computed:{classesObject:function(){return{"tabs-animated-wrap":this.animated,"tabs-swipeable-wrap":this.swipeable}}}},ie={props:{active:Boolean,id:String},data:function(){return{routeInfo:{activeTab:this.$route&&this.$route.route.tab}}},render:function(e){var t=this,o=t.routeInfo.activeTab;return e("div",{staticClass:"tab",attrs:{id:t.id},class:{active:o?o.tabId===t.id:t.active},on:{"tab:show":t.onTabShow,"tab:hide":t.onTabHide}},[o&&o.tabId===t.id?e(o.component,{tag:"component",props:t.$route.params}):t.$slots.default])},methods:{show:function(e){this.$f7&&this.$f7.showTab(this.$el,e)},onTabShow:function(e){this.$emit("tab:show",e)},onTabHide:function(e){this.$emit("tab:hide",e)},onRouteChange:function(e){if(e.route.tab){var t=this.routeInfo.activeTab&&this.routeInfo.activeTab.tabId,o=e.route.tab.tabId,n=this.id;n===t&&o!==n?this.$$(this.$el).trigger("tab:hide"):n!==t&&o===n&&this.$$(this.$el).trigger("tab:show"),this.$set(this.routeInfo,"activeTab",e.route.tab)}}}},re={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"popover",on:{"popover:open":e.onOpen,"popover:opened":e.onOpened,"popover:close":e.onClose,"popover:closed":e.onClosed}},[o("div",{staticClass:"popover-angle"}),e._v(" "),o("div",{staticClass:"popover-content"},[e._t("default")],2)])},staticRenderFns:[],methods:{onOpen:function(e){this.$emit("popover:open",e)},onOpened:function(e){this.$emit("popover:opened",e)},onClose:function(e){this.$emit("popover:close",e)},onClosed:function(e){this.$emit("popover:closed",e)},open:function(e,t){var o=this;if(o.$f7)return o.$f7.popover(o.$el,e,void 0,t)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},se={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"popup",class:e.classesObject,on:{"popup:open":e.onOpen,"popup:opened":e.onOpened,"popup:close":e.onClose,"popup:closed":e.onClosed}},[e._t("default")],2)},staticRenderFns:[],mounted:function(){var e=this;e.opened&&(e.$el.style.display="block")},watch:{opened:function(e){var t=this;if(t.$f7){var o=t.$$;if(e)t.$f7.popup(t.$el);else{if(!o(t.$el).hasClass("modal-in"))return;t.$f7.closeModal(t.$el)}}}},props:{"tablet-fullscreen":Boolean,theme:String,layout:String,opened:Boolean},computed:{classesObject:function(){var e={"tablet-fullscreen":this.tabletFullscreen,"modal-in":this.opened,"modal-out":!this.opened};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onOpen:function(e){this.$emit("popup:open",e)},onOpened:function(e){this.$emit("popup:opened",e)},onClose:function(e){this.$emit("popup:close",e)},onClosed:function(e){this.$emit("popup:closed",e)},onF7Init:function(){var e=this.$$;e&&0===e(".popup-overlay").length&&e(this.$root.$el).append('<div class="popup-overlay '+(this.opened?" modal-overlay-visible":"")+'"></div>')},open:function(e){var t=this;if(t.$f7)return t.$f7.popup(t.$el,void 0,e)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},le={render:function(e){var t,o,n,a=[],i=[],r=this,s="navbar toolbar tabbar subnavbar searchbar messagebar fab speed-dial floating-button".split(" ");if(r.$slots.default)for(var l=0;l<r.$slots.default.length;l++)if(n=r.$slots.default[l],o=n.tag){for(var c=!1,u=0;u<s.length;u++)o.indexOf(s[u])>=0&&(c=!0);c?a.push(n):i.push(n)}else i.push(n);return t=e("div",{staticClass:"picker-modal-inner"},i),e("div",{class:r.classesObject,staticClass:"picker-modal",on:{"picker:open":r.onOpen,"picker:opened":r.onOpened,"picker:close":r.onClose,"picker:closed":r.onClosed}},[a,t])},mounted:function(){var e=this;e.opened&&(e.$el.style.display="block")},watch:{opened:function(e){var t=this;t.$f7&&(e?t.$f7.pickerModal(t.$el):t.$f7.closeModal(t.$el))}},props:{opened:Boolean,theme:String,layout:String,overlay:Boolean},computed:{classesObject:function(){var e={"modal-in":this.opened,"modal-out":!this.opened};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onOpen:function(e){this.overlay&&this.$$(".picker-modal-overlay").addClass("modal-overlay-visible"),this.$emit("picker:open",e)},onOpened:function(e){this.$emit("picker:opened",e)},onClose:function(e){this.overlay&&this.$$(".picker-modal-overlay").removeClass("modal-overlay-visible"),this.$emit("picker:close",e)},onClosed:function(e){this.$emit("picker:closed",e)},onF7Init:function(){var e=this.$$;e&&0===e(".picker-modal-overlay").length&&(this.$theme&&this.$theme.material||this.overlay)&&e(this.$root.$el).append('<div class="picker-modal-overlay '+(this.opened?" modal-overlay-visible":"")+'"></div>')},open:function(e){var t=this;if(t.$f7)return t.$f7.pickerModal(t.$el,void 0,e)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},ce={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"login-screen",class:e.classesObject,on:{"loginscreen:open":e.onOpen,"loginscreen:opened":e.onOpened,"loginscreen:close":e.onClose,"loginscreen:closed":e.onClosed}},[e._t("default")],2)},staticRenderFns:[],mounted:function(){var e=this;e.opened&&(e.$el.style.display="block")},watch:{opened:function(e){var t=this;if(t.$f7){var o=t.$$;if(e)t.$f7.loginScreen(t.$el);else{if(!o(t.$el).hasClass("modal-in"))return;t.$f7.closeModal(t.$el)}}}},props:{theme:String,layout:String,opened:Boolean},computed:{classesObject:function(){var e={"modal-in":this.opened,"modal-out":!this.opened};return this.theme&&(e["theme-"+this.theme]=!0),this.layout&&(e["layout-"+this.layout]=!0),e}},methods:{onOpen:function(e){this.$emit("loginscreen:open",e)},onOpened:function(e){this.$emit("loginscreen:opened",e)},onClose:function(e){this.$emit("loginscreen:close",e)},onClosed:function(e){this.$emit("loginscreen:closed",e)},open:function(e){var t=this;if(t.$f7)return t.$f7.loginScreen(t.$el,e)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},ue={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"login-screen-title"},[e._t("default")],2)},staticRenderFns:[]},de={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"actions-modal keep-on-close",class:{"modal-in":e.opened},on:{"actions:open":e.onOpen,"actions:opened":e.onOpened,"actions:close":e.onClose,"actions:closed":e.onClosed}},[e._t("default")],2)},staticRenderFns:[],mounted:function(){var e=this;e.opened?e.$el.style.display="block":e.$el.style.display="none"},watch:{opened:function(e){var t=this;t.$f7&&(e?(t.$el.style.display="block",t.$f7.openModal(t.$el)):(t.$el.style.display="none",t.$f7.closeModal(t.$el)))}},props:{opened:Boolean},methods:{onOpen:function(e){this.$emit("actions:open",e)},onOpened:function(e){this.$emit("actions:opened",e)},onClose:function(e){this.$emit("actions:close",e)},onClosed:function(e){this.$emit("actions:closed",e)},onF7Init:function(){var e=this.$$;e&&0===e(".modal-overlay").length&&e(this.$root.$el).append('<div class="modal-overlay'+(this.opened?" modal-overlay-visible":"")+'"></div>')},open:function(e){var t=this;if(t.$f7)return t.$f7.openModal(t.$el,e)},close:function(e){var t=this;if(t.$f7)return t.$f7.closeModal(t.$el,e)}}},pe={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"actions-modal-group"},[e._t("default")],2)},staticRenderFns:[]},he={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"actions-modal-button",class:e.classesObject,on:{click:e.onClick}},[e._t("default")],2)},staticRenderFns:[],props:{color:String,bold:Boolean,close:{type:Boolean,default:!0}},computed:{classesObject:function(){var e=this,t={"actions-modal-button-bold":e.bold};return e.color&&(t["color-"+e.color]=!0),t}},methods:{onClick:function(e){this.close&&this.$f7&&this.$f7.closeModal(this.$parent.$parent.$el),this.$emit("click",e)}}},fe={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"actions-modal-label",class:e.classesObject,on:{click:e.onClick}},[e._t("default")],2)},staticRenderFns:[],props:{color:String,bold:Boolean},computed:{classesObject:function(){var e=this,t={"actions-modal-button-bold":e.bold};return e.color&&(t["color-"+e.color]=!0),t}},methods:{onClick:function(e){this.$emit("click",e)}}},me={render:function(){},beforeDestroy:function(){var e=this;e.f7PhotoBrowser&&e.f7PhotoBrowser.destroy&&e.f7PhotoBrowser.destroy()},props:{init:{type:Boolean,default:!0},params:Object,photos:Array,initialSlide:Number,spaceBetween:Number,speed:Number,zoom:Boolean,zoomMax:Number,zoomMin:Number,exposition:Boolean,expositionHideCaptions:Boolean,type:String,navbar:Boolean,toolbar:Boolean,theme:String,captionsTheme:String,swipeToClose:Boolean,backLinkText:String,ofText:String,loop:Boolean,lazyLoading:Boolean,lazyLoadingInPrevNext:Boolean,lazyLoadingOnTransitionStart:Boolean},methods:{open:function(e){return this.f7PhotoBrowser.open(e)},close:function(){return this.f7PhotoBrowser.close()},toggleZoom:function(){return this.f7PhotoBrowser.toggleZoom()},toggleExposition:function(){return this.f7PhotoBrowser.toggleExposition()},enableExposition:function(){return this.f7PhotoBrowser.enableExposition()},disableExposition:function(){return this.f7PhotoBrowser.disableExposition()},onF7Init:function(e){var t=this;if(t.init){var o=t.$options.propsData;t.f7PhotoBrowser=e.photoBrowser(t.params||{photos:o.photos,initialSlide:o.initialSlide,spaceBetween:o.spaceBetween,speed:o.speed,zoom:o.zoom,zoomMax:o.zoomMax,zoomMin:o.zoomMin,exposition:o.exposition,expositionHideCaptions:o.expositionHideCaptions,type:o.type,navbar:o.navbar,toolbar:o.toolbar,theme:o.theme,captionsTheme:o.captionsTheme,swipeToClose:o.swipeToClose,backLinkText:o.backLinkText,ofText:o.ofText,loop:o.loop,lazyLoading:o.lazyLoading,lazyLoadingInPrevNext:o.lazyLoadingInPrevNext,lazyLoadingOnTransitionStart:o.lazyLoadingOnTransitionStart,onOpen:function(e){t.$emit("open",e)},onClose:function(e){t.$emit("close",e)},onSwipeToClose:function(e){t.$emit("swipeToClose",e)},onSlideChangeStart:function(e){t.$emit("slideChangeStart",e)},onSlideChangeEnd:function(e){t.$emit("slideChangeEnd",e)},onTransitionStart:function(e){t.$emit("transitionStart",e)},onTransitionEnd:function(e){t.$emit("transitionEnd",e)},onClick:function(e,o){t.$emit("click",e,o)},onTap:function(e,o){t.$emit("tap",e,o)},onDoubleTap:function(e,o){t.$emit("doubleTap",e,o)},onLazyImageLoad:function(e,o){t.$emit("lazyImageLoad",e,o)},onLazyImageReady:function(e,o){t.$emit("lazyImageReady",e,o)}})}}}},be={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"timeline",class:e.classesObject},[e._t("default")],2)},staticRenderFns:[],props:{sides:Boolean,"tablet-sides":Boolean,col:[Number,String],"tablet-col":[Number,String],horizontal:Boolean},computed:{classesObject:function(){var e={},t=this;return t.sides&&(e["timeline-sides"]=!0),t.tabletSides&&(e["tablet-sides"]=!0),t.horizontal&&(e["timeline-horizontal"]=!0),t.col&&(e["col-"+t.col]=!0),t.tabletCol&&(e["tablet-"+t.tabletCol]=!0),e}}},ge={render:function(e){var t,o,n,a,i,r,s,l,c=this;return i=c.day||c.month?e("div",{staticClass:"timeline-item-date",domProps:{innerHTML:[c.day,"<small>"+c.month+"</small>"].join(" ")}}):e("div",{staticClass:"timeline-item-date",domProps:{innerHTML:c.date}}),r=e("div",{staticClass:"timeline-item-divider"}),c.time&&(t=e("div",{staticClass:"timeline-item-time",domProps:{innerHTML:c.time}})),c.title&&(o=e("div",{staticClass:"timeline-item-title",domProps:{innerHTML:c.title}})),c.subtitle&&(n=e("div",{staticClass:"timeline-item-subtitle",domProps:{innerHTML:c.subtitle}})),c.text&&(a=e("div",{staticClass:"timeline-item-text",domProps:{innerHTML:c.text}})),l=c.inner?c.content?e("div",{staticClass:"timeline-item-inner",domProps:{innerHTML:c.content}}):e("div",{staticClass:"timeline-item-inner"},[t,o,n,a,c.$slots.default]):[t,o,n,a,c.$slots.default],s=c.content&&!c.inner?e("div",{staticClass:"timeline-item-content",domProps:{innerHTML:c.content}}):e("div",{staticClass:"timeline-item-content"},[l]),e("div",{staticClass:"timeline-item",class:{"timeline-item-left":"left"===c.side,"timeline-item-right":"right"===c.side}},[i,r,s])},props:{date:[String,Number,Date],day:[String,Number],month:[String,Number],inner:Boolean,content:String,side:String,time:String,title:String,subtitle:String,text:String}},ve={render:function(e){var t,o,n,a,i=this;return i.time&&(t=e("div",{staticClass:"timeline-item-time",domProps:{innerHTML:i.time}})),i.title&&(o=e("div",{staticClass:"timeline-item-title",domProps:{innerHTML:i.title}})),i.subtitle&&(n=e("div",{staticClass:"timeline-item-subtitle",domProps:{innerHTML:i.subtitle}})),i.text&&(a=e("div",{staticClass:"timeline-item-text",domProps:{innerHTML:i.text}})),i.content?e("div",{class:{"timeline-item-inner":i.inner,"timeline-item-child":!i.inner},domProps:{innerHTML:i.content}}):e("div",{class:{"timeline-item-inner":i.inner,"timeline-item-child":!i.inner}},[t,o,n,a,i.$slots.default])},props:{inner:Boolean,content:String,time:String,title:String,subtitle:String,text:String}},$e={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"timeline-year"},[e.year||e.title?o("div",{staticClass:"timeline-year-title"},[o("span",{domProps:{innerHTML:e._s(e.year||e.title)}})]):e._e(),e._v(" "),e._t("default")],2)},staticRenderFns:[],props:{year:[Number,String],title:[Number,String]}},ke={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"timeline-month"},[e.month||e.title?o("div",{staticClass:"timeline-month-title"},[o("span",{domProps:{innerHTML:e._s(e.month||e.title)}})]):e._e(),e._v(" "),e._t("default")],2)},staticRenderFns:[],props:{month:[Number,String],title:[Number,String]}},Se={props:{value:[String,Array,Number],monthNames:Array,monthNamesShort:Array,dayNames:Array,dayNamesShort:Array,firstDay:Number,weekendDays:Array,multiple:Boolean,rangePicker:Boolean,dateFormat:String,direction:String,minDate:[Date,String,Number],maxDate:[Date,String,Number],disabled:[Array,Function,Object],events:[Array,Function,Object],rangesClasses:[Array,Function,Object],touchMove:Boolean,animate:Boolean,closeOnSelect:Boolean,monthPicker:Boolean,yearPicker:Boolean,weekHeader:Boolean,closeByOutsideClick:Boolean,scrollToInput:Boolean,inputReadOnly:Boolean,convertToPopover:Boolean,onlyInPopover:Boolean,toolbar:Boolean,toolbarTemplate:String,toolbarCloseText:String,headerPlaceholder:String,header:Boolean,footer:Boolean},computed:{calendarValue:function(){var e=this;return e.value&&!Array.isArray(e.value)?[e.value]:e.value}},watch:{value:function(){var e=this;if(e.f7Calendar){var t=e.value;Array.isArray(e.value)||(t=[e.value]),e.$nextTick(function(){e.f7Calendar.setValue(t)})}}},beforeDestroy:function(){var e=this;e.f7Calendar&&e.f7Calendar.destroy&&e.f7Calendar.destroy()},methods:{getValue:function(){if(this.f7Calendar)return this.f7Calendar.value},setValue:function(e){if(this.f7Calendar)return this.f7Calendar.setValue(e)},nextMonth:function(e){if(this.f7Calendar)return this.f7Calendar.nextMonth(e)},prevMonth:function(e){if(this.f7Calendar)return this.f7Calendar.prevMonth(e)},nextYear:function(){if(this.f7Calendar)return this.f7Calendar.nextYear()},prevYear:function(){if(this.f7Calendar)return this.f7Calendar.prevYear()},setYearMonth:function(e,t,o){if(this.f7Calendar)return this.f7Calendar.setYearMonth(e,t,o)},open:function(){if(this.f7Calendar)return this.f7Calendar.open()},close:function(){if(this.f7Calendar)return this.f7Calendar.close()}}},Ce={render:function(){var e=this,t=e.$createElement,o=e._self._c||t;return o("div",{staticClass:"item-input"},[o("input",{attrs:{type:"text",name:e.name},domProps:{value:e.value}})])},staticRenderFns:[],mixins:[Se],props:{name:String},methods:{onF7Init:function(e){var t=this,o=t.$$,n=o(t.$el).find("input"),a=Object.assign(t.$options.propsData,{input:n,value:t.calendarValue,onChange:function(e,o,n){t.$emit("change",e,o,n)},onMonthAdd:function(e,o){t.$emit("monthAdd",e,o)},onDayClick:function(e,o,n,a,i){t.$emit("dayClick",e,o,n,a,i)},onMonthYearChangeStart:function(e,o,n){t.$emit("monthYearChangeStart",e,o,n)},onMonthYearChangeEnd:function(e,o,n){t.$emit("monthYearChangeEnd",e,o,n)},onOpen:function(e){t.$emit("open",e)},onClose:function(e){t.$emit("close",e)}});t.f7Calendar=e.calendar(a)}}},Be={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("div",{staticClass:"calendar-inline"})},staticRenderFns:[],mixins:[Se],methods:{onF7Init:function(e){var t=this;void 0===t.$options.propsData.footer&&(t.$options.propsData.footer=!1),void 0===t.$options.propsData.header&&(t.$options.propsData.header=!1);var o=Object.assign(t.$options.propsData,{container:t.$el,value:t.calendarValue,onChange:function(e,o,n){t.$emit("change",e,o,n)},onMonthAdd:function(e,o){t.$emit("monthAdd",e,o)},onDayClick:function(e,o,n,a,i){t.$emit("dayClick",e,o,n,a,i)},onMonthYearChangeStart:function(e,o,n){t.$emit("monthYearChangeStart",e,o,n)},onMonthYearChangeEnd:function(e,o,n){t.$emit("monthYearChangeEnd",e,o,n)},onOpen:function(e){t.$emit("open",e)},onClose:function(e){t.$emit("close",e)}});t.f7Calendar=e.calendar(o)}}},ye={render:function(e){var t,o=this,n=[],a=[],i=[],r=[],s=[],l=[];o.headings&&(t=[],o.headings.forEach(function(n,a){var i=o.columns[a]&&1*o.items[0][o.columns[a]]===parseFloat(o.items[0][o.columns[a]]);t.push(e("f7-table-cell",{props:{label:0===a&&!i,numeric:i}},[n]))}),a.push(e("f7-table-row",{props:{heading:!0,selectable:o.selectable}},t))),o.items&&(t=[],o.items.forEach(function(t){var n=[];o.columns.forEach(function(o,a){var i=1*t[o]===parseFloat(t[o]);n.push(e("f7-table-cell",{props:{label:0===a&&!i,numeric:i}},[t[o]]))}),r.push(e("f7-table-row",{props:{selectable:o.selectable}},n))})),o.title&&s.push(e("f7-table-header",{props:{title:o.title}}));for(var c=o.$slots.default||[],u=0;u<c.length;u++){var d=c[u],p=d.componentOptions&&d.componentOptions.tag,h=d.componentOptions&&d.componentOptions.propsData;"f7-table-row"===p?(""===h.heading||!0===h.heading?a.push(d):r.push(d),!o.selectable||"selectable"in h||(h.selectable=!0)):s.push(d),"f7-table-header"===p&&(o.hasSelected=h.selected)}a.length>0&&(n=e("thead",{},a)),i=e("tbody",{},r),s.push(o.$slots["before-table"]),l.push(o.$slots["after-table"]);var f=e("table",{},[n,i]);return e("div",{staticClass:"data-table",class:{"data-table-collapsible":o.collapsible,"data-table-has-checked":o.hasSelected,"data-table-has-selected":o.hasSelected,card:o.card}},[s,f,l])},props:{card:Boolean,collapsible:Boolean,selectable:Boolean,items:Array,title:String,headings:Array,columns:Array}},we={render:function(e){var t,o,n=this;return n.title&&(o=e("div",{class:{"data-table-title":!n.selected,"data-table-title-selected":n.selected}},[n.title])),n.$slots.default&&n.$slots.default.map(function(e){"f7-table-title"===(e.componentOptions&&e.componentOptions.tag)&&e.componentOptions.propsData&&(e.componentOptions.propsData.selected=n.selected)}),t=e("div",{class:{"data-table-header":!n.selected,"data-table-header-selected":n.selected}},[o,n.$slots.default]),e("div",{staticClass:"card-header"},[t])},props:{title:String,selected:Boolean}},xe={render:function(e){var t=this;return e(t.$parent&&t.$parent.heading?"th":"td",{attrs:{"data-collapsible-title":t.collapsibleTitle},class:t.classesObject,on:{click:t.onClick}},[t.$slots.default])},props:{label:Boolean,numeric:Boolean,actions:Boolean,sortable:Boolean,checkbox:Boolean,order:{type:String,default:"asc"},"sortable-active":Boolean,"collapsible-title":String,"active-sorting":Boolean,"tablet-only":Boolean,"tablet-landscape-only":Boolean},computed:{classesObject:function(){var e=this;return{"checkbox-cell":e.checkbox,"label-cell":e.label,"numeric-cell":e.numeric,"actions-cell":e.actions,"sortable-cell":e.sortable,"sortable-asc":"asc"===e.order,"sortable-desc":"desc"===e.order,"sortable-active":e.sortableActive,"tablet-only":e.tabletOnly,"tablet-landscape-only":e.tabletLandscapeOnly}}},methods:{onClick:function(e){this.$emit("click",e)}}},_e={render:function(e){var t,o=this;return o.selectable&&(t=e("f7-table-cell",{props:{checkbox:!0}},[e("label",{staticClass:"form-checkbox"},[e("input",{attrs:{type:"checkbox"},domProps:{checked:o.selected},on:{change:o.onChange}}),e("i")])])),e("tr",{class:{"data-table-row-selected":o.selected}},[t,o.$slots.default])},props:{heading:Boolean,selectable:Boolean,selected:Boolean},methods:{onChange:function(e){this.$emit("change",e)}}},Pe={render:function(e){var t=this;return e("div",{class:{"data-table-title":!t.selected,"data-table-title-selected":t.selected}},t.$slots.default)},props:{selected:Boolean}},Oe={render:function(e){return e("div",{staticClass:"data-table-links"},this.$slots.default)}},Me={render:function(e){return e("div",{staticClass:"data-table-actions"},this.$slots.default)}},Te={render:function(e){return e("script",{attrs:{type:"text/template7"}},this.$slots.default)}},Le=function(){for(var e=[],t=arguments.length;t--;)e[t]=arguments[t];return e.join("/").replace(/\/+/g,"/")},Fe=function(e,t,o){return o.map(function(o){return{path:Le(e.path,t.path,o.path),pagePath:e.path,component:e.component,tab:{tabId:t.tabId,component:o.component}}})},Ie=function(e,t){return t.reduce(function(t,o){var n;return n=o.routes?Fe(e,o,o.routes):[{path:Le(e.path,o.path),pagePath:e.path,component:e.component,tab:{tabId:o.tabId,component:o.component}}],t.concat(n)},[])},Re=function(e){return void 0===e&&(e=[]),e.reduce(function(e,t){var o;return o=t.tabs?Ie(t,t.tabs):[Object.assign({},t,{pagePath:t.path})],e.concat(o)},[])},je=function(e){var t=[];return e.split("/").forEach(function(e){""!==e&&(0===e.indexOf(":")?t.push({name:e.replace(":","")}):t.push(e))}),t},Ne=function(e,o,n){var a=this;this.routeChangeHandler=null,this.routes=Re(e),this.framework7=o,this.dom7=n;var i=o.params.preroute;o.params.routes=e,o.params.routerRemoveTimeout=!0,o.params.preroute=function(e,o){var n=!0;return i&&!o.pageElement&&(n=i(e,o)),!!n&&t(e,o,a.changeRoute.bind(a))}};return Ne.prototype.setRouteChangeHandler=function(e){this.routeChangeHandler=e},Ne.prototype.changeRoute=function(e,t,o){var n=this;void 0===t&&(t=null);var a=this.findMatchingRoute(e);return!a||this.routeChangeHandler(Object.assign({},a,{view:t||function(){return n.framework7.views&&n.framework7.views.reduce(function(e,t){return t.main?t:e},null)}(),options:o,router:this}))},Ne.prototype.findMatchingRoute=function(e){var t;if(!e)return t;e=""+e;var o,n,a=this.routes,i=this.dom7.parseUrlQuery(e),r=e.split("#")[1],s={},l=e.split("#")[0].split("?")[0],c=l.split("/").filter(function(e){if(""!==e)return e});for(o=0;o<a.length;o++)if(!t){var u=a[o],d=je(u.path);if(d.length===c.length){var p=0;for(n=0;n<d.length;n++)"string"==typeof d[n]&&c[n]===d[n]&&p++,"object"==typeof d[n]&&(s[d[n].name]=c[n],p++);p===c.length&&(t={query:i,hash:r,params:s,url:e,path:l,route:u})}}return t},{install:function(e,t){function j(t,o){window.Framework7&&(t=t||{},void 0===t.material&&e.prototype.$theme.material&&(t.material=!0),void 0===t.root&&o&&(t.root=o.$el),Ie=e.prototype.$f7=window.f7=new window.Framework7(t),Re=new Ne(t.routes,Ie,Le),Re.setRouteChangeHandler(function(e){return je=e,Ee=e.view.router,Se.$emit("route-change",e),!e.view.pagesContainer.__vue__}),Ae=!0,Se.$emit("f7init",Ie))}t=t||{};var Se=new e,Le=window.Dom7;e.prototype.Dom7=Le,e.prototype.$$=Le,e.prototype.Template7=window.Template7,e.prototype.$t7=window.Template7,e.prototype.$device=window.Framework7.prototype.device;var Fe={ios:!1,material:!1};e.prototype.$theme=Fe,"auto"===t.theme&&(window&&window.navigator.userAgent.match(/(Android);?[\s\/]+([\d.]+)?/)?Fe.material=!0:Fe.ios=!0),"material"===t.theme?(Fe.ios=!1,Fe.material=!0):"ios"===t.theme&&(Fe.ios=!0,Fe.material=!1);var Ie,Re,je,Ee,Ae=!1;e.mixin({beforeCreate:function(){var e=this;Object.defineProperty(e,"$route",{get:function(){return je},enumerable:!0,configurable:!0}),Object.defineProperty(e,"$router",{get:function(){return Ee},enumerable:!0,configurable:!0}),Object.defineProperty(e,"$f7Router",{get:function(){return Re},enumerable:!0,configurable:!0}),!1===Fe.ios&&!1===Fe.material&&(e.$root.$options.framework7&&e.$root.$options.framework7.material||e.$f7&&e.$f7.params.material||"material"===t.theme?Fe.material=!0:Fe.ios=!0),Se.$on("route-change",function(t){e.onRouteChange&&e.onRouteChange(t)})},mounted:function(){var e=this;if(Ae)return void(e.onF7Init&&e.onF7Init(Ie));Se.$on("f7init",function(t){e.onF7Init&&e.onF7Init(t)}),e===e.$root&&j(e.$options.framework7,e.$root)},components:{"f7-statusbar":o,"f7-views":a,"f7-panel":n,"f7-view":i,"f7-pages":r,"f7-page":s,"f7-page-content":l,"f7-navbar":c,"f7-nav-left":d,"f7-nav-center":u,"f7-nav-right":p,"f7-subnavbar":h,"f7-toolbar":f,"f7-block-title":k,"f7-content-block-title":k,"f7-list-block-title":k,"f7-content-block":$,"f7-block":$,"f7-card":m,"f7-card-header":b,"f7-card-footer":g,"f7-card-content":v,"f7-list":B,"f7-list-group":y,"f7-list-item":w,"f7-list-item-content":x,"f7-list-button":O,"f7-list-label":M,"f7-swipeout-actions":_,"f7-swipeout-button":P,"f7-accordion":T,"f7-accordion-item":L,"f7-accordion-toggle":F,"f7-accordion-content":I,"f7-badge":S,"f7-icon":C,"f7-link":N,"f7-buttons":R,"f7-segmented":R,"f7-button":E,"f7-grid":A,"f7-col":D,"f7-preloader":H,"f7-progressbar":z,"f7-label":V,"f7-input":q,"f7-switch":U,"f7-range":Y,"f7-chip":G,"f7-fab":K,"f7-fab-speed-dial":W,"f7-fab-action":Q,"f7-fab-actions":Z,"f7-swiper":J,"f7-swiper-slide":X,"f7-messages":ee,"f7-message":te,"f7-messagebar":oe,"f7-searchbar":ne,"f7-tabs":ae,"f7-tab":ie,"f7-popover":re,"f7-popup":se,"f7-login-screen":ce,"f7-login-screen-title":ue,"f7-picker-modal":le,"f7-actions":de,"f7-actions-group":pe,"f7-actions-label":fe,"f7-actions-button":he,"f7-photo-browser":me,"f7-timeline":be,"f7-timeline-item":ge,"f7-timeline-item-child":ve,"f7-timeline-year":$e,"f7-timeline-month":ke,"f7-datepicker":Ce,"f7-calendar":Be,"f7-table":ye,"f7-table-header":we,"f7-table-cell":xe,"f7-table-row":_e,"f7-table-title":Pe,"f7-table-links":Oe,"f7-table-actions":Me,"t7-template":Te}})}}});
 //# sourceMappingURL=framework7-vue.min.js.map
 
 
@@ -47499,7 +47499,7 @@ return t7;
 /* unused harmony export Http */
 /* unused harmony export Resource */
 /*!
- * vue-resource v1.3.4
+ * vue-resource v1.3.5
  * https://github.com/pagekit/vue-resource
  * Released under the MIT License.
  */
@@ -47770,13 +47770,13 @@ var ntick;
 
 var inBrowser = typeof window !== 'undefined';
 
-var Util = function (ref) {
+function Util (ref) {
     var config = ref.config;
     var nextTick = ref.nextTick;
 
     ntick = nextTick;
     debug = config.debug || !config.silent;
-};
+}
 
 function warn(msg) {
     if (typeof console !== 'undefined' && debug) {
@@ -47949,7 +47949,7 @@ function _merge(target, source, deep) {
  * Root Prefix Transform.
  */
 
-var root = function (options$$1, next) {
+function root (options$$1, next) {
 
     var url = next(options$$1);
 
@@ -47958,13 +47958,13 @@ var root = function (options$$1, next) {
     }
 
     return url;
-};
+}
 
 /**
  * Query Parameter Transform.
  */
 
-var query = function (options$$1, next) {
+function query (options$$1, next) {
 
     var urlParams = Object.keys(Url.options.params), query = {}, url = next(options$$1);
 
@@ -47981,7 +47981,7 @@ var query = function (options$$1, next) {
     }
 
     return url;
-};
+}
 
 /**
  * URL Template v2.0.6 (https://github.com/bramstein/url-template)
@@ -48138,7 +48138,7 @@ function encodeReserved(str) {
  * URL Template (RFC 6570) Transform.
  */
 
-var template = function (options) {
+function template (options) {
 
     var variables = [], url = expand(options.url, options.params, variables);
 
@@ -48147,7 +48147,7 @@ var template = function (options) {
     });
 
     return url;
-};
+}
 
 /**
  * Service for URL templating.
@@ -48284,7 +48284,7 @@ function serialize(params, obj, scope) {
  * XDomain client (Internet Explorer).
  */
 
-var xdrClient = function (request) {
+function xdrClient (request) {
     return new PromiseObj(function (resolve) {
 
         var xdr = new XDomainRequest(), handler = function (ref) {
@@ -48317,7 +48317,7 @@ var xdrClient = function (request) {
         xdr.onprogress = function () {};
         xdr.send(request.getBody());
     });
-};
+}
 
 /**
  * CORS Interceptor.
@@ -48325,7 +48325,7 @@ var xdrClient = function (request) {
 
 var SUPPORTS_CORS = inBrowser && 'withCredentials' in new XMLHttpRequest();
 
-var cors = function (request, next) {
+function cors (request, next) {
 
     if (inBrowser) {
 
@@ -48344,13 +48344,13 @@ var cors = function (request, next) {
     }
 
     next();
-};
+}
 
 /**
  * Form data Interceptor.
  */
 
-var form = function (request, next) {
+function form (request, next) {
 
     if (isFormData(request.body)) {
 
@@ -48363,13 +48363,13 @@ var form = function (request, next) {
     }
 
     next();
-};
+}
 
 /**
  * JSON Interceptor.
  */
 
-var json = function (request, next) {
+function json (request, next) {
 
     var type = request.headers.get('Content-Type') || '';
 
@@ -48400,20 +48400,21 @@ var json = function (request, next) {
         }) : response;
 
     });
-};
+}
 
 function isJson(str) {
 
-    var start = str.match(/^\[|^\{(?!\{)/), end = {'[': /]$/, '{': /}$/};
+    var start = str.match(/^\s*(\[|\{)/);
+    var end = {'[': /]\s*$/, '{': /}\s*$/};
 
-    return start && end[start[0]].test(str);
+    return start && end[start[1]].test(str);
 }
 
 /**
  * JSONP client (Browser).
  */
 
-var jsonpClient = function (request) {
+function jsonpClient (request) {
     return new PromiseObj(function (resolve) {
 
         var name = request.jsonp || 'callback', callback = request.jsonpCallback || '_jsonp' + Math.random().toString(36).substr(2), body = null, handler, script;
@@ -48461,39 +48462,39 @@ var jsonpClient = function (request) {
 
         document.body.appendChild(script);
     });
-};
+}
 
 /**
  * JSONP Interceptor.
  */
 
-var jsonp = function (request, next) {
+function jsonp (request, next) {
 
     if (request.method == 'JSONP') {
         request.client = jsonpClient;
     }
 
     next();
-};
+}
 
 /**
  * Before Interceptor.
  */
 
-var before = function (request, next) {
+function before (request, next) {
 
     if (isFunction(request.before)) {
         request.before.call(this, request);
     }
 
     next();
-};
+}
 
 /**
  * HTTP method override Interceptor.
  */
 
-var method = function (request, next) {
+function method (request, next) {
 
     if (request.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(request.method)) {
         request.headers.set('X-HTTP-Method-Override', request.method);
@@ -48501,13 +48502,13 @@ var method = function (request, next) {
     }
 
     next();
-};
+}
 
 /**
  * Header Interceptor.
  */
 
-var header = function (request, next) {
+function header (request, next) {
 
     var headers = assign({}, Http.headers.common,
         !request.crossOrigin ? Http.headers.custom : {},
@@ -48521,13 +48522,13 @@ var header = function (request, next) {
     });
 
     next();
-};
+}
 
 /**
  * XMLHttp client (Browser).
  */
 
-var xhrClient = function (request) {
+function xhrClient (request) {
     return new PromiseObj(function (resolve) {
 
         var xhr = new XMLHttpRequest(), handler = function (event) {
@@ -48584,15 +48585,15 @@ var xhrClient = function (request) {
         xhr.ontimeout = handler;
         xhr.send(request.getBody());
     });
-};
+}
 
 /**
  * Http client (Node).
  */
 
-var nodeClient = function (request) {
+function nodeClient (request) {
 
-    var client = __webpack_require__(420);
+    var client = __webpack_require__(425);
 
     return new PromiseObj(function (resolve) {
 
@@ -48621,13 +48622,13 @@ var nodeClient = function (request) {
 
         }, function (error$$1) { return handler(error$$1.response); });
     });
-};
+}
 
 /**
  * Base client.
  */
 
-var Client = function (context) {
+function Client (context) {
 
     var reqHandlers = [sendRequest], resHandlers = [], handler;
 
@@ -48682,7 +48683,7 @@ var Client = function (context) {
     };
 
     return Client;
-};
+}
 
 function sendRequest(request, resolve) {
 
@@ -49073,11 +49074,13 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.2
+ * Vue.js v2.5.13
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
 /*  */
+
+var emptyObject = Object.freeze({});
 
 // these helpers produces better vm code in JS engines due to their
 // explicitness and function inlining
@@ -49104,6 +49107,8 @@ function isPrimitive (value) {
   return (
     typeof value === 'string' ||
     typeof value === 'number' ||
+    // $flow-disable-line
+    typeof value === 'symbol' ||
     typeof value === 'boolean'
   )
 }
@@ -49412,6 +49417,7 @@ var config = ({
   /**
    * Option merge strategies (used in core/util/options)
    */
+  // $flow-disable-line
   optionMergeStrategies: Object.create(null),
 
   /**
@@ -49452,6 +49458,7 @@ var config = ({
   /**
    * Custom user key aliases for v-on
    */
+  // $flow-disable-line
   keyCodes: Object.create(null),
 
   /**
@@ -49496,8 +49503,6 @@ var config = ({
 
 /*  */
 
-var emptyObject = Object.freeze({});
-
 /**
  * Check if a string starts with $ or _
  */
@@ -49538,17 +49543,20 @@ function parsePath (path) {
 
 /*  */
 
+
 // can we use __proto__?
 var hasProto = '__proto__' in {};
 
 // Browser environment sniffing
 var inBrowser = typeof window !== 'undefined';
+var inWeex = typeof WXEnvironment !== 'undefined' && !!WXEnvironment.platform;
+var weexPlatform = inWeex && WXEnvironment.platform.toLowerCase();
 var UA = inBrowser && window.navigator.userAgent.toLowerCase();
 var isIE = UA && /msie|trident/.test(UA);
 var isIE9 = UA && UA.indexOf('msie 9.0') > 0;
 var isEdge = UA && UA.indexOf('edge/') > 0;
-var isAndroid = UA && UA.indexOf('android') > 0;
-var isIOS = UA && /iphone|ipad|ipod|ios/.test(UA);
+var isAndroid = (UA && UA.indexOf('android') > 0) || (weexPlatform === 'android');
+var isIOS = (UA && /iphone|ipad|ipod|ios/.test(UA)) || (weexPlatform === 'ios');
 var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
 
 // Firefox has a "watch" function on Object.prototype...
@@ -49786,9 +49794,9 @@ var VNode = function VNode (
   this.elm = elm;
   this.ns = undefined;
   this.context = context;
-  this.functionalContext = undefined;
-  this.functionalOptions = undefined;
-  this.functionalScopeId = undefined;
+  this.fnContext = undefined;
+  this.fnOptions = undefined;
+  this.fnScopeId = undefined;
   this.key = data && data.key;
   this.componentOptions = componentOptions;
   this.componentInstance = undefined;
@@ -49832,6 +49840,7 @@ function createTextVNode (val) {
 // multiple renders, cloning them avoids errors when DOM manipulations rely
 // on their elm reference.
 function cloneVNode (vnode, deep) {
+  var componentOptions = vnode.componentOptions;
   var cloned = new VNode(
     vnode.tag,
     vnode.data,
@@ -49839,16 +49848,24 @@ function cloneVNode (vnode, deep) {
     vnode.text,
     vnode.elm,
     vnode.context,
-    vnode.componentOptions,
+    componentOptions,
     vnode.asyncFactory
   );
   cloned.ns = vnode.ns;
   cloned.isStatic = vnode.isStatic;
   cloned.key = vnode.key;
   cloned.isComment = vnode.isComment;
+  cloned.fnContext = vnode.fnContext;
+  cloned.fnOptions = vnode.fnOptions;
+  cloned.fnScopeId = vnode.fnScopeId;
   cloned.isCloned = true;
-  if (deep && vnode.children) {
-    cloned.children = cloneVNodes(vnode.children);
+  if (deep) {
+    if (vnode.children) {
+      cloned.children = cloneVNodes(vnode.children, true);
+    }
+    if (componentOptions && componentOptions.children) {
+      componentOptions.children = cloneVNodes(componentOptions.children, true);
+    }
   }
   return cloned
 }
@@ -49876,8 +49893,7 @@ var arrayMethods = Object.create(arrayProto);[
   'splice',
   'sort',
   'reverse'
-]
-.forEach(function (method) {
+].forEach(function (method) {
   // cache original method
   var original = arrayProto[method];
   def(arrayMethods, method, function mutator () {
@@ -50081,7 +50097,7 @@ function set (target, key, val) {
     target.splice(key, 1, val);
     return val
   }
-  if (hasOwn(target, key)) {
+  if (key in target && !(key in Object.prototype)) {
     target[key] = val;
     return val
   }
@@ -50209,18 +50225,18 @@ function mergeDataOrFn (
     // it has to be a function to pass previous merges.
     return function mergedDataFn () {
       return mergeData(
-        typeof childVal === 'function' ? childVal.call(this) : childVal,
-        typeof parentVal === 'function' ? parentVal.call(this) : parentVal
+        typeof childVal === 'function' ? childVal.call(this, this) : childVal,
+        typeof parentVal === 'function' ? parentVal.call(this, this) : parentVal
       )
     }
-  } else if (parentVal || childVal) {
+  } else {
     return function mergedInstanceDataFn () {
       // instance merge
       var instanceData = typeof childVal === 'function'
-        ? childVal.call(vm)
+        ? childVal.call(vm, vm)
         : childVal;
       var defaultData = typeof parentVal === 'function'
-        ? parentVal.call(vm)
+        ? parentVal.call(vm, vm)
         : parentVal;
       if (instanceData) {
         return mergeData(instanceData, defaultData)
@@ -50247,7 +50263,7 @@ strats.data = function (
 
       return parentVal
     }
-    return mergeDataOrFn.call(this, parentVal, childVal)
+    return mergeDataOrFn(parentVal, childVal)
   }
 
   return mergeDataOrFn(parentVal, childVal, vm)
@@ -50372,13 +50388,23 @@ var defaultStrat = function (parentVal, childVal) {
  */
 function checkComponents (options) {
   for (var key in options.components) {
-    var lower = key.toLowerCase();
-    if (isBuiltInTag(lower) || config.isReservedTag(lower)) {
-      warn(
-        'Do not use built-in or reserved HTML elements as component ' +
-        'id: ' + key
-      );
-    }
+    validateComponentName(key);
+  }
+}
+
+function validateComponentName (name) {
+  if (!/^[a-zA-Z][\w-]*$/.test(name)) {
+    warn(
+      'Invalid component name: "' + name + '". Component names ' +
+      'can only contain alphanumeric characters and the hyphen, ' +
+      'and must start with a letter.'
+    );
+  }
+  if (isBuiltInTag(name) || config.isReservedTag(name)) {
+    warn(
+      'Do not use built-in or reserved HTML elements as component ' +
+      'id: ' + name
+    );
   }
 }
 
@@ -50425,6 +50451,7 @@ function normalizeProps (options, vm) {
  */
 function normalizeInject (options, vm) {
   var inject = options.inject;
+  if (!inject) { return }
   var normalized = options.inject = {};
   if (Array.isArray(inject)) {
     for (var i = 0; i < inject.length; i++) {
@@ -50579,7 +50606,9 @@ function validateProp (
     observe(value);
     observerState.shouldConvert = prevShouldConvert;
   }
-  if (false) {
+  if (
+    false
+  ) {
     assertProp(prop, key, value, vm, absent);
   }
   return value
@@ -50757,7 +50786,7 @@ function logError (err, vm, info) {
     warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
   }
   /* istanbul ignore else */
-  if (inBrowser && typeof console !== 'undefined') {
+  if ((inBrowser || inWeex) && typeof console !== 'undefined') {
     console.error(err);
   } else {
     throw err
@@ -50981,6 +51010,43 @@ if (false) {
 
 /*  */
 
+var seenObjects = new _Set();
+
+/**
+ * Recursively traverse an object to evoke all converted
+ * getters, so that every nested property inside the object
+ * is collected as a "deep" dependency.
+ */
+function traverse (val) {
+  _traverse(val, seenObjects);
+  seenObjects.clear();
+}
+
+function _traverse (val, seen) {
+  var i, keys;
+  var isA = Array.isArray(val);
+  if ((!isA && !isObject(val)) || Object.isFrozen(val)) {
+    return
+  }
+  if (val.__ob__) {
+    var depId = val.__ob__.dep.id;
+    if (seen.has(depId)) {
+      return
+    }
+    seen.add(depId);
+  }
+  if (isA) {
+    i = val.length;
+    while (i--) { _traverse(val[i], seen); }
+  } else {
+    keys = Object.keys(val);
+    i = keys.length;
+    while (i--) { _traverse(val[keys[i]], seen); }
+  }
+}
+
+/*  */
+
 var normalizeEvent = cached(function (name) {
   var passive = name.charAt(0) === '&';
   name = passive ? name.slice(1) : name;
@@ -51022,11 +51088,12 @@ function updateListeners (
   remove$$1,
   vm
 ) {
-  var name, cur, old, event;
+  var name, def, cur, old, event;
   for (name in on) {
-    cur = on[name];
+    def = cur = on[name];
     old = oldOn[name];
     event = normalizeEvent(name);
+    /* istanbul ignore if */
     if (isUndef(cur)) {
       "production" !== 'production' && warn(
         "Invalid handler for event \"" + (event.name) + "\": got " + String(cur),
@@ -51036,7 +51103,7 @@ function updateListeners (
       if (isUndef(cur.fns)) {
         cur = on[name] = createFnInvoker(cur);
       }
-      add(event.name, cur, event.once, event.capture, event.passive);
+      add(event.name, cur, event.once, event.capture, event.passive, event.params);
     } else if (cur !== old) {
       old.fns = cur;
       on[name] = old;
@@ -51053,6 +51120,9 @@ function updateListeners (
 /*  */
 
 function mergeVNodeHook (def, hookKey, hook) {
+  if (def instanceof VNode) {
+    def = def.data.hook || (def.data.hook = {});
+  }
   var invoker;
   var oldHook = def[hookKey];
 
@@ -51420,6 +51490,7 @@ function updateComponentListeners (
 ) {
   target = vm;
   updateListeners(listeners, oldListeners || {}, add, remove$1, vm);
+  target = undefined;
 }
 
 function eventsMixin (Vue) {
@@ -51475,7 +51546,7 @@ function eventsMixin (Vue) {
     if (!cbs) {
       return vm
     }
-    if (arguments.length === 1) {
+    if (!fn) {
       vm._events[event] = null;
       return vm
     }
@@ -51526,6 +51597,8 @@ function eventsMixin (Vue) {
 
 /*  */
 
+
+
 /**
  * Runtime helper for resolving raw children VNodes into a slot object.
  */
@@ -51537,7 +51610,6 @@ function resolveSlots (
   if (!children) {
     return slots
   }
-  var defaultSlot = [];
   for (var i = 0, l = children.length; i < l; i++) {
     var child = children[i];
     var data = child.data;
@@ -51547,29 +51619,31 @@ function resolveSlots (
     }
     // named slots should only be respected if the vnode was rendered in the
     // same context.
-    if ((child.context === context || child.functionalContext === context) &&
+    if ((child.context === context || child.fnContext === context) &&
       data && data.slot != null
     ) {
-      var name = child.data.slot;
+      var name = data.slot;
       var slot = (slots[name] || (slots[name] = []));
       if (child.tag === 'template') {
-        slot.push.apply(slot, child.children);
+        slot.push.apply(slot, child.children || []);
       } else {
         slot.push(child);
       }
     } else {
-      defaultSlot.push(child);
+      (slots.default || (slots.default = [])).push(child);
     }
   }
-  // ignore whitespace
-  if (!defaultSlot.every(isWhitespace)) {
-    slots.default = defaultSlot;
+  // ignore slots that contains only whitespace
+  for (var name$1 in slots) {
+    if (slots[name$1].every(isWhitespace)) {
+      delete slots[name$1];
+    }
   }
   return slots
 }
 
 function isWhitespace (node) {
-  return node.isComment || node.text === ' '
+  return (node.isComment && !node.asyncFactory) || node.text === ' '
 }
 
 function resolveScopedSlots (
@@ -51765,7 +51839,10 @@ function mountComponent (
     };
   }
 
-  vm._watcher = new Watcher(vm, updateComponent, noop);
+  // we set this to vm._watcher inside the watcher's constructor
+  // since the watcher's initial patch may call $forceUpdate (e.g. inside child
+  // component's mounted hook), which relies on vm._watcher being already defined
+  new Watcher(vm, updateComponent, noop, null, true /* isRenderWatcher */);
   hydrating = false;
 
   // manually mounted instance, call mounted on self
@@ -52052,9 +52129,13 @@ var Watcher = function Watcher (
   vm,
   expOrFn,
   cb,
-  options
+  options,
+  isRenderWatcher
 ) {
   this.vm = vm;
+  if (isRenderWatcher) {
+    vm._watcher = this;
+  }
   vm._watchers.push(this);
   // options
   if (options) {
@@ -52248,40 +52329,6 @@ Watcher.prototype.teardown = function teardown () {
   }
 };
 
-/**
- * Recursively traverse an object to evoke all converted
- * getters, so that every nested property inside the object
- * is collected as a "deep" dependency.
- */
-var seenObjects = new _Set();
-function traverse (val) {
-  seenObjects.clear();
-  _traverse(val, seenObjects);
-}
-
-function _traverse (val, seen) {
-  var i, keys;
-  var isA = Array.isArray(val);
-  if ((!isA && !isObject(val)) || !Object.isExtensible(val)) {
-    return
-  }
-  if (val.__ob__) {
-    var depId = val.__ob__.dep.id;
-    if (seen.has(depId)) {
-      return
-    }
-    seen.add(depId);
-  }
-  if (isA) {
-    i = val.length;
-    while (i--) { _traverse(val[i], seen); }
-  } else {
-    keys = Object.keys(val);
-    i = keys.length;
-    while (i--) { _traverse(val[keys[i]], seen); }
-  }
-}
-
 /*  */
 
 var sharedPropertyDefinition = {
@@ -52419,6 +52466,7 @@ function getData (data, vm) {
 var computedWatcherOptions = { lazy: true };
 
 function initComputed (vm, computed) {
+  // $flow-disable-line
   var watchers = vm._computedWatchers = Object.create(null);
   // computed properties are just getters during SSR
   var isSSR = isServerRendering();
@@ -52648,11 +52696,11 @@ function resolveInject (inject, vm) {
     // inject is :any because flow is not smart enough to figure out cached
     var result = Object.create(null);
     var keys = hasSymbol
-        ? Reflect.ownKeys(inject).filter(function (key) {
-          /* istanbul ignore next */
-          return Object.getOwnPropertyDescriptor(inject, key).enumerable
-        })
-        : Object.keys(inject);
+      ? Reflect.ownKeys(inject).filter(function (key) {
+        /* istanbul ignore next */
+        return Object.getOwnPropertyDescriptor(inject, key).enumerable
+      })
+      : Object.keys(inject);
 
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
@@ -52726,6 +52774,7 @@ function renderSlot (
   bindObject
 ) {
   var scopedSlotFn = this.$scopedSlots[name];
+  var nodes;
   if (scopedSlotFn) { // scoped slot
     props = props || {};
     if (bindObject) {
@@ -52737,19 +52786,28 @@ function renderSlot (
       }
       props = extend(extend({}, bindObject), props);
     }
-    return scopedSlotFn(props) || fallback
+    nodes = scopedSlotFn(props) || fallback;
   } else {
     var slotNodes = this.$slots[name];
     // warn duplicate slot usage
-    if (slotNodes && "production" !== 'production') {
-      slotNodes._rendered && warn(
-        "Duplicate presence of slot \"" + name + "\" found in the same render tree " +
-        "- this will likely cause render errors.",
-        this
-      );
+    if (slotNodes) {
+      if (false) {
+        warn(
+          "Duplicate presence of slot \"" + name + "\" found in the same render tree " +
+          "- this will likely cause render errors.",
+          this
+        );
+      }
       slotNodes._rendered = true;
     }
-    return slotNodes || fallback
+    nodes = slotNodes || fallback;
+  }
+
+  var target = props && props.slot;
+  if (target) {
+    return this.$createElement('template', { slot: target }, nodes)
+  } else {
+    return nodes
   }
 }
 
@@ -52850,10 +52908,7 @@ function renderStatic (
   index,
   isInFor
 ) {
-  // static trees can be rendered once and cached on the contructor options
-  // so every instance shares the same cached trees
-  var renderFns = this.$options.staticRenderFns;
-  var cached = renderFns.cached || (renderFns.cached = []);
+  var cached = this._staticTrees || (this._staticTrees = []);
   var tree = cached[index];
   // if has already-rendered static tree and not inside v-for,
   // we can reuse the same tree by doing a shallow clone.
@@ -52863,7 +52918,11 @@ function renderStatic (
       : cloneVNode(tree)
   }
   // otherwise, render a fresh tree.
-  tree = cached[index] = renderFns[index].call(this._renderProxy, null, this);
+  tree = cached[index] = this.$options.staticRenderFns[index].call(
+    this._renderProxy,
+    null,
+    this // for render fns generated for functional component templates
+  );
   markStatic(tree, ("__static__" + index), false);
   return tree
 }
@@ -52981,8 +53040,8 @@ function FunctionalRenderContext (
     this._c = function (a, b, c, d) {
       var vnode = createElement(contextVm, a, b, c, d, needNormalization);
       if (vnode) {
-        vnode.functionalScopeId = options._scopeId;
-        vnode.functionalContext = parent;
+        vnode.fnScopeId = options._scopeId;
+        vnode.fnContext = parent;
       }
       return vnode
     };
@@ -53023,8 +53082,8 @@ function createFunctionalComponent (
   var vnode = options.render.call(null, renderContext._c, renderContext);
 
   if (vnode instanceof VNode) {
-    vnode.functionalContext = contextVm;
-    vnode.functionalOptions = options;
+    vnode.fnContext = contextVm;
+    vnode.fnOptions = options;
     if (data.slot) {
       (vnode.data || (vnode.data = {})).slot = data.slot;
     }
@@ -53038,6 +53097,25 @@ function mergeProps (to, from) {
     to[camelize(key)] = from[key];
   }
 }
+
+/*  */
+
+
+
+
+// Register the component hook to weex native render engine.
+// The hook will be triggered by native, not javascript.
+
+
+// Updates the state of the component to weex native render engine.
+
+/*  */
+
+// https://github.com/Hanks10100/weex-native-directive/tree/master/component
+
+// listening on native callback
+
+/*  */
 
 /*  */
 
@@ -53206,6 +53284,11 @@ function createComponent (
     { Ctor: Ctor, propsData: propsData, listeners: listeners, tag: tag, children: children },
     asyncFactory
   );
+
+  // Weex specific: invoke recycle-list optimized @render function for
+  // extracting cell-slot template.
+  // https://github.com/Hanks10100/weex-native-directive/tree/master/component
+  /* istanbul ignore if */
   return vnode
 }
 
@@ -53215,15 +53298,10 @@ function createComponentInstanceForVnode (
   parentElm,
   refElm
 ) {
-  var vnodeComponentOptions = vnode.componentOptions;
   var options = {
     _isComponent: true,
     parent: parent,
-    propsData: vnodeComponentOptions.propsData,
-    _componentTag: vnodeComponentOptions.tag,
     _parentVnode: vnode,
-    _parentListeners: vnodeComponentOptions.listeners,
-    _renderChildren: vnodeComponentOptions.children,
     _parentElm: parentElm || null,
     _refElm: refElm || null
   };
@@ -53233,7 +53311,7 @@ function createComponentInstanceForVnode (
     options.render = inlineTemplate.render;
     options.staticRenderFns = inlineTemplate.staticRenderFns;
   }
-  return new vnodeComponentOptions.Ctor(options)
+  return new vnode.componentOptions.Ctor(options)
 }
 
 function mergeHooks (data) {
@@ -53320,11 +53398,13 @@ function _createElement (
   // warn against non-primitive key
   if (false
   ) {
-    warn(
-      'Avoid using non-primitive value as key, ' +
-      'use string/number value instead.',
-      context
-    );
+    {
+      warn(
+        'Avoid using non-primitive value as key, ' +
+        'use string/number value instead.',
+        context
+      );
+    }
   }
   // support single function children as default scoped slot
   if (Array.isArray(children) &&
@@ -53394,6 +53474,7 @@ function applyNS (vnode, ns, force) {
 
 function initRender (vm) {
   vm._vnode = null; // the root of the child tree
+  vm._staticTrees = null; // v-once cached trees
   var options = vm.$options;
   var parentVnode = vm.$vnode = options._parentVnode; // the placeholder node in parent tree
   var renderContext = parentVnode && parentVnode.context;
@@ -53445,7 +53526,9 @@ function renderMixin (Vue) {
       // last render. They need to be cloned to ensure "freshness" for this render.
       for (var key in vm.$slots) {
         var slot = vm.$slots[key];
-        if (slot._rendered) {
+        // _rendered is a flag added by renderSlot, but may not be present
+        // if the slot is passed from manually written render functions
+        if (slot._rendered || (slot[0] && slot[0].elm)) {
           vm.$slots[key] = cloneVNodes(slot, true /* deep */);
         }
       }
@@ -53563,14 +53646,18 @@ function initMixin (Vue) {
 function initInternalComponent (vm, options) {
   var opts = vm.$options = Object.create(vm.constructor.options);
   // doing this because it's faster than dynamic enumeration.
+  var parentVnode = options._parentVnode;
   opts.parent = options.parent;
-  opts.propsData = options.propsData;
-  opts._parentVnode = options._parentVnode;
-  opts._parentListeners = options._parentListeners;
-  opts._renderChildren = options._renderChildren;
-  opts._componentTag = options._componentTag;
+  opts._parentVnode = parentVnode;
   opts._parentElm = options._parentElm;
   opts._refElm = options._refElm;
+
+  var vnodeComponentOptions = parentVnode.componentOptions;
+  opts.propsData = vnodeComponentOptions.propsData;
+  opts._parentListeners = vnodeComponentOptions.listeners;
+  opts._renderChildren = vnodeComponentOptions.children;
+  opts._componentTag = vnodeComponentOptions.tag;
+
   if (options.render) {
     opts.render = options.render;
     opts.staticRenderFns = options.staticRenderFns;
@@ -53704,13 +53791,7 @@ function initExtend (Vue) {
 
     var name = extendOptions.name || Super.options.name;
     if (false) {
-      if (!/^[a-zA-Z][\w-]*$/.test(name)) {
-        warn(
-          'Invalid component name: "' + name + '". Component names ' +
-          'can only contain alphanumeric characters and the hyphen, ' +
-          'and must start with a letter.'
-        );
-      }
+      validateComponentName(name);
     }
 
     var Sub = function VueComponent (options) {
@@ -53793,12 +53874,7 @@ function initAssetRegisters (Vue) {
       } else {
         /* istanbul ignore if */
         if (false) {
-          if (type === 'component' && config.isReservedTag(id)) {
-            warn(
-              'Do not use built-in or reserved HTML elements as component ' +
-              'id: ' + id
-            );
-          }
+          validateComponentName(id);
         }
         if (type === 'component' && isPlainObject(definition)) {
           definition.name = definition.name || id;
@@ -53854,7 +53930,7 @@ function pruneCacheEntry (
   current
 ) {
   var cached$$1 = cache[key];
-  if (cached$$1 && cached$$1 !== current) {
+  if (cached$$1 && (!current || cached$$1.tag !== current.tag)) {
     cached$$1.componentInstance.$destroy();
   }
   cache[key] = null;
@@ -53896,21 +53972,27 @@ var KeepAlive = {
   },
 
   render: function render () {
-    var vnode = getFirstComponentChild(this.$slots.default);
+    var slot = this.$slots.default;
+    var vnode = getFirstComponentChild(slot);
     var componentOptions = vnode && vnode.componentOptions;
     if (componentOptions) {
       // check pattern
       var name = getComponentName(componentOptions);
-      if (name && (
-        (this.include && !matches(this.include, name)) ||
-        (this.exclude && matches(this.exclude, name))
-      )) {
+      var ref = this;
+      var include = ref.include;
+      var exclude = ref.exclude;
+      if (
+        // not included
+        (include && (!name || !matches(include, name))) ||
+        // excluded
+        (exclude && name && matches(exclude, name))
+      ) {
         return vnode
       }
 
-      var ref = this;
-      var cache = ref.cache;
-      var keys = ref.keys;
+      var ref$1 = this;
+      var cache = ref$1.cache;
+      var keys = ref$1.keys;
       var key = vnode.key == null
         // same constructor may get registered as different local components
         // so cid alone is not enough (#3269)
@@ -53932,7 +54014,7 @@ var KeepAlive = {
 
       vnode.data.keepAlive = true;
     }
-    return vnode
+    return vnode || (slot && slot[0])
   }
 };
 
@@ -53999,7 +54081,7 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
   }
 });
 
-Vue$3.version = '2.5.2';
+Vue$3.version = '2.5.13';
 
 /*  */
 
@@ -54051,12 +54133,12 @@ function genClassForVnode (vnode) {
   var childNode = vnode;
   while (isDef(childNode.componentInstance)) {
     childNode = childNode.componentInstance._vnode;
-    if (childNode.data) {
+    if (childNode && childNode.data) {
       data = mergeClassData(childNode.data, data);
     }
   }
   while (isDef(parentNode = parentNode.parent)) {
-    if (parentNode.data) {
+    if (parentNode && parentNode.data) {
       data = mergeClassData(data, parentNode.data);
     }
   }
@@ -54426,7 +54508,23 @@ function createPatchFunction (backend) {
     }
   }
 
-  var inPre = 0;
+  function isUnknownElement$$1 (vnode, inVPre) {
+    return (
+      !inVPre &&
+      !vnode.ns &&
+      !(
+        config.ignoredElements.length &&
+        config.ignoredElements.some(function (ignore) {
+          return isRegExp(ignore)
+            ? ignore.test(vnode.tag)
+            : ignore === vnode.tag
+        })
+      ) &&
+      config.isUnknownElement(vnode.tag)
+    )
+  }
+
+  var creatingElmInVPre = 0;
   function createElm (vnode, insertedVnodeQueue, parentElm, refElm, nested) {
     vnode.isRootInsert = !nested; // for transition enter check
     if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
@@ -54439,21 +54537,9 @@ function createPatchFunction (backend) {
     if (isDef(tag)) {
       if (false) {
         if (data && data.pre) {
-          inPre++;
+          creatingElmInVPre++;
         }
-        if (
-          !inPre &&
-          !vnode.ns &&
-          !(
-            config.ignoredElements.length &&
-            config.ignoredElements.some(function (ignore) {
-              return isRegExp(ignore)
-                ? ignore.test(tag)
-                : ignore === tag
-            })
-          ) &&
-          config.isUnknownElement(tag)
-        ) {
+        if (isUnknownElement$$1(vnode, creatingElmInVPre)) {
           warn(
             'Unknown custom element: <' + tag + '> - did you ' +
             'register the component correctly? For recursive components, ' +
@@ -54477,7 +54563,7 @@ function createPatchFunction (backend) {
       }
 
       if (false) {
-        inPre--;
+        creatingElmInVPre--;
       }
     } else if (isTrue(vnode.isComment)) {
       vnode.elm = nodeOps.createComment(vnode.text);
@@ -54563,11 +54649,14 @@ function createPatchFunction (backend) {
 
   function createChildren (vnode, children, insertedVnodeQueue) {
     if (Array.isArray(children)) {
+      if (false) {
+        checkDuplicateKeys(children);
+      }
       for (var i = 0; i < children.length; ++i) {
         createElm(children[i], insertedVnodeQueue, vnode.elm, null, true);
       }
     } else if (isPrimitive(vnode.text)) {
-      nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(vnode.text));
+      nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(String(vnode.text)));
     }
   }
 
@@ -54594,7 +54683,7 @@ function createPatchFunction (backend) {
   // of going through the normal attribute patching process.
   function setScope (vnode) {
     var i;
-    if (isDef(i = vnode.functionalScopeId)) {
+    if (isDef(i = vnode.fnScopeId)) {
       nodeOps.setAttribute(vnode.elm, i, '');
     } else {
       var ancestor = vnode;
@@ -54608,7 +54697,7 @@ function createPatchFunction (backend) {
     // for slot content they should also get the scopeId from the host instance.
     if (isDef(i = activeInstance) &&
       i !== vnode.context &&
-      i !== vnode.functionalContext &&
+      i !== vnode.fnContext &&
       isDef(i = i.$options._scopeId)
     ) {
       nodeOps.setAttribute(vnode.elm, i, '');
@@ -54694,6 +54783,10 @@ function createPatchFunction (backend) {
     // during leaving transitions
     var canMove = !removeOnly;
 
+    if (false) {
+      checkDuplicateKeys(newCh);
+    }
+
     while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
       if (isUndef(oldStartVnode)) {
         oldStartVnode = oldCh[++oldStartIdx]; // Vnode has been moved left
@@ -54726,13 +54819,6 @@ function createPatchFunction (backend) {
           createElm(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.elm);
         } else {
           vnodeToMove = oldCh[idxInOld];
-          /* istanbul ignore if */
-          if (false) {
-            warn(
-              'It seems there are duplicate keys that is causing an update error. ' +
-              'Make sure each v-for item has a unique key.'
-            );
-          }
           if (sameVnode(vnodeToMove, newStartVnode)) {
             patchVnode(vnodeToMove, newStartVnode, insertedVnodeQueue);
             oldCh[idxInOld] = undefined;
@@ -54750,6 +54836,24 @@ function createPatchFunction (backend) {
       addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx, insertedVnodeQueue);
     } else if (newStartIdx > newEndIdx) {
       removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
+    }
+  }
+
+  function checkDuplicateKeys (children) {
+    var seenKeys = {};
+    for (var i = 0; i < children.length; i++) {
+      var vnode = children[i];
+      var key = vnode.key;
+      if (isDef(key)) {
+        if (seenKeys[key]) {
+          warn(
+            ("Duplicate keys detected: '" + key + "'. This may cause an update error."),
+            vnode.context
+          );
+        } else {
+          seenKeys[key] = true;
+        }
+      }
     }
   }
 
@@ -54832,27 +54936,32 @@ function createPatchFunction (backend) {
     }
   }
 
-  var bailed = false;
+  var hydrationBailed = false;
   // list of modules that can skip create hook during hydration because they
   // are already rendered on the client or has no need for initialization
-  var isRenderedModule = makeMap('attrs,style,class,staticClass,staticStyle,key');
+  // Note: style is excluded because it relies on initial clone for future
+  // deep updates (#7063).
+  var isRenderedModule = makeMap('attrs,class,staticClass,staticStyle,key');
 
   // Note: this is a browser-only function so we can assume elms are DOM nodes.
-  function hydrate (elm, vnode, insertedVnodeQueue) {
-    if (isTrue(vnode.isComment) && isDef(vnode.asyncFactory)) {
-      vnode.elm = elm;
-      vnode.isAsyncPlaceholder = true;
-      return true
-    }
-    if (false) {
-      if (!assertNodeMatch(elm, vnode)) {
-        return false
-      }
-    }
-    vnode.elm = elm;
+  function hydrate (elm, vnode, insertedVnodeQueue, inVPre) {
+    var i;
     var tag = vnode.tag;
     var data = vnode.data;
     var children = vnode.children;
+    inVPre = inVPre || (data && data.pre);
+    vnode.elm = elm;
+
+    if (isTrue(vnode.isComment) && isDef(vnode.asyncFactory)) {
+      vnode.isAsyncPlaceholder = true;
+      return true
+    }
+    // assert node match
+    if (false) {
+      if (!assertNodeMatch(elm, vnode, inVPre)) {
+        return false
+      }
+    }
     if (isDef(data)) {
       if (isDef(i = data.hook) && isDef(i = i.init)) { i(vnode, true /* hydrating */); }
       if (isDef(i = vnode.componentInstance)) {
@@ -54873,7 +54982,7 @@ function createPatchFunction (backend) {
               /* istanbul ignore if */
               if (false
               ) {
-                bailed = true;
+                hydrationBailed = true;
                 console.warn('Parent: ', elm);
                 console.warn('server innerHTML: ', i);
                 console.warn('client innerHTML: ', elm.innerHTML);
@@ -54885,7 +54994,7 @@ function createPatchFunction (backend) {
             var childrenMatch = true;
             var childNode = elm.firstChild;
             for (var i$1 = 0; i$1 < children.length; i$1++) {
-              if (!childNode || !hydrate(childNode, children[i$1], insertedVnodeQueue)) {
+              if (!childNode || !hydrate(childNode, children[i$1], insertedVnodeQueue, inVPre)) {
                 childrenMatch = false;
                 break
               }
@@ -54897,7 +55006,7 @@ function createPatchFunction (backend) {
               /* istanbul ignore if */
               if (false
               ) {
-                bailed = true;
+                hydrationBailed = true;
                 console.warn('Parent: ', elm);
                 console.warn('Mismatching childNodes vs. VNodes: ', elm.childNodes, children);
               }
@@ -54907,11 +55016,17 @@ function createPatchFunction (backend) {
         }
       }
       if (isDef(data)) {
+        var fullInvoke = false;
         for (var key in data) {
           if (!isRenderedModule(key)) {
+            fullInvoke = true;
             invokeCreateHooks(vnode, insertedVnodeQueue);
             break
           }
+        }
+        if (!fullInvoke && data['class']) {
+          // ensure collecting deps for deep class bindings for future updates
+          traverse(data['class']);
         }
       }
     } else if (elm.data !== vnode.text) {
@@ -54920,10 +55035,10 @@ function createPatchFunction (backend) {
     return true
   }
 
-  function assertNodeMatch (node, vnode) {
+  function assertNodeMatch (node, vnode, inVPre) {
     if (isDef(vnode.tag)) {
-      return (
-        vnode.tag.indexOf('vue-component') === 0 ||
+      return vnode.tag.indexOf('vue-component') === 0 || (
+        !isUnknownElement$$1(vnode, inVPre) &&
         vnode.tag.toLowerCase() === (node.tagName && node.tagName.toLowerCase())
       )
     } else {
@@ -54976,9 +55091,12 @@ function createPatchFunction (backend) {
           // create an empty node and replace it
           oldVnode = emptyNodeAt(oldVnode);
         }
+
         // replacing existing element
         var oldElm = oldVnode.elm;
         var parentElm$1 = nodeOps.parentNode(oldElm);
+
+        // create new node
         createElm(
           vnode,
           insertedVnodeQueue,
@@ -54989,9 +55107,8 @@ function createPatchFunction (backend) {
           nodeOps.nextSibling(oldElm)
         );
 
+        // update parent placeholder node element, recursively
         if (isDef(vnode.parent)) {
-          // component root element replaced.
-          // update parent placeholder node element, recursively
           var ancestor = vnode.parent;
           var patchable = isPatchable(vnode);
           while (ancestor) {
@@ -55020,6 +55137,7 @@ function createPatchFunction (backend) {
           }
         }
 
+        // destroy old node
         if (isDef(parentElm$1)) {
           removeVnodes(parentElm$1, [oldVnode], 0, 0);
         } else if (isDef(oldVnode.tag)) {
@@ -55085,14 +55203,14 @@ function _update (oldVnode, vnode) {
       }
     };
     if (isCreate) {
-      mergeVNodeHook(vnode.data.hook || (vnode.data.hook = {}), 'insert', callInsert);
+      mergeVNodeHook(vnode, 'insert', callInsert);
     } else {
       callInsert();
     }
   }
 
   if (dirsWithPostpatch.length) {
-    mergeVNodeHook(vnode.data.hook || (vnode.data.hook = {}), 'postpatch', function () {
+    mergeVNodeHook(vnode, 'postpatch', function () {
       for (var i = 0; i < dirsWithPostpatch.length; i++) {
         callHook$1(dirsWithPostpatch[i], 'componentUpdated', vnode, oldVnode);
       }
@@ -55117,17 +55235,20 @@ function normalizeDirectives$1 (
 ) {
   var res = Object.create(null);
   if (!dirs) {
+    // $flow-disable-line
     return res
   }
   var i, dir;
   for (i = 0; i < dirs.length; i++) {
     dir = dirs[i];
     if (!dir.modifiers) {
+      // $flow-disable-line
       dir.modifiers = emptyModifiers;
     }
     res[getRawDirName(dir)] = dir;
     dir.def = resolveAsset(vm.$options, 'directives', dir.name, true);
   }
+  // $flow-disable-line
   return res
 }
 
@@ -55180,7 +55301,7 @@ function updateAttrs (oldVnode, vnode) {
   // #4391: in IE9, setting type can reset value for input[type=radio]
   // #6666: IE/Edge forces progress value down to 1 before setting a max
   /* istanbul ignore if */
-  if ((isIE9 || isEdge) && attrs.value !== oldAttrs.value) {
+  if ((isIE || isEdge) && attrs.value !== oldAttrs.value) {
     setAttr(elm, 'value', attrs.value);
   }
   for (key in oldAttrs) {
@@ -55220,6 +55341,23 @@ function setAttr (el, key, value) {
     if (isFalsyAttrValue(value)) {
       el.removeAttribute(key);
     } else {
+      // #7138: IE10 & 11 fires input event when setting placeholder on
+      // <textarea>... block the first input event and remove the blocker
+      // immediately.
+      /* istanbul ignore if */
+      if (
+        isIE && !isIE9 &&
+        el.tagName === 'TEXTAREA' &&
+        key === 'placeholder' && !el.__ieph
+      ) {
+        var blocker = function (e) {
+          e.stopImmediatePropagation();
+          el.removeEventListener('input', blocker);
+        };
+        el.addEventListener('input', blocker);
+        // $flow-disable-line
+        el.__ieph = true; /* IE placeholder patched */
+      }
       el.setAttribute(key, value);
     }
   }
@@ -55383,10 +55521,18 @@ function pluckModuleFunction (
 
 function addProp (el, name, value) {
   (el.props || (el.props = [])).push({ name: name, value: value });
+  el.plain = false;
 }
 
 function addAttr (el, name, value) {
   (el.attrs || (el.attrs = [])).push({ name: name, value: value });
+  el.plain = false;
+}
+
+// add a raw attr (use this in preTransforms)
+function addRawAttr (el, name, value) {
+  el.attrsMap[name] = value;
+  el.attrsList.push({ name: name, value: value });
 }
 
 function addDirective (
@@ -55398,6 +55544,7 @@ function addDirective (
   modifiers
 ) {
   (el.directives || (el.directives = [])).push({ name: name, rawName: rawName, value: value, arg: arg, modifiers: modifiers });
+  el.plain = false;
 }
 
 function addHandler (
@@ -55408,6 +55555,7 @@ function addHandler (
   important,
   warn
 ) {
+  modifiers = modifiers || emptyObject;
   // warn prevent and passive modifier
   /* istanbul ignore if */
   if (
@@ -55418,28 +55566,47 @@ function addHandler (
       'Passive handler can\'t prevent default event.'
     );
   }
+
   // check capture modifier
-  if (modifiers && modifiers.capture) {
+  if (modifiers.capture) {
     delete modifiers.capture;
     name = '!' + name; // mark the event as captured
   }
-  if (modifiers && modifiers.once) {
+  if (modifiers.once) {
     delete modifiers.once;
     name = '~' + name; // mark the event as once
   }
   /* istanbul ignore if */
-  if (modifiers && modifiers.passive) {
+  if (modifiers.passive) {
     delete modifiers.passive;
     name = '&' + name; // mark the event as passive
   }
+
+  // normalize click.right and click.middle since they don't actually fire
+  // this is technically browser-specific, but at least for now browsers are
+  // the only target envs that have right/middle clicks.
+  if (name === 'click') {
+    if (modifiers.right) {
+      name = 'contextmenu';
+      delete modifiers.right;
+    } else if (modifiers.middle) {
+      name = 'mouseup';
+    }
+  }
+
   var events;
-  if (modifiers && modifiers.native) {
+  if (modifiers.native) {
     delete modifiers.native;
     events = el.nativeEvents || (el.nativeEvents = {});
   } else {
     events = el.events || (el.events = {});
   }
-  var newHandler = { value: value, modifiers: modifiers };
+
+  var newHandler = { value: value };
+  if (modifiers !== emptyObject) {
+    newHandler.modifiers = modifiers;
+  }
+
   var handlers = events[name];
   /* istanbul ignore if */
   if (Array.isArray(handlers)) {
@@ -55449,6 +55616,8 @@ function addHandler (
   } else {
     events[name] = newHandler;
   }
+
+  el.plain = false;
 }
 
 function getBindingAttr (
@@ -55715,11 +55884,11 @@ function genCheckboxModel (
   var falseValueBinding = getBindingAttr(el, 'false-value') || 'false';
   addProp(el, 'checked',
     "Array.isArray(" + value + ")" +
-      "?_i(" + value + "," + valueBinding + ")>-1" + (
-        trueValueBinding === 'true'
-          ? (":(" + value + ")")
-          : (":_q(" + value + "," + trueValueBinding + ")")
-      )
+    "?_i(" + value + "," + valueBinding + ")>-1" + (
+      trueValueBinding === 'true'
+        ? (":(" + value + ")")
+        : (":_q(" + value + "," + trueValueBinding + ")")
+    )
   );
   addHandler(el, 'change',
     "var $$a=" + value + "," +
@@ -55736,9 +55905,9 @@ function genCheckboxModel (
 }
 
 function genRadioModel (
-    el,
-    value,
-    modifiers
+  el,
+  value,
+  modifiers
 ) {
   var number = modifiers && modifiers.number;
   var valueBinding = getBindingAttr(el, 'value') || 'null';
@@ -55748,9 +55917,9 @@ function genRadioModel (
 }
 
 function genSelect (
-    el,
-    value,
-    modifiers
+  el,
+  value,
+  modifiers
 ) {
   var number = modifiers && modifiers.number;
   var selectedVal = "Array.prototype.filter" +
@@ -55770,6 +55939,19 @@ function genDefaultModel (
   modifiers
 ) {
   var type = el.attrsMap.type;
+
+  // warn if v-bind:value conflicts with v-model
+  if (false) {
+    var value$1 = el.attrsMap['v-bind:value'] || el.attrsMap[':value'];
+    if (value$1) {
+      var binding = el.attrsMap['v-bind:value'] ? 'v-bind:value' : ':value';
+      warn$1(
+        binding + "=\"" + value$1 + "\" conflicts with v-model on the same element " +
+        'because the latter already expands to a value binding internally'
+      );
+    }
+  }
+
   var ref = modifiers || {};
   var lazy = ref.lazy;
   var number = ref.number;
@@ -55876,6 +56058,7 @@ function updateDOMListeners (oldVnode, vnode) {
   target$1 = vnode.elm;
   normalizeEvents(on);
   updateListeners(on, oldOn, add$1, remove$2, vnode.context);
+  target$1 = undefined;
 }
 
 var events = {
@@ -55939,12 +56122,12 @@ function updateDOMProps (oldVnode, vnode) {
 function shouldUpdateValue (elm, checkVal) {
   return (!elm.composing && (
     elm.tagName === 'OPTION' ||
-    isDirty(elm, checkVal) ||
-    isInputChanged(elm, checkVal)
+    isNotInFocusAndDirty(elm, checkVal) ||
+    isDirtyWithModifiers(elm, checkVal)
   ))
 }
 
-function isDirty (elm, checkVal) {
+function isNotInFocusAndDirty (elm, checkVal) {
   // return true when textbox (.number and .trim) loses focus and its value is
   // not equal to the updated value
   var notInFocus = true;
@@ -55954,14 +56137,20 @@ function isDirty (elm, checkVal) {
   return notInFocus && elm.value !== checkVal
 }
 
-function isInputChanged (elm, newVal) {
+function isDirtyWithModifiers (elm, newVal) {
   var value = elm.value;
   var modifiers = elm._vModifiers; // injected by v-model runtime
-  if (isDef(modifiers) && modifiers.number) {
-    return toNumber(value) !== toNumber(newVal)
-  }
-  if (isDef(modifiers) && modifiers.trim) {
-    return value.trim() !== newVal.trim()
+  if (isDef(modifiers)) {
+    if (modifiers.lazy) {
+      // inputs with lazy should only be updated when not in focus
+      return false
+    }
+    if (modifiers.number) {
+      return toNumber(value) !== toNumber(newVal)
+    }
+    if (modifiers.trim) {
+      return value.trim() !== newVal.trim()
+    }
   }
   return value !== newVal
 }
@@ -56019,7 +56208,10 @@ function getStyle (vnode, checkChild) {
     var childNode = vnode;
     while (childNode.componentInstance) {
       childNode = childNode.componentInstance._vnode;
-      if (childNode.data && (styleData = normalizeStyleData(childNode.data))) {
+      if (
+        childNode && childNode.data &&
+        (styleData = normalizeStyleData(childNode.data))
+      ) {
         extend(res, styleData);
       }
     }
@@ -56481,7 +56673,7 @@ function enter (vnode, toggleDisplay) {
 
   if (!vnode.data.show) {
     // remove pending leave element on enter by injecting an insert hook
-    mergeVNodeHook(vnode.data.hook || (vnode.data.hook = {}), 'insert', function () {
+    mergeVNodeHook(vnode, 'insert', function () {
       var parent = el.parentNode;
       var pendingNode = parent && parent._pending && parent._pending[vnode.key];
       if (pendingNode &&
@@ -56532,12 +56724,12 @@ function leave (vnode, rm) {
   }
 
   var data = resolveTransition(vnode.data.transition);
-  if (isUndef(data)) {
+  if (isUndef(data) || el.nodeType !== 1) {
     return rm()
   }
 
   /* istanbul ignore if */
-  if (isDef(el._leaveCb) || el.nodeType !== 1) {
+  if (isDef(el._leaveCb)) {
     return
   }
 
@@ -56720,10 +56912,17 @@ if (isIE9) {
   });
 }
 
-var model$1 = {
-  inserted: function inserted (el, binding, vnode) {
+var directive = {
+  inserted: function inserted (el, binding, vnode, oldVnode) {
     if (vnode.tag === 'select') {
-      setSelected(el, binding, vnode.context);
+      // #6903
+      if (oldVnode.elm && !oldVnode.elm._vOptions) {
+        mergeVNodeHook(vnode, 'postpatch', function () {
+          directive.componentUpdated(el, binding, vnode);
+        });
+      } else {
+        setSelected(el, binding, vnode.context);
+      }
       el._vOptions = [].map.call(el.options, getValue);
     } else if (vnode.tag === 'textarea' || isTextInputType(el.type)) {
       el._vModifiers = binding.modifiers;
@@ -56744,6 +56943,7 @@ var model$1 = {
       }
     }
   },
+
   componentUpdated: function componentUpdated (el, binding, vnode) {
     if (vnode.tag === 'select') {
       setSelected(el, binding, vnode.context);
@@ -56902,7 +57102,7 @@ var show = {
 };
 
 var platformDirectives = {
-  model: model$1,
+  model: directive,
   show: show
 };
 
@@ -56984,7 +57184,7 @@ var Transition = {
   render: function render (h) {
     var this$1 = this;
 
-    var children = this.$options._renderChildren;
+    var children = this.$slots.default;
     if (!children) {
       return
     }
@@ -57062,7 +57262,9 @@ var Transition = {
       oldChild &&
       oldChild.data &&
       !isSameChild(child, oldChild) &&
-      !isAsyncPlaceholder(oldChild)
+      !isAsyncPlaceholder(oldChild) &&
+      // #6687 component root is a comment node
+      !(oldChild.componentInstance && oldChild.componentInstance._vnode.isComment)
     ) {
       // replace old child transition data with fresh one
       // important for dynamic transitions!
@@ -57164,7 +57366,7 @@ var TransitionGroup = {
       this._vnode,
       this.kept,
       false, // hydrating
-      true // removeOnly (!important, avoids unnecessary moves)
+      true // removeOnly (!important avoids unnecessary moves)
     );
     this._vnode = this.kept;
   },
@@ -57316,19 +57518,6 @@ Vue$3.nextTick(function () {
 
 /*  */
 
-// check whether current browser encodes a char inside attribute values
-function shouldDecode (content, encoded) {
-  var div = document.createElement('div');
-  div.innerHTML = "<div a=\"" + content + "\"/>";
-  return div.innerHTML.indexOf(encoded) > 0
-}
-
-// #3663
-// IE encodes newlines inside attribute values while other browsers don't
-var shouldDecodeNewlines = inBrowser ? shouldDecode('\n', '&#10;') : false;
-
-/*  */
-
 var defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g;
 var regexEscapeRE = /[-.*+?^${}()|[\]\/\\]/g;
 
@@ -57337,6 +57526,8 @@ var buildRegex = cached(function (delimiters) {
   var close = delimiters[1].replace(regexEscapeRE, '\\$&');
   return new RegExp(open + '((?:.|\\n)+?)' + close, 'g')
 });
+
+
 
 function parseText (
   text,
@@ -57347,23 +57538,30 @@ function parseText (
     return
   }
   var tokens = [];
+  var rawTokens = [];
   var lastIndex = tagRE.lastIndex = 0;
-  var match, index;
+  var match, index, tokenValue;
   while ((match = tagRE.exec(text))) {
     index = match.index;
     // push text token
     if (index > lastIndex) {
-      tokens.push(JSON.stringify(text.slice(lastIndex, index)));
+      rawTokens.push(tokenValue = text.slice(lastIndex, index));
+      tokens.push(JSON.stringify(tokenValue));
     }
     // tag token
     var exp = parseFilters(match[1].trim());
     tokens.push(("_s(" + exp + ")"));
+    rawTokens.push({ '@binding': exp });
     lastIndex = index + match[0].length;
   }
   if (lastIndex < text.length) {
-    tokens.push(JSON.stringify(text.slice(lastIndex)));
+    rawTokens.push(tokenValue = text.slice(lastIndex));
+    tokens.push(JSON.stringify(tokenValue));
   }
-  return tokens.join('+')
+  return {
+    expression: tokens.join('+'),
+    tokens: rawTokens
+  }
 }
 
 /*  */
@@ -57372,8 +57570,8 @@ function transformNode (el, options) {
   var warn = options.warn || baseWarn;
   var staticClass = getAndRemoveAttr(el, 'class');
   if (false) {
-    var expression = parseText(staticClass, options.delimiters);
-    if (expression) {
+    var res = parseText(staticClass, options.delimiters);
+    if (res) {
       warn(
         "class=\"" + staticClass + "\": " +
         'Interpolation inside attributes has been removed. ' +
@@ -57416,8 +57614,8 @@ function transformNode$1 (el, options) {
   if (staticStyle) {
     /* istanbul ignore if */
     if (false) {
-      var expression = parseText(staticStyle, options.delimiters);
-      if (expression) {
+      var res = parseText(staticStyle, options.delimiters);
+      if (res) {
         warn(
           "style=\"" + staticStyle + "\": " +
           'Interpolation inside attributes has been removed. ' +
@@ -57525,10 +57723,11 @@ var decodingMap = {
   '&gt;': '>',
   '&quot;': '"',
   '&amp;': '&',
-  '&#10;': '\n'
+  '&#10;': '\n',
+  '&#9;': '\t'
 };
 var encodedAttr = /&(?:lt|gt|quot|amp);/g;
-var encodedAttrWithNewLines = /&(?:lt|gt|quot|amp|#10);/g;
+var encodedAttrWithNewLines = /&(?:lt|gt|quot|amp|#10|#9);/g;
 
 // #5992
 var isIgnoreNewlineTag = makeMap('pre,textarea', true);
@@ -57719,12 +57918,12 @@ function parseHTML (html, options) {
         if (args[5] === '') { delete args[5]; }
       }
       var value = args[3] || args[4] || args[5] || '';
+      var shouldDecodeNewlines = tagName === 'a' && args[1] === 'href'
+        ? options.shouldDecodeNewlinesForHref
+        : options.shouldDecodeNewlines;
       attrs[i] = {
         name: args[1],
-        value: decodeAttr(
-          value,
-          options.shouldDecodeNewlines
-        )
+        value: decodeAttr(value, shouldDecodeNewlines)
       };
     }
 
@@ -57796,7 +57995,8 @@ function parseHTML (html, options) {
 var onRE = /^@|^v-on:/;
 var dirRE = /^v-|^@|^:/;
 var forAliasRE = /(.*?)\s+(?:in|of)\s+(.*)/;
-var forIteratorRE = /\((\{[^}]*\}|[^,]*),([^,]*)(?:,([^,]*))?\)/;
+var forIteratorRE = /,([^,\}\]]*)(?:,([^,\}\]]*))?$/;
+var stripParensRE = /^\(|\)$/g;
 
 var argRE = /:(.*)$/;
 var bindRE = /^:|^v-bind:/;
@@ -57865,13 +58065,17 @@ function parse (
     }
   }
 
-  function endPre (element) {
+  function closeElement (element) {
     // check pre state
     if (element.pre) {
       inVPre = false;
     }
     if (platformIsPreTag(element.tag)) {
       inPre = false;
+    }
+    // apply post-transforms
+    for (var i = 0; i < postTransforms.length; i++) {
+      postTransforms[i](element, options);
     }
   }
 
@@ -57881,6 +58085,7 @@ function parse (
     isUnaryTag: options.isUnaryTag,
     canBeLeftOpenTag: options.canBeLeftOpenTag,
     shouldDecodeNewlines: options.shouldDecodeNewlines,
+    shouldDecodeNewlinesForHref: options.shouldDecodeNewlinesForHref,
     shouldKeepComment: options.comments,
     start: function start (tag, attrs, unary) {
       // check namespace.
@@ -57984,11 +58189,7 @@ function parse (
         currentParent = element;
         stack.push(element);
       } else {
-        endPre(element);
-      }
-      // apply post-transforms
-      for (var i$1 = 0; i$1 < postTransforms.length; i$1++) {
-        postTransforms[i$1](element, options);
+        closeElement(element);
       }
     },
 
@@ -58002,7 +58203,7 @@ function parse (
       // pop stack
       stack.length -= 1;
       currentParent = stack[stack.length - 1];
-      endPre(element);
+      closeElement(element);
     },
 
     chars: function chars (text) {
@@ -58034,11 +58235,12 @@ function parse (
         // only preserve whitespace if its not right after a starting tag
         : preserveWhitespace && children.length ? ' ' : '';
       if (text) {
-        var expression;
-        if (!inVPre && text !== ' ' && (expression = parseText(text, delimiters))) {
+        var res;
+        if (!inVPre && text !== ' ' && (res = parseText(text, delimiters))) {
           children.push({
             type: 2,
-            expression: expression,
+            expression: res.expression,
+            tokens: res.tokens,
             text: text
           });
         } else if (text !== ' ' || !children.length || children[children.length - 1].text !== ' ') {
@@ -58119,26 +58321,34 @@ function processRef (el) {
 function processFor (el) {
   var exp;
   if ((exp = getAndRemoveAttr(el, 'v-for'))) {
-    var inMatch = exp.match(forAliasRE);
-    if (!inMatch) {
-      "production" !== 'production' && warn$2(
+    var res = parseFor(exp);
+    if (res) {
+      extend(el, res);
+    } else if (false) {
+      warn$2(
         ("Invalid v-for expression: " + exp)
       );
-      return
-    }
-    el.for = inMatch[2].trim();
-    var alias = inMatch[1].trim();
-    var iteratorMatch = alias.match(forIteratorRE);
-    if (iteratorMatch) {
-      el.alias = iteratorMatch[1].trim();
-      el.iterator1 = iteratorMatch[2].trim();
-      if (iteratorMatch[3]) {
-        el.iterator2 = iteratorMatch[3].trim();
-      }
-    } else {
-      el.alias = alias;
     }
   }
+}
+
+function parseFor (exp) {
+  var inMatch = exp.match(forAliasRE);
+  if (!inMatch) { return }
+  var res = {};
+  res.for = inMatch[2].trim();
+  var alias = inMatch[1].trim().replace(stripParensRE, '');
+  var iteratorMatch = alias.match(forIteratorRE);
+  if (iteratorMatch) {
+    res.alias = alias.replace(forIteratorRE, '');
+    res.iterator1 = iteratorMatch[1].trim();
+    if (iteratorMatch[2]) {
+      res.iterator2 = iteratorMatch[2].trim();
+    }
+  } else {
+    res.alias = alias;
+  }
+  return res
 }
 
 function processIf (el) {
@@ -58232,6 +58442,15 @@ function processSlot (el) {
       }
       el.slotScope = slotScope || getAndRemoveAttr(el, 'slot-scope');
     } else if ((slotScope = getAndRemoveAttr(el, 'slot-scope'))) {
+      /* istanbul ignore if */
+      if (false) {
+        warn$2(
+          "Ambiguous combined usage of slot-scope and v-for on <" + (el.tag) + "> " +
+          "(v-for takes higher priority). Use a wrapper <template> for the " +
+          "scoped slot to make it clearer.",
+          true
+        );
+      }
       el.slotScope = slotScope;
     }
     var slotTarget = getBindingAttr(el, 'slot');
@@ -58239,7 +58458,7 @@ function processSlot (el) {
       el.slotTarget = slotTarget === '""' ? '"default"' : slotTarget;
       // preserve slot as an attribute for native shadow DOM compat
       // only for non-scoped slots.
-      if (!el.slotScope) {
+      if (el.tag !== 'template' && !el.slotScope) {
         addAttr(el, 'slot', slotTarget);
       }
     }
@@ -58317,8 +58536,8 @@ function processAttrs (el) {
     } else {
       // literal attribute
       if (false) {
-        var expression = parseText(value, delimiters);
-        if (expression) {
+        var res = parseText(value, delimiters);
+        if (res) {
           warn$2(
             name + "=\"" + value + "\": " +
             'Interpolation inside attributes has been removed. ' +
@@ -58328,6 +58547,13 @@ function processAttrs (el) {
         }
       }
       addAttr(el, name, JSON.stringify(value));
+      // #6887 firefox doesn't update muted state if set via attribute
+      // even immediately after element creation
+      if (!el.component &&
+          name === 'muted' &&
+          platformMustUseProp(el.tag, el.attrsMap.type, name)) {
+        addProp(el, name, 'true');
+      }
     }
   }
 }
@@ -58431,6 +58657,8 @@ function preTransformNode (el, options) {
       var typeBinding = getBindingAttr(el, 'type');
       var ifCondition = getAndRemoveAttr(el, 'v-if', true);
       var ifConditionExtra = ifCondition ? ("&&(" + ifCondition + ")") : "";
+      var hasElse = getAndRemoveAttr(el, 'v-else', true) != null;
+      var elseIfCondition = getAndRemoveAttr(el, 'v-else-if', true);
       // 1. checkbox
       var branch0 = cloneASTElement(el);
       // process for on the main node
@@ -58461,6 +58689,13 @@ function preTransformNode (el, options) {
         exp: ifCondition,
         block: branch2
       });
+
+      if (hasElse) {
+        branch0.else = true;
+      } else if (elseIfCondition) {
+        branch0.elseif = elseIfCondition;
+      }
+
       return branch0
     }
   }
@@ -58468,11 +58703,6 @@ function preTransformNode (el, options) {
 
 function cloneASTElement (el) {
   return createASTElement(el.tag, el.attrsList.slice(), el.parent)
-}
-
-function addRawAttr (el, name, value) {
-  el.attrsMap[name] = value;
-  el.attrsList.push({ name: name, value: value });
 }
 
 var model$2 = {
@@ -58692,16 +58922,7 @@ function genHandlers (
 ) {
   var res = isNative ? 'nativeOn:{' : 'on:{';
   for (var name in events) {
-    var handler = events[name];
-    // #5330: warn click.right, since right clicks do not actually fire click events.
-    if (false
-    ) {
-      warn(
-        "Use \"contextmenu\" instead of \"click.right\" since right clicks " +
-        "do not actually fire \"click\" events."
-      );
-    }
-    res += "\"" + name + "\":" + (genHandler(name, handler)) + ",";
+    res += "\"" + name + "\":" + (genHandler(name, events[name])) + ",";
   }
   return res.slice(0, -1) + '}'
 }
@@ -58722,9 +58943,11 @@ function genHandler (
   var isFunctionExpression = fnExpRE.test(handler.value);
 
   if (!handler.modifiers) {
-    return isMethodPath || isFunctionExpression
-      ? handler.value
-      : ("function($event){" + (handler.value) + "}") // inline statement
+    if (isMethodPath || isFunctionExpression) {
+      return handler.value
+    }
+    /* istanbul ignore if */
+    return ("function($event){" + (handler.value) + "}") // inline statement
   } else {
     var code = '';
     var genModifierCode = '';
@@ -58760,6 +58983,7 @@ function genHandler (
       : isFunctionExpression
         ? ("(" + (handler.value) + ")($event)")
         : handler.value;
+    /* istanbul ignore if */
     return ("function($event){" + code + handlerCode + "}")
   }
 }
@@ -59231,7 +59455,10 @@ function genProps (props) {
   var res = '';
   for (var i = 0; i < props.length; i++) {
     var prop = props[i];
-    res += "\"" + (prop.name) + "\":" + (transformSpecialNewlines(prop.value)) + ",";
+    /* istanbul ignore if */
+    {
+      res += "\"" + (prop.name) + "\":" + (transformSpecialNewlines(prop.value)) + ",";
+    }
   }
   return res.slice(0, -1)
 }
@@ -59257,9 +59484,6 @@ var prohibitedKeywordRE = new RegExp('\\b' + (
 var unaryOperatorsRE = new RegExp('\\b' + (
   'delete,typeof,void'
 ).split(',').join('\\s*\\([^\\)]*\\)|\\b') + '\\s*\\([^\\)]*\\)');
-
-// check valid identifier for v-for
-var identRE = /[A-Za-z_$][\w$]*/;
 
 // strip strings in expressions
 var stripStringRE = /'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\]|\\.)*`|`(?:[^`\\]|\\.)*`/g;
@@ -59318,9 +59542,18 @@ function checkFor (node, text, errors) {
   checkIdentifier(node.iterator2, 'v-for iterator', text, errors);
 }
 
-function checkIdentifier (ident, type, text, errors) {
-  if (typeof ident === 'string' && !identRE.test(ident)) {
-    errors.push(("invalid " + type + " \"" + ident + "\" in expression: " + (text.trim())));
+function checkIdentifier (
+  ident,
+  type,
+  text,
+  errors
+) {
+  if (typeof ident === 'string') {
+    try {
+      new Function(("var " + ident + "=_"));
+    } catch (e) {
+      errors.push(("invalid " + type + " \"" + ident + "\" in expression: " + (text.trim())));
+    }
   }
 }
 
@@ -59465,7 +59698,7 @@ function createCompilerCreator (baseCompile) {
         // merge custom directives
         if (options.directives) {
           finalOptions.directives = extend(
-            Object.create(baseOptions.directives),
+            Object.create(baseOptions.directives || null),
             options.directives
           );
         }
@@ -59503,7 +59736,9 @@ var createCompiler = createCompilerCreator(function baseCompile (
   options
 ) {
   var ast = parse(template.trim(), options);
-  optimize(ast, options);
+  if (options.optimize !== false) {
+    optimize(ast, options);
+  }
   var code = generate(ast, options);
   return {
     ast: ast,
@@ -59516,6 +59751,21 @@ var createCompiler = createCompilerCreator(function baseCompile (
 
 var ref$1 = createCompiler(baseOptions);
 var compileToFunctions = ref$1.compileToFunctions;
+
+/*  */
+
+// check whether current browser encodes a char inside attribute values
+var div;
+function getShouldDecode (href) {
+  div = div || document.createElement('div');
+  div.innerHTML = href ? "<a href=\"\n\"/>" : "<div a=\"\n\"/>";
+  return div.innerHTML.indexOf('&#10;') > 0
+}
+
+// #3663: IE encodes newlines inside attribute values while other browsers don't
+var shouldDecodeNewlines = inBrowser ? getShouldDecode(false) : false;
+// #6828: chrome encodes content in a[href]
+var shouldDecodeNewlinesForHref = inBrowser ? getShouldDecode(true) : false;
 
 /*  */
 
@@ -59574,6 +59824,7 @@ Vue$3.prototype.$mount = function (
 
       var ref = compileToFunctions(template, {
         shouldDecodeNewlines: shouldDecodeNewlines,
+        shouldDecodeNewlinesForHref: shouldDecodeNewlinesForHref,
         delimiters: options.delimiters,
         comments: options.comments
       }, this);
@@ -59636,7 +59887,7 @@ function Entity(name, body) {
 Entity.prototype._createNamed = function createNamed(base) {
   var named;
   try {
-    named = __webpack_require__(371).runInThisContext(
+    named = __webpack_require__(374).runInThisContext(
       '(function ' + this.name + '(entity) {\n' +
       '  this._initNamed(entity);\n' +
       '})'
@@ -60450,7 +60701,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 /* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var constants = __webpack_require__(81);
+var constants = __webpack_require__(84);
 
 exports.tagClass = {
   0: 'universal',
@@ -60500,7 +60751,7 @@ exports.tagByName = constants._reverse(exports.tag);
 
 var decoders = exports;
 
-decoders.der = __webpack_require__(82);
+decoders.der = __webpack_require__(85);
 decoders.pem = __webpack_require__(171);
 
 
@@ -60511,7 +60762,7 @@ decoders.pem = __webpack_require__(171);
 var inherits = __webpack_require__(0);
 var Buffer = __webpack_require__(2).Buffer;
 
-var DERDecoder = __webpack_require__(82);
+var DERDecoder = __webpack_require__(85);
 
 function PEMDecoder(entity) {
   DERDecoder.call(this, entity);
@@ -60565,7 +60816,7 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 var encoders = exports;
 
-encoders.der = __webpack_require__(83);
+encoders.der = __webpack_require__(86);
 encoders.pem = __webpack_require__(173);
 
 
@@ -60575,7 +60826,7 @@ encoders.pem = __webpack_require__(173);
 
 var inherits = __webpack_require__(0);
 
-var DEREncoder = __webpack_require__(83);
+var DEREncoder = __webpack_require__(86);
 
 function PEMEncoder(entity) {
   DEREncoder.call(this, entity);
@@ -60603,7 +60854,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 /* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright (c) 2012, Mark Cavage. All rights reserved.
 // Copyright 2015 Joyent, Inc.
 
-var assert = __webpack_require__(84);
+var assert = __webpack_require__(87);
 var Stream = __webpack_require__(16).Stream;
 var util = __webpack_require__(51);
 
@@ -60837,12 +61088,7 @@ module.exports = _setExports(__webpack_require__.i({"NODE_ENV":"production"}).NO
 /* 194 */,
 /* 195 */,
 /* 196 */,
-/* 197 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(223), __esModule: true };
-
-/***/ }),
+/* 197 */,
 /* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -60864,12 +61110,18 @@ module.exports = { "default": __webpack_require__(226), __esModule: true };
 /* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = { "default": __webpack_require__(227), __esModule: true };
+
+/***/ }),
+/* 202 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
 exports.__esModule = true;
 
-var _promise = __webpack_require__(199);
+var _promise = __webpack_require__(200);
 
 var _promise2 = _interopRequireDefault(_promise);
 
@@ -60905,14 +61157,14 @@ exports.default = function (fn) {
 };
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(336);
+module.exports = __webpack_require__(338);
 
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61033,13 +61285,13 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var AuthCipher = __webpack_require__(87)
+var AuthCipher = __webpack_require__(90)
 var Buffer = __webpack_require__(1).Buffer
 var MODES = __webpack_require__(54)
-var StreamCipher = __webpack_require__(91)
+var StreamCipher = __webpack_require__(94)
 var Transform = __webpack_require__(17)
 var aes = __webpack_require__(45)
 var ebtk = __webpack_require__(48)
@@ -61160,13 +61412,13 @@ exports.createDecipheriv = createDecipheriv
 
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var MODES = __webpack_require__(54)
-var AuthCipher = __webpack_require__(87)
+var AuthCipher = __webpack_require__(90)
 var Buffer = __webpack_require__(1).Buffer
-var StreamCipher = __webpack_require__(91)
+var StreamCipher = __webpack_require__(94)
 var Transform = __webpack_require__(17)
 var aes = __webpack_require__(45)
 var ebtk = __webpack_require__(48)
@@ -61280,7 +61532,7 @@ exports.createCipher = createCipher
 
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
@@ -61375,7 +61627,7 @@ module.exports = GHASH
 
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var xor = __webpack_require__(33)
@@ -61398,7 +61650,7 @@ exports.decrypt = function (self, block) {
 
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
@@ -61437,7 +61689,7 @@ exports.encrypt = function (self, data, decrypt) {
 
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
@@ -61485,7 +61737,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
@@ -61516,7 +61768,7 @@ exports.encrypt = function (self, chunk, decrypt) {
 
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports) {
 
 exports.encrypt = function (self, block) {
@@ -61529,7 +61781,7 @@ exports.decrypt = function (self, block) {
 
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(33)
@@ -61552,13 +61804,13 @@ exports.encrypt = function (self, chunk) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ebtk = __webpack_require__(48)
 var aes = __webpack_require__(53)
-var DES = __webpack_require__(214)
-var desModes = __webpack_require__(215)
+var DES = __webpack_require__(215)
+var desModes = __webpack_require__(216)
 var aesModes = __webpack_require__(54)
 function createCipher (suite, password) {
   var keyLen, ivLen
@@ -61631,7 +61883,7 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var CipherBase = __webpack_require__(17)
@@ -61681,7 +61933,7 @@ DES.prototype._final = function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports) {
 
 exports['des-ecb'] = {
@@ -61711,23 +61963,23 @@ exports['des-ede'] = {
 
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(92)
+module.exports = __webpack_require__(95)
 
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(40)
 var stream = __webpack_require__(16)
 var inherits = __webpack_require__(0)
-var sign = __webpack_require__(218)
-var verify = __webpack_require__(219)
+var sign = __webpack_require__(219)
+var verify = __webpack_require__(220)
 
-var algorithms = __webpack_require__(92)
+var algorithms = __webpack_require__(95)
 Object.keys(algorithms).forEach(function (key) {
   algorithms[key].id = new Buffer(algorithms[key].id, 'hex')
   algorithms[key.toLowerCase()] = algorithms[key]
@@ -61816,16 +62068,16 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
-var createHmac = __webpack_require__(116)
+var createHmac = __webpack_require__(119)
 var crt = __webpack_require__(55)
 var EC = __webpack_require__(6).ec
 var BN = __webpack_require__(4)
 var parseKeys = __webpack_require__(49)
-var curves = __webpack_require__(93)
+var curves = __webpack_require__(96)
 
 function sign (hash, key, hashType, signType, tag) {
   var priv = parseKeys(key)
@@ -61968,14 +62220,14 @@ module.exports.makeKey = makeKey
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var BN = __webpack_require__(4)
 var EC = __webpack_require__(6).ec
 var parseKeys = __webpack_require__(49)
-var curves = __webpack_require__(93)
+var curves = __webpack_require__(96)
 
 function verify (sig, hash, key, signType, tag) {
   var pub = parseKeys(key)
@@ -62058,7 +62310,7 @@ module.exports = verify
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -62069,7 +62321,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -62139,7 +62391,7 @@ module.exports = {
 
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62164,10 +62416,10 @@ module.exports = Error.captureStackTrace || function (error) {
 
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(255);
+__webpack_require__(256);
 var $Object = __webpack_require__(12).Object;
 module.exports = function getOwnPropertyDescriptor(it, key) {
   return $Object.getOwnPropertyDescriptor(it, key);
@@ -62175,49 +62427,49 @@ module.exports = function getOwnPropertyDescriptor(it, key) {
 
 
 /***/ }),
-/* 224 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(256);
-module.exports = __webpack_require__(12).Object.keys;
-
-
-/***/ }),
 /* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(112);
-__webpack_require__(113);
-__webpack_require__(114);
 __webpack_require__(257);
-__webpack_require__(259);
-__webpack_require__(260);
-module.exports = __webpack_require__(12).Promise;
+module.exports = __webpack_require__(12).Object.keys;
 
 
 /***/ }),
 /* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(112);
-__webpack_require__(113);
-__webpack_require__(114);
+__webpack_require__(115);
+__webpack_require__(116);
+__webpack_require__(117);
 __webpack_require__(258);
-__webpack_require__(263);
-__webpack_require__(262);
+__webpack_require__(260);
 __webpack_require__(261);
-module.exports = __webpack_require__(12).Set;
+module.exports = __webpack_require__(12).Promise;
 
 
 /***/ }),
 /* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(115);
+__webpack_require__(116);
+__webpack_require__(117);
+__webpack_require__(259);
+__webpack_require__(264);
+__webpack_require__(263);
+__webpack_require__(262);
+module.exports = __webpack_require__(12).Set;
+
+
+/***/ }),
+/* 228 */
 /***/ (function(module, exports) {
 
 module.exports = function () { /* empty */ };
 
 
 /***/ }),
-/* 228 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var forOf = __webpack_require__(37);
@@ -62230,14 +62482,14 @@ module.exports = function (iter, ITERATOR) {
 
 
 /***/ }),
-/* 229 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // false -> Array#indexOf
 // true  -> Array#includes
 var toIObject = __webpack_require__(39);
 var toLength = __webpack_require__(66);
-var toAbsoluteIndex = __webpack_require__(252);
+var toAbsoluteIndex = __webpack_require__(253);
 module.exports = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
     var O = toIObject($this);
@@ -62259,7 +62511,7 @@ module.exports = function (IS_INCLUDES) {
 
 
 /***/ }),
-/* 230 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 0 -> Array#forEach
@@ -62270,10 +62522,10 @@ module.exports = function (IS_INCLUDES) {
 // 5 -> Array#find
 // 6 -> Array#findIndex
 var ctx = __webpack_require__(21);
-var IObject = __webpack_require__(97);
+var IObject = __webpack_require__(100);
 var toObject = __webpack_require__(67);
 var toLength = __webpack_require__(66);
-var asc = __webpack_require__(232);
+var asc = __webpack_require__(233);
 module.exports = function (TYPE, $create) {
   var IS_MAP = TYPE == 1;
   var IS_FILTER = TYPE == 2;
@@ -62309,11 +62561,11 @@ module.exports = function (TYPE, $create) {
 
 
 /***/ }),
-/* 231 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(15);
-var isArray = __webpack_require__(238);
+var isArray = __webpack_require__(239);
 var SPECIES = __webpack_require__(9)('species');
 
 module.exports = function (original) {
@@ -62331,11 +62583,11 @@ module.exports = function (original) {
 
 
 /***/ }),
-/* 232 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 9.4.2.3 ArraySpeciesCreate(originalArray, length)
-var speciesConstructor = __webpack_require__(231);
+var speciesConstructor = __webpack_require__(232);
 
 module.exports = function (original, length) {
   return new (speciesConstructor(original))(length);
@@ -62343,23 +62595,23 @@ module.exports = function (original, length) {
 
 
 /***/ }),
-/* 233 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var dP = __webpack_require__(23).f;
-var create = __webpack_require__(101);
+var create = __webpack_require__(104);
 var redefineAll = __webpack_require__(63);
 var ctx = __webpack_require__(21);
 var anInstance = __webpack_require__(56);
 var forOf = __webpack_require__(37);
 var $iterDefine = __webpack_require__(60);
-var step = __webpack_require__(98);
-var setSpecies = __webpack_require__(106);
+var step = __webpack_require__(101);
+var setSpecies = __webpack_require__(109);
 var DESCRIPTORS = __webpack_require__(18);
-var fastKey = __webpack_require__(100).fastKey;
-var validate = __webpack_require__(111);
+var fastKey = __webpack_require__(103).fastKey;
+var validate = __webpack_require__(114);
 var SIZE = DESCRIPTORS ? '_s' : 'size';
 
 var getEntry = function (that, key) {
@@ -62494,12 +62746,12 @@ module.exports = {
 
 
 /***/ }),
-/* 234 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 var classof = __webpack_require__(57);
-var from = __webpack_require__(228);
+var from = __webpack_require__(229);
 module.exports = function (NAME) {
   return function toJSON() {
     if (classof(this) != NAME) throw TypeError(NAME + "#toJSON isn't generic");
@@ -62509,14 +62761,14 @@ module.exports = function (NAME) {
 
 
 /***/ }),
-/* 235 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var global = __webpack_require__(8);
 var $export = __webpack_require__(14);
-var meta = __webpack_require__(100);
+var meta = __webpack_require__(103);
 var fails = __webpack_require__(36);
 var hide = __webpack_require__(22);
 var redefineAll = __webpack_require__(63);
@@ -62525,7 +62777,7 @@ var anInstance = __webpack_require__(56);
 var isObject = __webpack_require__(15);
 var setToStringTag = __webpack_require__(46);
 var dP = __webpack_require__(23).f;
-var each = __webpack_require__(230)(0);
+var each = __webpack_require__(231)(0);
 var DESCRIPTORS = __webpack_require__(18);
 
 module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
@@ -62575,7 +62827,7 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 
 
 /***/ }),
-/* 236 */
+/* 237 */
 /***/ (function(module, exports) {
 
 // fast apply, http://jsperf.lnkit.com/fast-apply/5
@@ -62597,7 +62849,7 @@ module.exports = function (fn, args, that) {
 
 
 /***/ }),
-/* 237 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
@@ -62611,7 +62863,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 238 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.2.2 IsArray(argument)
@@ -62622,7 +62874,7 @@ module.exports = Array.isArray || function isArray(arg) {
 
 
 /***/ }),
-/* 239 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // call something on iterator step with safe closing on error
@@ -62640,12 +62892,12 @@ module.exports = function (iterator, fn, value, entries) {
 
 
 /***/ }),
-/* 240 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var create = __webpack_require__(101);
+var create = __webpack_require__(104);
 var descriptor = __webpack_require__(62);
 var setToStringTag = __webpack_require__(46);
 var IteratorPrototype = {};
@@ -62660,7 +62912,7 @@ module.exports = function (Constructor, NAME, next) {
 
 
 /***/ }),
-/* 241 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ITERATOR = __webpack_require__(9)('iterator');
@@ -62688,11 +62940,11 @@ module.exports = function (exec, skipClosing) {
 
 
 /***/ }),
-/* 242 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(8);
-var macrotask = __webpack_require__(109).set;
+var macrotask = __webpack_require__(112).set;
 var Observer = global.MutationObserver || global.WebKitMutationObserver;
 var process = global.process;
 var Promise = global.Promise;
@@ -62762,12 +63014,12 @@ module.exports = function () {
 
 
 /***/ }),
-/* 243 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(23);
 var anObject = __webpack_require__(20);
-var getKeys = __webpack_require__(102);
+var getKeys = __webpack_require__(105);
 
 module.exports = __webpack_require__(18) ? Object.defineProperties : function defineProperties(O, Properties) {
   anObject(O);
@@ -62781,15 +63033,15 @@ module.exports = __webpack_require__(18) ? Object.defineProperties : function de
 
 
 /***/ }),
-/* 244 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pIE = __webpack_require__(247);
+var pIE = __webpack_require__(248);
 var createDesc = __webpack_require__(62);
 var toIObject = __webpack_require__(39);
-var toPrimitive = __webpack_require__(110);
+var toPrimitive = __webpack_require__(113);
 var has = __webpack_require__(28);
-var IE8_DOM_DEFINE = __webpack_require__(96);
+var IE8_DOM_DEFINE = __webpack_require__(99);
 var gOPD = Object.getOwnPropertyDescriptor;
 
 exports.f = __webpack_require__(18) ? gOPD : function getOwnPropertyDescriptor(O, P) {
@@ -62803,7 +63055,7 @@ exports.f = __webpack_require__(18) ? gOPD : function getOwnPropertyDescriptor(O
 
 
 /***/ }),
-/* 245 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
@@ -62822,12 +63074,12 @@ module.exports = Object.getPrototypeOf || function (O) {
 
 
 /***/ }),
-/* 246 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var has = __webpack_require__(28);
 var toIObject = __webpack_require__(39);
-var arrayIndexOf = __webpack_require__(229)(false);
+var arrayIndexOf = __webpack_require__(230)(false);
 var IE_PROTO = __webpack_require__(64)('IE_PROTO');
 
 module.exports = function (object, names) {
@@ -62845,21 +63097,21 @@ module.exports = function (object, names) {
 
 
 /***/ }),
-/* 247 */
+/* 248 */
 /***/ (function(module, exports) {
 
 exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 248 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(22);
 
 
 /***/ }),
-/* 249 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62894,7 +63146,7 @@ module.exports = function (COLLECTION) {
 
 
 /***/ }),
-/* 250 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62913,7 +63165,7 @@ module.exports = function (COLLECTION) {
 
 
 /***/ }),
-/* 251 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(65);
@@ -62936,7 +63188,7 @@ module.exports = function (TO_STRING) {
 
 
 /***/ }),
-/* 252 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var toInteger = __webpack_require__(65);
@@ -62949,7 +63201,7 @@ module.exports = function (index, length) {
 
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var classof = __webpack_require__(57);
@@ -62963,13 +63215,13 @@ module.exports = __webpack_require__(12).getIteratorMethod = function (it) {
 
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var addToUnscopables = __webpack_require__(227);
-var step = __webpack_require__(98);
+var addToUnscopables = __webpack_require__(228);
+var step = __webpack_require__(101);
 var Iterators = __webpack_require__(38);
 var toIObject = __webpack_require__(39);
 
@@ -63004,31 +63256,16 @@ addToUnscopables('entries');
 
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
 var toIObject = __webpack_require__(39);
-var $getOwnPropertyDescriptor = __webpack_require__(244).f;
+var $getOwnPropertyDescriptor = __webpack_require__(245).f;
 
-__webpack_require__(103)('getOwnPropertyDescriptor', function () {
+__webpack_require__(106)('getOwnPropertyDescriptor', function () {
   return function getOwnPropertyDescriptor(it, key) {
     return $getOwnPropertyDescriptor(toIObject(it), key);
-  };
-});
-
-
-/***/ }),
-/* 256 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 Object.keys(O)
-var toObject = __webpack_require__(67);
-var $keys = __webpack_require__(102);
-
-__webpack_require__(103)('keys', function () {
-  return function keys(it) {
-    return $keys(toObject(it));
   };
 });
 
@@ -63037,9 +63274,24 @@ __webpack_require__(103)('keys', function () {
 /* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
+// 19.1.2.14 Object.keys(O)
+var toObject = __webpack_require__(67);
+var $keys = __webpack_require__(105);
+
+__webpack_require__(106)('keys', function () {
+  return function keys(it) {
+    return $keys(toObject(it));
+  };
+});
+
+
+/***/ }),
+/* 258 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
-var LIBRARY = __webpack_require__(99);
+var LIBRARY = __webpack_require__(102);
 var global = __webpack_require__(8);
 var ctx = __webpack_require__(21);
 var classof = __webpack_require__(57);
@@ -63048,12 +63300,12 @@ var isObject = __webpack_require__(15);
 var aFunction = __webpack_require__(34);
 var anInstance = __webpack_require__(56);
 var forOf = __webpack_require__(37);
-var speciesConstructor = __webpack_require__(108);
-var task = __webpack_require__(109).set;
-var microtask = __webpack_require__(242)();
+var speciesConstructor = __webpack_require__(111);
+var task = __webpack_require__(112).set;
+var microtask = __webpack_require__(243)();
 var newPromiseCapabilityModule = __webpack_require__(61);
-var perform = __webpack_require__(104);
-var promiseResolve = __webpack_require__(105);
+var perform = __webpack_require__(107);
+var promiseResolve = __webpack_require__(108);
 var PROMISE = 'Promise';
 var TypeError = global.TypeError;
 var process = global.process;
@@ -63255,7 +63507,7 @@ if (!USE_NATIVE) {
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
 __webpack_require__(46)($Promise, PROMISE);
-__webpack_require__(106)(PROMISE);
+__webpack_require__(109)(PROMISE);
 Wrapper = __webpack_require__(12)[PROMISE];
 
 // statics
@@ -63274,7 +63526,7 @@ $export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
     return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
   }
 });
-$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(241)(function (iter) {
+$export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(242)(function (iter) {
   $Promise.all(iter)['catch'](empty);
 })), PROMISE, {
   // 25.4.4.1 Promise.all(iterable)
@@ -63321,17 +63573,17 @@ $export($export.S + $export.F * !(USE_NATIVE && __webpack_require__(241)(functio
 
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var strong = __webpack_require__(233);
-var validate = __webpack_require__(111);
+var strong = __webpack_require__(234);
+var validate = __webpack_require__(114);
 var SET = 'Set';
 
 // 23.2 Set Objects
-module.exports = __webpack_require__(235)(SET, function (get) {
+module.exports = __webpack_require__(236)(SET, function (get) {
   return function Set() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, {
   // 23.2.3.1 Set.prototype.add(value)
@@ -63342,7 +63594,7 @@ module.exports = __webpack_require__(235)(SET, function (get) {
 
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63351,8 +63603,8 @@ module.exports = __webpack_require__(235)(SET, function (get) {
 var $export = __webpack_require__(14);
 var core = __webpack_require__(12);
 var global = __webpack_require__(8);
-var speciesConstructor = __webpack_require__(108);
-var promiseResolve = __webpack_require__(105);
+var speciesConstructor = __webpack_require__(111);
+var promiseResolve = __webpack_require__(108);
 
 $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
   var C = speciesConstructor(this, core.Promise || global.Promise);
@@ -63369,7 +63621,7 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
 
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63377,7 +63629,7 @@ $export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
 // https://github.com/tc39/proposal-promise-try
 var $export = __webpack_require__(14);
 var newPromiseCapability = __webpack_require__(61);
-var perform = __webpack_require__(104);
+var perform = __webpack_require__(107);
 
 $export($export.S, 'Promise', { 'try': function (callbackfn) {
   var promiseCapability = newPromiseCapability.f(this);
@@ -63388,18 +63640,10 @@ $export($export.S, 'Promise', { 'try': function (callbackfn) {
 
 
 /***/ }),
-/* 261 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// https://tc39.github.io/proposal-setmap-offrom/#sec-set.from
-__webpack_require__(249)('Set');
-
-
-/***/ }),
 /* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// https://tc39.github.io/proposal-setmap-offrom/#sec-set.of
+// https://tc39.github.io/proposal-setmap-offrom/#sec-set.from
 __webpack_require__(250)('Set');
 
 
@@ -63407,14 +63651,22 @@ __webpack_require__(250)('Set');
 /* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
-// https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var $export = __webpack_require__(14);
-
-$export($export.P + $export.R, 'Set', { toJSON: __webpack_require__(234)('Set') });
+// https://tc39.github.io/proposal-setmap-offrom/#sec-set.of
+__webpack_require__(251)('Set');
 
 
 /***/ }),
 /* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// https://github.com/DavidBruant/Map-Set.prototype.toJSON
+var $export = __webpack_require__(14);
+
+$export($export.P + $export.R, 'Set', { toJSON: __webpack_require__(235)('Set') });
+
+
+/***/ }),
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(6);
@@ -63543,7 +63795,7 @@ function formatReturnValue(bn, enc, len) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63581,7 +63833,7 @@ module.exports = function hash (buf, fn) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63634,7 +63886,7 @@ module.exports = Hmac
 
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63642,20 +63894,20 @@ module.exports = Hmac
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = __webpack_require__(42)
 exports.createHash = exports.Hash = __webpack_require__(40)
-exports.createHmac = exports.Hmac = __webpack_require__(116)
+exports.createHmac = exports.Hmac = __webpack_require__(119)
 
-var algos = __webpack_require__(216)
+var algos = __webpack_require__(217)
 var algoKeys = Object.keys(algos)
 var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(algoKeys)
 exports.getHashes = function () {
   return hashes
 }
 
-var p = __webpack_require__(130)
+var p = __webpack_require__(133)
 exports.pbkdf2 = p.pbkdf2
 exports.pbkdf2Sync = p.pbkdf2Sync
 
-var aes = __webpack_require__(213)
+var aes = __webpack_require__(214)
 
 exports.Cipher = aes.Cipher
 exports.createCipher = aes.createCipher
@@ -63668,7 +63920,7 @@ exports.createDecipheriv = aes.createDecipheriv
 exports.getCiphers = aes.getCiphers
 exports.listCiphers = aes.listCiphers
 
-var dh = __webpack_require__(273)
+var dh = __webpack_require__(274)
 
 exports.DiffieHellmanGroup = dh.DiffieHellmanGroup
 exports.createDiffieHellmanGroup = dh.createDiffieHellmanGroup
@@ -63676,16 +63928,16 @@ exports.getDiffieHellman = dh.getDiffieHellman
 exports.createDiffieHellman = dh.createDiffieHellman
 exports.DiffieHellman = dh.DiffieHellman
 
-var sign = __webpack_require__(217)
+var sign = __webpack_require__(218)
 
 exports.createSign = sign.createSign
 exports.Sign = sign.Sign
 exports.createVerify = sign.createVerify
 exports.Verify = sign.Verify
 
-exports.createECDH = __webpack_require__(264)
+exports.createECDH = __webpack_require__(265)
 
-var publicEncrypt = __webpack_require__(330)
+var publicEncrypt = __webpack_require__(332)
 
 exports.publicEncrypt = publicEncrypt.publicEncrypt
 exports.privateEncrypt = publicEncrypt.privateEncrypt
@@ -63733,7 +63985,7 @@ exports.constants = {
 
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63805,7 +64057,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63953,7 +64205,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64103,7 +64355,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64165,7 +64417,7 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64428,13 +64680,13 @@ exports.padSplit = function padSplit(num, size, group) {
 
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(117)
-var primes = __webpack_require__(275)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(120)
+var primes = __webpack_require__(276)
 
-var DH = __webpack_require__(274)
+var DH = __webpack_require__(275)
 
 function getDiffieHellman (mod) {
   var prime = new Buffer(primes[mod].prime, 'hex')
@@ -64477,18 +64729,18 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(4);
-var MillerRabin = __webpack_require__(128);
+var MillerRabin = __webpack_require__(131);
 var millerRabin = new MillerRabin();
 var TWENTYFOUR = new BN(24);
 var ELEVEN = new BN(11);
 var TEN = new BN(10);
 var THREE = new BN(3);
 var SEVEN = new BN(7);
-var primes = __webpack_require__(117);
+var primes = __webpack_require__(120);
 var randomBytes = __webpack_require__(42);
 module.exports = DH;
 
@@ -64648,8 +64900,8 @@ function formatReturnValue(bn, enc) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 275 */,
-/* 276 */
+/* 276 */,
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65031,7 +65283,7 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65471,7 +65723,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65658,7 +65910,7 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66603,7 +66855,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66776,7 +67028,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(287);
+  pre = __webpack_require__(288);
 } catch (e) {
   pre = undefined;
 }
@@ -66815,20 +67067,20 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var BN = __webpack_require__(4);
-var HmacDRBG = __webpack_require__(317);
+var HmacDRBG = __webpack_require__(319);
 var elliptic = __webpack_require__(6);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(282);
-var Signature = __webpack_require__(283);
+var KeyPair = __webpack_require__(283);
+var Signature = __webpack_require__(284);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -67062,7 +67314,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67188,7 +67440,7 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67330,7 +67582,7 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67341,8 +67593,8 @@ var elliptic = __webpack_require__(6);
 var utils = elliptic.utils;
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(285);
-var Signature = __webpack_require__(286);
+var KeyPair = __webpack_require__(286);
+var Signature = __webpack_require__(287);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -67455,7 +67707,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67558,7 +67810,7 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67631,7 +67883,7 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 287 */
+/* 288 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -68417,7 +68669,7 @@ module.exports = {
 
 
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68426,7 +68678,7 @@ module.exports = {
 var utils = exports;
 var BN = __webpack_require__(4);
 var minAssert = __webpack_require__(10);
-var minUtils = __webpack_require__(129);
+var minUtils = __webpack_require__(132);
 
 utils.assert = minAssert;
 utils.toArray = minUtils.toArray;
@@ -68544,7 +68796,6 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 289 */,
 /* 290 */,
 /* 291 */,
 /* 292 */,
@@ -68561,14 +68812,16 @@ utils.intFromLE = intFromLE;
 /* 303 */,
 /* 304 */,
 /* 305 */,
-/* 306 */
+/* 306 */,
+/* 307 */,
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/*
  * extsprintf.js: extended POSIX-style sprintf
  */
 
-var mod_assert = __webpack_require__(84);
+var mod_assert = __webpack_require__(87);
 var mod_util = __webpack_require__(51);
 
 /*
@@ -68751,7 +69004,7 @@ function dumpException(ex)
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 307 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68810,29 +69063,29 @@ module.exports = opts => {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 308 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(setImmediate) {
 const EventEmitter = __webpack_require__(24);
 const http = __webpack_require__(77);
-const https = __webpack_require__(123);
+const https = __webpack_require__(126);
 const PassThrough = __webpack_require__(16).PassThrough;
 const urlLib = __webpack_require__(50);
 const querystring = __webpack_require__(72);
-const duplexer3 = __webpack_require__(118);
-const isStream = __webpack_require__(126);
-const getStream = __webpack_require__(119);
-const timedOut = __webpack_require__(150);
+const duplexer3 = __webpack_require__(121);
+const isStream = __webpack_require__(129);
+const getStream = __webpack_require__(122);
+const timedOut = __webpack_require__(153);
 const urlParseLax = __webpack_require__(154);
-const lowercaseKeys = __webpack_require__(127);
-const isRedirect = __webpack_require__(124);
-const unzipResponse = __webpack_require__(416);
-const createErrorClass = __webpack_require__(115);
-const isRetryAllowed = __webpack_require__(125);
+const lowercaseKeys = __webpack_require__(130);
+const isRedirect = __webpack_require__(127);
+const unzipResponse = __webpack_require__(421);
+const createErrorClass = __webpack_require__(118);
+const isRetryAllowed = __webpack_require__(128);
 const Buffer = __webpack_require__(1).Buffer;
-const pkg = __webpack_require__(309);
+const pkg = __webpack_require__(311);
 
 function requestAsEventEmitter(opts) {
 	opts = opts || {};
@@ -69182,8 +69435,8 @@ module.exports = got;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(44).setImmediate))
 
 /***/ }),
-/* 309 */,
-/* 310 */
+/* 311 */,
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69274,7 +69527,7 @@ module.exports = HashBase
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 311 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69328,7 +69581,7 @@ Hmac.prototype.digest = function digest(enc) {
 
 
 /***/ }),
-/* 312 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69481,21 +69734,21 @@ var sh = [
 
 
 /***/ }),
-/* 313 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.sha1 = __webpack_require__(314);
-exports.sha224 = __webpack_require__(315);
-exports.sha256 = __webpack_require__(120);
-exports.sha384 = __webpack_require__(316);
-exports.sha512 = __webpack_require__(121);
+exports.sha1 = __webpack_require__(316);
+exports.sha224 = __webpack_require__(317);
+exports.sha256 = __webpack_require__(123);
+exports.sha384 = __webpack_require__(318);
+exports.sha512 = __webpack_require__(124);
 
 
 /***/ }),
-/* 314 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69503,7 +69756,7 @@ exports.sha512 = __webpack_require__(121);
 
 var utils = __webpack_require__(13);
 var common = __webpack_require__(41);
-var shaCommon = __webpack_require__(122);
+var shaCommon = __webpack_require__(125);
 
 var rotl32 = utils.rotl32;
 var sum32 = utils.sum32;
@@ -69576,14 +69829,14 @@ SHA1.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 315 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(13);
-var SHA256 = __webpack_require__(120);
+var SHA256 = __webpack_require__(123);
 
 function SHA224() {
   if (!(this instanceof SHA224))
@@ -69613,7 +69866,7 @@ SHA224.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 316 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69621,7 +69874,7 @@ SHA224.prototype._digest = function digest(enc) {
 
 var utils = __webpack_require__(13);
 
-var SHA512 = __webpack_require__(121);
+var SHA512 = __webpack_require__(124);
 
 function SHA384() {
   if (!(this instanceof SHA384))
@@ -69655,14 +69908,14 @@ SHA384.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 317 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var hash = __webpack_require__(71);
-var utils = __webpack_require__(129);
+var utils = __webpack_require__(132);
 var assert = __webpack_require__(10);
 
 function HmacDRBG(options) {
@@ -69775,7 +70028,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 /***/ }),
-/* 318 */
+/* 320 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -69865,7 +70118,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 319 */
+/* 321 */
 /***/ (function(module, exports) {
 
 
@@ -69880,7 +70133,7 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 320 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {/**
@@ -71732,10 +71985,10 @@ function stubFalse() {
 
 module.exports = isEqual;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(78)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(81)(module)))
 
 /***/ }),
-/* 321 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -72951,13 +73204,13 @@ module.exports = unionWith;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
-/* 322 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 var inherits = __webpack_require__(0)
-var HashBase = __webpack_require__(323)
+var HashBase = __webpack_require__(325)
 
 var ARRAY16 = new Array(16)
 
@@ -73104,7 +73357,7 @@ module.exports = MD5
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 323 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73206,8 +73459,8 @@ module.exports = HashBase
 
 
 /***/ }),
-/* 324 */,
-/* 325 */
+/* 326 */,
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73217,7 +73470,7 @@ module.exports = HashBase
 
 var asn1 = __webpack_require__(31)
 
-exports.certificate = __webpack_require__(326)
+exports.certificate = __webpack_require__(328)
 
 var RSAPrivateKey = asn1.define('RSAPrivateKey', function () {
   this.seq().obj(
@@ -73336,7 +73589,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 /***/ }),
-/* 326 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73431,7 +73684,7 @@ module.exports = X509Certificate
 
 
 /***/ }),
-/* 327 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// adapted from https://github.com/apatil/pemstrip
@@ -73468,12 +73721,12 @@ module.exports = function (okey, password) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 328 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(132)
-var defaultEncoding = __webpack_require__(131)
-var sync = __webpack_require__(133)
+/* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(135)
+var defaultEncoding = __webpack_require__(134)
+var sync = __webpack_require__(136)
 var Buffer = __webpack_require__(1).Buffer
 
 var ZERO_BUF
@@ -73573,7 +73826,7 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(7)))
 
 /***/ }),
-/* 329 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73594,11 +73847,11 @@ module.exports = function (url) {
 
 
 /***/ }),
-/* 330 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.publicEncrypt = __webpack_require__(332);
-exports.privateDecrypt = __webpack_require__(331);
+exports.publicEncrypt = __webpack_require__(334);
+exports.privateDecrypt = __webpack_require__(333);
 
 exports.privateEncrypt = function privateEncrypt(key, buf) {
   return exports.publicEncrypt(key, buf, true);
@@ -73609,16 +73862,16 @@ exports.publicDecrypt = function publicDecrypt(key, buf) {
 };
 
 /***/ }),
-/* 331 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(49);
-var mgf = __webpack_require__(134);
-var xor = __webpack_require__(136);
+var mgf = __webpack_require__(137);
+var xor = __webpack_require__(139);
 var bn = __webpack_require__(4);
 var crt = __webpack_require__(55);
 var createHash = __webpack_require__(40);
-var withPublic = __webpack_require__(135);
+var withPublic = __webpack_require__(138);
 module.exports = function privateDecrypt(private_key, enc, reverse) {
   var padding;
   if (private_key.padding) {
@@ -73723,16 +73976,16 @@ function compare(a, b){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 332 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(49);
 var randomBytes = __webpack_require__(42);
 var createHash = __webpack_require__(40);
-var mgf = __webpack_require__(134);
-var xor = __webpack_require__(136);
+var mgf = __webpack_require__(137);
+var xor = __webpack_require__(139);
 var bn = __webpack_require__(4);
-var withPublic = __webpack_require__(135);
+var withPublic = __webpack_require__(138);
 var crt = __webpack_require__(55);
 
 var constants = {
@@ -73824,7 +74077,7 @@ function nonZero(len, crypto) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
-/* 333 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module, global) {var __WEBPACK_AMD_DEFINE_RESULT__;/*! https://mths.be/punycode v1.4.1 by @mathias */
@@ -74360,10 +74613,10 @@ function nonZero(len, crypto) {
 
 }(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(78)(module), __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(81)(module), __webpack_require__(5)))
 
 /***/ }),
-/* 334 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74454,7 +74707,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 335 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74546,7 +74799,7 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 336 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // This method of obtaining a reference to the global object needs to be
@@ -74564,7 +74817,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(337);
+module.exports = __webpack_require__(339);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -74580,7 +74833,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 337 */
+/* 339 */
 /***/ (function(module, exports) {
 
 /**
@@ -75316,7 +75569,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 338 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -75509,7 +75762,7 @@ if (hadRuntime) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(7)))
 
 /***/ }),
-/* 339 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -75609,7 +75862,7 @@ module.exports = Sha
 
 
 /***/ }),
-/* 340 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -75714,7 +75967,7 @@ module.exports = Sha1
 
 
 /***/ }),
-/* 341 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -75726,7 +75979,7 @@ module.exports = Sha1
  */
 
 var inherits = __webpack_require__(0)
-var Sha256 = __webpack_require__(137)
+var Sha256 = __webpack_require__(140)
 var Hash = __webpack_require__(29)
 var Buffer = __webpack_require__(1).Buffer
 
@@ -75773,11 +76026,11 @@ module.exports = Sha224
 
 
 /***/ }),
-/* 342 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0)
-var SHA512 = __webpack_require__(138)
+var SHA512 = __webpack_require__(141)
 var Hash = __webpack_require__(29)
 var Buffer = __webpack_require__(1).Buffer
 
@@ -75836,7 +76089,7 @@ module.exports = Sha384
 
 
 /***/ }),
-/* 343 */
+/* 345 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -75847,14 +76100,14 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 344 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(26);
 
 
 /***/ }),
-/* 345 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75887,7 +76140,7 @@ module.exports = __webpack_require__(26);
 
 module.exports = PassThrough;
 
-var Transform = __webpack_require__(140);
+var Transform = __webpack_require__(143);
 
 /*<replacement>*/
 var util = __webpack_require__(11);
@@ -75907,7 +76160,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 346 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -75987,35 +76240,35 @@ module.exports = function () {
 }();
 
 /***/ }),
-/* 347 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(76).PassThrough
 
 
 /***/ }),
-/* 348 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(76).Transform
 
 
 /***/ }),
-/* 349 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(75);
 
 
 /***/ }),
-/* 350 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer, global, process) {var capability = __webpack_require__(143)
+/* WEBPACK VAR INJECTION */(function(Buffer, global, process) {var capability = __webpack_require__(146)
 var inherits = __webpack_require__(0)
-var response = __webpack_require__(351)
-var stream = __webpack_require__(149)
-var toArrayBuffer = __webpack_require__(355)
+var response = __webpack_require__(353)
+var stream = __webpack_require__(152)
+var toArrayBuffer = __webpack_require__(357)
 
 var IncomingMessage = response.IncomingMessage
 var rStates = response.readyStates
@@ -76321,12 +76574,12 @@ var unsafeHeaders = [
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer, __webpack_require__(5), __webpack_require__(7)))
 
 /***/ }),
-/* 351 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process, Buffer, global) {var capability = __webpack_require__(143)
+/* WEBPACK VAR INJECTION */(function(process, Buffer, global) {var capability = __webpack_require__(146)
 var inherits = __webpack_require__(0)
-var stream = __webpack_require__(149)
+var stream = __webpack_require__(152)
 
 var rStates = exports.readyStates = {
 	UNSENT: 0,
@@ -76510,7 +76763,7 @@ IncomingMessage.prototype._onXHRProgress = function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(2).Buffer, __webpack_require__(5)))
 
 /***/ }),
-/* 352 */
+/* 354 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -76521,7 +76774,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 353 */
+/* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -76554,7 +76807,7 @@ module.exports = Array.isArray || function (arr) {
 
 module.exports = PassThrough;
 
-var Transform = __webpack_require__(145);
+var Transform = __webpack_require__(148);
 
 /*<replacement>*/
 var util = __webpack_require__(11);
@@ -76574,7 +76827,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 354 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -76654,7 +76907,7 @@ module.exports = function () {
 }();
 
 /***/ }),
-/* 355 */
+/* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(2).Buffer
@@ -76687,19 +76940,19 @@ module.exports = function (buf) {
 
 
 /***/ }),
-/* 356 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* eslint no-param-reassign: 0 */
 
 
-const got = __webpack_require__(359);
-const VError = __webpack_require__(370);
-const signature = __webpack_require__(358);
+const got = __webpack_require__(361);
+const VError = __webpack_require__(373);
+const signature = __webpack_require__(360);
 
-const isEqual = __webpack_require__(320);
-const unionWith = __webpack_require__(321);
+const isEqual = __webpack_require__(322);
+const unionWith = __webpack_require__(323);
 
 const DEFAULT_SEARCH_PARAMS = {
   host: 'example.com',
@@ -76888,23 +77141,23 @@ module.exports = TravelPayouts;
 
 
 /***/ }),
-/* 357 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(356);
+module.exports = __webpack_require__(358);
 
 
 /***/ }),
-/* 358 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-const crypto = __webpack_require__(267);
+const crypto = __webpack_require__(268);
 
 function makeSignatureString(params) {
   let signature = '';
@@ -76934,29 +77187,29 @@ module.exports = makeSignature;
 
 
 /***/ }),
-/* 359 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(setImmediate) {
 const EventEmitter = __webpack_require__(24);
 const http = __webpack_require__(77);
-const https = __webpack_require__(123);
+const https = __webpack_require__(126);
 const PassThrough = __webpack_require__(16).PassThrough;
 const urlLib = __webpack_require__(50);
 const querystring = __webpack_require__(72);
-const duplexer3 = __webpack_require__(118);
-const isStream = __webpack_require__(126);
-const getStream = __webpack_require__(119);
-const timedOut = __webpack_require__(150);
+const duplexer3 = __webpack_require__(121);
+const isStream = __webpack_require__(129);
+const getStream = __webpack_require__(122);
+const timedOut = __webpack_require__(153);
 const urlParseLax = __webpack_require__(154);
-const lowercaseKeys = __webpack_require__(127);
-const isRedirect = __webpack_require__(124);
-const unzipResponse = __webpack_require__(419);
-const createErrorClass = __webpack_require__(115);
-const isRetryAllowed = __webpack_require__(125);
+const lowercaseKeys = __webpack_require__(130);
+const isRedirect = __webpack_require__(127);
+const unzipResponse = __webpack_require__(424);
+const createErrorClass = __webpack_require__(118);
+const isRetryAllowed = __webpack_require__(128);
 const Buffer = __webpack_require__(1).Buffer;
-const pkg = __webpack_require__(360);
+const pkg = __webpack_require__(362);
 
 function requestAsEventEmitter(opts) {
 	opts = opts || {};
@@ -77306,14 +77559,15 @@ module.exports = got;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(44).setImmediate))
 
 /***/ }),
-/* 360 */,
-/* 361 */,
 /* 362 */,
 /* 363 */,
 /* 364 */,
 /* 365 */,
 /* 366 */,
-/* 367 */
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -77336,7 +77590,7 @@ module.exports = {
 
 
 /***/ }),
-/* 368 */
+/* 371 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -77365,7 +77619,7 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 369 */
+/* 372 */
 /***/ (function(module, exports) {
 
 module.exports = function isBuffer(arg) {
@@ -77376,7 +77630,7 @@ module.exports = function isBuffer(arg) {
 }
 
 /***/ }),
-/* 370 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -77386,7 +77640,7 @@ module.exports = function isBuffer(arg) {
 var mod_assertplus = __webpack_require__(174);
 var mod_util = __webpack_require__(51);
 
-var mod_extsprintf = __webpack_require__(306);
+var mod_extsprintf = __webpack_require__(308);
 var mod_isError = __webpack_require__(11).isError;
 var sprintf = mod_extsprintf.sprintf;
 
@@ -77833,10 +78087,10 @@ WError.prototype.cause = function we_cause(c)
 
 
 /***/ }),
-/* 371 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var indexOf = __webpack_require__(319);
+var indexOf = __webpack_require__(321);
 
 var Object_keys = function (obj) {
     if (Object.keys) return Object.keys(obj)
@@ -77977,9 +78231,6 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 372 */,
-/* 373 */,
-/* 374 */,
 /* 375 */,
 /* 376 */,
 /* 377 */,
@@ -78017,7 +78268,12 @@ exports.createContext = Script.createContext = function (context) {
 /* 409 */,
 /* 410 */,
 /* 411 */,
-/* 412 */
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */
 /***/ (function(module, exports) {
 
 /**
@@ -78050,7 +78306,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 413 */
+/* 418 */
 /***/ (function(module, exports) {
 
 module.exports = extend
@@ -78075,14 +78331,14 @@ function extend() {
 
 
 /***/ }),
-/* 414 */,
-/* 415 */,
-/* 416 */,
-/* 417 */,
-/* 418 */,
 /* 419 */,
 /* 420 */,
-/* 421 */
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */
 /***/ (function(module, exports) {
 
 /*
@@ -78138,7 +78394,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 422 */
+/* 427 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -78157,7 +78413,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(412)
+var listToStyles = __webpack_require__(417)
 
 /*
 type StyleObject = {
@@ -78360,4 +78616,4 @@ function applyToTag (styleElement, obj) {
 
 /***/ })
 ]);
-//# sourceMappingURL=vendor.b78c87be472b22ea4bff.js.map
+//# sourceMappingURL=vendor.5fface2072f3422ff0e7.js.map

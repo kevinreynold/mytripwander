@@ -18,7 +18,6 @@ import Framework7Vue from 'framework7-vue'
 import Framework7ThemeColorsMaterial from 'framework7/dist/css/framework7.material.colors.min.css'
 import Framework7ThemeMaterial from './css/framework7.material.css'
 
-
 // Import F7 Icons
 import Framework7Icons from 'framework7-icons/css/framework7-icons.css'
 
@@ -31,6 +30,8 @@ import AppStyles from './css/app.css'
 
 // Import FontAwesome
 import FontAwesome from './assets/font-awesome/css/font-awesome.min.css'
+
+// Plugins
 
 // Import Routes
 import Routes from './routes.js'

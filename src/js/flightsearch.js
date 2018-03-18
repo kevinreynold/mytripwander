@@ -147,7 +147,12 @@ function processData(data){
   //SORT BY PRICE.
   ticket_list.sort((a, b) => a.unified_price - b.unified_price);
   // console.log(ticket_list);
+  store.original_flight_search_result = ticket_list;
   store.flight_search_result = ticket_list;
+  window.f7.addNotification({
+      message: store.flight_search_result.length + ' tickets found.',
+      hold: 1500
+  });
   goTo();
 }
 
@@ -228,9 +233,12 @@ travelpayouts.getRedirectLink = async function(url){
     });
 
     store.flight_ticket_url = result;
-    goTo('/flight-redirect/');
+    var url_redirect = String(store.flight_ticket_url.url);
+    window.open(url_redirect, '_blank');
+
+    // goTo('/flight-redirect/');
     setTimeout(function () {
-      // window.f7.hidePreloader();
+      window.f7.hidePreloader();
     }, 100);
   } catch (e) {
     setTimeout(function () {
@@ -241,6 +249,29 @@ travelpayouts.getRedirectLink = async function(url){
     }, 1000);
   }
 };
+
+travelpayouts.cobaLogin = async function(){
+    var result = await got.get("http://127.0.0.1:5000/test", {retries: 2})
+    .then(res => {
+      var res = JSON.parse(res.body);
+      console.log(res);
+    });
+    // var params = {
+    // 	email : "coolxint@gmail.com",
+    // 	password : "qweqwe"
+    // }
+    //
+    // var result = await got.post("http://127.0.0.1:5000/login", {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(params),
+    // })
+    // .then(res => {
+    //   var res = JSON.parse(res.body);
+    //   return res;
+    // });
+}
 
 
 export default travelpayouts;

@@ -72,42 +72,27 @@
     <!-- Pilih Destinasi-->
     <transition name="return-fade" mode="out-in">
     <div v-if="page == 1" class="tabs">
-      <f7-block inner>TRAVELERS</f7-block>
-      <f7-block class="modal-container" inner no-hairlines>
-
-        <div class="passenger-input">
-          <div class="passenger-icon">
-            <img src="../assets/flight-icon/child.png" alt="child" width="45px">
-          </div>
-          <div class="passenger-desc">
-            Child<br>
-            <span>(age 2-12)</span>
-          </div>
-          <div class="passenger-counter">
-            <div class="counter-dec" v-on:click="passenger.children > 0 ? passenger.children -= 1 : 0">-</div>
-            <div class="counter-desc">{{passenger.children}}</div>
-            <div class="counter-inc" v-on:click="passenger.children < 6 ? passenger.children += 1 : 6">+</div>
-          </div>
-        </div>
-
-      </f7-block>
-      <f7-block class="modal-container" inner>Rooms</f7-block>
-      <f7-block class="modal-container"inner no-hairlines>
-        <div class="passenger-input">
-          <div class="passenger-icon">
-            <img src="../assets/flight-icon/rooms.png" alt="adult" width="45px">
-          </div>
-          <div class="passenger-desc">
-            Number of Rooms<br>
-            <span>(Maximum 4)</span>
-          </div>
-          <div class="passenger-counter">
-            <div class="counter-dec" v-on:click="rooms > 1 ? rooms -= 1 : 1">-</div>
-            <div class="counter-desc">{{rooms}}</div>
-            <div class="counter-inc" v-on:click="rooms < 9 ? rooms += 1 : 9">+</div>
-          </div>
-        </div>
-      </f7-block>
+      <f7-block class="less-margin" inner>Choose Your Destination</f7-block>
+      <div class="list-block choose-destination">
+        <!-- Kota Asal -->
+        <f7-card>
+          <f7-card-header>
+              Start Hometown
+          </f7-card-header>
+          <f7-card-content>
+              <div class="starting-city underline">
+                <span>Select your first city</span>
+              </div>
+              <div class="start-date">
+                Start Date :
+                <input style="margin-left:12%;" type="date"/>
+              </div>
+              <div class="returned-here">
+                <input type="checkbox"/> I'm returning here
+              </div>
+          </f7-card-content>
+        </f7-card>
+      </div>
     </div>
     </transition>
 
@@ -156,6 +141,10 @@ export default {
 </script>
 
 <style scoped>
+  .less-margin{
+      margin-top: 2%;
+  }
+
   .modal-container{
     margin-top: -10%;
   }
@@ -229,6 +218,39 @@ export default {
    margin: 5%;
    overflow: auto;
    z-index: 5000;
+ }
+
+ /* Choose Destionation */
+ .choose-destination{
+   margin-top: -4.5%;
+ }
+
+ .card-header{
+   background-color: #009688;
+   color: white;
+ }
+
+ .starting-city{
+   font-size: 1.6em;
+   text-align: center;
+   color: #009688;
+ }
+
+ .underline{
+   text-decoration-line: underline;
+   text-decoration-style: dashed;
+ }
+
+ .start-date{
+   width: 40%;
+   margin: auto;
+   margin-top: 2%;
+   text-align: center;
+ }
+
+ .returned-here{
+   text-align: right;
+   margin-top: 2%;
  }
 
  /* animation page */

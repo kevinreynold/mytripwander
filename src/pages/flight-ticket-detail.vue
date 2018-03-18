@@ -42,7 +42,6 @@ export default {
     },
     buyTicket(){
       travelpayouts.getRedirectLink(self.flight_details.url);
-
       // var mainView = Dom7('#main-view')[0].f7View;
       // mainView.router.load({url: '/flight-redirect/'});
     }

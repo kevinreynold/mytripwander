@@ -69,7 +69,7 @@ export default {
   .ticket-price{
     width: 50%;
     height: 100%;
-    font-size: 1.35em;
+    font-size: 1.5em;
     font-weight: bold;
     color: #2C3E50;
     text-align: right;

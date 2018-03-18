@@ -16,6 +16,10 @@ export default [
       component: require('./pages/flightbookings.vue')
   },
   {
+      path: '/hotel/',
+      component: require('./pages/hotelbookings.vue')
+  },
+  {
       path: '/flight-result/',
       component: require('./pages/flight-search-result.vue')
   },

@@ -8,7 +8,7 @@
     "pgclean": "del /q pg\\www\\* && for /d %p in (pg\\www\\*.*) do rmdir \"%p\" /s /q",
     "pgcopy": "xcopy res pg\\www\\res /e /i /h /k && xcopy dist\\static\\fonts dist\\static\\css\\static\\fonts /e /i /h /k && xcopy dist pg\\www /e /i /h /k",
     "pgrun": "cd pg && phonegap build android",
-    "pg": "npm run build && npm run pgclean && npm run pgcopy && npm run pgrun"
+    "pg": "npm run distclean && npm run build && npm run pgclean && npm run pgcopy && npm run pgrun"
   },
   "author": "Reynold Kevin",
   "dependencies": {
@@ -55,7 +55,8 @@
     "webpack-hot-middleware": "^2.16.1",
     "webpack-merge": "^2.6.1",
     "travelpayouts-api": "1.0.0",
-    "got": "^6.2.0"
+    "got": "^6.2.0",
+    "ion-rangeslider": "2.2.0"
   },
   "engines": {
     "node": ">= 4.0.0",
