@@ -21,7 +21,7 @@
                 <img src="../assets/flight-icon/depature_date.png" alt="Departure" width="30px">
               </div>
               <div class="grid-input">
-                <input type="date" :min="today" :max="to_date" v-model="from_date"/>
+                <input type="date" :min="today" :max="checkout_date" v-model="checkin_date"/>
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@
                   <img src="../assets/flight-icon/return_date.png" alt="Departure" width="30px">
                 </div>
                 <div class="grid-input">
-                  <input type="date" :min="from_date" v-model="to_date"/>
+                  <input type="date" :min="checkin_date" v-model="checkout_date"/>
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import travelpayouts from "../js/flightsearch"
+import hotel_api from "../js/hotelsearch"
 import store from "../js/store"
 
 let self;
@@ -138,8 +138,8 @@ export default {
     },
     new_location: '',
     today: getDateAfterDays(0),
-    from_date: getDateAfterDays(7),
-    to_date: getDateAfterDays(10),
+    checkin_date: getDateAfterDays(7),
+    checkout_date: getDateAfterDays(10),
     passenger: {
       adults: 1,
       children: 0
@@ -167,31 +167,28 @@ export default {
     },
     doSearch(){
       //params
-      if (self.location.id === "") {
-        window.f7.addNotification({
-            message: 'Please make sure that location is filled'
-        });
-      }
-      else{
-        //options
-        // var passenger_data = {
-        //   host: 'mytripwander.com',
-        //   user_ip: '127.0.0.1',
-        //   locale: 'en',
-        //   trip_class: document.getElementById("booking-class").options[document.getElementById("booking-class").selectedIndex].value,
-        //   passengers: {
-        //     adults: self.passenger.adults,
-        //     children: self.passenger.children,
-        //     infants: self.passenger.infants
-        //   },
-        //   know_english: true
-        // };
+      // if (self.location.id === "") {
+      //   window.f7.addNotification({
+      //       message: 'Please make sure that location is filled'
+      //   });
+      // }
+      // else{
+        var passenger_data = {
+          adults: self.passenger.adults,
+          children: self.passenger.children,
+          checkin: self.checkin_date,
+          checkout: self.checkout_date,
+          type: self.location.type,
+          place_id: self.location.id,
+          name: self.location.name
+        };
 
         // console.log(flight_data);
-        // console.log(passenger_data);
-        // store.flight_booking_data = flight_data;
-        // travelpayouts.getPriceList(flight_data,passenger_data);
-      }
+        // console.log(JSON.stringify(passenger_data));
+        store.hotel_booking_data = passenger_data;
+        // hotel_api.hotelSearch(passenger_data);
+        hotel_api.hotelSeachLocal();
+      // }
     },
   },
   mounted() {
@@ -243,7 +240,7 @@ export default {
         },
         onChange: function(autocomplete, value){
           self.location = {
-            type : value.type,
+            type : value.type.toLowerCase(),
             id : value.id,
             name : value.fullName
           };

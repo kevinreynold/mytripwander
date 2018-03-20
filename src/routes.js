@@ -16,10 +16,6 @@ export default [
       component: require('./pages/flightbookings.vue')
   },
   {
-      path: '/hotel/',
-      component: require('./pages/hotelbookings.vue')
-  },
-  {
       path: '/flight-result/',
       component: require('./pages/flight-search-result.vue')
   },
@@ -30,6 +26,18 @@ export default [
   {
       path: '/flight-redirect/',
       component: require('./pages/flight-redirect.vue')
+  },
+  {
+      path: '/hotel/',
+      component: require('./pages/hotelbookings.vue')
+  },
+  {
+      path: '/hotel-city-result/',
+      component: require('./pages/hotel-city-result.vue')
+  },
+  {
+      path: '/hotel-hotel-result/',
+      component: require('./pages/hotel-hotel-result.vue')
   },
   {
       path: '/about/',

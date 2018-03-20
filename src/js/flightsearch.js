@@ -199,7 +199,7 @@ travelpayouts.getPriceList = async function(flight_data,passenger_data){
 
 // flight-api-result
 // tokyo-round-trip
-travelpayouts.getPriceListLocal = function(json = "tokyo-round-trip"){
+travelpayouts.getPriceListLocal = function(json = "flight-api-result"){
   window.f7.showPreloader();
   try {
     var data = $.parseJSON($.ajax({

@@ -22,7 +22,14 @@
     </f7-fab>
 
     <div class="list-block flight-search-result">
-      <flight_card class="dynamic-component" v-for="flight_detail in flight_search_result" :key="flight_detail.url" :flight_detail="flight_detail"/>
+      <slot v-if="flight_search_result.length > 0">
+        <flight_card class="dynamic-component" v-for="flight_detail in flight_search_result" :key="flight_detail.url" :flight_detail="flight_detail"/>
+      </slot>
+      <slot v-else-if="flight_search_result.length == 0">
+        <f7-block class="not-found" inner>
+          Not found any tickets. Please try another filter :)
+        </f7-block>
+      </slot>
     </div>
 
     <f7-popup id="popup-sort">
@@ -90,7 +97,14 @@
         </slot>
       </div>
       <f7-block class="button-margin" inner no-hairlines>
-        <f7-button fill color="teal" @click="doFilter">Apply Filters</f7-button>
+        <f7-grid>
+          <f7-col width="75">
+            <f7-button fill color="teal" @click="doFilter">Apply Filters</f7-button>
+          </f7-col>
+          <f7-col width="25">
+            <f7-button fill color="teal" @click="resetFilter">Reset</f7-button>
+          </f7-col>
+        </f7-grid>
       </f7-block>
     </f7-popup>
   </f7-page>
@@ -192,6 +206,44 @@ function resetInfiniteScroll(type){
   }, 1500);
 }
 
+function resetFilters(){
+  self.scrollUp();
+  window.f7.showPreloader();
+  setTimeout(function () {
+    store.flight_search_result = store.original_flight_search_result;
+    store.sort_by = "price";
+    store.price_filter = {
+      from: 0,
+      to: 0
+    };
+    store.outbond_departure = {
+      from : 0,
+      to: 48
+    };
+    store.outbond_arrival = {
+      from : 0,
+      to: 48
+    };
+    store.return_departure = {
+      from : 0,
+      to: 48
+    };
+    store.return_arrival = {
+      from : 0,
+      to: 48
+    };
+    var mainView = Dom7('#main-view')[0].f7View;
+    mainView.router.refreshPage();
+    window.f7.closeModal("#popup-filter", true);
+    window.f7.closeModal("#popup-sort", true);
+    window.f7.hidePreloader();
+    window.f7.addNotification({
+        message: store.flight_search_result.length + ' tickets found.',
+        hold: 1500
+    });
+  }, 1500);
+}
+
 function get24Hours(interval = 30){
   let start = 0;
   let result = [];
@@ -234,32 +286,43 @@ function sortSearchResult(){
 
 function filterSearchResult(x){
   let answer = false;
-  if(x.price >= self.price_filter.from && x.price <= self.price_filter.to)
+  if(x.price >= self.price_filter.from && x.price <= self.price_filter.to){
     answer = true;
-  else
+  }
+  else{
     return false;
+  }
 
-  if(new Date('1970/01/01 ' + x.display[0].departure_airport.time) >= new Date('1970/01/01 ' + self.outbond_departure.from_value) && new Date('1970/01/01 ' + x.display[0].departure_airport.time) <= new Date('1970/01/01 ' + self.outbond_departure.to_value))
+  if(new Date('1970/01/01 ' + x.display[0].departure_airport.time) >= new Date('1970/01/01 ' + self.outbond_departure.from_value) && new Date('1970/01/01 ' + x.display[0].departure_airport.time) <= new Date('1970/01/01 ' + self.outbond_departure.to_value)){
     answer = true;
-  else
+  }
+  else{
     return false;
+  }
 
-  if(new Date('1970/01/01 ' + x.display[0].arrival_airport.time) >= new Date('1970/01/01 ' + self.outbond_arrival.from_value) && new Date('1970/01/01 ' + x.display[0].arrival_airport.time) <= new Date('1970/01/01 ' + self.outbond_arrival.to_value))
+  if(new Date('1970/01/01 ' + x.display[0].arrival_airport.time) >= new Date('1970/01/01 ' + self.outbond_arrival.from_value) && new Date('1970/01/01 ' + x.display[0].arrival_airport.time) <= new Date('1970/01/01 ' + self.outbond_arrival.to_value)){
     answer = true;
-  else
+  }
+  else{
     return false;
+  }
 
   if(self.flight_data.length > 1){
-    if(new Date('1970/01/01 ' + x.display[1].departure_airport.time) >= new Date('1970/01/01 ' + self.return_departure.from_value) && new Date('1970/01/01 ' + x.display[1].departure_airport.time) <= new Date('1970/01/01 ' + self.return_departure.to_value))
+    if(new Date('1970/01/01 ' + x.display[1].departure_airport.time) >= new Date('1970/01/01 ' + self.return_departure.from_value) && new Date('1970/01/01 ' + x.display[1].departure_airport.time) <= new Date('1970/01/01 ' + self.return_departure.to_value)){
       answer = true;
-    else
+    }
+    else{
       return false;
+    }
 
-    if(new Date('1970/01/01 ' + x.display[1].arrival_airport.time) >= new Date('1970/01/01 ' + self.return_arrival.from_value) && new Date('1970/01/01 ' + x.display[1].arrival_airport.time) <= new Date('1970/01/01 ' + self.return_arrival.to_value))
+    if(new Date('1970/01/01 ' + x.display[1].arrival_airport.time) >= new Date('1970/01/01 ' + self.return_arrival.from_value) && new Date('1970/01/01 ' + x.display[1].arrival_airport.time) <= new Date('1970/01/01 ' + self.return_arrival.to_value)){
       answer = true;
-    else
+    }
+    else{
       return false;
+    }
   }
+
   return answer;
 }
 
@@ -416,8 +479,8 @@ export default {
     self.flight_search_result_full = store.flight_search_result;
     self.flight_search_result = self.flight_search_result_full;
 
-    console.log(self.original_flight_search_result.length);
-    console.log(self.flight_search_result_full.length);
+    // console.log(self.original_flight_search_result.length);
+    // console.log(self.flight_search_result_full.length);
 
     self.price.min = self.original_flight_search_result[0].price;
     self.price.max = self.original_flight_search_result[self.original_flight_search_result.length-1].price;
@@ -481,10 +544,21 @@ export default {
       self.flight_search_result_full = self.flight_search_result_full.filter(filterSearchResult);
       sortSearchResult();
       resetInfiniteScroll("filter");
-      window.f7.addNotification({
-          message: self.flight_search_result_full.length + ' tickets found.',
-          hold: 1500
-      });
+      if(self.flight_search_result_full.length > 0){
+        window.f7.addNotification({
+            message: self.flight_search_result_full.length + ' tickets found.',
+            hold: 1500
+        });
+      }
+      else {
+        window.f7.addNotification({
+            message: '0 ticket found.',
+            hold: 1500
+        });
+      }
+    },
+    resetFilter(){
+      resetFilters();
     },
     clearData(){
       store.flight_search_result = [];
@@ -541,6 +615,12 @@ export default {
     width: 0px;
     height: 20px;
     border: 1px solid white;
+  }
+
+  .not-found{
+    padding-top: 60px;
+    color: rgba(0, 0, 0, 0.45);
+    text-align: center;
   }
 
   .modal-container{
