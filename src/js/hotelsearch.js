@@ -42,9 +42,18 @@ hotel_api.hotelSearch = async function(passenger_data){
         goTo('/hotel-city-result/');
       }
       else if(passenger_data.type === "hotel"){
-        store.original_hotel_hotel_search_result = data.result;
-        store.hotel_hotel_search_result = data.result;
-        goTo('/hotel-hotel-result/');
+        if(data.result.length > 0){
+          store.hotel_details = data.result[0];
+          goTo('/hotel-hotel-result/');
+        }
+        else{
+          setTimeout(function () {
+            window.f7.hidePreloader();
+            window.f7.addNotification({
+                message: 'No Rooms Available..'
+            });
+          }, 1000);
+        }
       }
 
       setTimeout(function () {
@@ -62,14 +71,19 @@ hotel_api.hotelSearch = async function(passenger_data){
 
 // hotel_search_hongkong_city
 // hotel_search_hongkong_hotel
-hotel_api.hotelSeachLocal = function(json = "hotel_search_hongkong_city"){
+hotel_api.hotelSeachLocal = async function(json = "hotel_search_hongkong_city"){
   window.f7.showPreloader();
   try {
-    var data = $.parseJSON($.ajax({
-      url: "http://mytripwander.com/test/"+ json +".json",
-      dataType: "json",
-      async: false
-    }).responseText);
+    // var data = $.parseJSON($.ajax({
+    //   url: "http://mytripwander.com/test/"+ json +".json",
+    //   dataType: "json",
+    //   async: false
+    // }).responseText);
+    var data = await got.get("http://mytripwander.com/test/"+ json +".json",{retries: 2})
+    .then(res => {
+      var res = JSON.parse(res.body);
+      return res;
+    });
 
     if(json == "hotel_search_hongkong_city"){
       store.original_hotel_city_search_result = data.result;
@@ -81,8 +95,7 @@ hotel_api.hotelSeachLocal = function(json = "hotel_search_hongkong_city"){
       goTo('/hotel-city-result/');
     }
     else{
-      store.original_hotel_hotel_search_result = data.result;
-      store.hotel_hotel_search_result = data.result;
+      store.hotel_details = data.result[0];
       goTo('/hotel-hotel-result/');
     }
 

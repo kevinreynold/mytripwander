@@ -167,12 +167,12 @@ export default {
     },
     doSearch(){
       //params
-      // if (self.location.id === "") {
-      //   window.f7.addNotification({
-      //       message: 'Please make sure that location is filled'
-      //   });
-      // }
-      // else{
+      if (self.location.id === "") {
+        window.f7.addNotification({
+            message: 'Please make sure that location is filled'
+        });
+      }
+      else{
         var passenger_data = {
           adults: self.passenger.adults,
           children: self.passenger.children,
@@ -186,9 +186,9 @@ export default {
         // console.log(flight_data);
         // console.log(JSON.stringify(passenger_data));
         store.hotel_booking_data = passenger_data;
-        // hotel_api.hotelSearch(passenger_data);
-        hotel_api.hotelSeachLocal();
-      // }
+        hotel_api.hotelSearch(passenger_data);
+        // hotel_api.hotelSeachLocal();
+      }
     },
   },
   mounted() {

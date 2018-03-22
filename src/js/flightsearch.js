@@ -199,15 +199,19 @@ travelpayouts.getPriceList = async function(flight_data,passenger_data){
 
 // flight-api-result
 // tokyo-round-trip
-travelpayouts.getPriceListLocal = function(json = "flight-api-result"){
+travelpayouts.getPriceListLocal = async function(json = "flight-api-result"){
   window.f7.showPreloader();
   try {
-    var data = $.parseJSON($.ajax({
-      url: "http://mytripwander.com/test/"+ json +".json",
-      dataType: "json",
-      async: false
-    }).responseText);
-    // console.log(data);
+    // var data = $.parseJSON($.ajax({
+    //   url: "http://mytripwander.com/test/"+ json +".json",
+    //   dataType: "json",
+    //   async: false
+    // }).responseText);
+    var data = await got.get("http://mytripwander.com/test/"+ json +".json",{retries: 2})
+    .then(res => {
+      var res = JSON.parse(res.body);
+      return res;
+    });
 
     processData(data);
     setTimeout(function () {
@@ -249,29 +253,5 @@ travelpayouts.getRedirectLink = async function(url){
     }, 1000);
   }
 };
-
-travelpayouts.cobaLogin = async function(){
-    var result = await got.get("http://127.0.0.1:5000/test", {retries: 2})
-    .then(res => {
-      var res = JSON.parse(res.body);
-      console.log(res);
-    });
-    // var params = {
-    // 	email : "coolxint@gmail.com",
-    // 	password : "qweqwe"
-    // }
-    //
-    // var result = await got.post("http://127.0.0.1:5000/login", {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(params),
-    // })
-    // .then(res => {
-    //   var res = JSON.parse(res.body);
-    //   return res;
-    // });
-}
-
 
 export default travelpayouts;

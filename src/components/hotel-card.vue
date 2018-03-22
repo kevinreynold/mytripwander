@@ -23,7 +23,7 @@
         <f7-icon :class="{ checked: stars[3] }" fa="star"></f7-icon>
         <f7-icon :class="{ checked: stars[4] }" fa="star"></f7-icon>
       </div>
-      <div class="hotel-clicked" v-on:click="showHotelDetail"><f7-icon f7="chevron_down" size="150%"></f7-icon></div>
+      <div class="hotel-clicked" v-on:click="showHotelDetail(hotel_detail)"><f7-icon f7="chevron_down" size="150%"></f7-icon></div>
     </f7-card-footer>
   </f7-card>
 </template>
@@ -34,7 +34,7 @@ import store from "../js/store"
 let self;
 
 export default {
-  name: "flight-card",
+  name: "hotel-card",
   props:{
     hotel_detail: { type: Object },
   },
@@ -60,7 +60,8 @@ export default {
         self.stars[i] = true;
       }
     },
-    showHotelDetail() {
+    showHotelDetail(hotel_detail) {
+      // console.log(hotel_detail.name);
       store.hotel_details = hotel_detail;
       var mainView = Dom7('#main-view')[0].f7View;
       mainView.router.load({url: '/hotel-hotel-result/'});
@@ -171,7 +172,7 @@ export default {
     float: left;
   }
 
-  .hotel-start-rating{
+  .hotel-star-rating{
     width: 70%;
     overflow: auto;
     /*margin-top: -40px;*/

@@ -32,6 +32,7 @@ import AppStyles from './css/app.css'
 import FontAwesome from './assets/font-awesome/css/font-awesome.min.css'
 
 // Plugins
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 // Import Routes
 import Routes from './routes.js'
@@ -40,6 +41,15 @@ import Routes from './routes.js'
 import App from './app'
 
 // Init F7 Vue Plugin
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCxrMcKXjC6BwEOqQr_jpITTcGgAh1w4KI',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+    // OR: libraries: 'places,drawing'
+    // OR: libraries: 'places,drawing,visualization'
+    // (as you require)
+  }
+})
 Vue.use(VueResource)
 Vue.use(Framework7Vue)
 

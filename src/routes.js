@@ -40,6 +40,10 @@ export default [
       component: require('./pages/hotel-hotel-result.vue')
   },
   {
+      path: '/hotel-room-deals/',
+      component: require('./pages/hotel-room-deals.vue')
+  },
+  {
       path: '/about/',
       component: require('./pages/about.vue')
   },

@@ -56,7 +56,8 @@
     "webpack-merge": "^2.6.1",
     "travelpayouts-api": "1.0.0",
     "got": "^6.2.0",
-    "ion-rangeslider": "2.2.0"
+    "ion-rangeslider": "2.2.0",
+    "vue2-google-maps": "0.8.11"
   },
   "engines": {
     "node": ">= 4.0.0",

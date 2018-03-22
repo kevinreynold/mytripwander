@@ -277,7 +277,6 @@ function filterSearchResult(x){
   return answer;
 }
 
-
 export default {
   components: {
     hotel_card
@@ -384,10 +383,10 @@ export default {
     self.price.max = sort_data[sort_data.length-1].minPriceTotal;
     self.price.value = self.price.min;
 
-    console.log(self.original_hotel_city_search_result.length);
-    console.log(self.hotel_city_search_result_full.length);
-
-    console.log(self.hotel_city_search_result_full);
+    // console.log(self.original_hotel_city_search_result.length);
+    // console.log(self.hotel_city_search_result_full.length);
+    //
+    // console.log(self.hotel_city_search_result_full);
   },
   methods: {
     scrollUp() {
