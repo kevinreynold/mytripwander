@@ -195,8 +195,14 @@ function animateRotate(element, degree, dur){
         }
     });
 }
+
 function getDateAfterDays(day){
   var date = new Date(new Date().getTime() + day * 24 * 60 * 60 * 1000);
+  return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
+}
+
+function getDateAfter(cur_date, day){
+  var date = new Date(cur_date.getTime() + day * 24 * 60 * 60 * 1000);
   return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
 }
 
@@ -221,7 +227,7 @@ export default {
     isSwapped: false,
     today: getDateAfterDays(0),
     depart_date: getDateAfterDays(7),
-    return_date: getDateAfterDays(10),
+    return_date: getDateAfterDays(1000),
     passenger: {
       adults: 1,
       children: 0,
@@ -243,6 +249,16 @@ export default {
   methods: {
     tabClick(mode) {
       self.mode = mode;
+      if(mode === "one-way"){
+        self.return_date = getDateAfterDays(1000);
+      }
+      else if(mode === "round-trip"){
+        let split_depart_date = self.depart_date.split('-');
+        let depart_date_date = new Date(parseInt(split_depart_date[0]), parseInt(split_depart_date[1])-1, parseInt(split_depart_date[2]));
+        self.return_date = getDateAfter(depart_date_date, 3);
+      }
+      console.log(self.depart_date);
+      console.log(self.return_date);
     },
     clearText(e){
       e.preventDefault();
@@ -332,8 +348,8 @@ export default {
         // console.log(flight_data);
         // console.log(passenger_data);
         store.flight_booking_data = flight_data;
-        // travelpayouts.getPriceListLocal();
-        travelpayouts.getPriceList(flight_data,passenger_data);
+        travelpayouts.getPriceListLocal();
+        // travelpayouts.getPriceList(flight_data,passenger_data);
       }
     },
   },
@@ -366,7 +382,7 @@ export default {
                 dataType: 'json',
                 success: function (data) {
                     for (var i = 0; i < data.length; i++) {
-                        if (data[i].city_fullname.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
+                        if (data[i].city_fullname.toLowerCase().indexOf(term.toLowerCase()) >= 0 || data[i].city_code.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
                           data[i].results = data[i].city_code + ' | ' + data[i].city_fullname;
                           results.push(data[i]);
                         }
@@ -421,7 +437,7 @@ export default {
                 dataType: 'json',
                 success: function (data) {
                     for (var i = 0; i < data.length; i++) {
-                        if (data[i].city_fullname.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
+                        if (data[i].city_fullname.toLowerCase().indexOf(term.toLowerCase()) >= 0 || data[i].city_code.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
                           data[i].results = data[i].city_code + ' | ' + data[i].city_fullname;
                           results.push(data[i]);
                         }

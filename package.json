@@ -57,7 +57,8 @@
     "travelpayouts-api": "1.0.0",
     "got": "^6.2.0",
     "ion-rangeslider": "2.2.0",
-    "vue2-google-maps": "0.8.11"
+    "vue2-google-maps": "0.8.11",
+    "vue-form-wizard" : "0.8.4"
   },
   "engines": {
     "node": ">= 4.0.0",

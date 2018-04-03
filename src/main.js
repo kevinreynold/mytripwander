@@ -33,6 +33,8 @@ import FontAwesome from './assets/font-awesome/css/font-awesome.min.css'
 
 // Plugins
 import * as VueGoogleMaps from 'vue2-google-maps'
+import VueFormWizard from 'vue-form-wizard'
+import './css/vue-form-wizard.css'
 
 // Import Routes
 import Routes from './routes.js'
@@ -50,6 +52,7 @@ Vue.use(VueGoogleMaps, {
     // (as you require)
   }
 })
+Vue.use(VueFormWizard)
 Vue.use(VueResource)
 Vue.use(Framework7Vue)
 

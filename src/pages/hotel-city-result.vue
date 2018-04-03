@@ -206,7 +206,7 @@ function resetFilters(){
   self.scrollUp();
   window.f7.showPreloader();
   setTimeout(function () {
-    store.hotel_city_search_result = store.original_hotel_city_search_result;
+    store.hotel_city_search_result = copy(store.original_hotel_city_search_result);
     store.hotel_sort_by = "popularity";
     store.hotel_price_filter = {
       from: 0,
@@ -371,8 +371,8 @@ export default {
     self = this;
     self.hotel_booking_data = store.hotel_booking_data;
 
-    self.original_hotel_city_search_result = store.original_hotel_city_search_result;
-    self.hotel_city_search_result_full = store.hotel_city_search_result;
+    self.original_hotel_city_search_result = copy(store.original_hotel_city_search_result);
+    self.hotel_city_search_result_full = copy(store.hotel_city_search_result);
 
     self.hotel_city_search_result = self.hotel_city_search_result_full.slice(0,3);
 

@@ -151,7 +151,7 @@ function processData(data){
   store.flight_search_result = ticket_list;
   window.f7.addNotification({
       message: store.flight_search_result.length + ' tickets found.',
-      hold: 1500
+      hold: 2500
   });
   goTo();
 }
@@ -199,7 +199,7 @@ travelpayouts.getPriceList = async function(flight_data,passenger_data){
 
 // flight-api-result
 // tokyo-round-trip
-travelpayouts.getPriceListLocal = async function(json = "flight-api-result"){
+travelpayouts.getPriceListLocal = async function(json = "tokyo-round-trip"){
   window.f7.showPreloader();
   try {
     // var data = $.parseJSON($.ajax({

@@ -210,7 +210,7 @@ function resetFilters(){
   self.scrollUp();
   window.f7.showPreloader();
   setTimeout(function () {
-    store.flight_search_result = store.original_flight_search_result;
+    store.flight_search_result = copy(store.original_flight_search_result);
     store.sort_by = "price";
     store.price_filter = {
       from: 0,
@@ -239,7 +239,7 @@ function resetFilters(){
     window.f7.hidePreloader();
     window.f7.addNotification({
         message: store.flight_search_result.length + ' tickets found.',
-        hold: 1500
+        hold: 2500
     });
   }, 1500);
 }
@@ -324,6 +324,16 @@ function filterSearchResult(x){
   }
 
   return answer;
+}
+
+function copy(o) {
+   var output, v, key;
+   output = Array.isArray(o) ? [] : {};
+   for (key in o) {
+       v = o[key];
+       output[key] = (typeof v === "object") ? copy(v) : v;
+   }
+   return output;
 }
 
 export default {
@@ -475,9 +485,9 @@ export default {
     // console.log(store.return_arrival);
 
     // store.flight_search_result = store.flight_search_result.slice(0,12);
-    self.original_flight_search_result = store.original_flight_search_result;
-    self.flight_search_result_full = store.flight_search_result;
-    self.flight_search_result = self.flight_search_result_full;
+    self.original_flight_search_result = copy(store.original_flight_search_result);
+    self.flight_search_result_full = copy(store.flight_search_result);
+    self.flight_search_result = copy(self.flight_search_result_full);
 
     // console.log(self.original_flight_search_result.length);
     // console.log(self.flight_search_result_full.length);
@@ -490,6 +500,8 @@ export default {
     // console.log(JSON.stringify(self.flight_data));
     // console.log(JSON.stringify(store.flight_search_result[0]));
     // console.log(self.flight_search_result);
+    // console.log(store.price_filter);
+    // console.log(JSON.stringify(self.price));
   },
   methods: {
     scrollUp() {
@@ -547,13 +559,13 @@ export default {
       if(self.flight_search_result_full.length > 0){
         window.f7.addNotification({
             message: self.flight_search_result_full.length + ' tickets found.',
-            hold: 1500
+            hold: 2500
         });
       }
       else {
         window.f7.addNotification({
             message: '0 ticket found.',
-            hold: 1500
+            hold: 2500
         });
       }
     },

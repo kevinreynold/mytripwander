@@ -21,7 +21,7 @@
                 <img src="../assets/flight-icon/depature_date.png" alt="Departure" width="30px">
               </div>
               <div class="grid-input">
-                <input type="date" :min="today" :max="checkout_date" v-model="checkin_date"/>
+                <input type="date" :min="today" :max="max_checkin" v-model="checkin_date"/>
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@
                   <img src="../assets/flight-icon/return_date.png" alt="Departure" width="30px">
                 </div>
                 <div class="grid-input">
-                  <input type="date" :min="checkin_date" v-model="checkout_date"/>
+                  <input type="date" :min="min_checkout" v-model="checkout_date"/>
                 </div>
               </div>
             </div>
@@ -127,6 +127,11 @@ function getDateAfterDays(day){
   return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
 }
 
+function getDateAfter(cur_date, day){
+  var date = new Date(cur_date.getTime() + day * 24 * 60 * 60 * 1000);
+  return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
+}
+
 export default {
   components: {
   },
@@ -152,6 +157,16 @@ export default {
     },
     children(){
       return ("00" + self.passenger.children).slice(-2);
+    },
+    max_checkin(){
+      let split_checkout = self.checkout_date.split('-');
+      let checkout_date = new Date(parseInt(split_checkout[0]), parseInt(split_checkout[1])-1, parseInt(split_checkout[2]));
+      return getDateAfter(checkout_date, -1);
+    },
+    min_checkout(){
+      let split_check_in = self.checkin_date.split('-');
+      let check_in_date = new Date(parseInt(split_check_in[0]), parseInt(split_check_in[1])-1, parseInt(split_check_in[2]));
+      return getDateAfter(check_in_date, 1);
     }
   },
   methods: {
