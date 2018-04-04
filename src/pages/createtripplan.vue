@@ -59,7 +59,7 @@
                  </div>
                  <div class="start-date">
                    Start Date :
-                   <input style="margin-left:12%;" type="date" :min="today" v-model="start_date"/>
+                   <input style="margin-left:12%;" type="date" :min="today" :max="limit_date" v-model="start_date"/>
                  </div>
                  <div class="returned-here">
                    <input type="checkbox" v-model="return_here"/> I'm returning here
@@ -86,7 +86,7 @@
                         Starting City :
                       </div>
                       <div class="choose-start-city">
-                        <select>
+                        <select class="select-start-city" v-model="dest.city_code">
                           <option v-for="city in dest.cities" :key="city.city_code" :value="city.city_code">{{city.city_name}}</option>
                         </select>
                       </div>
@@ -420,6 +420,7 @@
 
 <script>
 import plan_trip from "../js/plantrip"
+import travelpayouts from "../js/flightsearch"
 import store from "../js/store"
 
 let self;
@@ -446,6 +447,7 @@ export default {
   data: () => ({
     page: 0,
     today: getDateAfterDays(7),
+    limit_date: getDateAfterDays(372),
     start_date: getDateAfterDays(7),
     list_destination_original: [],
     list_destination: [],
@@ -453,6 +455,8 @@ export default {
     list_destination_available: [],
     current_dest_idx: 0,
     first_city: "Select your first city",
+    first_city_code: "",
+    first_city_title: "",
     passenger: {
       adults: 1,
       children: 0
@@ -566,6 +570,8 @@ export default {
         },
         onChange: function (autocomplete, value) {
           self.first_city = value[0].city_fullname;
+          self.first_city_code = value[0].city_code;
+          self.first_city_title =  value[0].title;
         }
     });
 
@@ -658,6 +664,10 @@ export default {
         if(self.mode) {
           self.$refs.trip_plan_tab_3.checked = false;
           self.$refs.trip_plan_tab_4.checked = false;
+
+          for (var i = 0; i < self.list_destination.length; i++) {
+            self.list_destination[i].city_name = document.getElementsByClassName("select-start-city")[i].options[document.getElementsByClassName("select-start-city")[i].selectedIndex].text;
+          }
           trip_plan_wizard.changeTab(self.last_tab_index, 5);
         }
         else{
@@ -668,6 +678,10 @@ export default {
         self.budget = pickerBudget.displayValue[0];
         self.start_hour = pickerStartHour.displayValue[0] + ":" + pickerStartHour.displayValue[1];
         self.end_hour = pickerEndHour.displayValue[0] + ":" + pickerEndHour.displayValue[1];
+
+        for (var i = 0; i < self.list_destination.length; i++) {
+          self.list_destination[i].city_name = document.getElementsByClassName("select-start-city")[i].options[document.getElementsByClassName("select-start-city")[i].selectedIndex].text;
+        }
         trip_plan_wizard.nextTab();
       }
       else{
@@ -675,8 +689,31 @@ export default {
       }
     },
     finishStep(){
-      console.log("Y");
-      self.$refs.trip_plan_wizard.prevTab();
+      store.trip_plan_data = {
+        passenger: self.passenger,
+        start_date: self.start_date,
+        first_city: self.first_city,
+        first_city_code: self.first_city_code,
+        first_city_title: self.first_city_title,
+        return_here: self.return_here,
+        list_destination: self.list_destination,
+        mode: self.mode,
+        interests: self.interests,
+        budget: self.budget,
+        start_hour: self.start_hour,
+        end_hour: self.end_hour
+      };
+      // console.log(JSON.stringify(store.trip_plan_data));
+      console.log(self.start_date);
+
+      var mainView = Dom7('#main-view')[0].f7View;
+      if(!self.mode){ //otomatis
+        window.f7.alert("We received your customised trip query.<br>Trip plan will be done within 2 days.<br>We'll let you know via notification if it's already done.<br>Thank you for your patience", 'Automatic Trip Plan', function(){
+          mainView.router.back();
+        });
+      }else{
+        travelpayouts.getFlightPlan();
+      }
     },
     addDest(idx){
       if (self.list_destination.length < 3) {

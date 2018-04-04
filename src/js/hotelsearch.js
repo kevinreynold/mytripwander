@@ -33,13 +33,23 @@ hotel_api.hotelSearch = async function(passenger_data){
       });
 
       if(passenger_data.type === "city"){
-        store.original_hotel_city_search_result = data.result;
-        store.hotel_city_search_result = data.result;
-        window.f7.addNotification({
-            message: store.original_hotel_city_search_result.length + ' hotels found.',
-            hold: 1500
-        });
-        goTo('/hotel-city-result/');
+        if(data.result.length > 0){
+          store.original_hotel_city_search_result = data.result;
+          store.hotel_city_search_result = data.result;
+          window.f7.addNotification({
+              message: store.original_hotel_city_search_result.length + ' hotels found.',
+              hold: 1500
+          });
+          goTo('/hotel-city-result/');
+        }
+        else{
+          setTimeout(function () {
+            window.f7.hidePreloader();
+            window.f7.addNotification({
+                message: 'No Rooms Available..'
+            });
+          }, 1000);
+        }
       }
       else if(passenger_data.type === "hotel"){
         if(data.result.length > 0){

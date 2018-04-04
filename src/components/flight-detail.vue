@@ -2,7 +2,7 @@
   <div id="flight-detail">
     <f7-card v-for="(flight_detail,index) in flight_details.segment" :key="flight_detail.key">
       <f7-card-header>
-        {{index | getCityByIndex(0)}} - {{index | getCityByIndex(1)}} ({{index | getSegmentDurationByIndex}})
+        <div class="flight-title">{{index | getCityByIndex(0)}} &nbsp;<f7-icon fa="arrow-right"/> {{index | getCityByIndex(1)}} ({{index | getSegmentDurationByIndex}})</div>
       </f7-card-header>
       <f7-card-content :inner="false">
         <f7-block inner>
@@ -66,7 +66,7 @@ export default {
       else{
         city = self.flight_details.display[index].arrival_airport.airport.city;
       }
-      return city.toUpperCase();
+      return city;
     },
     getSegmentDurationByIndex(index){
       return changeFormatDuration(self.flight_details.segment_durations[index]);
@@ -120,5 +120,11 @@ export default {
     color: white;
     font-size: 1.25em;
     font-weight: 400;
+  }
+
+  .flight-title{
+    width: 100%;
+    overflow: auto;
+    text-align: left;
   }
 </style>

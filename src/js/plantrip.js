@@ -1,4 +1,5 @@
 import store from "./store";
+import travelpayouts from "./flightsearch";
 import got from "got";
 
 var plan_trip = {};
@@ -11,6 +12,16 @@ function goTo(url_link = '/createtrip/'){
 function goBack(){
   var mainView = Dom7('#main-view')[0].f7View;
   mainView.router.back();
+}
+
+function copy(o) {
+   var output, v, key;
+   output = Array.isArray(o) ? [] : {};
+   for (key in o) {
+       v = o[key];
+       output[key] = (typeof v === "object") ? copy(v) : v;
+   }
+   return output;
 }
 
 plan_trip.getDestinationList = async function(){

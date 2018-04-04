@@ -8,6 +8,10 @@ export default [
       component: require('./pages/createtripplan.vue')
   },
   {
+      path: '/plan-overview-country/',
+      component: require('./pages/plan-overview-country.vue')
+  },
+  {
       path: '/mybookings/',
       component: require('./pages/mybookings.vue')
   },

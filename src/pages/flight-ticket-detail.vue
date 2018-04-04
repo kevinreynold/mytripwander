@@ -66,7 +66,9 @@ export default {
  .doubled-size{
    text-align: center;
    margin-top: 0px;
+   margin-bottom: 10px;
    font-size: 1.4em;
+   padding-bottom: 5px;
  }
 
  .doubled-size span{

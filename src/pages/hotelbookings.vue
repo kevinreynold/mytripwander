@@ -198,7 +198,6 @@ export default {
           name: self.location.name
         };
 
-        // console.log(flight_data);
         // console.log(JSON.stringify(passenger_data));
         store.hotel_booking_data = passenger_data;
         hotel_api.hotelSearch(passenger_data);

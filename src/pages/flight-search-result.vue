@@ -476,6 +476,7 @@ export default {
     //do something after creating vue instance
     self = this;
     self.flight_data = store.flight_booking_data;
+    // console.log(store.original_flight_search_result);
 
     // console.log(store.sort_by);
     // console.log(store.price_filter);
