@@ -12,6 +12,10 @@ export default [
       component: require('./pages/plan-overview-country.vue')
   },
   {
+      path: '/plan-overview-city/',
+      component: require('./pages/plan-overview-city.vue')
+  },
+  {
       path: '/mybookings/',
       component: require('./pages/mybookings.vue')
   },

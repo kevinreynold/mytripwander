@@ -86,8 +86,8 @@
                         Starting City :
                       </div>
                       <div class="choose-start-city">
-                        <select class="select-start-city" v-model="dest.city_code">
-                          <option v-for="city in dest.cities" :key="city.city_code" :value="city.city_code">{{city.city_name}}</option>
+                        <select class="select-start-city" v-model="dest.city_combination">
+                          <option v-for="city, index in dest.cities" :key="city.city_code" :value="city.city_code+';'+city.zone_id+';'+city.hotel_city_id">{{city.city_name}}</option>
                         </select>
                       </div>
                     </f7-col>
@@ -350,7 +350,7 @@
     <f7-popup id="popup-country">
       <f7-navbar>
         <f7-nav-left>
-          <f7-link>Sort</f7-link>
+          <f7-link>List Country</f7-link>
         </f7-nav-left>
         <f7-nav-right>
           <f7-link close-popup="#popup-country"><f7-icon f7="close"/></f7-link>
@@ -515,8 +515,15 @@ export default {
         max_stay : (first_dest.country_code === 'HK')? 6 : first_dest.total_city * 3,
         stay : 3,
         cities: first_dest.cities,
+        city_combination : [first_dest.cities[0].city_code, first_dest.cities[0].zone_id, first_dest.cities[0].hotel_city_id].join(';'),
         city_code : first_dest.cities[0].city_code,
         city_name : first_dest.cities[0].city_name,
+        hotel_city_id : first_dest.cities[0].hotel_city_id,
+        zone_id : first_dest.cities[0].zone_id,
+        last_city_code : first_dest.cities[0].city_code,
+        last_city_name : first_dest.cities[0].city_name,
+        last_hotel_city_id : first_dest.cities[0].hotel_city_id,
+        last_zone_id : first_dest.cities[0].zone_id
       }
       self.list_destination.push(dest);
       self.list_destination_idx.push(first_dest.country_code);
@@ -667,6 +674,17 @@ export default {
 
           for (var i = 0; i < self.list_destination.length; i++) {
             self.list_destination[i].city_name = document.getElementsByClassName("select-start-city")[i].options[document.getElementsByClassName("select-start-city")[i].selectedIndex].text;
+            self.list_destination[i].city_combination = document.getElementsByClassName("select-start-city")[i].options[document.getElementsByClassName("select-start-city")[i].selectedIndex].value;
+            console.log(self.list_destination[i].city_combination);
+            let split_string = self.list_destination[i].city_combination.split(';');
+            self.list_destination[i].city_code = split_string[0];
+            self.list_destination[i].zone_id = split_string[1];
+            self.list_destination[i].hotel_city_id = split_string[2];
+
+            self.list_destination[i].last_city_name = document.getElementsByClassName("select-start-city")[i].options[document.getElementsByClassName("select-start-city")[i].selectedIndex].text;
+            self.list_destination[i].last_city_code = split_string[0];
+            self.list_destination[i].last_zone_id = split_string[1];
+            self.list_destination[i].last_hotel_city_id = split_string[2];
           }
           trip_plan_wizard.changeTab(self.last_tab_index, 5);
         }
@@ -681,6 +699,17 @@ export default {
 
         for (var i = 0; i < self.list_destination.length; i++) {
           self.list_destination[i].city_name = document.getElementsByClassName("select-start-city")[i].options[document.getElementsByClassName("select-start-city")[i].selectedIndex].text;
+          self.list_destination[i].city_combination = document.getElementsByClassName("select-start-city")[i].options[document.getElementsByClassName("select-start-city")[i].selectedIndex].value;
+          console.log(self.list_destination[i].city_combination);
+          let split_string = self.list_destination[i].city_combination.split(';');
+          self.list_destination[i].city_code = split_string[0];
+          self.list_destination[i].zone_id = split_string[1];
+          self.list_destination[i].hotel_city_id = split_string[2];
+
+          self.list_destination[i].last_city_name = document.getElementsByClassName("select-start-city")[i].options[document.getElementsByClassName("select-start-city")[i].selectedIndex].text;
+          self.list_destination[i].last_city_code = split_string[0];
+          self.list_destination[i].last_zone_id = split_string[1];
+          self.list_destination[i].last_hotel_city_id = split_string[2];
         }
         trip_plan_wizard.nextTab();
       }
@@ -703,8 +732,9 @@ export default {
         start_hour: self.start_hour,
         end_hour: self.end_hour
       };
+
       // console.log(JSON.stringify(store.trip_plan_data));
-      console.log(self.start_date);
+      // console.log(self.start_date);
 
       var mainView = Dom7('#main-view')[0].f7View;
       if(!self.mode){ //otomatis
@@ -738,8 +768,15 @@ export default {
           max_stay : (first_dest.country_code === 'HK')? 6 : first_dest.total_city * 3,
           stay : 3,
           cities: first_dest.cities,
+          city_combination : [first_dest.cities[0].city_code, first_dest.cities[0].zone_id, first_dest.cities[0].hotel_city_id].join(';'),
           city_code : first_dest.cities[0].city_code,
           city_name : first_dest.cities[0].city_name,
+          hotel_city_id : first_dest.cities[0].hotel_city_id,
+          zone_id : first_dest.cities[0].zone_id,
+          last_city_code : first_dest.cities[0].city_code,
+          last_city_name : first_dest.cities[0].city_name,
+          last_hotel_city_id : first_dest.cities[0].hotel_city_id,
+          last_zone_id : first_dest.cities[0].zone_id
         }
 
         if(self.current_dest_idx === -1){

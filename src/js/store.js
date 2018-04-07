@@ -3,9 +3,15 @@ const store = {
   // service_url : 'http://103.253.25.103:5000',
   service_url : 'http://127.0.0.1:5000',
   //createplan
+  list_city_all: [],
   list_dest_all : [],
   trip_plan_data: {},
   flight_plan: [],
+  flight_plan_index: 0,
+  flight_search_plan_mode: "booking", //booking, search, change
+  search_again_mode: false,
+  trip_city_plan_data: [],
+  trip_city_plan_data_index: 0,
   //flight
   flight_booking_data : [],
   flight_search_result : [],

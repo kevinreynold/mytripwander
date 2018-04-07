@@ -179,6 +179,7 @@
 
 <script>
 import travelpayouts from "../js/flightsearch"
+// import plan_trip from "../js/plantrip"
 import store from "../js/store"
 
 let self;

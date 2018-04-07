@@ -4,18 +4,7 @@
     <f7-block-title class="doubled-size">Get this ticket from <span>{{flight_details.host_name}}</span> !!!</f7-block-title>
     <flight_detail :flight_details="flight_details"/>
     <div class="fixed-bottom">
-      <slot v-if="flight_search_plan_mode === 'booking'">
-        <f7-button fill big v-on:click="buyTicket">Buy Ticket</f7-button>
-      </slot>
-      <slot v-else-if="flight_search_plan_mode === 'search'">
-        <f7-button fill big v-on:click="searchAgain">Search Again</f7-button>
-      </slot>
-      <slot v-else="flight_search_plan_mode === 'change'">
-        <f7-grid>
-          <f7-col width="70"><f7-button fill big v-on:click="buyTicket">Buy Ticket</f7-button></f7-col>
-          <f7-col width="30"><f7-button fill big v-on:click="changeTicket">Change</f7-button></f7-col>
-        </f7-grid>
-      </slot>
+      <f7-button fill big v-on:click="buyTicket">Search and Buy</f7-button>
     </div>
     <f7-button fill big color="white">Buy Ticket</f7-button>
   </f7-page>
@@ -34,8 +23,6 @@ export default {
   },
   data: () => ({
     flight_details : [],
-    flight_search_plan_mode: "",
-    search_again_mode: false
   }),
   computed: {
     title(){
@@ -47,8 +34,6 @@ export default {
   created() {
     self = this;
     self.flight_details = store.flight_details;
-    self.flight_search_plan_mode = store.flight_search_plan_mode;
-    self.search_again_mode = store.search_again_mode;
     // console.log(self.flight_details);
   },
   methods: {
@@ -56,15 +41,9 @@ export default {
       store.flight_details = [];
     },
     buyTicket(){
-      travelpayouts.getRedirectLink(self.flight_details.url);
+      travelpayouts.searchBuyAgain();
       // var mainView = Dom7('#main-view')[0].f7View;
       // mainView.router.load({url: '/flight-redirect/'});
-    },
-    searchAgain(){
-      travelpayouts.searchAgain();
-    },
-    changeTicket(){
-      travelpayouts.changeFlightPlan();
     }
   }
 }
@@ -88,7 +67,7 @@ export default {
    text-align: center;
    margin-top: 0px;
    margin-bottom: 10px;
-   font-size: 1.25em;
+   font-size: 1.4em;
    padding-bottom: 5px;
  }
 

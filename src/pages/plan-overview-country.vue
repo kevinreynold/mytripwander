@@ -26,9 +26,9 @@
         </div>
 
         <div class="list-countries">
-          <f7-card v-for="country in trip_plan_data.list_destination" :key="country.country_code">
+          <f7-card v-for="country, index in trip_plan_data.list_destination" :key="country.country_code">
             <f7-card-content :inner="false">
-              <div class="country-display" :style="country_image_url(country.country_code)" valign="bottom">
+              <div class="country-display" :style="country_image_url(country.country_code)" valign="bottom" @click="cityDetail(index)">
                 <div class="overlay">
                   <div class="country-title">{{country.country_name}}</div>
                   <div class="country-days">{{country.stay}} Days</div>
@@ -41,7 +41,7 @@
       </f7-tab>
       <f7-tab id="tab2">
         <div class="list-flight">
-          <f7-card v-for="flight_detail in flight_plan" :key="flight_detail.url">
+          <f7-card v-for="(flight_detail, index) in flight_plan" :key="flight_detail.url">
             <f7-card-header>
               <div class="flight-title">{{flight_detail.display[0].departure_airport.airport.city}} | {{flight_detail.display[0].departure_airport.airport.code}}&nbsp;<f7-icon fa="arrow-right"/> {{flight_detail.display[0].arrival_airport.airport.city}} | {{flight_detail.display[0].arrival_airport.airport.code}}</div>
               <div class="flight-price">${{flight_detail.price}}</div>
@@ -67,8 +67,8 @@
             </f7-card-content>
             <f7-card-footer>
               <div class="empty"></div>
-              <div class="flight-change">Change</div>
-              <div class="flight-desc" @click="showFlightDetail(flight_detail)">Detail</div>
+              <div class="flight-change" @click="changeFlightTicket(flight_detail, index)">Change</div>
+              <div class="flight-desc" @click="showFlightDetail(flight_detail, index)">Detail</div>
             </f7-card-footer>
           </f7-card>
         </div>
@@ -81,6 +81,7 @@
 
 <script>
 import store from "../js/store"
+import travelpayouts from "../js/flightsearch"
 
 let self;
 
@@ -90,6 +91,7 @@ export default {
   data: () => ({
     test: [1,2,3],
     trip_plan_data: {},
+    trip_city_plan_data: [],
     flight_plan: []
   }),
   computed: {
@@ -124,16 +126,38 @@ export default {
   created() {
     self = this;
     self.trip_plan_data = store.trip_plan_data;
+    self.trip_city_plan_data = store.trip_city_plan_data;
     self.flight_plan = store.flight_plan;
   },
   methods: {
     country_image_url(country_code){
       return ("background-image:url('http://103.253.25.103/assets/country/" + country_code + ".jpg')");
     },
-    showFlightDetail(flight_detail){
+    showFlightDetail(flight_detail, index){
+      store.flight_search_plan_mode = "search";
       store.flight_details = flight_detail;
+      store.flight_plan_index = index;
+      console.log(index);
       var mainView = Dom7('#main-view')[0].f7View;
       mainView.router.load({url: '/flight-detail/'});
+    },
+    changeFlightTicket(flight_detail, index){
+      // console.log(self.flight_plan);
+      // console.log(store.flight_plan);
+      store.flight_plan_index = index;
+      console.log(index);
+      store.flight_details = flight_detail;
+      travelpayouts.searchAgain(true);
+    },
+    cityDetail(index){
+      store.trip_city_plan_data_index = index;
+      console.log(index);
+      window.f7.showPreloader();
+      setTimeout(function () {
+        var mainView = Dom7('#main-view')[0].f7View;
+        mainView.router.load({url: '/plan-overview-city/'});
+        window.f7.hidePreloader();
+      }, 1500);
     }
   }
 }

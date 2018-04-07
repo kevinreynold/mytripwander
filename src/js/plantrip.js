@@ -53,4 +53,49 @@ plan_trip.getDestinationList = async function(){
     }
 }
 
+plan_trip.getAllCity = async function(){
+    window.f7.showPreloader();
+    try {
+      if(store.list_city_all.length === 0){
+        var data = await got.get(store.service_url +"/city/all", {
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+
+        store.list_city_all = data.result;
+      }
+
+      setTimeout(function () {
+        window.f7.hidePreloader();
+      }, 500);
+    } catch (e) {
+      setTimeout(function () {
+        window.f7.hidePreloader();
+        window.f7.addNotification({
+            message: 'No Internet Connection..'
+        });
+        goBack();
+      }, 1000);
+    }
+}
+
+plan_trip.getAirport = async function(city_code){
+    try {
+        var data = await got.get(store.service_url + "/airport/" + city_code, {
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+        // console.log(data.result);
+        return data.result;
+    } catch (e) {
+      return null;
+    }
+}
+
 export default plan_trip;
