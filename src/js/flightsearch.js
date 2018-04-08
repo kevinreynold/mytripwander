@@ -464,7 +464,9 @@ travelpayouts.getFlightPlan = async function(){
       zone_id: list_destination[i].zone_id,
       hotel_city_id: list_destination[i].hotel_city_id,
       day: stay,
-      hotel: undefined
+      hotel: undefined,
+      booking_data: undefined,
+      search_at: getDateAfterDays(0)
     };
     temp['cities'].push(city);
 
@@ -718,6 +720,5 @@ travelpayouts.researchFlightPlan = async function(start_index){
   console.log(store.trip_city_plan_data);
   console.log(store.flight_plan);
 };
-
 
 export default travelpayouts;

@@ -20,13 +20,15 @@
       <div></div>
       <div class="empty"></div>
       <slot></slot>
-      <div class="room-book-now" v-on:click="showDeal(room_deal)">Book Now</div>
+      <div v-if="hotel_search_plan_mode !== 'search'" class="room-book-now" v-on:click="showDeal(room_deal)">Book Now</div>
+      <div v-if="hotel_search_plan_mode === 'change'" class="room-book-now" v-on:click="changeDeal(room_deal)">Change</div>
     </f7-card-footer>
   </f7-card>
 </template>
 
 <script>
 import store from "../js/store"
+import hotel_api from "../js/hotelsearch"
 
 let self;
 
@@ -37,7 +39,8 @@ export default {
   },
   data: () => ({
     options: {},
-    room_detail: []
+    room_detail: [],
+    hotel_search_plan_mode: ""
   }),
   computed: {
     agency_logo_url(){
@@ -48,6 +51,7 @@ export default {
   },
   created() {
     self = this;
+    self.hotel_search_plan_mode = store.hotel_search_plan_mode;
     self.options = self.room_deal.options;
     self.setFacility();
   },
@@ -86,6 +90,9 @@ export default {
       let url = room_deal.fullBookingURL;
       let url_redirect = String(url);
       window.open(url_redirect, '_blank');
+    },
+    changeDeal(room_deal) {
+      hotel_api.changeHotelBooking(room_deal);
     }
   }
 }
@@ -157,15 +164,16 @@ export default {
   }
 
   .empty{
-    width: 46%;
+    width: 25%;
   }
 
   .book-slot{
-    width: 27%;
+    width: 25%;
   }
   .room-book-now{
-    width: 27%;
+    width: 25%;
     padding: 4px;
+    margin-left: 10px;
     overflow: auto;
     background-color: #009688;
     border: 1px solid #009688;

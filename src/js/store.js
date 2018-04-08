@@ -7,11 +7,15 @@ const store = {
   list_dest_all : [],
   trip_plan_data: {},
   flight_plan: [],
-  flight_plan_index: 0,
   flight_search_plan_mode: "booking", //booking, search, change
+  flight_plan_index: 0,
   search_again_mode: false,
   trip_city_plan_data: [],
   trip_city_plan_data_index: 0,
+  hotel_search_plan_mode: "booking",
+  hotel_plan_index: 0,
+  hotel_search_again_mode: false,
+  hotel_search_more_deal_mode: false,
   //flight
   flight_booking_data : [],
   flight_search_result : [],

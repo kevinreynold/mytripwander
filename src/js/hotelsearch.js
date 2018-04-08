@@ -41,6 +41,7 @@ function copy(o) {
 }
 
 hotel_api.hotelSearch = async function(passenger_data){
+    store.hotel_search_plan_mode = "booking";
     window.f7.showPreloader();
     try {
       var data = await got.get(store.service_url +"/hotel/search", {
@@ -102,6 +103,7 @@ hotel_api.hotelSearch = async function(passenger_data){
 // hotel_search_hongkong_city
 // hotel_search_hongkong_hotel
 hotel_api.hotelSeachLocal = async function(json = "hotel_search_hongkong_city"){
+  store.hotel_search_plan_mode = "booking";
   window.f7.showPreloader();
   try {
     // var data = $.parseJSON($.ajax({
@@ -169,6 +171,11 @@ hotel_api.getRedirectLink = async function(url){
   }
 };
 
+function getDateAfterDays(day){
+  var date = new Date(new Date().getTime() + day * 24 * 60 * 60 * 1000);
+  return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
+}
+
 function getDateAfter(cur_date, day){
   var date = new Date(cur_date.getTime() + day * 24 * 60 * 60 * 1000);
   return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
@@ -207,7 +214,6 @@ hotel_api.getHotelPlan = async function(){
     else{
       check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day));
     }
-
 
     console.log(current_date);
     console.log(check_out);
@@ -254,7 +260,7 @@ hotel_api.getHotelPlan = async function(){
       let list_hotel_city_id = await this.getAllHotelByCity(trip_city_plan_data_one.cities[i].city_code);
       console.log(list_hotel_city_id);
       hotel_list = hotel_list.filter(x => list_hotel_city_id.some(x2 => x.id.toString() == x2.toString()));
-      hotel_list = hotel_list.filter(x => x.rating > 70 && x.stars > 2);
+      hotel_list = hotel_list.filter(x => x.rating > 70 && x.stars > 3);
       // hotel_list.sort((a,b) => b.popularity - a.popularity);
       hotel_list.sort((a,b) => a.price - b.price);
       console.log(hotel_list);
@@ -263,6 +269,14 @@ hotel_api.getHotelPlan = async function(){
       console.log(hotel_booking);
 
       store.trip_city_plan_data[store.trip_city_plan_data_index].cities[i].hotel = hotel_booking;
+      store.trip_city_plan_data[store.trip_city_plan_data_index].cities[i].booking_data = {
+        adults: trip_plan_data.passenger.adults,
+        children: trip_plan_data.passenger.children,
+        checkin: getDateAfter(current_date, 0),
+        checkout: getDateAfter(check_out, 0),
+        type: 'city',
+        place_id: trip_city_plan_data_one.cities[i].hotel_city_id
+      };
 
       current_date = check_out;
       window.f7.hidePreloader();
@@ -365,8 +379,96 @@ hotel_api.getHotelPlan = async function(){
   }
 }
 
-hotel_api.searchAgain = async function(){
-  console.log("asd");
+hotel_api.searchAgain = async function(mode = false){
+  let city_index = store.hotel_plan_index;
+  let hotel_details = copy(store.hotel_details);
+  let cur_index = store.trip_city_plan_data_index;
+  console.log(cur_index);
+  let trip_city_plan_data_one = copy(store.trip_city_plan_data[cur_index]);
+  let passenger_data = copy(trip_city_plan_data_one.cities[city_index].booking_data);
+  console.log(passenger_data);
+
+  window.f7.showPreloader();
+  try {
+    var data = await got.get(store.service_url +"/hotel/search", {
+      query: passenger_data,
+      retries: 2
+    })
+    .then(res => {
+      var res = JSON.parse(res.body);
+      return res;
+    });
+
+    let hotel_list = data.result;
+    let list_hotel_city_id = await this.getAllHotelByCity(trip_city_plan_data_one.cities[city_index].city_code);
+    hotel_list = hotel_list.filter(x => list_hotel_city_id.some(x2 => x.id.toString() == x2.toString()));
+
+    let hotel_list_original = copy(hotel_list);
+    hotel_list = hotel_list.filter(x => x.id.toString() == trip_city_plan_data_one.cities[city_index].hotel.id.toString());
+
+    if(hotel_list.length > 0 && !mode){
+      console.log("hotel ada tiket");
+      goBack();
+      store.hotel_search_plan_mode = "change";
+      store.hotel_booking_data = passenger_data;
+      store.hotel_search_again_mode = false;
+      await sleep(1500);
+      store.hotel_details = hotel_list[0];
+      goTo('/hotel-hotel-result/');
+    }
+    else{
+      console.log("hotel cari ulang");
+      if(!mode){
+        goBack();
+      }
+      store.hotel_search_plan_mode = "change";
+      store.hotel_booking_data = passenger_data;
+      store.hotel_search_again_mode = true;
+      await sleep(1500);
+
+      store.original_hotel_city_search_result = hotel_list_original;
+      store.hotel_city_search_result = hotel_list_original;
+      window.f7.addNotification({
+          message: store.original_hotel_city_search_result.length + ' hotels found.',
+          hold: 1500
+      });
+      goTo('/hotel-city-result/');
+    }
+    window.f7.hidePreloader();
+  } catch (e) {
+    setTimeout(function () {
+      window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
+    }, 1000);
+  }
+}
+
+hotel_api.changeHotelBooking = async function(room_deal){
+  console.log("ganti hotel");
+  console.log(room_deal);
+  window.f7.showPreloader();
+  console.log(store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index]);
+  store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].search_at = getDateAfterDays(0);
+  store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].hotel = store.hotel_details;
+  store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].hotel.rooms = [];
+  store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].hotel.rooms.push(room_deal);
+  var mainView = Dom7('#main-view')[0].f7View;
+  goBack();
+  await sleep(500);
+  if(store.hotel_search_again_mode){
+    goBack();
+  }
+  await sleep(500);
+  if(store.hotel_search_more_deal_mode){
+    goBack();
+  }
+  await sleep(500);
+  store.hotel_search_more_deal_mode = false;
+  mainView.router.refreshPage();
+  await sleep(500);
+  window.f7.hidePreloader();
 }
 
 export default hotel_api;

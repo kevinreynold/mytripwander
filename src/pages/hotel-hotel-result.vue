@@ -35,7 +35,7 @@
 
     <div class="hotel-best-deal">Best Deal</div>
     <room_card :room_deal=best_deal>
-      <div class="room-more-deals" v-on:click="moreDeals">More Deals</div>
+      <div v-if="hotel_search_plan_mode !== 'search'" class="room-more-deals" v-on:click="moreDeals">More Deals</div>
     </room_card>
 
 
@@ -73,12 +73,18 @@
         </ul>
       </div>
     </div>
+
+    <div v-if="hotel_search_plan_mode === 'search'" class="fixed-bottom">
+        <f7-button fill big v-on:click="searchAgain">Search Again</f7-button>
+    </div>
+    <f7-button v-if="hotel_search_plan_mode === 'search'" fill big color="white">Blank Space</f7-button>
   </f7-page>
 </template>
 
 <script>
 import room_card from '../components/room-card'
 import store from '../js/store'
+import hotel_api from "../js/hotelsearch"
 
 let self;
 
@@ -113,7 +119,8 @@ export default {
     staff_languages: [],
     room_amenities: [],
     hotel_amenities: [],
-    amenities: []
+    amenities: [],
+    hotel_search_plan_mode: ""
   }),
   computed: {
     title(){
@@ -141,6 +148,7 @@ export default {
   created() {
     //do something after creating vue instance
     self = this;
+    self.hotel_search_plan_mode = store.hotel_search_plan_mode;
     self.hotel_booking_data = store.hotel_booking_data;
     self.hotel_details = store.hotel_details;
 
@@ -216,9 +224,13 @@ export default {
       store.hotel_details = [];
     },
     moreDeals(){
+      store.hotel_search_more_deal_mode = true;
       store.list_room_deals = self.hotel_details.rooms;
       var mainView = Dom7('#main-view')[0].f7View;
       mainView.router.load({url: '/hotel-room-deals/'});
+    },
+    searchAgain(){
+      hotel_api.searchAgain();
     }
   }
 }
@@ -445,9 +457,8 @@ export default {
   }
 
   .room-more-deals{
-    width: 27%;
+    width: 25%;
     padding: 4px;
-    margin-right: 10px;
     overflow: auto;
     color: #009688;
     border: 1px solid #009688;
@@ -456,4 +467,12 @@ export default {
     font-size: 0.9em;
   }
 
+  .fixed-bottom {
+     position:fixed;
+     left:0px;
+     bottom:0px;
+     width:100%;
+     overflow: auto;
+     z-index: 5000;
+  }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <f7-page>
-    <f7-navbar title="Hongkong | 5 Days" back-link="Back" sliding no-shadow></f7-navbar>
+    <f7-navbar :title="list_destination.country_name + ' | ' + totalDaysTrip + ' Days'" back-link="Back" sliding no-shadow></f7-navbar>
 
     <f7-toolbar tabbar>
       <f7-link href="#tab11" tab-link active text="Overview"></f7-link>
@@ -25,11 +25,14 @@
         <f7-button fill big color="white">Blank Space</f7-button>
       </f7-tab>
       <f7-tab id="tab22">
+        <div class="change-city">
+          <f7-button fill @click="showOrderCity">Change City</f7-button>
+        </div>
         <div class="list-hotel">
-          <f7-card v-if="city.hotel" v-for="city in new_cities" :key="city.id">
+          <f7-card v-if="city.hotel" v-for="city, index in new_cities" :key="city.id">
             <f7-card-header class="hotel-card-header">
-              <div class="hotel-city">{{city.city_name}}</div>
-              <div class="hotel-price">${{city.hotel.minPriceTotal.toFixed(0)}}</div>
+              <div class="hotel-city">{{city.city_name}} ({{city.day}} D)</div>
+              <div class="hotel-price">${{city.hotel.rooms[0].total.toFixed(0)}}</div>
             </f7-card-header>
             <f7-card-content>
               <div class="hotel-name">{{city.hotel.name}} <span>{{(city.hotel.rating/10).toFixed(1)}}</span></div>
@@ -38,22 +41,19 @@
                 <div class="room-detail">
                   <div>
                     <ul>
-                      <li v-for="d in room_detail" :key="d.key"><span><f7-icon fa="check"/></span> {{d}}</li>
+                      <li v-for="d in setFacility(city.hotel.rooms[0].options)" :key="d.key"><span><f7-icon fa="check"/></span> {{d}}</li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div class="hotel-last-search">Last Search : 2018-04-05</div>
+              <div class="hotel-last-search">Last Search : {{city.search_at}}</div>
             </f7-card-content>
             <f7-card-footer>
               <div class="empty"></div>
-              <div class="hotel-change">Change</div>
-              <div class="hotel-desc">Detail</div>
+              <div class="hotel-change" @click="changeHotelBooking(city.hotel, index)">Change</div>
+              <div class="hotel-desc" @click="showHotelDetail(city.hotel, index)">Detail</div>
             </f7-card-footer>
           </f7-card>
-        </div>
-        <div class="change-city">
-          <f7-button fill @click="showOrderCity">Change City</f7-button>
         </div>
         <f7-button fill big color="white">Blank Space</f7-button>
       </f7-tab>
@@ -159,6 +159,11 @@ import plan_trip from "../js/plantrip"
 
 let self;
 
+function getDateAfterDays(day){
+  var date = new Date(new Date().getTime() + day * 24 * 60 * 60 * 1000);
+  return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
+}
+
 function copy(o) {
    var output, v, key;
    output = Array.isArray(o) ? [] : {};
@@ -174,7 +179,7 @@ export default {
   },
   data: () => ({
     day: [1,2,3,4,5],
-    room_detail: [],
+    list_destination: {},
     trip_city_plan_data_one: [],
     //UNTUK HOTEL
     cities: [
@@ -244,12 +249,12 @@ export default {
     self.trip_city_plan_data_one = copy(store.trip_city_plan_data[store.trip_city_plan_data_index]);
     console.log(self.trip_city_plan_data_one);
 
+    self.list_destination = copy(store.trip_plan_data.list_destination[store.trip_city_plan_data_index]);
+    self.country_code = self.list_destination.country_code;
+    console.log(self.country_code);
     self.cities = self.trip_city_plan_data_one.cities;
     self.new_cities = copy(self.cities);
     self.last_city_id = self.cities[self.cities.length-1].id + 1;
-    self.room_detail.push("Pay now");
-    self.room_detail.push("Pay at the hotel");
-    self.room_detail.push("Free Wi-Fi");
   },
   methods: {
     showOrderCity(){
@@ -267,7 +272,9 @@ export default {
         zone_id: item.last_zone_id,
         hotel_city_id: item.hotel_city_id,
         day: 1,
-        hotel: undefined
+        hotel: undefined,
+        booking_data: undefined,
+        search_at: getDateAfterDays(0)
       };
       self.new_cities.push(temp);
       self.cities.push(temp);
@@ -355,6 +362,49 @@ export default {
             hold: 2500
         });
       }
+    },
+    setFacility(options){
+      let hotel_options = [];
+      for(let propName in options) {
+          if(options.hasOwnProperty(propName)) {
+            if(propName === "deposit" && options[propName]){
+              hotel_options.push("Pay now");
+            }
+            else if(propName === "deposit" && !options[propName]){
+              hotel_options.push("Pay at the hotel");
+            }
+            else if(propName === "freeWifi" && options[propName]){
+              hotel_options.push("Free Wi-Fi");
+            }
+            else if(propName === "refundable" && options[propName]){
+              hotel_options.push("Refundable");
+            }
+            else if(propName === "refundable" && !options[propName]){
+              hotel_options.push("Non-refundable");
+            }
+            else if(propName === "breakfast" && options[propName]){
+              hotel_options.push("Breakfast");
+            }
+            // console.log(propName + ": " + options[propName]);
+          }
+      }
+      hotel_options.sort();
+      return hotel_options;
+    },
+    showHotelDetail(hotel, index){
+      store.hotel_search_plan_mode = "search";
+      store.hotel_booking_data = store.trip_city_plan_data[store.trip_city_plan_data_index].cities[index].booking_data;
+      store.hotel_details = hotel;
+      store.hotel_plan_index = index;
+      console.log(index);
+      var mainView = Dom7('#main-view')[0].f7View;
+      mainView.router.load({url: '/hotel-hotel-result/'});
+    },
+    changeHotelBooking(hotel, index){
+      store.hotel_plan_index = index;
+      console.log(index);
+      store.hotel_details = hotel;
+      hotel_api.searchAgain(true);
     }
   }
 }
