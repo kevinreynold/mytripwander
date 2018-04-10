@@ -26,7 +26,7 @@
       </f7-tab>
       <f7-tab id="tab22">
         <div class="change-city">
-          <f7-button fill @click="showOrderCity">Change City</f7-button>
+          <f7-button fill @click="showOrderCity">Change City and Day</f7-button>
         </div>
         <div class="list-hotel">
           <f7-card v-if="city.hotel" v-for="city, index in new_cities" :key="city.id">
@@ -92,7 +92,7 @@
         </f7-list>
 
         <div class="fixed-bottom">
-          <f7-button fill @click="saveListCity">Done</f7-button>
+          <f7-button fill big @click="saveListCity">Done</f7-button>
         </div>
       </div>
     </f7-popup>
@@ -182,6 +182,7 @@ export default {
     list_destination: {},
     trip_city_plan_data_one: [],
     //UNTUK HOTEL
+    cities_original: [],
     cities: [
       {
         id: 0,
@@ -233,16 +234,11 @@ export default {
     }
   },
   mounted() {
-    plan_trip.getAllCity();
-    setTimeout(function () {
-      self.list_city_all = copy(store.list_city_all);
-      self.list_city_all = self.list_city_all.filter((x) => x.country_code === self.country_code)[0].cities;
-      self.list_city_available = self.list_city_all.filter(x => !self.new_cities.some(x2 => x.city_code === x2.city_code));
-
-      if(!self.trip_city_plan_data_one.already_open){
-        window.f7.popup("#popup-choose-city", true);
-      }
-    }, 1000);
+    window.f7.showPreloader();
+    if(!self.trip_city_plan_data_one.already_open){
+      window.f7.popup("#popup-choose-city", true);
+    }
+    window.f7.hidePreloader();
   },
   created() {
     self = this;
@@ -253,8 +249,17 @@ export default {
     self.country_code = self.list_destination.country_code;
     console.log(self.country_code);
     self.cities = self.trip_city_plan_data_one.cities;
+    self.cities_original = copy(self.trip_city_plan_data_one.cities);
     self.new_cities = copy(self.cities);
-    self.last_city_id = self.cities[self.cities.length-1].id + 1;
+    let temp_cities = copy(self.cities);
+    temp_cities.sort((a,b) => b.id - a.id);
+    console.log('temp_cities');
+    console.log(temp_cities);
+    self.last_city_id = temp_cities[0].id + 1;
+
+    self.list_city_all = copy(store.list_city_all);
+    self.list_city_all = self.list_city_all.filter((x) => x.country_code === self.country_code)[0].cities;
+    self.list_city_available = self.list_city_all.filter(x => !self.new_cities.some(x2 => x.city_code === x2.city_code));
   },
   methods: {
     showOrderCity(){
@@ -265,19 +270,47 @@ export default {
     },
     chooseCity(item){
       self.is_change = true;
+      let list_dest_trip = [];
+      let day = {
+        day: 1,
+        start_hour: "08:00",
+        hotel_data: undefined,
+        to_another_city: false,
+        list_place: []
+      };
+      list_dest_trip.push(day);
+
       let temp = {
         id: self.last_city_id,
         city_name: item.city_name,
         city_code: item.city_code,
-        zone_id: item.last_zone_id,
+        zone_id: item.zone_id,
         hotel_city_id: item.hotel_city_id,
         day: 1,
         hotel: undefined,
+        hotel_data: undefined,
         booking_data: undefined,
-        search_at: getDateAfterDays(0)
+        search_at: getDateAfterDays(0),
+        list_dest_trip: list_dest_trip
       };
       self.new_cities.push(temp);
       self.cities.push(temp);
+
+      //ubah to_another_city
+      for (let i = 0; i < self.new_cities.length; i++) {
+        for (let j = 0; j < self.new_cities[i].list_dest_trip.length; j++) {
+          if(i == 0){
+            self.new_cities[i].list_dest_trip[j].to_another_city = false;
+          }
+          else if(j == 0 && i > 0){
+            self.new_cities[i].list_dest_trip[j].to_another_city = true;
+          }
+          else{
+            self.new_cities[i].list_dest_trip[j].to_another_city = false;
+          }
+        }
+      }
+
       self.last_city_id = self.last_city_id + 1;
 
       self.list_city_available = self.list_city_all.filter(x => !self.new_cities.some(x2 => x.city_code === x2.city_code));
@@ -292,12 +325,14 @@ export default {
       if(!self.sorting){
         self.cur_old_idx = self.cities.findIndex((x) => x.id === city.id);
         self.cur_new_idx = self.new_cities.findIndex((x) => x.id === city.id);
-        // console.log(JSON.stringify(city));
-        // console.log(JSON.stringify(self.new_cities));
-        // console.log(self.cur_new_idx);
-        // console.log("");
-        // console.log(JSON.stringify(self.cities));
-        // console.log(self.cur_old_idx);
+        console.log('CITY');
+        console.log(city);
+        console.log('NEW CITY');
+        console.log(self.new_cities);
+        console.log(self.cur_new_idx);
+        console.log("CITIES");
+        console.log(self.cities);
+        console.log(self.cur_old_idx);
 
         self.counter = self.new_cities[self.cur_new_idx].day;
         self.city_counter = self.new_cities[self.cur_new_idx].city_name;
@@ -306,14 +341,71 @@ export default {
     },
     doneChangeStay(){
       self.is_change = true;
+      let old_city = copy(self.new_cities[self.cur_new_idx]);
       self.new_cities[self.cur_new_idx].day = self.counter;
       self.cities[self.cur_old_idx].day = self.counter;
+
+      //kalau hari berubah list_dest_trip nya berubah
+      //cari indexnya dulu -> hati2 kan harinya berubah jam buka tutupnya juga bisa ganti
+      if(old_city.day >= self.new_cities[self.cur_new_idx].day){
+        console.log('AA');
+        //kalau durasinya lebih kecil maka tinggal slice aja
+        self.new_cities[self.cur_new_idx].list_dest_trip = self.new_cities[self.cur_new_idx].list_dest_trip.slice(0, self.counter);
+      }
+      else{
+        //kalau durasinya lebih besar maka tambah hari baru
+        console.log('BB');
+        let last_day = old_city.day;
+        console.log(last_day);
+        console.log(self.new_cities[self.cur_new_idx].day);
+        for (var i = last_day; i < self.new_cities[self.cur_new_idx].day; i++) {
+          let day = {
+            day: (i+1),
+            start_hour: "08:00",
+            hotel_data: undefined,
+            to_another_city: false,
+            list_place: []
+          };
+          self.new_cities[self.cur_new_idx].list_dest_trip.push(day);
+        }
+      }
+
+      //ubah to_another_city
+      for (let i = 0; i < self.new_cities.length; i++) {
+        for (let j = 0; j < self.new_cities[i].list_dest_trip.length; j++) {
+          if(i == 0){
+            self.new_cities[i].list_dest_trip[j].to_another_city = false;
+          }
+          else if(j == 0 && i > 0){
+            self.new_cities[i].list_dest_trip[j].to_another_city = true;
+          }
+          else{
+            self.new_cities[i].list_dest_trip[j].to_another_city = false;
+          }
+        }
+      }
+
       window.f7.closeModal("#picker-modal-city-day", true);
     },
     deleteCity(city){
       self.is_change = true;
       let index = self.new_cities.findIndex((x) => x.id === city.id);
       self.new_cities.splice(index, 1);
+
+      //ubah to_another_city
+      for (let i = 0; i < self.new_cities.length; i++) {
+        for (let j = 0; j < self.new_cities[i].list_dest_trip.length; j++) {
+          if(i == 0){
+            self.new_cities[i].list_dest_trip[j].to_another_city = false;
+          }
+          else if(j == 0 && i > 0){
+            self.new_cities[i].list_dest_trip[j].to_another_city = true;
+          }
+          else{
+            self.new_cities[i].list_dest_trip[j].to_another_city = false;
+          }
+        }
+      }
 
       self.list_city_available = self.list_city_all.filter(x => !self.new_cities.some(x2 => x.city_code === x2.city_code));
     },
@@ -333,16 +425,36 @@ export default {
       console.log(temp);
       self.new_cities.splice(new_index, 0, temp);
 
-      console.log(JSON.stringify(self.new_cities));
+      //ubah to_another_city
+      for (let i = 0; i < self.new_cities.length; i++) {
+        for (let j = 0; j < self.new_cities[i].list_dest_trip.length; j++) {
+          if(i == 0){
+            self.new_cities[i].list_dest_trip[j].to_another_city = false;
+          }
+          else if(j == 0 && i > 0){
+            self.new_cities[i].list_dest_trip[j].to_another_city = true;
+          }
+          else{
+            self.new_cities[i].list_dest_trip[j].to_another_city = false;
+          }
+        }
+      }
+
+      console.log("CITIES");
+      console.log(self.cities);
+      console.log("NEW CITIES");
+      console.log(self.new_cities);
     },
     closeChooseCity(){
       if(self.is_change){
         window.f7.confirm('Your change may not be saved.<br>Do you want to exit ?', 'Confirmation',
         function () {
+          window.f7.showPreloader();
           window.f7.closeModal("#popup-choose-city",true);
           setTimeout(function () {
             var mainView = Dom7('#main-view')[0].f7View;
             mainView.router.refreshPage();
+            window.f7.hidePreloader();
           }, 1500);
         });
       }

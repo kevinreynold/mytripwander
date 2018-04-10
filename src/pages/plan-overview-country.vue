@@ -82,6 +82,7 @@
 <script>
 import store from "../js/store"
 import travelpayouts from "../js/flightsearch"
+import plan_trip from "../js/plantrip"
 
 let self;
 
@@ -128,10 +129,17 @@ export default {
     self.trip_plan_data = store.trip_plan_data;
     self.trip_city_plan_data = store.trip_city_plan_data;
     self.flight_plan = store.flight_plan;
+
+    console.log('TRIP PLAN DATA');
+    console.log(JSON.stringify(store.trip_plan_data));
+    console.log('TRIP CITY PLAN DATA');
+    console.log(JSON.stringify(store.trip_city_plan_data));
+    console.log('FLIGHT PLAN');
+    console.log(JSON.stringify(store.flight_plan));
   },
   methods: {
     country_image_url(country_code){
-      return ("background-image:url('http://103.253.25.103/assets/country/" + country_code + ".jpg')");
+      return ("background-image:url('" + store._url + "/assets/country/" + country_code + ".jpg')");
     },
     showFlightDetail(flight_detail, index){
       store.flight_search_plan_mode = "search";
@@ -152,12 +160,7 @@ export default {
     cityDetail(index){
       store.trip_city_plan_data_index = index;
       console.log(index);
-      window.f7.showPreloader();
-      setTimeout(function () {
-        var mainView = Dom7('#main-view')[0].f7View;
-        mainView.router.load({url: '/plan-overview-city/'});
-        window.f7.hidePreloader();
-      }, 1500);
+      plan_trip.goToCityOverview();
     }
   }
 }
@@ -172,7 +175,8 @@ export default {
     position: relative;
     width: 100%;
     height: 50vw;
-    background: url("../assets/bg/trip_overview.jpg");
+    background: url("http://103.253.25.103/assets/trip_overview.jpg");
+    background-color: rgba(0,0,0,0.5); 
     background-size: cover;
     background-position: center;
     color: white;

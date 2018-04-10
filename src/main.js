@@ -63,6 +63,7 @@ new Vue({
   // Init Framework7 by passing parameters here
   framework7: {
     root: '#app',
+    pushState: true,
     /* Uncomment to enable Material theme: */
     material: true,
     routes: Routes,

@@ -448,27 +448,17 @@ travelpayouts.getFlightPlan = async function(){
     // temp['list_destination'] = list_destination[i];
     let stay = list_destination[i].stay;
 
-    temp['days'] = [];
+    let list_dest_trip = [];
     for (let j = 0; j < stay; j++) {
       let day = {
+        day: (j+1),
+        start_hour: "08:00",
+        hotel_data: undefined,
+        to_another_city: false,
         list_place: []
       };
-      temp['days'].push(day);
+      list_dest_trip.push(day);
     }
-
-    temp['cities'] = [];
-    let city = {
-      id: 1,
-      city_code: list_destination[i].city_code,
-      city_name: list_destination[i].city_name,
-      zone_id: list_destination[i].zone_id,
-      hotel_city_id: list_destination[i].hotel_city_id,
-      day: stay,
-      hotel: undefined,
-      booking_data: undefined,
-      search_at: getDateAfterDays(0)
-    };
-    temp['cities'].push(city);
 
     //airport
     temp['arrival'] = flight_plan[i];
@@ -481,6 +471,23 @@ travelpayouts.getFlightPlan = async function(){
     else{
       temp['go_back_airport'] = undefined;
     }
+
+    temp['cities'] = [];
+    let city = {
+      id: 1,
+      city_code: list_destination[i].city_code,
+      city_name: list_destination[i].city_name,
+      zone_id: list_destination[i].zone_id,
+      hotel_city_id: list_destination[i].hotel_city_id,
+      day: stay,
+      hotel: undefined,
+      hotel_data: undefined,
+      booking_data: undefined,
+      search_at: getDateAfterDays(0),
+      list_dest_trip: list_dest_trip
+    };
+    temp['cities'].push(city);
+
     temp['already_open'] = false;
     store.trip_city_plan_data.push(temp);
   }
@@ -605,6 +612,23 @@ travelpayouts.changeFlightPlan = async function(){
   window.f7.showPreloader();
   store.flight_plan.splice(store.flight_plan_index, 1);
   store.flight_plan.splice(store.flight_plan_index, 0, store.flight_details);
+
+  //ubah goback_airport dan arrival_airport
+  //airport
+  let list_destination = copy(store.trip_plan_data.list_destination);
+  for (let i = 0; i < list_destination.length; i++) {
+    store.trip_city_plan_data[i].arrival = store.flight_plan[i];
+    store.trip_city_plan_data[i].go_back = ((i+1) < list_destination.length + 1)? store.flight_plan[i+1] : undefined;
+
+    store.trip_city_plan_data[i].arrival_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].arrival.display[0].arrival_airport.airport.code);
+    if(store.trip_city_plan_data[i].go_back){
+      store.trip_city_plan_data[i].go_back_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].go_back.display[0].departure_airport.airport.code);
+    }
+    else{
+      store.trip_city_plan_data[i].go_back_airport = undefined;
+    }
+  }
+
   var mainView = Dom7('#main-view')[0].f7View;
   goBack();
   await sleep(500);
@@ -612,8 +636,8 @@ travelpayouts.changeFlightPlan = async function(){
     goBack();
   }
   await sleep(500);
-  // mainView.router.refreshPage();
-  // await sleep(500);
+  mainView.router.refreshPage();
+  await sleep(500);
   window.f7.hidePreloader();
 };
 

@@ -196,6 +196,21 @@ hotel_api.getAllHotelByCity = async function(city_code){
     }
 }
 
+hotel_api.getHotelData = async function(hotel_id){
+    try {
+        var data = await got.get(store.service_url + "/hotel/data/" + hotel_id, {
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+        return data.result;
+    } catch (e) {
+      return null;
+    }
+}
+
 hotel_api.getHotelPlan = async function(){
   let cur_index = store.trip_city_plan_data_index;
   console.log(cur_index);
@@ -269,6 +284,8 @@ hotel_api.getHotelPlan = async function(){
       console.log(hotel_booking);
 
       store.trip_city_plan_data[store.trip_city_plan_data_index].cities[i].hotel = hotel_booking;
+      store.trip_city_plan_data[store.trip_city_plan_data_index].cities[i].hotel.rooms = store.trip_city_plan_data[store.trip_city_plan_data_index].cities[i].hotel.rooms.slice(0,1);
+      store.trip_city_plan_data[store.trip_city_plan_data_index].cities[i].hotel_data = await this.getHotelData(hotel_booking.id.toString());
       store.trip_city_plan_data[store.trip_city_plan_data_index].cities[i].booking_data = {
         adults: trip_plan_data.passenger.adults,
         children: trip_plan_data.passenger.children,
@@ -451,7 +468,9 @@ hotel_api.changeHotelBooking = async function(room_deal){
   window.f7.showPreloader();
   console.log(store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index]);
   store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].search_at = getDateAfterDays(0);
+
   store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].hotel = store.hotel_details;
+  store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].hotel_data = await this.getHotelData(store.hotel_details.id.toString());
   store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].hotel.rooms = [];
   store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].hotel.rooms.push(room_deal);
   var mainView = Dom7('#main-view')[0].f7View;

@@ -26,7 +26,7 @@
             <f7-list-item link="/about/" title="About"></f7-list-item>
             <f7-list-item link="/form/" title="Form"></f7-list-item>
             <f7-list-item link="/dynamic-route/blog/45/post/125/?foo=bar#about" title="Dynamic Route"></f7-list-item>
-            <f7-list-item link="/plan-overview-city/" title="City"></f7-list-item>
+            <f7-list-item @click="goTo" title="Per Day"></f7-list-item>
           </f7-list>
           <f7-block-title>Side Panels</f7-block-title>
           <f7-block>
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+  import plan_trip from "../js/plantrip"
+
   export default {
     name: 'main-view',
     data () {
@@ -71,6 +73,9 @@
         setTimeout(function () {
           window.f7.hidePreloader();
         }, 1000);
+      },
+      goTo(){
+        plan_trip.goToPerDay('TPE');
       }
     },
     created () {

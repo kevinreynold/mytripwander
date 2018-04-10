@@ -14,6 +14,10 @@ function goBack(){
   mainView.router.back();
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function copy(o) {
    var output, v, key;
    output = Array.isArray(o) ? [] : {};
@@ -82,6 +86,14 @@ plan_trip.getAllCity = async function(){
     }
 }
 
+plan_trip.goToCityOverview = async function(){
+  window.f7.showPreloader();
+  await this.getAllCity();
+  await sleep(1000);
+  window.f7.hidePreloader();
+  goTo('/plan-overview-city/');
+}
+
 plan_trip.getAirport = async function(city_code){
     try {
         var data = await got.get(store.service_url + "/airport/" + city_code, {
@@ -96,6 +108,43 @@ plan_trip.getAirport = async function(city_code){
     } catch (e) {
       return null;
     }
+}
+
+plan_trip.goToPerDay = async function(city_code){
+    window.f7.showPreloader('Fetch List Attraction Data');
+    try {
+        var data = await got.get(store.service_url + "/attraction/" + city_code, {
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+        store.list_attraction =  data.result;
+        await sleep(500);
+        window.f7.hidePreloader();
+    } catch (e) {
+      return null;
+    }
+
+    window.f7.showPreloader('Fetch List Restaurant Data');
+    try {
+        var data = await got.get(store.service_url + "/food/" + city_code, {
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+        store.list_food =  data.result;
+        await sleep(500);
+        window.f7.hidePreloader();
+    } catch (e) {
+      return null;
+    }
+
+    var mainView = Dom7('#main-view')[0].f7View;
+    mainView.router.load({url: '/plan-overview-day/'});
 }
 
 export default plan_trip;

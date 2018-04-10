@@ -44,25 +44,38 @@
       <f7-block class="no-margin" inner no-hairlines><hr></f7-block>
 
       <f7-grid class="flight-user">
-        <f7-col width="35"></f7-col>
-        <f7-col width="30">
-          <div class="col-date" v-on:click="changePassenger">
+        <f7-col width="30"></f7-col>
+        <f7-col width="40">
+          <!-- <div class="col-date" v-on:click="changePassenger"> -->
+          <div class="col-date">
             <div class="col-title">TRAVELERS</div>
             <div class="grid-head">
               <div class="grid-user">
-                <div>
-                  <img src="../assets/flight-icon/adult.png" alt="adult" width="20px">
-                  <span class="passenger-info">{{adults}}</span>
+                <div class="grid-passenger">
+                  <div class="grid-image" ><img src="../assets/flight-icon/adult.png" alt="adult" width="20px"></div>
+                  <!-- <span class="passenger-info">{{adults}}</span> -->
+                  <div class="grid-counter">
+                    <div class="counter-dec" v-on:click="passenger.adults > 1 ? passenger.adults -= 1 : 1">-</div>
+                    <div class="counter-desc">{{passenger.adults}}</div>
+                    <div class="counter-inc" v-on:click="passenger.adults < 4 ? passenger.adults += 1 : 4">+</div>
+                  </div>
                 </div>
-                <div>
-                  <img src="../assets/flight-icon/child.png" alt="child" width="20px">
-                  <span class="passenger-info">{{children}}</span>
+                <div class="grid-passenger">
+                  <!-- <img src="../assets/flight-icon/child.png" alt="child" width="20px"> -->
+                  <!-- <span class="passenger-info">{{children}}</span> -->
+                  <div class="grid-image" ><img src="../assets/flight-icon/child.png" alt="child" width="20px"></div>
+                  <!-- <span class="passenger-info">{{adults}}</span> -->
+                  <div class="grid-counter">
+                    <div class="counter-dec" v-on:click="passenger.children > 0 ? passenger.children -= 1 : 0">-</div>
+                    <div class="counter-desc">{{passenger.children}}</div>
+                    <div class="counter-inc" v-on:click="passenger.children < 3 ? passenger.children += 1 : 3">+</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </f7-col>
-        <f7-col width="35"></f7-col>
+        <f7-col width="30"></f7-col>
       </f7-grid>
 
     </f7-list>
@@ -416,6 +429,32 @@ export default {
             transform: scaleY(0) translateZ(0);
     opacity: 0;
     border: 0;
+  }
+
+  .grid-passenger{
+    width: 100% !important;
+    overflow: auto;
+  }
+
+  .grid-image{
+    width: 25% !important;
+    padding-top: 7px;
+    float: left;
+  }
+
+  .grid-counter{
+    width: 70% !important;
+    float: left;
+  }
+
+  .grid-counter div{
+    width: 28%;
+    margin-top: 5%;
+    border: 2px solid black;
+    font-size: 1.3em;
+    font-weight: 400;
+    text-align: center;
+    float: left;
   }
 
   .modal-container{
