@@ -1,6 +1,8 @@
 import store from "./store";
 import travelpayouts from "./flightsearch";
+import hotel_api from "./hotelsearch";
 import got from "got";
+import moment from "moment";
 
 var plan_trip = {};
 
@@ -43,17 +45,16 @@ plan_trip.getDestinationList = async function(){
         store.list_dest_all = data.result;
       }
 
-      setTimeout(function () {
-        window.f7.hidePreloader();
-      }, 500);
+      await sleep(500);
+      window.f7.hidePreloader();
     } catch (e) {
-      setTimeout(function () {
-        window.f7.hidePreloader();
-        window.f7.addNotification({
-            message: 'No Internet Connection..'
-        });
-        goBack();
-      }, 1000);
+      await sleep(500);
+      goBack();
+      await sleep(500);
+      window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
     }
 }
 
@@ -143,8 +144,287 @@ plan_trip.goToPerDay = async function(city_code){
       return null;
     }
 
+    await sleep(250);
+
+    window.f7.showPreloader('Fetch Hotel Data Tainan');
+    store.coba_hotel1 = await hotel_api.getHotelData('525625'); //Tayih Landis Hotel Tainan
+    await sleep(250);
+    window.f7.hidePreloader();
+
+    await sleep(250);
+
+    window.f7.showPreloader('Fetch Hotel Data Kaohsiung');
+    store.coba_hotel2 = await hotel_api.getHotelData('391444'); //Grand Hi Lai Hotel
+    await sleep(250);
+    window.f7.hidePreloader();
+
+    await sleep(250);
+
+    window.f7.showPreloader('Fetch Arrival Airport Data');
+    store.coba_airport = await this.getAirport('TNN');
+    await sleep(250);
+    window.f7.hidePreloader();
+
+    store.airport_mode = 'arrival';
+    store.is_change_city = false;
+    await sleep(250);
+
+    goTo('/plan-overview-day/');
+    await sleep(250);
+    await this.addSchedule(false);
+}
+
+plan_trip.getDistance = async function(origin, destination){
+    let dest_data = {
+      origin: origin,
+      destination: destination
+    };
+
+    try {
+        var data = await got.get(store.service_url +"/place/distance", {
+          query: dest_data,
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+        return data.result;
+    } catch (e) {
+      return null;
+    }
+}
+
+function getDateString(date, time){
+  return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2) + " " + time;
+}
+
+function printCurrentPlace(curTime, curPlace, cur_day){
+  let temp_time = curTime.clone();
+  temp_time.add(curPlace.duration, 'm');
+  let warning = (curPlace.travel_time_before.status === "N")? ' (NOT FOUND)' : '';
+  return (curPlace.place.name + ' | ' + curTime.format('LT') + ' - ' + temp_time.format('LT') + ' | ' + getOpeningHours(curPlace.place, cur_day) + warning);
+}
+
+function getOpeningHours(place, cur_day){
+  let string_hours = "";
+  if(place.opening_hours.day[cur_day] !== 'Closed'){
+    let split_string = place.opening_hours.day[cur_day].split('-');
+    let open = split_string[0].slice(0,2) + ":" + split_string[0].slice(2,4);
+    let close = split_string[1].slice(0,2) + ":" + split_string[1].slice(2,4);
+    string_hours = open + '-' + close;
+  }
+  else{
+    string_hours = 'Closed';
+  }
+  return string_hours;
+}
+
+function isOpen(curTime, curPlace, cur_day){
+  let temp_time = curTime.clone();
+  temp_time.add(curPlace.duration, 'm');
+  let cur_hour = temp_time.format('HH:mm');
+
+  let opening_hours = getOpeningHours(curPlace.place, cur_day).split('-');
+  if(opening_hours !== 'Closed'){
+    let open = opening_hours[0];
+    let close = opening_hours[1];
+    console.log(open);
+    console.log(close);
+    if(new Date('1970/01/01 ' + cur_hour) >= new Date('1970/01/01 ' + open) && new Date('1970/01/01 ' + cur_hour) <= new Date('1970/01/01 ' + close)){
+      console.log('mantap');
+      return true;
+    }
+  }
+  console.log(cur_hour);
+  return false;
+}
+
+function changeFormatDuration(duration){
+  var result = "";
+  if(duration == 0){
+    return "none";
+  }
+
+  if (duration > 3600) {
+    result += ("00" + (Math.floor(duration / 3600))).slice(-2) + "h ";
+    duration -= (Math.floor(duration / 3600)) * 3600;
+    result += ("00" + (Math.floor(duration / 60))).slice(-2) + "m ";
+    result += ("00" + (duration % 60)).slice(-2) + "s ";
+  }
+  else if (duration > 60) {
+    result += ("00" + (Math.floor(duration/60))).slice(-2) + "m ";
+    result += ("00" + (duration % 60)).slice(-2) + "s ";
+  }
+  else{
+    result += ("00" + (duration)).slice(-2) + "s ";
+  }
+  return result;
+}
+
+plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-result kalau false pertama kali buka
+  let is_change_city = store.is_change_city;
+  let airport_mode = store.airport_mode; //arrival | go_back | none
+
+  let run_down = store.coba_run_down;
+  let hotel_before = store.coba_hotel2;
+  let hotel_now = store.coba_hotel1;
+
+  let airport_arrival = store.coba_airport;
+  let airport_go_back = store.coba_airport;
+
+  let cur_date = new Date();
+  let cur_day = cur_date.getDay();
+  let start_hour = '08:00';
+  let start = moment(getDateString(cur_date, start_hour));
+  // console.log(start.format('LLL'));
+  // start.add(77, 'm');
+  // console.log(start.format('LLL'));
+  // let add = start.clone();
+  // add.add(30, 'm');
+  // console.log(add.format('LLL'));
+  // console.log(start.format('LLL'));
+
+  let modified_run_down = [];
+  let travel_time_before = 0;
+  let duration = 0;
+  let last_place = {};
+
+  let list_distance = [];
+  let temp_distance = {
+    origin: 'none',
+    destination: 'none',
+    status: 'Y',
+    travel_time: 0
+  };
+
+  console.log('');
+  console.log(is_change_city);
+  console.log('MULAI');
+  window.f7.showPreloader('Fetch Schedule');
+
+  //airport
+  if(airport_mode === 'arrival'){
+    duration = 60;
+    travel_time_before = 0;
+
+    start.add(travel_time_before, 's');
+    let temp_airport = {
+        place: airport_arrival,
+        is_open: true,
+        duration: duration,
+        travel_time_before: temp_distance,
+        humanize: changeFormatDuration(temp_distance.travel_time),
+        can_sort: false,
+        type: 'airport_arrival'
+    };
+    temp_airport.string_format = printCurrentPlace(start, temp_airport, cur_day);
+    start.add(duration, 'm');
+    modified_run_down.push(temp_airport);
+
+    last_place = airport_arrival;
+    temp_distance = await this.getDistance(last_place.place_id, hotel_now.place_id);
+    travel_time_before = temp_distance.travel_time;
+    duration = 60;
+  }
+  else{
+    travel_time_before = 0;
+    duration = 0;
+  }
+
+  //hotel_before
+  if(is_change_city){ //kalau ganti kota
+    start.add(travel_time_before, 's');
+    let temp1 = {
+        place: hotel_before,
+        is_open: true,
+        duration: duration,
+        travel_time_before: temp_distance,
+        humanize: changeFormatDuration(temp_distance.travel_time),
+        can_sort: false,
+        type: 'hotel_before'
+    };
+    temp1.string_format = printCurrentPlace(start, temp1, cur_day);
+    start.add(duration, 'm');
+    modified_run_down.push(temp1);
+    last_place = hotel_before;
+    temp_distance = await this.getDistance(last_place.place_id, hotel_now.place_id);
+    travel_time_before = temp_distance.travel_time;
+    duration = 60;
+  }
+
+  //hotel_now
+  start.add(travel_time_before, 's');
+  let temp2 = {
+      place: hotel_now,
+      is_open: true,
+      duration: duration,
+      travel_time_before: temp_distance,
+      humanize: changeFormatDuration(temp_distance.travel_time),
+      can_sort: false,
+      type: 'hotel_now'
+  };
+  temp2.string_format = printCurrentPlace(start, temp2, cur_day);
+  start.add(duration, 'm');
+  modified_run_down.push(temp2);
+
+  last_place = hotel_now;
+  if(run_down.length > 0){
+    temp_distance = await this.getDistance(last_place.place_id, run_down[0].place.place_id);
+    travel_time_before = temp_distance.travel_time;
+    duration = run_down[0].duration;
+  }
+  else{ //bisa langsung airport pulang
+    travel_time_before = 0
+    duration = 0;
+  }
+
+  //mulai per tempat
+  for (let i = 0; i < run_down.length; i++) {
+    start.add(travel_time_before, 's');
+    let temp_place = {
+        place: run_down[i].place,
+        is_open: true,
+        duration: duration,
+        travel_time_before: temp_distance,
+        humanize: changeFormatDuration(temp_distance.travel_time),
+        can_sort: true,
+        type: 'place'
+    };
+    temp_place.string_format = printCurrentPlace(start, temp_place, cur_day);
+    temp_place.is_open = isOpen(start, temp_place, cur_day);
+    start.add(duration, 'm');
+    modified_run_down.push(temp_place);
+
+    if(i < run_down.length - 1){
+      last_place = run_down[i].place;
+      temp_distance = await this.getDistance(last_place.place_id, run_down[i+1].place.place_id);
+      travel_time_before = temp_distance.travel_time;
+      duration = run_down[i+1].duration;
+    }
+  }
+
+  store.coba_modified_run_down = [];
+  store.coba_modified_run_down = modified_run_down;
+
+  await sleep(250);
+  if(mode){
+    goBack();
+    await sleep(500);
+    goBack();
+    await sleep(500);
     var mainView = Dom7('#main-view')[0].f7View;
-    mainView.router.load({url: '/plan-overview-day/'});
+    mainView.router.refreshPage();
+    await sleep(500);
+    window.f7.hidePreloader();
+  }
+  else{
+    await sleep(500);
+    var mainView = Dom7('#main-view')[0].f7View;
+    mainView.router.refreshPage();
+    await sleep(500);
+    window.f7.hidePreloader();
+  }
 }
 
 export default plan_trip;

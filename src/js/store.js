@@ -1,7 +1,7 @@
 const store = {
   _url : 'http://103.253.25.103',
-  service_url : 'http://103.253.25.103:5000',
-  // service_url : 'http://127.0.0.1:5000',
+  // service_url : 'http://103.253.25.103:5000',
+  service_url : 'http://127.0.0.1:5000',
   //createplan
   list_city_all: [],
   list_dest_all : [],
@@ -19,7 +19,17 @@ const store = {
   //perday
   list_attraction: [],
   list_food: [],
+  list_search: [],
+  place_mode: "",
   place_details: {},
+  coba_run_down: [],
+  coba_modified_run_down: [],
+  is_change_city: true,
+  airport_mode: 'none', //arrival | go_back | none
+  view_place_mode: false,
+  coba_hotel1: {},
+  coba_hotel2: {},
+  coba_airport: {},
   //flight
   flight_booking_data : [],
   flight_search_result : [],

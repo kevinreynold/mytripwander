@@ -188,7 +188,6 @@ export default {
         id: 0,
         city_name: 'Kaohsiung',
         city_code: 'KHH',
-        zone_id: 371,
         hotel_city_id: 5806,
         day: 1,
         hotel: null
@@ -197,7 +196,6 @@ export default {
         id: 1,
         city_name: 'Tainan',
         city_code: 'TNN',
-        zone_id: 371,
         hotel_city_id: 5809,
         day: 3,
         hotel: null
@@ -206,7 +204,6 @@ export default {
         id: 2,
         city_name: 'Hsinchu',
         city_code: 'HSZ',
-        zone_id: 371,
         hotel_city_id: 5805,
         day: 5,
         hotel: null
@@ -284,7 +281,6 @@ export default {
         id: self.last_city_id,
         city_name: item.city_name,
         city_code: item.city_code,
-        zone_id: item.zone_id,
         hotel_city_id: item.hotel_city_id,
         day: 1,
         hotel: undefined,
@@ -463,14 +459,22 @@ export default {
       }
     },
     saveListCity(){
-      if(!self.sorting){
-        store.trip_city_plan_data[store.trip_city_plan_data_index].cities = copy(self.new_cities);
-        console.log(store.trip_city_plan_data);
-        hotel_api.getHotelPlan();
+      if(self.new_cities.length > 0){
+        if(!self.sorting){
+          store.trip_city_plan_data[store.trip_city_plan_data_index].cities = copy(self.new_cities);
+          console.log(store.trip_city_plan_data);
+          hotel_api.getHotelPlan();
+        }
+        else{
+          window.f7.addNotification({
+              message: 'Please close sort toggle first.',
+              hold: 2500
+          });
+        }
       }
       else{
         window.f7.addNotification({
-            message: 'Please close sort toggle first.',
+            message: 'At least 1 city is chosen.',
             hold: 2500
         });
       }

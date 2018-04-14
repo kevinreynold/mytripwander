@@ -27,6 +27,8 @@
 
 <script>
   import f7_list_item_media from '../components/f7-list-item-media'
+  import plan_trip from "../js/plantrip"
+  import store from "../js/store"
 
   export default {
     name: 'left-panel',

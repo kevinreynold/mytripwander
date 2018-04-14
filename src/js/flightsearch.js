@@ -461,12 +461,12 @@ travelpayouts.getFlightPlan = async function(){
     }
 
     //airport
-    temp['arrival'] = flight_plan[i];
-    temp['go_back'] = ((i+1) < list_destination.length + 1)? flight_plan[i+1] : undefined;
+    temp['arrival'] = flight_plan[i].display[0];
+    temp['go_back'] = ((i+1) < flight_plan.length)? flight_plan[i+1].display[0] : undefined;
 
-    temp['arrival_airport'] = await plan_trip.getAirport(temp['arrival'].display[0].arrival_airport.airport.code);
+    temp['arrival_airport'] = await plan_trip.getAirport(temp['arrival'].arrival_airport.airport.code);
     if(temp['go_back']){
-      temp['go_back_airport'] = await plan_trip.getAirport(temp['go_back'].display[0].departure_airport.airport.code);
+      temp['go_back_airport'] = await plan_trip.getAirport(temp['go_back'].departure_airport.airport.code);
     }
     else{
       temp['go_back_airport'] = undefined;
@@ -477,7 +477,6 @@ travelpayouts.getFlightPlan = async function(){
       id: 1,
       city_code: list_destination[i].city_code,
       city_name: list_destination[i].city_name,
-      zone_id: list_destination[i].zone_id,
       hotel_city_id: list_destination[i].hotel_city_id,
       day: stay,
       hotel: undefined,
@@ -617,12 +616,12 @@ travelpayouts.changeFlightPlan = async function(){
   //airport
   let list_destination = copy(store.trip_plan_data.list_destination);
   for (let i = 0; i < list_destination.length; i++) {
-    store.trip_city_plan_data[i].arrival = store.flight_plan[i];
-    store.trip_city_plan_data[i].go_back = ((i+1) < list_destination.length + 1)? store.flight_plan[i+1] : undefined;
+    store.trip_city_plan_data[i].arrival = store.flight_plan[i].display[0];
+    store.trip_city_plan_data[i].go_back = ((i+1) < list_destination.length + 1)? store.flight_plan[i+1].display[0] : undefined;
 
-    store.trip_city_plan_data[i].arrival_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].arrival.display[0].arrival_airport.airport.code);
+    store.trip_city_plan_data[i].arrival_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].arrival.arrival_airport.airport.code);
     if(store.trip_city_plan_data[i].go_back){
-      store.trip_city_plan_data[i].go_back_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].go_back.display[0].departure_airport.airport.code);
+      store.trip_city_plan_data[i].go_back_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].go_back.departure_airport.airport.code);
     }
     else{
       store.trip_city_plan_data[i].go_back_airport = undefined;
@@ -631,8 +630,8 @@ travelpayouts.changeFlightPlan = async function(){
 
   var mainView = Dom7('#main-view')[0].f7View;
   goBack();
-  await sleep(500);
   if(store.search_again_mode){
+    await sleep(500);
     goBack();
   }
   await sleep(500);
@@ -729,12 +728,12 @@ travelpayouts.researchFlightPlan = async function(start_index){
   //airport
   let list_destination = copy(store.trip_plan_data.list_destination);
   for (let i = start_index; i < list_destination.length; i++) {
-    store.trip_city_plan_data[i].arrival = store.flight_plan[i];
-    store.trip_city_plan_data[i].go_back = ((i+1) < list_destination.length + 1)? store.flight_plan[i+1] : undefined;
+    store.trip_city_plan_data[i].arrival = store.flight_plan[i].display[0];
+    store.trip_city_plan_data[i].go_back = ((i+1) < list_destination.length + 1)? store.flight_plan[i+1].display[0] : undefined;
 
-    store.trip_city_plan_data[i].arrival_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].arrival.display[0].arrival_airport.airport.code);
+    store.trip_city_plan_data[i].arrival_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].arrival.arrival_airport.airport.code);
     if(store.trip_city_plan_data[i].go_back){
-      store.trip_city_plan_data[i].go_back_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].go_back.display[0].departure_airport.airport.code);
+      store.trip_city_plan_data[i].go_back_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].go_back.departure_airport.airport.code);
     }
     else{
       store.trip_city_plan_data[i].go_back_airport = undefined;

@@ -20,6 +20,10 @@ export default [
       component: require('./pages/plan-overview-day.vue')
   },
   {
+      path: '/search-place/',
+      component: require('./pages/search-place.vue')
+  },
+  {
       path: '/place-result/',
       component: require('./pages/place-result.vue')
   },

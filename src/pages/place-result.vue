@@ -24,7 +24,7 @@
 
     <div class="place-location-title">Opening Hours</div>
     <div class="place-opening-hours">
-      <div v-for="open in setOpeningHours(place_details)" :key="open.day_name" class="open-hours">
+      <div :class="{highlight: openingHoursStatus(index)}" v-for="open, index in setOpeningHours(place_details)" :key="open.day_name" class="open-hours">
         <div class="open-day">{{open.day_name}}</div>
         <div class="open-separator">:</div>
         <div class="open-hours-string">{{open.hours}}</div>
@@ -39,7 +39,7 @@
       <div class="place-location"><f7-icon fa="map-marker"/> {{place_details.address}}</div>
     </div>
 
-    <div class="fixed-bottom">
+    <div v-if="!view_place_mode" class="fixed-bottom">
         <f7-button fill big v-on:click="addPlace">Add Place</f7-button>
     </div>
     <f7-button fill big color="white">Blank Space</f7-button>
@@ -48,6 +48,7 @@
 
 <script>
 import store from '../js/store'
+import plan_trip from "../js/plantrip"
 
 let self;
 
@@ -65,6 +66,16 @@ function compare(a, b) {
   return comparison;
 }
 
+function copy(o) {
+   var output, v, key;
+   output = Array.isArray(o) ? [] : {};
+   for (key in o) {
+       v = o[key];
+       output[key] = (typeof v === "object") ? copy(v) : v;
+   }
+   return output;
+}
+
 export default {
   components: {
   },
@@ -72,7 +83,9 @@ export default {
     place_details: {},
     center: {lat:22.324587, lng:114.173473},
     markers: [],
-    photos:[]
+    photos: [],
+    cur_day: 3,
+    view_place_mode: false
   }),
   computed: {
     title(){
@@ -94,6 +107,7 @@ export default {
     //do something after creating vue instance
     self = this;
     self.place_details = store.place_details;
+    self.view_place_mode = store.view_place_mode;
     // console.log(self.place_details);
 
     self.center.lat = parseFloat(self.place_details.latitude);
@@ -150,6 +164,9 @@ export default {
       // console.log(res);
       return res;
     },
+    openingHoursStatus(day){
+      return self.cur_day === day;
+    },
     getTypes(item){
       let list_types = item.types.split(';');
       let list_interests = item.interests.split(';');
@@ -179,6 +196,13 @@ export default {
     },
     addPlace(){
       console.log('add place');
+      let item = copy(self.place_details);
+      let temp = {
+        place: item,
+        duration: item.avg_dur
+      }
+      store.coba_run_down.push(temp);
+      plan_trip.addSchedule();
     }
   }
 }
@@ -425,5 +449,10 @@ export default {
      width:100%;
      overflow: auto;
      z-index: 5000;
+  }
+
+  .highlight{
+    font-weight: bold;
+    color: #009688;
   }
 </style>

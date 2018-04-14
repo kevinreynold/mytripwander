@@ -218,17 +218,18 @@ hotel_api.getHotelPlan = async function(){
   console.log(trip_city_plan_data_one);
   let trip_plan_data = copy(store.trip_plan_data);
   console.log(trip_plan_data);
-  let current_date = new Date(trip_city_plan_data_one.arrival.display[0].arrival_airport.date);
+  let current_date = new Date(trip_city_plan_data_one.arrival.arrival_airport.date);
   let new_total_stay = 0;
 
   for (var i = 0; i < trip_city_plan_data_one.cities.length; i++) {
     let check_out = "";
-    if(i === trip_city_plan_data_one.cities.length - 1){
-      check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day - 1));
-    }
-    else{
-      check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day));
-    }
+    check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day - 1));
+    // if(i === trip_city_plan_data_one.cities.length - 1){
+    //   check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day - 1));
+    // }
+    // else{
+    //   check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day));
+    // }
 
     console.log(current_date);
     console.log(check_out);
@@ -295,7 +296,7 @@ hotel_api.getHotelPlan = async function(){
         place_id: trip_city_plan_data_one.cities[i].hotel_city_id
       };
 
-      current_date = check_out;
+      current_date = new Date(getDateAfter(check_out, 1));
       window.f7.hidePreloader();
     } catch (e) {
       console.log(e.message);
@@ -316,14 +317,12 @@ hotel_api.getHotelPlan = async function(){
   let new_first_city = {
     city_code: trip_city_plan_data_one.cities[0].city_code,
     city_name: trip_city_plan_data_one.cities[0].city_name,
-    zone_id: trip_city_plan_data_one.cities[0].zone_id,
     hotel_city_id: trip_city_plan_data_one.cities[0].hotel_city_id
   };
 
   let new_last_city = {
     city_code: trip_city_plan_data_one.cities[trip_city_plan_data_one.cities.length - 1].city_code,
     city_name: trip_city_plan_data_one.cities[trip_city_plan_data_one.cities.length - 1].city_name,
-    zone_id: trip_city_plan_data_one.cities[trip_city_plan_data_one.cities.length - 1].zone_id,
     hotel_city_id: trip_city_plan_data_one.cities[trip_city_plan_data_one.cities.length - 1].hotel_city_id
   };
 
@@ -361,12 +360,10 @@ hotel_api.getHotelPlan = async function(){
   store.trip_plan_data.list_destination[cur_index].city_code = new_first_city.city_code;
   store.trip_plan_data.list_destination[cur_index].city_name = new_first_city.city_name;
   store.trip_plan_data.list_destination[cur_index].hotel_city_id = new_first_city.hotel_city_id;
-  store.trip_plan_data.list_destination[cur_index].zone_id = new_first_city.zone_id;
 
   store.trip_plan_data.list_destination[cur_index].last_city_code = new_last_city.city_code;
   store.trip_plan_data.list_destination[cur_index].last_city_name = new_last_city.city_name;
   store.trip_plan_data.list_destination[cur_index].last_hotel_city_id = new_last_city.hotel_city_id;
-  store.trip_plan_data.list_destination[cur_index].last_zone_id = new_last_city.zone_id;
 
   //research flight
   if(is_change_flight){
@@ -475,19 +472,20 @@ hotel_api.changeHotelBooking = async function(room_deal){
   store.trip_city_plan_data[store.trip_city_plan_data_index].cities[store.hotel_plan_index].hotel.rooms.push(room_deal);
   var mainView = Dom7('#main-view')[0].f7View;
   goBack();
-  await sleep(500);
   if(store.hotel_search_again_mode){
+    console.log("search_again");
+    await sleep(500);
     goBack();
   }
-  await sleep(500);
   if(store.hotel_search_more_deal_mode){
+    console.log("more_deal");
+    await sleep(500);
     goBack();
   }
-  await sleep(500);
+  await sleep(750);
+  window.f7.hidePreloader();
   store.hotel_search_more_deal_mode = false;
   mainView.router.refreshPage();
-  await sleep(500);
-  window.f7.hidePreloader();
 }
 
 export default hotel_api;

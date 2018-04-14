@@ -58,6 +58,7 @@
 
 <script>
   import plan_trip from "../js/plantrip"
+  import store from "../js/store"
 
   export default {
     name: 'main-view',
@@ -75,7 +76,7 @@
         }, 1000);
       },
       goTo(){
-        plan_trip.goToPerDay('TPE');
+        plan_trip.goToPerDay('TNN');
       }
     },
     created () {
