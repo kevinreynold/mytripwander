@@ -36,6 +36,9 @@
                       <div class="item-title custom-item-title">{{item.name}}</div>
                     </div>
                     <div class="item-text custom-item-text">
+                      <div v-if="place_mode === 'nearby' "class="type-list">
+                        ({{changeFormatDuration(item.travel_time)}})
+                      </div>
                       <div class="type-list">
                         <!-- <f7-chip v-for="type in getTypes(item.types)" :key="type.key" :text="type"></f7-chip> -->
                         <span v-if="type !== 'food'" v-for="type in getTypes(item)" :key="type.key">{{type}}</span>
@@ -92,6 +95,9 @@ export default {
       else if(self.place_mode === 'recreation'){
         return 'Tourist Attracions - Recreation';
       }
+      else if(self.place_mode === 'nearby'){
+        return 'Nearby Places';
+      }
       return 'Restaurants';
     }
   },
@@ -135,6 +141,27 @@ export default {
         mainView.router.load({url: '/place-result/'});
         window.f7.hidePreloader();
       }, 500);
+    },
+    changeFormatDuration(duration){
+      var result = "";
+      if(duration == 0){
+        return "none";
+      }
+
+      if (duration > 3600) {
+        result += ("00" + (Math.floor(duration / 3600))).slice(-2) + "h ";
+        duration -= (Math.floor(duration / 3600)) * 3600;
+        result += ("00" + (Math.floor(duration / 60))).slice(-2) + "m ";
+        result += ("00" + (duration % 60)).slice(-2) + "s ";
+      }
+      else if (duration > 60) {
+        result += ("00" + (Math.floor(duration/60))).slice(-2) + "m ";
+        result += ("00" + (duration % 60)).slice(-2) + "s ";
+      }
+      else{
+        result += ("00" + (duration)).slice(-2) + "s ";
+      }
+      return result;
     }
   }
 }
@@ -152,7 +179,7 @@ export default {
   }
 
   .custom-item-text{
-    max-height: 50px;
+    max-height: 75px;
   }
 
   .type-list{

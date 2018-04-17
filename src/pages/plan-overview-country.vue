@@ -31,7 +31,9 @@
               <div class="country-display" :style="country_image_url(country.country_code)" valign="bottom" @click="cityDetail(index)">
                 <div class="overlay">
                   <div class="country-title">{{country.country_name}}</div>
-                  <div class="country-days">{{country.stay}} Days</div>
+                  <div class="country-list-city">- {{getListCity(index)}} -</div>
+                  <div class="country-days">({{country.stay}} Days)</div>
+                  <div class="country-hotel-budget"><f7-icon fa="hotel"/> ${{getHotelPrice(index)}}</div>
                 </div>
               </div>
             </f7-card-content>
@@ -141,6 +143,25 @@ export default {
     country_image_url(country_code){
       return ("background-image:url('" + store._url + "/assets/country/" + country_code + ".jpg')");
     },
+    getListCity(index){
+      let res = "";
+      for (var i = 0; i < store.trip_city_plan_data[index].cities.length; i++) {
+        res += store.trip_city_plan_data[index].cities[i].city_name;
+        if(i !== store.trip_city_plan_data[index].cities.length-1){
+          res += ' - ';
+        }
+      }
+      return res;
+    },
+    getHotelPrice(index){
+      let result = 0;
+      for (let i = 0; i < store.trip_city_plan_data[index].cities.length; i++) {
+        if(store.trip_city_plan_data[index].cities[i].hotel){
+          result += store.trip_city_plan_data[index].cities[i].hotel.rooms[0].total;
+        }
+      }
+      return result;
+    },
     showFlightDetail(flight_detail, index){
       store.flight_search_plan_mode = "search";
       store.flight_details = flight_detail;
@@ -176,7 +197,7 @@ export default {
     width: 100%;
     height: 50vw;
     background: url("http://103.253.25.103/assets/trip_overview.jpg");
-    background-color: rgba(0,0,0,0.5); 
+    background-color: rgba(0,0,0,0.5);
     background-size: cover;
     background-position: center;
     color: white;
@@ -252,23 +273,42 @@ export default {
 
   .country-title{
     position: absolute;
-    top: 45%;
+    top: 32.5%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     color:white;
     font-size: 2em;
   }
 
+  .country-list-city{
+    position: absolute;
+    top: 52.5%;
+    left: 0%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    transform: translateY(-50%);
+    font-size: 1.35em;
+  }
+
   .country-days{
     position: absolute;
-    top: 65%;
+    top: 70%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     color:white;
     font-size: 1.5em;
   }
 
-  /* FLIGHT PLAN CAD */
+  .country-hotel-budget{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    color: white;
+    font-size: 1.1em;
+  }
+
+  /* FLIGHT PLAN CARD */
 
   .flight-title{
     width: 60%;

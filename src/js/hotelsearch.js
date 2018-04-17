@@ -272,11 +272,17 @@ hotel_api.getHotelPlan = async function(){
       });
 
       let hotel_list = data.result;
+      let original_hotel_list = copy(hotel_list);
       console.log(hotel_list);
       let list_hotel_city_id = await this.getAllHotelByCity(trip_city_plan_data_one.cities[i].city_code);
       console.log(list_hotel_city_id);
       hotel_list = hotel_list.filter(x => list_hotel_city_id.some(x2 => x.id.toString() == x2.toString()));
       hotel_list = hotel_list.filter(x => x.rating > 70 && x.stars > 3);
+
+      if(hotel_list.length === 0){
+        hotel = original_hotel_list;
+      }
+
       // hotel_list.sort((a,b) => b.popularity - a.popularity);
       hotel_list.sort((a,b) => a.price - b.price);
       console.log(hotel_list);
@@ -297,8 +303,10 @@ hotel_api.getHotelPlan = async function(){
       };
 
       current_date = new Date(getDateAfter(check_out, 1));
+      await sleep(1000);
       window.f7.hidePreloader();
     } catch (e) {
+      store.trip_city_plan_data[store.trip_city_plan_data_index].already_open = false;
       console.log(e.message);
       setTimeout(function () {
         window.f7.hidePreloader();
@@ -307,8 +315,6 @@ hotel_api.getHotelPlan = async function(){
         });
       }, 1000);
     }
-
-
     new_total_stay = new_total_stay + trip_city_plan_data_one.cities[i].day;
   }
 
@@ -368,6 +374,20 @@ hotel_api.getHotelPlan = async function(){
   //research flight
   if(is_change_flight){
     await travelpayouts.researchFlightPlan(cur_index);
+    await sleep(250);
+
+    for (var i = 0; i < trip_city_plan_data_one.cities.length; i++) {
+      for (let j = 0; j < trip_city_plan_data_one.cities[i].list_dest_trip.length; j++) {
+        if(i == 0 && j == 0){
+          store.trip_city_plan_data[cur_index].cities[i].list_dest_trip[j].start_hour = store.trip_city_plan_data[cur_index].arrival.arrival_airport.time;
+        }
+
+        if(j == 0){
+          store.trip_city_plan_data[cur_index].cities[i].list_dest_trip[j].hotel_now_duration = 60;
+        }
+      }
+    }
+
     window.f7.showPreloader();
     await sleep(250);
     goBack();

@@ -22,14 +22,23 @@ const store = {
   list_search: [],
   place_mode: "",
   place_details: {},
+  view_place_mode: false,
+  can_add_place: true,
   coba_run_down: [],
   coba_modified_run_down: [],
-  is_change_city: true,
-  airport_mode: 'none', //arrival | go_back | none
-  view_place_mode: false,
   coba_hotel1: {},
   coba_hotel2: {},
   coba_airport: {},
+  is_change_city: true,
+  airport_mode: 'none', //arrival | go_back | none
+  hotel_before_data: undefined,
+  hotel_now_data: undefined,
+  airport_arrival_data: undefined,
+  airport_go_back_data: undefined,
+  per_day_data: {
+    start_hour: '08:00'
+  },
+  last_time: "",
   //flight
   flight_booking_data : [],
   flight_search_result : [],

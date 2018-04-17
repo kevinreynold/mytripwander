@@ -1,6 +1,14 @@
 <template>
   <f7-page>
-    <f7-navbar :title="list_destination.country_name + ' | ' + totalDaysTrip + ' Days'" back-link="Back" sliding no-shadow></f7-navbar>
+    <!-- <f7-navbar :title="list_destination.country_name + ' | ' + totalDaysTrip + ' Days'" back-link="Back" sliding no-shadow></f7-navbar> -->
+    <f7-navbar sliding no-shadow>
+      <f7-nav-left>
+        <f7-link @click="backToCountry"><f7-icon f7="arrow_left"/></f7-link>
+      </f7-nav-left>
+      <f7-nav-center>
+        {{list_destination.country_name + ' | ' + totalDaysTrip + ' Days'}}
+      </f7-nav-center>
+    </f7-navbar>
 
     <f7-toolbar tabbar>
       <f7-link href="#tab11" tab-link active text="Overview"></f7-link>
@@ -9,19 +17,33 @@
 
     <f7-tabs animated swipeable>
       <f7-tab id="tab11" active>
+
         <div class="list-day">
-          <f7-card v-for="d,index in day" :key="d.key">
-            <f7-card-header class="city-card-header">
-              <div class="city-day">Day - {{d}}</div>
-              <div class="remove-day">
-                <span v-if="index > 0"><f7-icon f7="close"/></span>
-              </div>
-            </f7-card-header>
-            <f7-card-content>
-              <div class="city-card-content"></div>
-            </f7-card-content>
-          </f7-card>
+
+          <slot v-if="trip_city_plan_data_one.already_open" v-for="city, city_index in trip_city_plan_data_one.cities">
+            <f7-card v-for="day, day_index in city.list_dest_trip" :key="day.key" class='city-card'>
+              <!-- <f7-card-header class="city-card-header">
+                <div>{{city_index}} - {{day_index}}</div>
+              </f7-card-header> -->
+              <f7-card-content :inner="false">
+                <div class="city-display" :style="city_image_url" valign="bottom">
+                  <div class="overlay">
+                    <div class="city-day">Day - {{getCurrentDay(city_index, day_index)}}</div>
+                    <div class="city-info">
+                      <div class="city-info-img"><img src="../assets/hotel-icon/location-white.png" alt="adult" width="30px"></div>
+                      <div class="city-info-value">{{day.list_place.length}}</div>
+                    </div>
+                    <div class="city-title">{{city.city_name}}</div>
+                    <div class="city-date">{{getTripDate(city.booking_data.checkin, day_index)}}</div>
+                    <div class="city-clicked" @click="showDayRoute(city_index, day_index)"><f7-icon f7="chevron_down" color="white" size="125%"></f7-icon></div>
+                  </div>
+                </div>
+              </f7-card-content>
+            </f7-card>
+          </slot>
+
         </div>
+
         <f7-button fill big color="white">Blank Space</f7-button>
       </f7-tab>
       <f7-tab id="tab22">
@@ -67,6 +89,7 @@
         </f7-nav-left>
         <f7-nav-right>
           <f7-link v-if="trip_city_plan_data_one.already_open" @click="closeChooseCity"><f7-icon f7="close"/></f7-link>
+          <f7-link v-else-if="!trip_city_plan_data_one.already_open" @click="closeChooseCityFirst"><f7-icon f7="close"/></f7-link>
         </f7-nav-right>
       </f7-navbar>
 
@@ -156,6 +179,7 @@ import store from "../js/store"
 import travelpayouts from "../js/flightsearch"
 import hotel_api from "../js/hotelsearch"
 import plan_trip from "../js/plantrip"
+import moment from "moment"
 
 let self;
 
@@ -178,7 +202,7 @@ export default {
   components: {
   },
   data: () => ({
-    day: [1,2,3,4,5],
+    cur_day: 0,
     list_destination: {},
     trip_city_plan_data_one: [],
     //UNTUK HOTEL
@@ -228,6 +252,9 @@ export default {
         res += self.new_cities[i].day;
       }
       return res;
+    },
+    city_image_url(){
+      return ("background-image:url('" + store._url + "/assets/bg_city.jpg')");
     }
   },
   mounted() {
@@ -245,7 +272,7 @@ export default {
     self.list_destination = copy(store.trip_plan_data.list_destination[store.trip_city_plan_data_index]);
     self.country_code = self.list_destination.country_code;
     console.log(self.country_code);
-    self.cities = self.trip_city_plan_data_one.cities;
+    self.cities = copy(self.trip_city_plan_data_one.cities);
     self.cities_original = copy(self.trip_city_plan_data_one.cities);
     self.new_cities = copy(self.cities);
     let temp_cities = copy(self.cities);
@@ -272,6 +299,8 @@ export default {
         day: 1,
         start_hour: "08:00",
         hotel_data: undefined,
+        hotel_before_duration: 0,
+        hotel_now_duration: 0,
         to_another_city: false,
         list_place: []
       };
@@ -310,6 +339,8 @@ export default {
       self.last_city_id = self.last_city_id + 1;
 
       self.list_city_available = self.list_city_all.filter(x => !self.new_cities.some(x2 => x.city_code === x2.city_code));
+
+      console.log(self.trip_city_plan_data_one);
 
       window.f7.showPreloader();
       setTimeout(function(){
@@ -359,6 +390,8 @@ export default {
             day: (i+1),
             start_hour: "08:00",
             hotel_data: undefined,
+            hotel_before_duration: 0,
+            hotel_now_duration: 0,
             to_another_city: false,
             list_place: []
           };
@@ -406,10 +439,10 @@ export default {
       self.list_city_available = self.list_city_all.filter(x => !self.new_cities.some(x2 => x.city_code === x2.city_code));
     },
     onOpen: function () {
-      self.sorting = !self.sorting;
+      self.sorting = true;
     },
     onClose: function () {
-      self.sorting = !self.sorting;
+      self.sorting = false;
     },
     onSort: function (event, indexes) {
       self.is_change = true;
@@ -440,6 +473,19 @@ export default {
       console.log(self.cities);
       console.log("NEW CITIES");
       console.log(self.new_cities);
+    },
+    closeChooseCityFirst(){
+      if(self.is_change){
+        window.f7.confirm('Your change may not be saved.<br>Do you want to exit ?', 'Confirmation',
+        function () {
+          window.f7.closeModal("#popup-choose-city",true);
+          plan_trip.backRefresh();
+        });
+      }
+      else{
+        window.f7.closeModal("#popup-choose-city",true);
+        plan_trip.backRefresh();
+      }
     },
     closeChooseCity(){
       if(self.is_change){
@@ -521,6 +567,82 @@ export default {
       console.log(index);
       store.hotel_details = hotel;
       hotel_api.searchAgain(true);
+    },
+    getTripDate(date, day_after){
+      let cur_date = new Date(date);
+      let date_after = new Date(cur_date.getTime() + day_after * 24 * 60 * 60 * 1000);
+      let date_after_string =  date_after.getFullYear() + "-" + ("00" + (date_after.getMonth()+1)).slice(-2) + "-" + ("00" + (date_after.getDate())).slice(-2);
+
+      let result = moment(date_after_string).format('dddd, DD MMMM YYYY');
+      return result;
+    },
+    showDayRoute(city_index, day_index){ //day itu list_dest_trip
+      let cur_date = new Date(self.trip_city_plan_data_one.cities[city_index].booking_data.checkin);
+      let date_after = new Date(cur_date.getTime() + day_index * 24 * 60 * 60 * 1000);
+      let cur_date_string =  date_after.getFullYear() + "-" + ("00" + (date_after.getMonth()+1)).slice(-2) + "-" + ("00" + (date_after.getDate())).slice(-2);
+
+      //run_down
+      store.coba_run_down = copy(self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].list_place);
+
+      store.per_day_data = {
+        city_index: city_index,
+        day_index: day_index,
+        city_code: self.trip_city_plan_data_one.cities[city_index].city_code,
+        cur_date: cur_date_string,
+        start_hour: self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].start_hour
+      };
+
+      //airport_mode
+      if(city_index == 0 && day_index == 0){
+        store.airport_mode = 'arrival';
+        store.airport_arrival_data = copy(self.trip_city_plan_data_one.arrival_airport);
+        store.per_day_data.arrival_duration = self.trip_city_plan_data_one.arrival_duration;
+        console.log(store.airport_arrival_data.name);
+      }
+      else if(city_index === self.trip_city_plan_data_one.cities.length - 1 && day_index === self.trip_city_plan_data_one.cities[self.trip_city_plan_data_one.cities.length-1].list_dest_trip.length - 1){
+        if(self.trip_city_plan_data_one.go_back_airport){
+          store.airport_mode = 'go_back';
+          store.airport_go_back_data = copy(self.trip_city_plan_data_one.go_back_airport);
+          store.per_day_data.go_back_duration = self.trip_city_plan_data_one.go_back_duration;
+          store.per_day_data.hotel_go_back_duration = self.trip_city_plan_data_one.hotel_go_back_duration;
+          store.per_day_data.go_back_time = self.trip_city_plan_data_one.go_back.departure_airport.time;
+          console.log(store.airport_go_back_data.name);
+        }
+      }
+      else{
+        store.airport_mode = 'none';
+      }
+
+      store.is_change_city = self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].to_another_city;
+
+      console.log('AIRPORT MODE : ' + store.airport_mode);
+      console.log('CHANGE CITY : ' + store.is_change_city);
+      console.log(JSON.stringify(store.per_day_data));
+
+      //hotel_now
+      store.hotel_now_data = copy(self.trip_city_plan_data_one.cities[city_index].hotel_data);
+      store.per_day_data.hotel_now_duration = self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].hotel_now_duration;
+
+      //hotel_before
+      console.log(store.hotel_now_data.name);
+      if(store.is_change_city){
+        store.hotel_before_data = copy(self.trip_city_plan_data_one.cities[city_index-1].hotel_data);
+        store.per_day_data.hotel_before_duration = self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].hotel_before_duration;
+        console.log(store.hotel_before_data.name);
+      }
+
+      plan_trip.goToPerDay();
+    },
+    backToCountry(){
+      plan_trip.backRefresh();
+    },
+    getCurrentDay(city_index, day_index){
+      let result = 0;
+      for (let i = 0; i < city_index; i++) {
+        result += self.trip_city_plan_data_one.cities[i].day;
+      }
+      result += (day_index + 1);
+      return result;
     }
   }
 }
@@ -531,14 +653,17 @@ export default {
     margin-top: -1.5%;
   }
 
+  .city-card{
+    border: 2px solid #009688;
+  }
+
   .city-card-header{
     min-height: 35px;
-    background-color: #009688;
-    color: white;
+    /* background-color: #009688; */
+    /* color: white; */
   }
 
   .city-day{
-    width: 50%;
     overflow: auto;
     text-align: left;
   }
@@ -779,6 +904,88 @@ export default {
    width:100%;
    overflow: auto;
    z-index: 5000;
+ }
+
+ .city-display{
+   position: relative;
+   width: 100%;
+   height: 47vw;
+   background-size: cover;
+   background-position: center;
+ }
+
+ .overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0,0,0,0.5);
+ }
+
+ .city-day{
+   position: absolute;
+   top: 5px;
+   left: 5px;
+   color: white;
+   font-size: 1.2em;
+ }
+
+ .city-info{
+   position: absolute;
+   top: 3px;
+   right: 2px;
+ }
+
+ .city-info-img{
+   width: 30px;
+   padding-right: 0px;
+   padding-top: 2px;
+ }
+
+ .city-info-value{
+   width: 15px;
+   padding-top: 5px;
+   font-size: 1.1em;
+ }
+
+ .city-info div{
+   overflow: auto;
+   float: left;
+   margin-right: 0px;
+   color: white;
+ }
+
+ .city-title{
+   position: absolute;
+   top: 40%;
+   left: 0%;
+   width: 100%;
+   text-align: center;
+   color: white;
+   transform: translateY(-50%);
+   font-size: 1.7em;
+ }
+
+ .city-date{
+   position: absolute;
+   top: 60%;
+   left: 0%;
+   width: 100%;
+   text-align: center;
+   color: white;
+   transform: translateY(-50%);
+   font-size: 1.2em;
+ }
+
+ .city-clicked{
+   position: absolute;
+   text-align: center;
+   bottom: -5px;
+   right: 15px;
+   color: white;
+   transform: translateY(-50%);
+   font-size: 1.2em;
  }
 </style>
 

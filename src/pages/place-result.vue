@@ -52,20 +52,6 @@ import plan_trip from "../js/plantrip"
 
 let self;
 
-function compare(a, b) {
-  // Use toUpperCase() to ignore character casing
-  const nameA = a.name.toUpperCase();
-  const nameB = b.name.toUpperCase();
-
-  let comparison = 0;
-  if (nameA > nameB) {
-    comparison = 1;
-  } else if (nameA < nameB) {
-    comparison = -1;
-  }
-  return comparison;
-}
-
 function copy(o) {
    var output, v, key;
    output = Array.isArray(o) ? [] : {};
@@ -74,6 +60,21 @@ function copy(o) {
        output[key] = (typeof v === "object") ? copy(v) : v;
    }
    return output;
+}
+
+function changeListDestTripData(run_down){
+  let country_index = store.trip_city_plan_data_index;
+  let city_index = store.per_day_data.city_index;
+  let day_index = store.per_day_data.day_index;
+  store.trip_city_plan_data[country_index].cities[city_index].list_dest_trip[day_index].list_place = [];
+  store.trip_city_plan_data[country_index].cities[city_index].list_dest_trip[day_index].list_place = copy(run_down);
+
+  // console.log('PERUBAHAN');
+  // console.log(country_index);
+  // console.log(city_index);
+  // console.log(day_index);
+  // console.log(store.trip_city_plan_data[country_index].cities[city_index].list_dest_trip[day_index].list_place);
+  // console.log('');
 }
 
 export default {
@@ -106,6 +107,9 @@ export default {
   created() {
     //do something after creating vue instance
     self = this;
+    let cur_date = new Date(store.per_day_data.cur_date);
+    self.cur_day = cur_date.getDay();
+
     self.place_details = store.place_details;
     self.view_place_mode = store.view_place_mode;
     // console.log(self.place_details);
@@ -199,9 +203,11 @@ export default {
       let item = copy(self.place_details);
       let temp = {
         place: item,
-        duration: item.avg_dur
+        duration: item.avg_dur,
+        id: 99
       }
       store.coba_run_down.push(temp);
+      changeListDestTripData(store.coba_run_down);
       plan_trip.addSchedule();
     }
   }

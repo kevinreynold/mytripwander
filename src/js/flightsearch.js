@@ -322,6 +322,24 @@ function filterDepartureFlight(x){
   return answer;
 }
 
+function filterDayFlight(x){
+  let answer = false;
+
+  let start_date = new Date(x.display[0].departure_airport.date);
+  let end_date = new Date(x.display[0].arrival_airport.date);
+  start_date.setHours(0,0,0,0);
+  end_date.setHours(0,0,0,0);
+
+  let timeDiff = Math.abs(end_date.getTime() - start_date.getTime());
+  let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  if(diffDays > 0){
+    answer = true;
+  }
+
+  return answer;
+}
+
 function makeDestRoute(trip_plan_data){ // hasil = ['SUB-TPE','TPE-HKG','HKG-SUB']
   let res = [];
 
@@ -395,21 +413,30 @@ travelpayouts.getFlightPlan = async function(){
       if (data != null) {
         // console.log(data);
         let ticket_list = await processData(data);
-
+        let original_ticket_list = copy(ticket_list);
         //ambil tiketnya dulu
         //ambil tiket termurah
         //ambil tiket yang malam dari hometown saja sisanya cari yang sampainya pagi.
         if(i === 0){
           ticket_list = ticket_list.filter(filterArrivalFlight);
+          if(ticket_list.length === 0){
+            ticket_list = original_ticket_list;
+          }
+          // ticket_list = ticket_list.filter(filterDayFlight);
         }
         else{
           ticket_list = ticket_list.filter(filterArrivalFlight);
+          if(ticket_list.length === 0){
+            ticket_list = original_ticket_list;
+          }
+          // ticket_list = ticket_list.filter(filterDayFlight);
         }
         ticket_list.sort((a,b) => a.unified_price - b.unified_price);
 
         current_date = new Date(ticket_list[0].display[0].arrival_airport.date);
         store.flight_plan.push(ticket_list[0]);
 
+        await sleep(1000);
         if((!trip_plan_data.return_here) || (trip_plan_data.return_here && i < dest_route.length - 1)){
           current_date = new Date(getDateAfter(current_date, trip_plan_data.list_destination[i].stay - 1));
           console.log(current_date);
@@ -454,6 +481,8 @@ travelpayouts.getFlightPlan = async function(){
         day: (j+1),
         start_hour: "08:00",
         hotel_data: undefined,
+        hotel_before_duration: 0,
+        hotel_now_duration: 0,
         to_another_city: false,
         list_place: []
       };
@@ -463,6 +492,9 @@ travelpayouts.getFlightPlan = async function(){
     //airport
     temp['arrival'] = flight_plan[i].display[0];
     temp['go_back'] = ((i+1) < flight_plan.length)? flight_plan[i+1].display[0] : undefined;
+    temp['arrival_duration'] = 60; //dalam menit
+    temp['go_back_duration'] = 90; //dalam menit
+    temp['hotel_go_back_duration'] = 60; //dalam menit
 
     temp['arrival_airport'] = await plan_trip.getAirport(temp['arrival'].arrival_airport.airport.code);
     if(temp['go_back']){
@@ -617,7 +649,7 @@ travelpayouts.changeFlightPlan = async function(){
   let list_destination = copy(store.trip_plan_data.list_destination);
   for (let i = 0; i < list_destination.length; i++) {
     store.trip_city_plan_data[i].arrival = store.flight_plan[i].display[0];
-    store.trip_city_plan_data[i].go_back = ((i+1) < list_destination.length + 1)? store.flight_plan[i+1].display[0] : undefined;
+    store.trip_city_plan_data[i].go_back = (i < store.flight_plan.length - 1)? store.flight_plan[i+1].display[0] : undefined;
 
     store.trip_city_plan_data[i].arrival_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].arrival.arrival_airport.airport.code);
     if(store.trip_city_plan_data[i].go_back){
@@ -627,6 +659,21 @@ travelpayouts.changeFlightPlan = async function(){
       store.trip_city_plan_data[i].go_back_airport = undefined;
     }
   }
+
+  let cur_index = store.trip_city_plan_data_index;
+  for (var i = 0; i < store.trip_city_plan_data[cur_index].cities.length; i++) {
+    for (let j = 0; j < store.trip_city_plan_data[cur_index].cities[i].list_dest_trip.length; j++) {
+      if(i == 0 && j == 0){
+        store.trip_city_plan_data[cur_index].cities[i].list_dest_trip[j].start_hour = store.trip_city_plan_data[cur_index].arrival.arrival_airport.time;
+      }
+
+      if(j == 0){
+        store.trip_city_plan_data[cur_index].cities[i].list_dest_trip[j].hotel_now_duration = 60;
+      }
+    }
+  }
+
+  await sleep(250);
 
   var mainView = Dom7('#main-view')[0].f7View;
   goBack();
@@ -642,10 +689,12 @@ travelpayouts.changeFlightPlan = async function(){
 
 travelpayouts.researchFlightPlan = async function(start_index){
   store.flight_plan = store.flight_plan.slice(0, start_index);
+  // store.flight_plan = [];
 
   let trip_plan_data = copy(store.trip_plan_data);
   let dest_route = makeDestRoute(trip_plan_data);
-  let current_date = new Date(trip_plan_data.start_date);
+  // let current_date = new Date(trip_plan_data.start_date);
+  let current_date = new Date(store.trip_city_plan_data[start_index].arrival.departure_airport.date);
 
   //options
   let passenger_data = {
@@ -662,6 +711,7 @@ travelpayouts.researchFlightPlan = async function(start_index){
   };
 
   for (var i = start_index; i < dest_route.length; i++) {
+  // for (var i = 0; i < dest_route.length; i++) {
     let split_string_route = dest_route[i].split('-');
     let origin_route = await this.getNearestAirport(split_string_route[0]);
     let destination_route = await this.getNearestAirport(split_string_route[1]);
@@ -682,21 +732,30 @@ travelpayouts.researchFlightPlan = async function(start_index){
       if (data != null) {
         // console.log(data);
         let ticket_list = await processData(data);
-
+        let original_ticket_list = copy(ticket_list);
         //ambil tiketnya dulu
         //ambil tiket termurah
         //ambil tiket yang malam dari hometown saja sisanya cari yang sampainya pagi.
         if(i === 0){
           ticket_list = ticket_list.filter(filterArrivalFlight);
+          if(ticket_list.length === 0){
+            ticket_list = original_ticket_list;
+          }
+          // ticket_list = ticket_list.filter(filterDayFlight);
         }
         else{
           ticket_list = ticket_list.filter(filterArrivalFlight);
+          if(ticket_list.length === 0){
+            ticket_list = original_ticket_list;
+          }
+          // ticket_list = ticket_list.filter(filterDayFlight);
         }
         ticket_list.sort((a,b) => a.unified_price - b.unified_price);
 
         current_date = new Date(ticket_list[0].display[0].arrival_airport.date);
         store.flight_plan.push(ticket_list[0]);
 
+        await sleep(1000);
         if((!trip_plan_data.return_here) || (trip_plan_data.return_here && i < dest_route.length - 1)){
           current_date = new Date(getDateAfter(current_date, trip_plan_data.list_destination[i].stay - 1));
           console.log(current_date);
@@ -713,6 +772,7 @@ travelpayouts.researchFlightPlan = async function(start_index){
         window.f7.hidePreloader();
       }
     } catch (e) {
+      store.trip_city_plan_data[store.trip_city_plan_data_index].already_open = false;
       console.log(e.message);
       setTimeout(function () {
         window.f7.hidePreloader();
@@ -729,7 +789,7 @@ travelpayouts.researchFlightPlan = async function(start_index){
   let list_destination = copy(store.trip_plan_data.list_destination);
   for (let i = start_index; i < list_destination.length; i++) {
     store.trip_city_plan_data[i].arrival = store.flight_plan[i].display[0];
-    store.trip_city_plan_data[i].go_back = ((i+1) < list_destination.length + 1)? store.flight_plan[i+1].display[0] : undefined;
+    store.trip_city_plan_data[i].go_back = (i < store.flight_plan.length - 1)? store.flight_plan[i+1].display[0] : undefined;
 
     store.trip_city_plan_data[i].arrival_airport = await plan_trip.getAirport(store.trip_city_plan_data[i].arrival.arrival_airport.airport.code);
     if(store.trip_city_plan_data[i].go_back){

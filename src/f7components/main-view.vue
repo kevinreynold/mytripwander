@@ -76,7 +76,7 @@
         }, 1000);
       },
       goTo(){
-        plan_trip.goToPerDay('TNN');
+        plan_trip.goToPerDayLocal('TNN');
       }
     },
     created () {

@@ -111,7 +111,36 @@ plan_trip.getAirport = async function(city_code){
     }
 }
 
-plan_trip.goToPerDay = async function(city_code){
+plan_trip.goToNearbyPlaces = async function(origin){
+    window.f7.showPreloader('Fetch Nearby Places');
+    let dest_data = {
+      origin: origin
+    };
+
+    try {
+        var data = await got.get(store.service_url +"/place/nearby", {
+          query: dest_data,
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+
+        store.list_search = data.result;
+        store.place_mode = "nearby";
+
+    } catch (e) {
+      return null;
+    }
+
+    await sleep(500);
+    var mainView = Dom7('#main-view')[0].f7View;
+    mainView.router.load({url: '/search-place/'});
+    window.f7.hidePreloader();
+}
+
+plan_trip.goToPerDayLocal = async function(city_code){
     window.f7.showPreloader('Fetch List Attraction Data');
     try {
         var data = await got.get(store.service_url + "/attraction/" + city_code, {
@@ -165,10 +194,73 @@ plan_trip.goToPerDay = async function(city_code){
     await sleep(250);
     window.f7.hidePreloader();
 
-    store.airport_mode = 'arrival';
+    store.airport_mode = 'go_back';
     store.is_change_city = false;
+
     await sleep(250);
 
+    goTo('/plan-overview-day/');
+    await sleep(250);
+    await this.addSchedule(false);
+}
+
+plan_trip.goToPerDay = async function(){
+    let city_code = store.per_day_data.city_code;
+
+    window.f7.showPreloader('Fetch List Attraction Data');
+    try {
+        var data = await got.get(store.service_url + "/attraction/" + city_code, {
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+        store.list_attraction =  data.result;
+        await sleep(500);
+        window.f7.hidePreloader();
+    } catch (e) {
+      return null;
+    }
+
+    window.f7.showPreloader('Fetch List Restaurant Data');
+    try {
+        var data = await got.get(store.service_url + "/food/" + city_code, {
+          retries: 2
+        })
+        .then(res => {
+          var res = JSON.parse(res.body);
+          return res;
+        });
+        store.list_food =  data.result;
+        await sleep(500);
+        window.f7.hidePreloader();
+    } catch (e) {
+      return null;
+    }
+    await sleep(250);
+
+    //hotel_now
+    store.coba_hotel1 = copy(store.hotel_now_data);
+    //hotel_before
+    if(store.is_change_city){
+      store.coba_hotel2 = copy(store.hotel_before_data);
+    }
+
+    if(store.airport_mode === 'arrival'){
+      window.f7.showPreloader('Fetch Arrival Airport Data');
+      store.coba_airport = copy(store.airport_arrival_data);
+      await sleep(250);
+      window.f7.hidePreloader();
+    }
+    else if(store.airport_mode === 'go_back'){
+      window.f7.showPreloader('Fetch Departure Airport Data');
+      store.coba_airport = copy(store.airport_go_back_data);
+      await sleep(250);
+      window.f7.hidePreloader();
+    }
+
+    await sleep(250);
     goTo('/plan-overview-day/');
     await sleep(250);
     await this.addSchedule(false);
@@ -225,18 +317,31 @@ function isOpen(curTime, curPlace, cur_day){
   temp_time.add(curPlace.duration, 'm');
   let cur_hour = temp_time.format('HH:mm');
 
-  let opening_hours = getOpeningHours(curPlace.place, cur_day).split('-');
+  let opening_hours = getOpeningHours(curPlace.place, cur_day);
   if(opening_hours !== 'Closed'){
+    opening_hours = opening_hours.split('-');
     let open = opening_hours[0];
     let close = opening_hours[1];
-    console.log(open);
-    console.log(close);
-    if(new Date('1970/01/01 ' + cur_hour) >= new Date('1970/01/01 ' + open) && new Date('1970/01/01 ' + cur_hour) <= new Date('1970/01/01 ' + close)){
-      console.log('mantap');
-      return true;
+    let open_hour = parseInt(open.split(':')[0]);
+    let close_hour = parseInt(close.split(':')[0]);
+    // console.log(open_hour)
+    // console.log(close_hour);
+    // console.log(open);
+    // console.log(close);
+    if(close_hour >= open_hour){
+      if(new Date('1970/01/01 ' + cur_hour) >= new Date('1970/01/01 ' + open) && new Date('1970/01/01 ' + cur_hour) <= new Date('1970/01/01 ' + close)){
+        // console.log('mantap');
+        return true;
+      }
+    }
+    else{
+      if(new Date('1970/01/01 ' + cur_hour) >= new Date('1970/01/01 ' + open) && new Date('1970/01/01 ' + cur_hour) <= new Date('1970/01/02 ' + close)){
+        // console.log('mantap2');
+        return true;
+      }
     }
   }
-  console.log(cur_hour);
+  // console.log(cur_hour);
   return false;
 }
 
@@ -273,9 +378,22 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
   let airport_arrival = store.coba_airport;
   let airport_go_back = store.coba_airport;
 
-  let cur_date = new Date();
+  let per_day_data = copy(store.per_day_data);
+  let hotel_before_duration = (per_day_data.hotel_before_duration)? per_day_data.hotel_before_duration : 0;
+  let hotel_now_duration = (per_day_data.hotel_now_duration)? per_day_data.hotel_now_duration : 60;
+  let airport_arrival_duration = (per_day_data.arrival_duration)? per_day_data.arrival_duration : 60;
+  let airport_go_back_duration = (per_day_data.go_back_duration)? per_day_data.go_back_duration : 90;
+  let hotel_go_back_duration = (per_day_data.hotel_go_back_duration)? per_day_data.hotel_go_back_duration : 60;
+
+  let go_back_time = (per_day_data.go_back_time)? per_day_data.go_back_time : "";
+
+  let start_hour = per_day_data.start_hour;
+  let hour = parseInt(start_hour.split(':')[0]);
+  let minute = parseInt(start_hour.split(':')[1]);
+
+  let cur_date = new Date(per_day_data.cur_date);
+  cur_date.setHours(hour, minute, 0, 0);
   let cur_day = cur_date.getDay();
-  let start_hour = '08:00';
   let start = moment(getDateString(cur_date, start_hour));
   // console.log(start.format('LLL'));
   // start.add(77, 'm');
@@ -305,7 +423,7 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
 
   //airport
   if(airport_mode === 'arrival'){
-    duration = 60;
+    duration = airport_arrival_duration;
     travel_time_before = 0;
 
     start.add(travel_time_before, 's');
@@ -316,6 +434,7 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
         travel_time_before: temp_distance,
         humanize: changeFormatDuration(temp_distance.travel_time),
         can_sort: false,
+        id: -3,
         type: 'airport_arrival'
     };
     temp_airport.string_format = printCurrentPlace(start, temp_airport, cur_day);
@@ -325,15 +444,14 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
     last_place = airport_arrival;
     temp_distance = await this.getDistance(last_place.place_id, hotel_now.place_id);
     travel_time_before = temp_distance.travel_time;
-    duration = 60;
   }
   else{
     travel_time_before = 0;
-    duration = 0;
   }
 
   //hotel_before
   if(is_change_city){ //kalau ganti kota
+    duration = hotel_before_duration;
     start.add(travel_time_before, 's');
     let temp1 = {
         place: hotel_before,
@@ -342,6 +460,7 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
         travel_time_before: temp_distance,
         humanize: changeFormatDuration(temp_distance.travel_time),
         can_sort: false,
+        id: -2,
         type: 'hotel_before'
     };
     temp1.string_format = printCurrentPlace(start, temp1, cur_day);
@@ -354,6 +473,7 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
   }
 
   //hotel_now
+  duration = hotel_now_duration;
   start.add(travel_time_before, 's');
   let temp2 = {
       place: hotel_now,
@@ -362,6 +482,7 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
       travel_time_before: temp_distance,
       humanize: changeFormatDuration(temp_distance.travel_time),
       can_sort: false,
+      id: -1,
       type: 'hotel_now'
   };
   temp2.string_format = printCurrentPlace(start, temp2, cur_day);
@@ -389,8 +510,11 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
         travel_time_before: temp_distance,
         humanize: changeFormatDuration(temp_distance.travel_time),
         can_sort: true,
+        id: i,
         type: 'place'
     };
+    store.coba_run_down[i].id = i;
+
     temp_place.string_format = printCurrentPlace(start, temp_place, cur_day);
     temp_place.is_open = isOpen(start, temp_place, cur_day);
     start.add(duration, 'm');
@@ -404,8 +528,77 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
     }
   }
 
+  if(airport_mode === 'go_back'){
+    console.log("GO BACKK");
+    if(run_down.length > 0){
+      last_place = run_down[run_down.length - 1].place;
+    }
+
+    if(last_place.place_id !== hotel_now.place_id){
+      temp_distance = await this.getDistance(last_place.place_id, hotel_now.place_id);
+      travel_time_before = temp_distance.travel_time;
+      duration = hotel_go_back_duration;
+      start.add(travel_time_before, 's');
+      let hotel_go_back = {
+          place: hotel_now,
+          is_open: true,
+          duration: duration,
+          travel_time_before: temp_distance,
+          humanize: changeFormatDuration(temp_distance.travel_time),
+          can_sort: false,
+          id: -4,
+          type: 'hotel_go_back'
+      };
+      hotel_go_back.string_format = printCurrentPlace(start, hotel_go_back, cur_day);
+      start.add(duration, 'm');
+      modified_run_down.push(hotel_go_back);
+      last_place = hotel_now;
+    }
+
+    temp_distance = await this.getDistance(last_place.place_id, airport_go_back.place_id);
+    travel_time_before = temp_distance.travel_time;
+    duration = airport_go_back_duration;
+
+    start.add(travel_time_before, 's');
+    let temp_airport_go_back = {
+        place: airport_go_back,
+        is_open: true,
+        duration: duration,
+        travel_time_before: temp_distance,
+        humanize: changeFormatDuration(temp_distance.travel_time),
+        can_sort: false,
+        id: -5,
+        type: 'airport_go_back'
+    };
+    temp_airport_go_back.string_format = printCurrentPlace(start, temp_airport_go_back, cur_day);
+    start.add(duration, 'm');
+    modified_run_down.push(temp_airport_go_back);
+  }
+
   store.coba_modified_run_down = [];
   store.coba_modified_run_down = modified_run_down;
+
+  let end_date = new Date(start.format('YYYY/MM/DD HH:mm'));
+  cur_date.setHours(0,0,0,0);
+  end_date.setHours(0,0,0,0);
+  // console.log(cur_date);
+  // console.log(end_date);
+
+  let timeDiff = Math.abs(end_date.getTime() - cur_date.getTime());
+  let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  // console.log(diffDays);
+  if(diffDays > 0){
+    store.can_add_place = false;
+    window.f7.addNotification({
+        message: "You can't add place anymore.."
+    });
+  }
+  else{
+    store.can_add_place = true;
+  }
+
+  store.last_time = start.format('HH:mm');
+  console.log(store.last_time);
 
   await sleep(250);
   if(mode){
@@ -425,6 +618,15 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
     await sleep(500);
     window.f7.hidePreloader();
   }
+}
+
+plan_trip.backRefresh = async function(){
+  window.f7.showPreloader();
+  goBack();
+  await sleep(500);
+  var mainView = Dom7('#main-view')[0].f7View;
+  mainView.router.refreshPage();
+  window.f7.hidePreloader();
 }
 
 export default plan_trip;
