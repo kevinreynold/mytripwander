@@ -1,14 +1,29 @@
 <template>
   <f7-page>
-    <f7-navbar title="Plan Overview" back-link="Back" sliding no-shadow></f7-navbar>
+    <!-- <f7-navbar title="Plan Overview" back-link="Back" sliding no-shadow>
+      <f7-nav-right>
+        <f7-link><f7-icon f7="more_vertical"/></f7-link>
+      </f7-nav-right>
+    </f7-navbar> -->
+    <f7-navbar sliding no-shadow>
+      <f7-nav-left>
+        <f7-link @click="backToMainMenu"><f7-icon f7="arrow_left"/></f7-link>
+      </f7-nav-left>
+      <f7-nav-center>
+        Plan Overview
+      </f7-nav-center>
+      <f7-nav-right>
+        <f7-link><f7-icon f7="more_vertical"/></f7-link>
+      </f7-nav-right>
+    </f7-navbar>
 
     <f7-toolbar tabbar>
-      <f7-link href="#tab1" tab-link active text="Overview"></f7-link>
-      <f7-link href="#tab2" tab-link text="Flight"></f7-link>
+      <f7-link href="#tab-country-1" tab-link active text="Overview"></f7-link>
+      <f7-link href="#tab-country-2" tab-link text="Flight"></f7-link>
     </f7-toolbar>
 
     <f7-tabs animated swipeable>
-      <f7-tab id="tab1" active>
+      <f7-tab id="tab-country-1" active>
         <div class="trip-display">
             <div class="passenger-trip">
               <div class="passenger-img"><img src="../assets/flight-icon/adult-white.png" alt="adult" width="15px"></div>
@@ -22,7 +37,7 @@
             <div class="from-trip">{{trip_plan_data.first_city}}</div>
             <div class="from-trip">{{trip_plan_data.start_date}}</div>
             <div class="returned-trip" v-if="trip_plan_data.return_here">* returned to hometown</div>
-            <div class="budget-trip"><f7-icon fa="money"/> ${{totalBudget}}</div>
+            <div class="budget-trip"><f7-icon fa="plane"/> ${{totalBudget}}</div>
         </div>
 
         <div class="list-countries">
@@ -39,9 +54,13 @@
             </f7-card-content>
           </f7-card>
         </div>
+
+        <div class="fixed-bottom">
+          <f7-button fill big @click="saveToDB">Save Changes</f7-button>
+        </div>
         <f7-button fill big color="white">Blank Space</f7-button>
       </f7-tab>
-      <f7-tab id="tab2">
+      <f7-tab id="tab-country-2">
         <div class="list-flight">
           <f7-card v-for="(flight_detail, index) in flight_plan" :key="flight_detail.url">
             <f7-card-header>
@@ -182,6 +201,26 @@ export default {
       store.trip_city_plan_data_index = index;
       console.log(index);
       plan_trip.goToCityOverview();
+    },
+    saveToDB(){
+      plan_trip.updateTrip();
+    },
+    backToMainMenu(){
+      window.f7.confirm('', 'Your changes may not be saved.<br> Do you want to exit?',
+      function () {
+        if(store.plan_trip_mode === "plan"){
+          window.f7.showPreloader();
+          var mainView = Dom7('#main-view')[0].f7View;
+          mainView.router.back();
+          window.f7.hidePreloader();
+        }
+        else if(store.plan_trip_mode === "edit"){
+          plan_trip.backFromEditTrip();
+        }
+      },
+      function () {
+        console.log("nothing");
+      });
     }
   }
 }
@@ -418,6 +457,15 @@ export default {
     border-radius: 3px;
     font-size: 0.9em;
   }
+
+  .fixed-bottom {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   overflow: auto;
+   z-index: 5000;
+ }
 </style>
 
 <style scoped child-component="f7-tabs">

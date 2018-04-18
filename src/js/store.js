@@ -2,7 +2,12 @@ const store = {
   _url : 'http://103.253.25.103',
   // service_url : 'http://103.253.25.103:5000',
   service_url : 'http://127.0.0.1:5000',
+  user_id: 2,
+  //mytrip
+  list_my_trip: [],
+  plan_trip_mode: "plan", //plan || edit
   //createplan
+  trip_id: 0,
   list_city_all: [],
   list_dest_all : [],
   trip_plan_data: {}, //SIMPAN

@@ -437,10 +437,14 @@ travelpayouts.getFlightPlan = async function(){
         store.flight_plan.push(ticket_list[0]);
 
         await sleep(1000);
-        if((!trip_plan_data.return_here) || (trip_plan_data.return_here && i < dest_route.length - 1)){
+        if(i < dest_route.length - 1){
           current_date = new Date(getDateAfter(current_date, trip_plan_data.list_destination[i].stay - 1));
           console.log(current_date);
         }
+        // if((!trip_plan_data.return_here) || (trip_plan_data.return_here && i < dest_route.length - 1)){
+        //   current_date = new Date(getDateAfter(current_date, trip_plan_data.list_destination[i].stay - 1));
+        //   console.log(current_date);
+        // }
 
         window.f7.hidePreloader();
       }
@@ -523,16 +527,36 @@ travelpayouts.getFlightPlan = async function(){
     store.trip_city_plan_data.push(temp);
   }
   console.log(store.trip_city_plan_data);
+  window.f7.hidePreloader();
 
-  setTimeout(function () {
-    goBack();
-    window.f7.hidePreloader();
-    window.f7.showPreloader();
-  }, 1000);
-  setTimeout(function () {
-    goTo('/plan-overview-country/');
-    window.f7.hidePreloader();
-  }, 1500);
+  //atur start_hour dan hotel_now_duration
+  for (let k = 0; k < store.trip_city_plan_data.length; k++) {
+    for (let i = 0; i < store.trip_city_plan_data[k].cities.length; i++) {
+      for (let j = 0; j < store.trip_city_plan_data[k].cities[i].list_dest_trip.length; j++) {
+        if(i == 0 && j == 0){
+          store.trip_city_plan_data[k].cities[i].list_dest_trip[j].start_hour = store.trip_city_plan_data[k].arrival.arrival_airport.time;
+        }
+
+        if(j == 0){
+          store.trip_city_plan_data[k].cities[i].list_dest_trip[j].hotel_now_duration = 60;
+        }
+      }
+    }
+  }
+
+  store.plan_trip_mode = "plan";
+  //simpan database
+  await plan_trip.saveTrip();
+
+  await sleep(1000);
+  window.f7.showPreloader();
+  goBack();
+  window.f7.hidePreloader();
+
+  await sleep(1000);
+  window.f7.showPreloader();
+  goTo('/plan-overview-country/');
+  window.f7.hidePreloader();
 };
 
 function filterByFlightTime(x){
@@ -660,15 +684,16 @@ travelpayouts.changeFlightPlan = async function(){
     }
   }
 
-  let cur_index = store.trip_city_plan_data_index;
-  for (var i = 0; i < store.trip_city_plan_data[cur_index].cities.length; i++) {
-    for (let j = 0; j < store.trip_city_plan_data[cur_index].cities[i].list_dest_trip.length; j++) {
-      if(i == 0 && j == 0){
-        store.trip_city_plan_data[cur_index].cities[i].list_dest_trip[j].start_hour = store.trip_city_plan_data[cur_index].arrival.arrival_airport.time;
-      }
+  for (let k = 0; k < store.trip_city_plan_data.length; k++) {
+    for (let i = 0; i < store.trip_city_plan_data[k].cities.length; i++) {
+      for (let j = 0; j < store.trip_city_plan_data[k].cities[i].list_dest_trip.length; j++) {
+        if(i == 0 && j == 0){
+          store.trip_city_plan_data[k].cities[i].list_dest_trip[j].start_hour = store.trip_city_plan_data[k].arrival.arrival_airport.time;
+        }
 
-      if(j == 0){
-        store.trip_city_plan_data[cur_index].cities[i].list_dest_trip[j].hotel_now_duration = 60;
+        if(j == 0){
+          store.trip_city_plan_data[k].cities[i].list_dest_trip[j].hotel_now_duration = 60;
+        }
       }
     }
   }

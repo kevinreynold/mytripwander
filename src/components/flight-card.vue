@@ -101,24 +101,25 @@ export default {
   }
 
   .ticket-destination{
-    width: 42.5%;
+    width: 42%;
     overflow: auto;
     text-align: left;
     float: left;
   }
 
   .ticket-duration{
-    width: 17.5%;
+    width: 20%;
     overflow: auto;
     margin-top: 3%;
     font-weight: bold;
     color: rgba(0,0,0,0.5);
     text-align: left;
     float: left;
+    font-size: 0.9em;
   }
 
   .ticket-etc{
-    width: 40%;
+    width: 38%;
     overflow: auto;
     text-align: right;
     float: left;

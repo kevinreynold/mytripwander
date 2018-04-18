@@ -11,12 +11,12 @@
     </f7-navbar>
 
     <f7-toolbar tabbar>
-      <f7-link href="#tab11" tab-link active text="Overview"></f7-link>
-      <f7-link href="#tab22" tab-link text="Hotel"></f7-link>
+      <f7-link href="#tab-city-1" tab-link active text="Overview"></f7-link>
+      <f7-link href="#tab-city-2" tab-link text="Hotel"></f7-link>
     </f7-toolbar>
 
     <f7-tabs animated swipeable>
-      <f7-tab id="tab11" active>
+      <f7-tab id="tab-city-1" active>
 
         <div class="list-day">
 
@@ -46,7 +46,7 @@
 
         <f7-button fill big color="white">Blank Space</f7-button>
       </f7-tab>
-      <f7-tab id="tab22">
+      <f7-tab id="tab-city-2">
         <div class="change-city">
           <f7-button fill @click="showOrderCity">Change City and Day</f7-button>
         </div>
@@ -617,8 +617,6 @@ export default {
 
       console.log('AIRPORT MODE : ' + store.airport_mode);
       console.log('CHANGE CITY : ' + store.is_change_city);
-      console.log(JSON.stringify(store.per_day_data));
-
       //hotel_now
       store.hotel_now_data = copy(self.trip_city_plan_data_one.cities[city_index].hotel_data);
       store.per_day_data.hotel_now_duration = self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].hotel_now_duration;
@@ -631,6 +629,7 @@ export default {
         console.log(store.hotel_before_data.name);
       }
 
+      console.log(JSON.stringify(store.per_day_data));
       plan_trip.goToPerDay();
     },
     backToCountry(){
@@ -980,9 +979,10 @@ export default {
 
  .city-clicked{
    position: absolute;
+   padding: 5px 10px 5px 10px;
    text-align: center;
-   bottom: -5px;
-   right: 15px;
+   bottom: -15px;
+   right: 5px;
    color: white;
    transform: translateY(-50%);
    font-size: 1.2em;

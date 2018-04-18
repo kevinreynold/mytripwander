@@ -10,14 +10,14 @@
             <f7-card-content><span class="size-double">Hi, John Doe</span></f7-card-content>
           </div> -->
           <f7-list>
-            <f7_list_item_media link="/about/" link_view="#main-view" icon="home" title="My Trip"/>
+            <f7_list_item_media mode="mytrip" link="#" icon="home" title="My Trip"/>
             <f7_list_item_media link="/createtrip/" link_view="#main-view" icon="map" title="Plan Trip"/>
-            <f7_list_item_media link="/mybookings/" link_view="#main-view" icon="ticket" title="My Bookings"/>
+            <!-- <f7_list_item_media link="/mybookings/" link_view="#main-view" icon="ticket" title="My Bookings"/> -->
             <f7_list_item_media link="/flight/" link_view="#main-view" icon="plane" title="Book Flight"/>
             <f7_list_item_media link="/hotel/" link_view="#main-view" icon="hotel" title="Book Hotel"/>
             <f7_list_item_media link="/settings/" link_view="#main-view" icon="gear" title="Settings"/>
             <!-- <f7_list_item_media link="/form/" link_view="#main-view" icon="question-circle" title="Tutorial"/> -->
-            <f7_list_item_media log_out="true" icon="sign-out" title="Logout"/>
+            <f7_list_item_media mode="logout" icon="sign-out" title="Logout"/>
           </f7-list>
         </f7-page>
       </f7-pages>

@@ -179,7 +179,7 @@
 
 <script>
 import travelpayouts from "../js/flightsearch"
-// import plan_trip from "../js/plantrip"
+import plan_trip from "../js/plantrip"
 import store from "../js/store"
 
 let self;
@@ -351,6 +351,7 @@ export default {
         store.flight_booking_data = flight_data;
         // travelpayouts.getPriceListLocal();
         travelpayouts.getPriceList(flight_data,passenger_data);
+        // plan_trip.cobaSaveTrip();
       }
     },
   },

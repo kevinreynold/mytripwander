@@ -272,15 +272,17 @@ hotel_api.getHotelPlan = async function(){
       });
 
       let hotel_list = data.result;
-      let original_hotel_list = copy(hotel_list);
       console.log(hotel_list);
       let list_hotel_city_id = await this.getAllHotelByCity(trip_city_plan_data_one.cities[i].city_code);
       console.log(list_hotel_city_id);
+
       hotel_list = hotel_list.filter(x => list_hotel_city_id.some(x2 => x.id.toString() == x2.toString()));
+      let hotel_list_original = copy(hotel_list);
+
       hotel_list = hotel_list.filter(x => x.rating > 70 && x.stars > 3);
 
       if(hotel_list.length === 0){
-        hotel = original_hotel_list;
+        hotel_list = hotel_list_original;
       }
 
       // hotel_list.sort((a,b) => b.popularity - a.popularity);
@@ -376,14 +378,16 @@ hotel_api.getHotelPlan = async function(){
     await travelpayouts.researchFlightPlan(cur_index);
     await sleep(250);
 
-    for (var i = 0; i < trip_city_plan_data_one.cities.length; i++) {
-      for (let j = 0; j < trip_city_plan_data_one.cities[i].list_dest_trip.length; j++) {
-        if(i == 0 && j == 0){
-          store.trip_city_plan_data[cur_index].cities[i].list_dest_trip[j].start_hour = store.trip_city_plan_data[cur_index].arrival.arrival_airport.time;
-        }
+    for (let k = 0; k < store.trip_city_plan_data.length; k++) {
+      for (let i = 0; i < store.trip_city_plan_data[k].cities.length; i++) {
+        for (let j = 0; j < store.trip_city_plan_data[k].cities[i].list_dest_trip.length; j++) {
+          if(i == 0 && j == 0){
+            store.trip_city_plan_data[k].cities[i].list_dest_trip[j].start_hour = store.trip_city_plan_data[k].arrival.arrival_airport.time;
+          }
 
-        if(j == 0){
-          store.trip_city_plan_data[cur_index].cities[i].list_dest_trip[j].hotel_now_duration = 60;
+          if(j == 0){
+            store.trip_city_plan_data[k].cities[i].list_dest_trip[j].hotel_now_duration = 60;
+          }
         }
       }
     }

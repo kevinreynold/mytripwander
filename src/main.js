@@ -68,6 +68,8 @@ new Vue({
     material: true,
     routes: Routes,
     // swipePanel: 'left'
+    modalButtonOk: 'Yes',
+    modalButtonCancel: 'No',
   },
   // Register App Component
   components: {

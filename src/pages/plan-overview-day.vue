@@ -10,13 +10,13 @@
     </f7-navbar>
 
     <f7-toolbar tabbar>
-      <f7-link href="#tab1" tab-link active text="Table View"></f7-link>
-      <f7-link href="#tab2" tab-link text="Map View"></f7-link>
+      <f7-link href="#tab-day-1" tab-link active text="Table View"></f7-link>
+      <f7-link href="#tab-day-2" tab-link text="Map View"></f7-link>
     </f7-toolbar>
 
     <!-- <f7-tabs animated swipeable> -->
     <f7-tabs animated>
-      <f7-tab id="tab1" active>
+      <f7-tab id="tab-day-1" active>
         <div class='toggle-sort-menu'>
           <a href="#" :class="{'sort-not-active': !sorting, 'sort-active': sorting}" data-sortable=".sortable-place" class="toggle-sortable">TOGGLE SORT PLACE</a>
         </div>
@@ -229,7 +229,7 @@
           </f7-fab>
         </f7-fab-speed-dial>
       </f7-tab>
-      <f7-tab id="tab2">
+      <f7-tab id="tab-day-2">
         <f7-button fill big color="white">Blank Space</f7-button>
       </f7-tab>
     </f7-tabs>

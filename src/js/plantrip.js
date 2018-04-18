@@ -379,13 +379,14 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
   let airport_go_back = store.coba_airport;
 
   let per_day_data = copy(store.per_day_data);
-  let hotel_before_duration = (per_day_data.hotel_before_duration)? per_day_data.hotel_before_duration : 0;
-  let hotel_now_duration = (per_day_data.hotel_now_duration)? per_day_data.hotel_now_duration : 60;
-  let airport_arrival_duration = (per_day_data.arrival_duration)? per_day_data.arrival_duration : 60;
-  let airport_go_back_duration = (per_day_data.go_back_duration)? per_day_data.go_back_duration : 90;
-  let hotel_go_back_duration = (per_day_data.hotel_go_back_duration)? per_day_data.hotel_go_back_duration : 60;
 
-  let go_back_time = (per_day_data.go_back_time)? per_day_data.go_back_time : "";
+  let hotel_before_duration = (per_day_data.hotel_before_duration != undefined)? per_day_data.hotel_before_duration : 0;
+  let hotel_now_duration = (per_day_data.hotel_now_duration != undefined)? per_day_data.hotel_now_duration : 60;
+  let airport_arrival_duration = (per_day_data.arrival_duration != undefined)? per_day_data.arrival_duration : 60;
+  let airport_go_back_duration = (per_day_data.go_back_duration != undefined)? per_day_data.go_back_duration : 90;
+  let hotel_go_back_duration = (per_day_data.hotel_go_back_duration != undefined)? per_day_data.hotel_go_back_duration : 60;
+
+  let go_back_time = (per_day_data.go_back_time != undefined)? per_day_data.go_back_time : "";
 
   let start_hour = per_day_data.start_hour;
   let hour = parseInt(start_hour.split(':')[0]);
@@ -627,6 +628,192 @@ plan_trip.backRefresh = async function(){
   var mainView = Dom7('#main-view')[0].f7View;
   mainView.router.refreshPage();
   window.f7.hidePreloader();
+}
+
+plan_trip.getTotalBudget = function(){
+  let flight_budget = 0;
+  for (var i = 0; i < store.flight_plan.length; i++) {
+    flight_budget += store.flight_plan[i].price;
+  }
+
+  let hotel_budget = 0;
+  for (var i = 0; i < store.trip_city_plan_data.length; i++) {
+    for (let j = 0; j < store.trip_city_plan_data[i].cities.length; j++) {
+      if(store.trip_city_plan_data[i].cities[j].hotel){
+        hotel_budget += store.trip_city_plan_data[i].cities[j].hotel.rooms[0].total;
+      }
+    }
+  }
+
+  return Math.round((flight_budget + hotel_budget) * 100) / 100;
+}
+
+plan_trip.cobaSaveTrip = async function(){
+  let params = {
+    user_id: 2,
+    plan_data: 'plan_data_1',
+    city_plan_data: 'city_plan_data_1',
+    flight_data: 'flight_data_1',
+    total_budget: 325.25
+  };
+
+  let response = await got.post(store.service_url +"/trip/save", {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    })
+    .then(res => {
+      if (res.statusCode !== 200) {
+        return 'Error';
+      }
+      return JSON.parse(res.body);
+    })
+    .catch(err => {
+      return 'Error';
+    });
+
+  console.log(response.trip_id);
+  console.log(response);
+}
+
+plan_trip.saveTrip = async function(){
+  window.f7.showPreloader();
+  let user_id = store.user_id;
+  let plan_data = JSON.stringify(store.trip_plan_data);
+  let city_plan_data = JSON.stringify(store.trip_city_plan_data);
+  let flight_data = JSON.stringify(store.flight_plan);
+  let total_budget = this.getTotalBudget();
+
+  let params = {
+    user_id: user_id,
+    plan_data: plan_data,
+    city_plan_data: city_plan_data,
+    flight_data: flight_data,
+    total_budget: total_budget
+  };
+
+  let response = await got.post(store.service_url +"/trip/save", {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    })
+    .then(res => {
+      if (res.statusCode !== 200) {
+        return 'Error';
+      }
+      return JSON.parse(res.body);
+    })
+    .catch(err => {
+      return 'Error';
+    });
+
+  store.trip_id = response.trip_id;
+  console.log(response);
+  window.f7.hidePreloader();
+}
+
+plan_trip.updateTrip = async function(){
+  window.f7.showPreloader('Updating Trip');
+  let plan_data = JSON.stringify(store.trip_plan_data);
+  let city_plan_data = JSON.stringify(store.trip_city_plan_data);
+  let flight_data = JSON.stringify(store.flight_plan);
+  let trip_id = store.trip_id;
+  let total_budget = this.getTotalBudget();
+
+  let params = {
+    trip_id: trip_id,
+    plan_data: plan_data,
+    city_plan_data: city_plan_data,
+    flight_data: flight_data,
+    total_budget: total_budget
+  };
+
+  let response = await got.post(store.service_url +"/trip/update", {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    })
+    .then(res => {
+      if (res.statusCode !== 200) {
+        return 'Error';
+      }
+      return JSON.parse(res.body);
+    })
+    .catch(err => {
+      return 'Error';
+    });
+
+  console.log(response);
+  await sleep(1000);
+  window.f7.hidePreloader();
+}
+
+plan_trip.loadingTrip = async function(id){
+  window.f7.showPreloader('Loading Trip');
+  try {
+      var data = await got.get(store.service_url + "/trip/load/" + id, {
+        retries: 2
+      })
+      .then(res => {
+        var res = JSON.parse(res.body);
+        return res;
+      });
+
+      let result = data.result;
+      store.trip_id = result.id;
+      store.trip_plan_data = result.plan_data;
+      store.trip_city_plan_data = result.city_plan_data;
+      store.flight_plan = result.flight_data;
+      store.plan_trip_mode = "edit";
+
+  } catch (e) {
+    return null;
+  }
+
+  await sleep(500);
+  goTo('/plan-overview-country/');
+  window.f7.hidePreloader();
+}
+
+plan_trip.goToMyTrip = async function(){
+  window.f7.showPreloader('Fetch My Trip Data');
+  let user_id = store.user_id;
+  let user_data = {
+    user_id: user_id
+  };
+
+  try {
+      var data = await got.get(store.service_url +"/trip/load/all", {
+        query: user_data,
+        retries: 2
+      })
+      .then(res => {
+        var res = JSON.parse(res.body);
+        return res;
+      });
+
+      store.list_my_trip = data.result;
+
+  } catch (e) {
+    return null;
+  }
+
+  await sleep(500);
+  goTo('/mytrip/');
+  window.f7.hidePreloader();
+}
+
+plan_trip.backFromEditTrip = async function(){
+  window.f7.showPreloader();
+  goBack();
+  await sleep(500);
+  goBack();
+  await sleep(500);
+  window.f7.hidePreloader();
+  this.goToMyTrip();
 }
 
 export default plan_trip;
