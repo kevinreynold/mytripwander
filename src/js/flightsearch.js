@@ -527,7 +527,6 @@ travelpayouts.getFlightPlan = async function(){
     store.trip_city_plan_data.push(temp);
   }
   console.log(store.trip_city_plan_data);
-  window.f7.hidePreloader();
 
   //atur start_hour dan hotel_now_duration
   for (let k = 0; k < store.trip_city_plan_data.length; k++) {
@@ -546,15 +545,14 @@ travelpayouts.getFlightPlan = async function(){
 
   store.plan_trip_mode = "plan";
   //simpan database
+  // window.f7.hidePreloader();
   await plan_trip.saveTrip();
 
-  await sleep(1000);
-  window.f7.showPreloader();
+  await sleep(500);
+  // window.f7.showPreloader();
   goBack();
-  window.f7.hidePreloader();
 
-  await sleep(1000);
-  window.f7.showPreloader();
+  await sleep(500);
   goTo('/plan-overview-country/');
   window.f7.hidePreloader();
 };

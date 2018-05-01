@@ -249,7 +249,7 @@ function sortSearchResult(){
 
 function filterSearchResult(x){
   let answer = false;
-  if(x.minPriceTotal >= self.price_filter.from && x.minPriceTotal <= self.price_filter.to){
+  if(x.minPriceTotal >= convertPriceToRUB(self.price_filter.from) && x.minPriceTotal <= convertPriceToRUB(self.price_filter.to)){
     answer = true;
   }
   else{
@@ -277,6 +277,16 @@ function filterSearchResult(x){
   return answer;
 }
 
+function convertPrice(price){
+  let result = Math.round(price * store.currency_rate * 100) / 100;
+  return result;
+}
+
+function convertPriceToRUB(price){
+  let result = Math.round(price / store.currency_rate * 100) / 100;
+  return result;
+}
+
 export default {
   components: {
     hotel_card
@@ -285,6 +295,7 @@ export default {
     hotel_booking_data: {},
     hotel_city_search_result: [],
     sort_by: "popularity",
+    currency_symbol: store.currency_symbol,
     price: {
       min: 0,
       max: 0,
@@ -352,7 +363,7 @@ export default {
         type: "double",
         min: self.price.min,
         max: self.price.max,
-        prefix: "$",
+        prefix: self.currency_symbol,
         from: self.price_filter.from,
         to: self.price_filter.to
       });
@@ -379,8 +390,8 @@ export default {
     let sort_data = copy(self.original_hotel_city_search_result);
     sort_data.sort((a, b) => a.minPriceTotal - b.minPriceTotal);
 
-    self.price.min = sort_data[0].minPriceTotal;
-    self.price.max = sort_data[sort_data.length-1].minPriceTotal;
+    self.price.min = convertPrice(sort_data[0].minPriceTotal);
+    self.price.max = convertPrice(sort_data[sort_data.length-1].minPriceTotal);
     self.price.value = self.price.min;
 
     // console.log(self.original_hotel_city_search_result.length);

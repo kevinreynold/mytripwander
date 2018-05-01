@@ -2,7 +2,7 @@
   <f7-card style="border: 1.5px solid #009688; border-radius: 1%;">
     <f7-card-header>
       <div class="agency"><img class="carrier-logo" :src="agency_logo_url"></div>
-      <div class="room-price">${{room_deal.total}}</div>
+      <div class="room-price">{{currency_symbol}}{{convertPrice(room_deal.total)}}</div>
     </f7-card-header>
     <f7-card-content>
       <div class="room-display">
@@ -40,7 +40,8 @@ export default {
   data: () => ({
     options: {},
     room_detail: [],
-    hotel_search_plan_mode: ""
+    hotel_search_plan_mode: "",
+    currency_symbol: store.currency_symbol
   }),
   computed: {
     agency_logo_url(){
@@ -56,6 +57,10 @@ export default {
     self.setFacility();
   },
   methods: {
+    convertPrice(price){
+      let result = price * store.currency_rate;
+      return result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     setFacility(){
       for(let propName in self.options) {
           if(self.options.hasOwnProperty(propName)) {
@@ -107,6 +112,7 @@ export default {
     color: rgb(72,139,248);
     /* color: black; */
     text-align: right;
+    margin-right: 2px;
   }
 
   .agency{

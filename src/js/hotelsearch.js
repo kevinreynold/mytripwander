@@ -440,9 +440,15 @@ hotel_api.searchAgain = async function(mode = false){
     let hotel_list = data.result;
     let list_hotel_city_id = await this.getAllHotelByCity(trip_city_plan_data_one.cities[city_index].city_code);
     hotel_list = hotel_list.filter(x => list_hotel_city_id.some(x2 => x.id.toString() == x2.toString()));
+    console.log(hotel_list);
 
     let hotel_list_original = copy(hotel_list);
-    hotel_list = hotel_list.filter(x => x.id.toString() == trip_city_plan_data_one.cities[city_index].hotel.id.toString());
+    if(trip_city_plan_data_one.cities[city_index].hotel.id){
+      hotel_list = hotel_list.filter(x => x.id.toString() == trip_city_plan_data_one.cities[city_index].hotel.id.toString());
+    }
+    else{
+      hotel_list = [];
+    }
 
     if(hotel_list.length > 0 && !mode){
       console.log("hotel ada tiket");

@@ -639,9 +639,10 @@ export default {
   methods: {
     stepInfo(prevIndex, nextIndex){
       // console.log(prevIndex + " - " + nextIndex);
-      if(prevIndex === 0 && nextIndex === 1){
+      // if(nextIndex === 5){
        // self.$refs.trip_plan_wizard.changeTab(0,3);
-      }
+      // }
+
     },
     prevTabPlan(){
       //prev untuk last step
@@ -972,6 +973,7 @@ export default {
    width: 100%;
    margin: auto;
    margin-top: -5px;
+   margin-left: 8.5px;
  }
 
  .center{

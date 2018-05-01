@@ -23,11 +23,12 @@
               <div class="from-trip">{{trip.plan_data.first_city}}</div>
               <div class="from-trip">{{trip.plan_data.start_date}}</div>
               <div class="returned-trip" v-if="trip.plan_data.return_here">* returned to hometown</div>
-              <div class="budget-trip"><f7-icon fa="money"/> ${{trip.total_budget}}</div>
+              <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip">Automatic</div>
           </div>
           <div class="trip-footer">
             <div class="trip-created-at">Created at : {{getDateString(trip.created_at)}}</div>
-            <div class="trip-click" @click="goToEditTrip(trip.id)"><f7-icon f7="chevron_down" size="125%"></f7-icon></div>
+            <div class="trip-click" @click="goToEditTrip(trip.id, 'edit')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div>
           </div>
         </div>
         <f7-button color="white">Blank Space</f7-button>
@@ -47,11 +48,12 @@
               <div class="from-trip">{{trip.plan_data.first_city}}</div>
               <div class="from-trip">{{trip.plan_data.start_date}}</div>
               <div class="returned-trip" v-if="trip.plan_data.return_here">* returned to hometown</div>
-              <div class="budget-trip"><f7-icon fa="money"/> ${{trip.total_budget}}</div>
+              <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip">Automatic</div>
           </div>
           <div class="trip-footer">
             <div class="trip-created-at">Created at : {{getDateString(trip.created_at)}}</div>
-            <div class="trip-click" @click="goToEditTrip(trip.id)"><f7-icon f7="chevron_down" size="125%"></f7-icon></div>
+            <div class="trip-click" @click="goToEditTrip(trip.id, 'past')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div>
           </div>
         </div>
         <f7-button color="white">Blank Space</f7-button>
@@ -83,7 +85,8 @@ export default {
   data: () => ({
     list_my_trip: [],
     list_my_trip_upcoming: [],
-    list_my_trip_past: []
+    list_my_trip_past: [],
+    currency_symbol: store.currency_symbol
   }),
   computed: {
     totalDaysTrips(){
@@ -99,6 +102,10 @@ export default {
     self.list_my_trip_past = self.list_my_trip.filter(x => new Date() >= new Date(x.plan_data.start_date));
   },
   methods: {
+    convertPrice(price){
+      let result = price * store.currency_rate;
+      return result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     totalDaysTrip(plan_data){
       let res = 0;
       for (var i = 0; i < plan_data.list_destination.length; i++) {
@@ -120,7 +127,8 @@ export default {
       var date = new Date(cur_date);
       return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
     },
-    goToEditTrip(id){
+    goToEditTrip(id, mode){
+      store.plan_trip_mode = mode;
       plan_trip.loadingTrip(id);
     }
   }
@@ -138,13 +146,15 @@ export default {
     margin: 2.5%;
     border-radius: 2px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    border: 2.5px solid #009688;
+    border: 2px solid #009688;
   }
 
   .trip-footer{
     position: relative;
+    width: 100%;
     height: 20px;
-    padding: 5px;
+    padding: 5px 0;
+    /* padding: 5px 4%; */
     font-size: 0.9em;
   }
 
@@ -176,7 +186,7 @@ export default {
   .passenger-trip{
     position: absolute;
     top: 7px;
-    right: 2px;
+    left: 7px;
   }
 
   .passenger-img{
@@ -222,6 +232,10 @@ export default {
     bottom: 10px;
     right: 10px;
     font-size: 1.15em;
+  }
+
+  .budget-trip .icon{
+    padding-bottom: 3px;
   }
 </style>
 

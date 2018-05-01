@@ -30,6 +30,29 @@ function copy(o) {
    return output;
 }
 
+plan_trip.getCurrencyData = async function(id){
+  try {
+      var data = await got.get(store.service_url + "/currency/" + id, {
+        retries: 2
+      })
+      .then(res => {
+        var res = JSON.parse(res.body);
+        return res.result;
+      });
+
+      console.log(data);
+      store.currency_rate = data.rate;
+      store.currency_symbol = data.symbol;
+
+      console.log(store.currency_rate);
+      console.log(store.currency_symbol);
+      window.f7.hidePreloader();
+
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
 plan_trip.getDestinationList = async function(){
     window.f7.showPreloader();
     try {
@@ -611,6 +634,10 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
     mainView.router.refreshPage();
     await sleep(500);
     window.f7.hidePreloader();
+    window.f7.showPreloader('Generate Map View');
+    await initMap(store.coba_modified_run_down);
+    await sleep(500);
+    window.f7.hidePreloader();
   }
   else{
     await sleep(500);
@@ -618,6 +645,102 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
     mainView.router.refreshPage();
     await sleep(500);
     window.f7.hidePreloader();
+    window.f7.showPreloader('Generate Map View');
+    await initMap(store.coba_modified_run_down);
+    await sleep(500);
+    window.f7.hidePreloader();
+  }
+}
+
+async function initMap(markers) {
+  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var labelIndex = 0;
+
+  console.log("MARKERS");
+  console.log(markers[0]);
+  var mapOptions = {
+      center: new google.maps.LatLng(markers[0].place.latitude, markers[0].place.longitude),
+      zoom: 10,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+  var infoWindow = new google.maps.InfoWindow();
+  var lat_lng = new Array();
+  var latlngbounds = new google.maps.LatLngBounds();
+
+  for (i = 0; i < markers.length; i++) {
+      var data = markers[i].place;
+      var myLatlng = new google.maps.LatLng(data.latitude, data.longitude);
+      lat_lng.push(myLatlng);
+
+      var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: data.name,
+          label: labels[labelIndex++ % labels.length]
+      });
+      latlngbounds.extend(marker.position);
+
+      (function (marker, data) {
+          google.maps.event.addListener(marker, "click", function (e) {
+              infoWindow.setContent(data.name);
+              infoWindow.open(map, marker);
+          });
+      })(marker, data);
+  }
+  map.setCenter(latlngbounds.getCenter());
+  map.fitBounds(latlngbounds);
+
+  //***********ROUTING****************//
+  //Intialize the Path Array
+  var path = new google.maps.MVCArray();
+  //Intialize the Direction Service
+  var service = new google.maps.DirectionsService();
+  //Set the Path Stroke Color
+  var poly = new google.maps.Polyline({ map: map, strokeColor: '#73b9ff' });
+
+  //Loop and Draw Path Route between the Points on MAP
+  for (var i = 0; i < lat_lng.length; i++) {
+    if ((i + 1) < lat_lng.length) {
+      var src = lat_lng[i];
+      var des = lat_lng[i + 1];
+      poly.setPath(path);
+
+      var current_status = google.maps.DirectionsStatus.OK
+      var try_mode = 0;
+      do {
+        var travel_mode = google.maps.DirectionsTravelMode.TRANSIT;
+        if(try_mode == 0){
+          travel_mode = google.maps.DirectionsTravelMode.TRANSIT;
+        }
+        else if(try_mode == 1){
+          travel_mode = google.maps.DirectionsTravelMode.DRIVING;
+        }
+        else if(try_mode == 2){
+          travel_mode = google.maps.DirectionsTravelMode.WALKING;
+        }
+
+        service.route({
+          origin: src,
+          destination: des,
+          travelMode: travel_mode
+        }, function (result, status) {
+          current_status = status;
+          console.log(status);
+          //console.log(result);
+          if (status == google.maps.DirectionsStatus.OK) {
+            for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+              // console.log(result.routes[0].overview_path[i]);
+              path.push(result.routes[0].overview_path[i]);
+            }
+          }
+        });
+        try_mode += 1;
+        console.log(try_mode);
+        await sleep(1000);
+      } while (current_status != google.maps.DirectionsStatus.OK);
+    }
   }
 }
 
@@ -630,22 +753,30 @@ plan_trip.backRefresh = async function(){
   window.f7.hidePreloader();
 }
 
+function convertPrice(price){
+  let result = Math.round(price * store.currency_rate * 100) / 100;
+  return result;
+}
+
 plan_trip.getTotalBudget = function(){
   let flight_budget = 0;
   for (var i = 0; i < store.flight_plan.length; i++) {
-    flight_budget += store.flight_plan[i].price;
+    flight_budget += store.flight_plan[i].unified_price;
   }
 
   let hotel_budget = 0;
   for (var i = 0; i < store.trip_city_plan_data.length; i++) {
     for (let j = 0; j < store.trip_city_plan_data[i].cities.length; j++) {
       if(store.trip_city_plan_data[i].cities[j].hotel){
-        hotel_budget += store.trip_city_plan_data[i].cities[j].hotel.rooms[0].total;
+        if(store.trip_city_plan_data[i].cities[j].hotel.rooms){
+          hotel_budget += store.trip_city_plan_data[i].cities[j].hotel.rooms[0].total;
+        }
       }
     }
   }
 
-  return Math.round((flight_budget + hotel_budget) * 100) / 100;
+  let result = Math.round((flight_budget + hotel_budget) * 100) / 100;
+  return result;
 }
 
 plan_trip.cobaSaveTrip = async function(){
@@ -678,7 +809,7 @@ plan_trip.cobaSaveTrip = async function(){
 }
 
 plan_trip.saveTrip = async function(){
-  window.f7.showPreloader();
+  // window.f7.showPreloader();
   let user_id = store.user_id;
   let plan_data = JSON.stringify(store.trip_plan_data);
   let city_plan_data = JSON.stringify(store.trip_city_plan_data);
@@ -711,7 +842,7 @@ plan_trip.saveTrip = async function(){
 
   store.trip_id = response.trip_id;
   console.log(response);
-  window.f7.hidePreloader();
+  // window.f7.hidePreloader();
 }
 
 plan_trip.updateTrip = async function(){
@@ -748,6 +879,10 @@ plan_trip.updateTrip = async function(){
 
   console.log(response);
   await sleep(1000);
+  window.f7.addNotification({
+      message: 'Update plan success.',
+      hold: 2500
+  });
   window.f7.hidePreloader();
 }
 
@@ -767,7 +902,6 @@ plan_trip.loadingTrip = async function(id){
       store.trip_plan_data = result.plan_data;
       store.trip_city_plan_data = result.city_plan_data;
       store.flight_plan = result.flight_data;
-      store.plan_trip_mode = "edit";
 
   } catch (e) {
     return null;

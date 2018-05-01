@@ -2,7 +2,7 @@
   <f7-card class="ticket-result">
     <f7-card-header>
       <div class="ticket-carrier"><img class="carrier-logo" :src="flight_detail.image_url"></div>
-      <div class="ticket-price">${{flight_detail.price}}</div>
+      <div class="ticket-price">{{currency_symbol}}{{convertPrice(flight_detail.unified_price)}}</div>
     </f7-card-header>
     <f7-card-content>
       <div class="ticket-display" v-for="display in flight_detail.display">
@@ -48,6 +48,9 @@ import store from "../js/store"
 
 export default {
   name: "flight-card",
+  data: () => ({
+    currency_symbol: store.currency_symbol
+  }),
   props:{
     flight_detail: { type: Object },
   },
@@ -56,6 +59,10 @@ export default {
   created() {
   },
   methods: {
+    convertPrice(price){
+      let result = price * store.currency_rate;
+      return result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     showTicketDetail(flight_detail) {
       store.flight_details = flight_detail;
       var mainView = Dom7('#main-view')[0].f7View;

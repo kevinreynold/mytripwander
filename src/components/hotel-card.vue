@@ -11,7 +11,7 @@
       <div class="hotel-display" :style="hotel_image_url" valign="bottom">
         <div class="hotel-price">
             <div class="hotel-price-from">From</div>
-            <div class="hotel-price-value">${{hotel_detail.minPriceTotal.toFixed(0)}}</div>
+            <div class="hotel-price-value">{{currency_symbol}}{{convertPrice(hotel_detail.minPriceTotal)}}</div>
         </div>
       </div>
     </f7-card-content>
@@ -40,7 +40,8 @@ export default {
   },
   data: () => ({
     stars: [false,false,false,false,false],
-    guest_rating: 0
+    guest_rating: 0,
+    currency_symbol: store.currency_symbol
   }),
   computed: {
     hotel_image_url(){
@@ -55,6 +56,10 @@ export default {
     self.guest_rating = (self.hotel_detail.rating/10).toFixed(1);
   },
   methods: {
+    convertPrice(price){
+      let result = price * store.currency_rate;
+      return result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     setStarRating(star){
       for(let i=0; i<star; i++){
         self.stars[i] = true;
@@ -116,6 +121,7 @@ export default {
   }
 
   .hotel-display{
+    position: relative;
     width: 100%;
     overflow: auto;
     height: 50vw;
@@ -124,17 +130,18 @@ export default {
   }
 
   .hotel-price{
-    position: relative;
-    top: 64%;
-    left: 71%;
-    width: 22%;
+    float: right;
+    margin-top: 33%;
+    margin-right: 2%;
+    min-width: 22%;
     height: 24%;
     padding: 2%;
     background-color: rgba(0,0,0,0.6);
     color: white;
-    text-align: center;
+    text-align: right;
     font-size: 1.1em;
     border-radius: 10%;
+    overflow:hidden;
   }
 
   .hotel-price-from{

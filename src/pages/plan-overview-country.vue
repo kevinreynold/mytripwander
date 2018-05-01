@@ -37,7 +37,7 @@
             <div class="from-trip">{{trip_plan_data.first_city}}</div>
             <div class="from-trip">{{trip_plan_data.start_date}}</div>
             <div class="returned-trip" v-if="trip_plan_data.return_here">* returned to hometown</div>
-            <div class="budget-trip"><f7-icon fa="plane"/> ${{totalBudget}}</div>
+            <div class="budget-trip"><f7-icon fa="plane"/> {{currency_symbol}}{{totalBudget}}</div>
         </div>
 
         <div class="list-countries">
@@ -48,14 +48,14 @@
                   <div class="country-title">{{country.country_name}}</div>
                   <div class="country-list-city">- {{getListCity(index)}} -</div>
                   <div class="country-days">({{country.stay}} Days)</div>
-                  <div class="country-hotel-budget"><f7-icon fa="hotel"/> ${{getHotelPrice(index)}}</div>
+                  <div class="country-hotel-budget"><f7-icon fa="hotel"/> {{currency_symbol}}{{convertPrice(getHotelPrice(index))}}</div>
                 </div>
               </div>
             </f7-card-content>
           </f7-card>
         </div>
 
-        <div class="fixed-bottom">
+        <div v-if="plan_trip_mode !== 'past'" class="fixed-bottom">
           <f7-button fill big @click="saveToDB">Save Changes</f7-button>
         </div>
         <f7-button fill big color="white">Blank Space</f7-button>
@@ -65,7 +65,7 @@
           <f7-card v-for="(flight_detail, index) in flight_plan" :key="flight_detail.url">
             <f7-card-header>
               <div class="flight-title">{{flight_detail.display[0].departure_airport.airport.city}} | {{flight_detail.display[0].departure_airport.airport.code}}&nbsp;<f7-icon fa="arrow-right"/> {{flight_detail.display[0].arrival_airport.airport.city}} | {{flight_detail.display[0].arrival_airport.airport.code}}</div>
-              <div class="flight-price">${{flight_detail.price}}</div>
+              <div class="flight-price">{{currency_symbol}}{{convertPrice(flight_detail.unified_price)}}</div>
             </f7-card-header>
             <f7-card-content>
               <div class="flight-display">
@@ -107,14 +107,20 @@ import plan_trip from "../js/plantrip"
 
 let self;
 
+function convertPrice(price){
+  let result = price * store.currency_rate;
+  return result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export default {
   components: {
   },
   data: () => ({
-    test: [1,2,3],
+    plan_trip_mode: "plan",
     trip_plan_data: {},
     trip_city_plan_data: [],
-    flight_plan: []
+    flight_plan: [],
+    currency_symbol: store.currency_symbol
   }),
   computed: {
     totalDaysTrip(){
@@ -137,9 +143,10 @@ export default {
     totalBudget(){
       let res = 0;
       for (var i = 0; i < self.flight_plan.length; i++) {
-        res += self.flight_plan[i].price;
+        res += self.flight_plan[i].unified_price;
       }
-      return Math.round(res * 100) / 100;
+      let result = Math.round(res * 100) / 100;
+      return convertPrice(result);
     }
   },
   mounted() {
@@ -147,6 +154,7 @@ export default {
   },
   created() {
     self = this;
+    self.plan_trip_mode = store.plan_trip_mode;
     self.trip_plan_data = store.trip_plan_data;
     self.trip_city_plan_data = store.trip_city_plan_data;
     self.flight_plan = store.flight_plan;
@@ -159,6 +167,10 @@ export default {
     console.log(JSON.stringify(store.flight_plan));
   },
   methods: {
+    convertPrice(price){
+      let result = price * store.currency_rate;
+      return result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     country_image_url(country_code){
       return ("background-image:url('" + store._url + "/assets/country/" + country_code + ".jpg')");
     },
@@ -176,7 +188,9 @@ export default {
       let result = 0;
       for (let i = 0; i < store.trip_city_plan_data[index].cities.length; i++) {
         if(store.trip_city_plan_data[index].cities[i].hotel){
-          result += store.trip_city_plan_data[index].cities[i].hotel.rooms[0].total;
+          if(store.trip_city_plan_data[index].cities[i].hotel.rooms){
+            result += store.trip_city_plan_data[index].cities[i].hotel.rooms[0].total;
+          }
         }
       }
       return result;
@@ -206,21 +220,26 @@ export default {
       plan_trip.updateTrip();
     },
     backToMainMenu(){
-      window.f7.confirm('', 'Your changes may not be saved.<br> Do you want to exit?',
-      function () {
-        if(store.plan_trip_mode === "plan"){
-          window.f7.showPreloader();
-          var mainView = Dom7('#main-view')[0].f7View;
-          mainView.router.back();
-          window.f7.hidePreloader();
-        }
-        else if(store.plan_trip_mode === "edit"){
-          plan_trip.backFromEditTrip();
-        }
-      },
-      function () {
-        console.log("nothing");
-      });
+      if(self.plan_trip_mode !== "past"){
+        window.f7.confirm('', 'Your changes may not be saved.<br> Do you want to exit?',
+        function () {
+          if(self.plan_trip_mode === "plan"){
+            window.f7.showPreloader();
+            var mainView = Dom7('#main-view')[0].f7View;
+            mainView.router.back();
+            window.f7.hidePreloader();
+          }
+          else{
+            plan_trip.backFromEditTrip();
+          }
+        },
+        function () {
+          console.log("nothing");
+        });
+      }
+      else{
+        plan_trip.backFromEditTrip();
+      }
     }
   }
 }

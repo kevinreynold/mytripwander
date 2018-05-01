@@ -286,7 +286,7 @@ function sortSearchResult(){
 
 function filterSearchResult(x){
   let answer = false;
-  if(x.price >= self.price_filter.from && x.price <= self.price_filter.to){
+  if(x.unified_price >= convertPriceToRUB(self.price_filter.from) && x.unified_price <= convertPriceToRUB(self.price_filter.to)){
     answer = true;
   }
   else{
@@ -336,6 +336,16 @@ function copy(o) {
    return output;
 }
 
+function convertPrice(price){
+  let result = Math.round(price * store.currency_rate * 100) / 100;
+  return result;
+}
+
+function convertPriceToRUB(price){
+  let result = Math.round(price / store.currency_rate * 100) / 100;
+  return result;
+}
+
 export default {
   components: {
     flight_card
@@ -345,6 +355,7 @@ export default {
     flight_search_result_full : [],
     flight_search_result : [],
     flight_data : [],
+    currency_symbol: store.currency_symbol,
     price: {
       min: 0,
       max: 0,
@@ -438,7 +449,7 @@ export default {
         type: "double",
         min: self.price.min,
         max: self.price.max,
-        prefix: "$",
+        prefix: self.currency_symbol,
         from: self.price_filter.from,
         to: self.price_filter.to
       });
@@ -493,8 +504,8 @@ export default {
     // console.log(self.original_flight_search_result.length);
     // console.log(self.flight_search_result_full.length);
 
-    self.price.min = self.original_flight_search_result[0].price;
-    self.price.max = self.original_flight_search_result[self.original_flight_search_result.length-1].price;
+    self.price.min = convertPrice(self.original_flight_search_result[0].unified_price);
+    self.price.max = convertPrice(self.original_flight_search_result[self.original_flight_search_result.length-1].unified_price);
     self.price.value = self.price.min;
 
     self.flight_search_result = self.flight_search_result.slice(0, 5);

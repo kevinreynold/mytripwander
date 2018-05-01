@@ -230,7 +230,7 @@
         </f7-fab-speed-dial>
       </f7-tab>
       <f7-tab id="tab-day-2">
-        <f7-button fill big color="white">Blank Space</f7-button>
+        <div id="map"></div>
       </f7-tab>
     </f7-tabs>
 
@@ -323,6 +323,7 @@
   </f7-page>
 </template>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxrMcKXjC6BwEOqQr_jpITTcGgAh1w4KI"></script>
 <script>
 import store from "../js/store"
 import plan_trip from "../js/plantrip"
@@ -357,6 +358,86 @@ function changeListDestTripData(run_down){
   let day_index = store.per_day_data.day_index;
   store.trip_city_plan_data[country_index].cities[city_index].list_dest_trip[day_index].list_place = [];
   store.trip_city_plan_data[country_index].cities[city_index].list_dest_trip[day_index].list_place = copy(run_down);
+}
+
+function initMap(markers) {
+  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var labelIndex = 0;
+
+  console.log("MARKERS");
+  console.log(markers[0]);
+  var mapOptions = {
+      center: new google.maps.LatLng(markers[0].place.latitude, markers[0].place.longitude),
+      zoom: 10,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+  var infoWindow = new google.maps.InfoWindow();
+  var lat_lng = new Array();
+  var latlngbounds = new google.maps.LatLngBounds();
+
+  for (i = 0; i < markers.length; i++) {
+      var data = markers[i].place;
+      var myLatlng = new google.maps.LatLng(data.latitude, data.longitude);
+      lat_lng.push(myLatlng);
+
+      var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: data.name,
+          label: labels[labelIndex++ % labels.length]
+      });
+      latlngbounds.extend(marker.position);
+
+      (function (marker, data) {
+          google.maps.event.addListener(marker, "click", function (e) {
+              infoWindow.setContent(data.name);
+              infoWindow.open(map, marker);
+          });
+      })(marker, data);
+  }
+  map.setCenter(latlngbounds.getCenter());
+  map.fitBounds(latlngbounds);
+
+  //***********ROUTING****************//
+  //Intialize the Path Array
+  var path = new google.maps.MVCArray();
+  //Intialize the Direction Service
+  var service = new google.maps.DirectionsService();
+  //Set the Path Stroke Color
+  var poly = new google.maps.Polyline({ map: map, strokeColor: '#73b9ff' });
+
+  //Loop and Draw Path Route between the Points on MAP
+  for (var i = 0; i < lat_lng.length; i++) {
+    if ((i + 1) < lat_lng.length) {
+      var src = lat_lng[i];
+      var des = lat_lng[i + 1];
+      poly.setPath(path);
+      var current_status = google.maps.DirectionsStatus.OK
+      var try_mode = 0;
+      do {
+        var travel_mode = (try_mode==0)? google.maps.DirectionsTravelMode.TRANSIT : google.maps.DirectionsTravelMode.DRIVING;
+        service.route({
+          origin: src,
+          destination: des,
+          travelMode: travel_mode
+        }, function (result, status) {
+          current_status = status;
+          console.log(status);
+          //console.log(result);
+          if (status == google.maps.DirectionsStatus.OK) {
+            for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
+              // console.log(result.routes[0].overview_path[i]);
+              path.push(result.routes[0].overview_path[i]);
+            }
+          }
+        });
+        try_mode += 1;
+        console.log(try_mode);
+      } while (current_status != google.maps.DirectionsStatus.OK);
+    }
+  }
 }
 
 export default {
@@ -433,6 +514,35 @@ export default {
     }
   },
   mounted() {
+    $(document).ready(function(){
+      var markers = [
+          {
+            "title": 'Soho, Hong Kong',
+            "lat": '22.281572',
+            "lng": '114.152845',
+
+          }
+        ,
+          {
+            "title": 'Man Mo Temple',
+            "lat": '22.28395',
+            "lng": '114.1501902',
+
+          }
+        ,
+          {
+            "title": 'Dr Sun Yat-sen Museum',
+            "lat": '22.2819842',
+            "lng": '114.1508136',
+          }
+        ,
+          {
+            "title": 'Hong Kong Museum of Medical Sciences',
+            "lat": '22.2834468',
+            "lng": '114.1486087',
+          }
+      ];
+    });
   },
   created() {
     self = this;
@@ -1022,6 +1132,13 @@ export default {
     color: rgba(0,0,0,0.3);
     transform: translateY(-50%);
     font-size: 1.5em;
+  }
+
+  #map {
+    width: 100%;
+    /* margin: 2.5%; */
+    height: 100%;
+    /* border: 1px solid black; */
   }
 </style>
 

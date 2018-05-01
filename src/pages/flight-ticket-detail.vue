@@ -1,6 +1,6 @@
 <template>
   <f7-page>
-    <f7-navbar :title="'$'+flight_details.price" back-link="Back" sliding @back-click="clearData"></f7-navbar>
+    <f7-navbar :title="currency_symbol + convertPrice(flight_details.unified_price)" back-link="Back" sliding @back-click="clearData"></f7-navbar>
     <f7-block-title class="doubled-size">Get this ticket from <span>{{flight_details.host_name}}</span> !!!</f7-block-title>
     <flight_detail :flight_details="flight_details"/>
     <div class="fixed-bottom">
@@ -35,7 +35,8 @@ export default {
   data: () => ({
     flight_details : [],
     flight_search_plan_mode: "",
-    search_again_mode: false
+    search_again_mode: false,
+    currency_symbol: store.currency_symbol
   }),
   computed: {
     title(){
@@ -52,6 +53,10 @@ export default {
     // console.log(self.flight_details);
   },
   methods: {
+    convertPrice(price){
+      let result = price * store.currency_rate;
+      return result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     clearData(){
       store.flight_details = [];
     },

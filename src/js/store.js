@@ -3,9 +3,12 @@ const store = {
   // service_url : 'http://103.253.25.103:5000',
   service_url : 'http://127.0.0.1:5000',
   user_id: 2,
+  currency_id: 'IDR',
+  currency_rate: 1,
+  currency_symbol: '$',
   //mytrip
   list_my_trip: [],
-  plan_trip_mode: "plan", //plan || edit
+  plan_trip_mode: "plan", //plan || edit || past
   //createplan
   trip_id: 0,
   list_city_all: [],

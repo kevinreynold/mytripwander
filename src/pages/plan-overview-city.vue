@@ -52,29 +52,46 @@
         </div>
         <div class="list-hotel">
           <f7-card v-if="city.hotel" v-for="city, index in new_cities" :key="city.id">
-            <f7-card-header class="hotel-card-header">
-              <div class="hotel-city">{{city.city_name}} ({{city.day}} D)</div>
-              <div class="hotel-price">${{city.hotel.rooms[0].total.toFixed(0)}}</div>
-            </f7-card-header>
-            <f7-card-content>
-              <div class="hotel-name">{{city.hotel.name}} <span>{{(city.hotel.rating/10).toFixed(1)}}</span></div>
-              <div class="room-display">
-                <div class="room-desc">{{city.hotel.rooms[0].desc}}</div>
-                <div class="room-detail">
-                  <div>
-                    <ul>
-                      <li v-for="d in setFacility(city.hotel.rooms[0].options)" :key="d.key"><span><f7-icon fa="check"/></span> {{d}}</li>
-                    </ul>
+            <slot v-if="city.hotel.id">
+              <f7-card-header class="hotel-card-header">
+                <div class="hotel-city">{{city.city_name}} ({{city.day}} D)</div>
+                <div class="hotel-price">{{currency_symbol}}{{convertPrice(city.hotel.rooms[0].total)}}</div>
+              </f7-card-header>
+              <f7-card-content>
+                <div class="hotel-name">{{city.hotel.name}} <span>{{(city.hotel.rating/10).toFixed(1)}}</span></div>
+                <div class="room-display">
+                  <div class="room-desc">{{city.hotel.rooms[0].desc}}</div>
+                  <div class="room-detail">
+                    <div>
+                      <ul>
+                        <li v-for="d in setFacility(city.hotel.rooms[0].options)" :key="d.key"><span><f7-icon fa="check"/></span> {{d}}</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="hotel-last-search">Last Search : {{city.search_at}}</div>
-            </f7-card-content>
-            <f7-card-footer>
-              <div class="empty"></div>
-              <div class="hotel-change" @click="changeHotelBooking(city.hotel, index)">Change</div>
-              <div class="hotel-desc" @click="showHotelDetail(city.hotel, index)">Detail</div>
-            </f7-card-footer>
+                <div class="hotel-last-search">Last Search : {{city.search_at}}</div>
+              </f7-card-content>
+              <f7-card-footer>
+                <div class="empty"></div>
+                <div class="hotel-change" @click="changeHotelBooking(city.hotel, index)">Change</div>
+                <div class="hotel-desc" @click="showHotelDetail(city.hotel, index)">Detail</div>
+              </f7-card-footer>
+            </slot>
+            <slot v-else>
+              <f7-card-header class="hotel-card-header">
+                <div class="hotel-city">{{city.city_name}} ({{city.day}} D)</div>
+              </f7-card-header>
+              <f7-card-content>
+                <div class="hotel-name">{{city.hotel_data.name}}</div>
+                <div class="room-detail">
+                  No Rooms Avaiable
+                </div>
+              </f7-card-content>
+              <f7-card-footer>
+                <div class="empty"></div>
+                <div class="hotel-change" @click="changeHotelBooking(city.hotel, index)">Change</div>
+              </f7-card-footer>
+            </slot>
           </f7-card>
         </div>
         <f7-button fill big color="white">Blank Space</f7-button>
@@ -243,7 +260,8 @@ export default {
     cur_new_idx: 0,
     list_city_all: [],
     list_city_available: [],
-    country_code: "TW"
+    country_code: "TW",
+    currency_symbol: store.currency_symbol
   }),
   computed: {
     totalDaysTrip(){
@@ -286,6 +304,10 @@ export default {
     self.list_city_available = self.list_city_all.filter(x => !self.new_cities.some(x2 => x.city_code === x2.city_code));
   },
   methods: {
+    convertPrice(price){
+      let result = price * store.currency_rate;
+      return result.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     showOrderCity(){
       window.f7.popup("#popup-choose-city", true);
     },
