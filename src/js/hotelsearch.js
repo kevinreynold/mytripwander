@@ -64,12 +64,11 @@ hotel_api.hotelSearch = async function(passenger_data){
           goTo('/hotel-city-result/');
         }
         else{
-          setTimeout(function () {
-            window.f7.hidePreloader();
-            window.f7.addNotification({
-                message: 'No Rooms Available..'
-            });
-          }, 1000);
+          await sleep(1000);
+          window.f7.hidePreloader();
+          window.f7.addNotification({
+              message: 'No Rooms Available..'
+          });
         }
       }
       else if(passenger_data.type === "hotel"){
@@ -78,25 +77,23 @@ hotel_api.hotelSearch = async function(passenger_data){
           goTo('/hotel-hotel-result/');
         }
         else{
-          setTimeout(function () {
-            window.f7.hidePreloader();
-            window.f7.addNotification({
-                message: 'No Rooms Available..'
-            });
-          }, 1000);
+          await sleep(1000);
+          window.f7.hidePreloader();
+          window.f7.addNotification({
+              message: 'No Rooms Available..'
+          });
         }
       }
 
-      setTimeout(function () {
-        window.f7.hidePreloader();
-      }, 100);
+      await sleep(100);
+      window.f7.hidePreloader();
     } catch (e) {
-      setTimeout(function () {
-        window.f7.hidePreloader();
-        window.f7.addNotification({
-            message: 'No Internet Connection..'
-        });
-      }, 1000);
+      await sleep(1000);
+      window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
+      return 0;
     }
 }
 
@@ -221,45 +218,66 @@ hotel_api.getHotelPlan = async function(){
   let current_date = new Date(trip_city_plan_data_one.arrival.arrival_airport.date);
   let new_total_stay = 0;
 
-  for (var i = 0; i < trip_city_plan_data_one.cities.length; i++) {
-    let check_out = "";
-    check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day - 1));
-    // if(i === trip_city_plan_data_one.cities.length - 1){
-    //   check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day - 1));
-    // }
-    // else{
-    //   check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day));
-    // }
+  let trip_plan_data_original = copy(store.trip_plan_data_original);
+  let trip_city_plan_data_original = copy(store.trip_city_plan_data_original);
+  let flight_plan_original = copy(store.flight_plan_original);
+  let error = false;
 
-    console.log(current_date);
-    console.log(check_out);
-    let passenger_data = {};
-    if(trip_city_plan_data_one.cities[i].hotel == undefined || trip_city_plan_data_one.cities[i].hotel == null){
-      console.log('case 1');
-      passenger_data = {
-        adults: trip_plan_data.passenger.adults,
-        children: trip_plan_data.passenger.children,
-        checkin: getDateAfter(current_date, 0),
-        checkout: getDateAfter(check_out, 0),
-        type: 'city',
-        place_id: trip_city_plan_data_one.cities[i].hotel_city_id
-      };
-    }
-    else{
-      console.log('case 2');
-      passenger_data = {
-        adults: trip_plan_data.passenger.adults,
-        children: trip_plan_data.passenger.children,
-        checkin: getDateAfter(current_date, 0),
-        checkout: getDateAfter(check_out, 0),
-        type: 'hotel',
-        place_id: trip_city_plan_data_one.cities[i].hotel.id.toString()
-      };
-    }
+  try {
+    for (var i = 0; i < trip_city_plan_data_one.cities.length; i++) {
+      let check_out = "";
+      check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day - 1));
+      // if(i === trip_city_plan_data_one.cities.length - 1){
+      //   check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day - 1));
+      // }
+      // else{
+      //   check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day));
+      // }
 
-    window.f7.showPreloader('Looking for hotel at ' + trip_city_plan_data_one.cities[i].city_name);
-    console.log(passenger_data);
-    try {
+      console.log(current_date);
+      console.log(check_out);
+      let passenger_data = {};
+      if(trip_city_plan_data_one.cities[i].hotel == undefined || trip_city_plan_data_one.cities[i].hotel == null){
+        console.log('case 1');
+        passenger_data = {
+          adults: trip_plan_data.passenger.adults,
+          children: trip_plan_data.passenger.children,
+          checkin: getDateAfter(current_date, 0),
+          checkout: getDateAfter(check_out, 0),
+          type: 'city',
+          place_id: trip_city_plan_data_one.cities[i].hotel_city_id
+        };
+      }
+      else{
+        if(trip_city_plan_data_one.cities[i].hotel.rooms){
+          console.log('case 2');
+          console.log(trip_city_plan_data_one.cities[i].hotel);
+          passenger_data = {
+            adults: trip_plan_data.passenger.adults,
+            children: trip_plan_data.passenger.children,
+            checkin: getDateAfter(current_date, 0),
+            checkout: getDateAfter(check_out, 0),
+            type: 'hotel',
+            place_id: trip_city_plan_data_one.cities[i].hotel.id.toString()
+          };
+        }
+        else{
+          console.log('case 2.5');
+          passenger_data = {
+            adults: trip_plan_data.passenger.adults,
+            children: trip_plan_data.passenger.children,
+            checkin: getDateAfter(current_date, 0),
+            checkout: getDateAfter(check_out, 0),
+            type: 'city',
+            place_id: trip_city_plan_data_one.cities[i].hotel_city_id
+          };
+        }
+      }
+
+      window.f7.showPreloader('Looking for hotel at ' + trip_city_plan_data_one.cities[i].city_name);
+      console.log(passenger_data);
+
+
       var data = await got.get(store.service_url +"/hotel/search", {
         query: passenger_data,
         retries: 2
@@ -307,18 +325,30 @@ hotel_api.getHotelPlan = async function(){
       current_date = new Date(getDateAfter(check_out, 1));
       await sleep(1000);
       window.f7.hidePreloader();
-    } catch (e) {
-      store.trip_city_plan_data[store.trip_city_plan_data_index].already_open = false;
-      console.log(e.message);
-      setTimeout(function () {
-        window.f7.hidePreloader();
-        window.f7.addNotification({
-            message: 'No Internet Connection..'
-        });
-      }, 1000);
+      new_total_stay = new_total_stay + trip_city_plan_data_one.cities[i].day;
     }
-    new_total_stay = new_total_stay + trip_city_plan_data_one.cities[i].day;
+  } catch (e) {
+    console.log(e.message);
+    // store.trip_city_plan_data[store.trip_city_plan_data_index].already_open = false;
+
+    error = true;
+    store.trip_plan_data = trip_plan_data_original;
+    store.trip_city_plan_data = trip_city_plan_data_original;
+    store.flight_plan = flight_plan_original;
+
+    goBack();
+    await sleep(1000);
+
+    window.f7.closeModal("#popup-choose-city",true);
+    window.f7.hidePreloader();
+    window.f7.addNotification({
+        message: 'No Internet Connection..'
+    });
+
+    return 0;
   }
+
+  if(error){ return 0;}
 
   store.trip_city_plan_data[store.trip_city_plan_data_index].already_open = true;
   //informasi
@@ -375,7 +405,26 @@ hotel_api.getHotelPlan = async function(){
 
   //research flight
   if(is_change_flight){
-    await travelpayouts.researchFlightPlan(cur_index);
+    let result = await travelpayouts.researchFlightPlan(cur_index);
+
+    if(!result) {
+      console.log("GAGAL UBAH TIKET PESAWAT");
+      store.trip_plan_data = trip_plan_data_original;
+      store.trip_city_plan_data = trip_city_plan_data_original;
+      store.flight_plan = flight_plan_original;
+
+      goBack();
+      await sleep(1000);
+
+      window.f7.closeModal("#popup-choose-city",true);
+      window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
+
+      return 0;
+    }
+
     await sleep(250);
 
     for (let k = 0; k < store.trip_city_plan_data.length; k++) {

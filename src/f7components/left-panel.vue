@@ -4,7 +4,7 @@
     <f7-view id="left-panel-view" navbar-through :dynamic-navbar="true">
       <f7-pages>
         <f7-page>
-          <f7-block-title class="profile">Hi, John Doe</f7-block-title>
+          <f7-block-title class="profile">Hi, {{username}}</f7-block-title>
           <!-- <div class="profile">
             <f7-card-content><img class="round-image" src="../assets/user.jpg" alt="John Doe" width="100px"></f7-card-content>
             <f7-card-content><span class="size-double">Hi, John Doe</span></f7-card-content>
@@ -34,6 +34,12 @@
     name: 'left-panel',
     components: {
       f7_list_item_media
+    },
+    data: () => ({
+      username: store.user_name
+    }),
+    created() {
+      //do something after creating vue instance
     }
   }
 </script>

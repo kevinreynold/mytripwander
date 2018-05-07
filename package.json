@@ -1,5 +1,5 @@
 {
-  "name": "framework7-vue-webpack-template",
+  "name": "MyTripWander",
   "description": "Framework7 Vue + Webpack template",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node build/dev-server.js",
@@ -59,7 +59,8 @@
     "ion-rangeslider": "2.2.0",
     "vue2-google-maps": "0.8.11",
     "vue-form-wizard" : "0.8.4",
-    "moment": "2.22.0"
+    "moment": "2.22.0",
+    "jspdf": "^1.3.5"
   },
   "engines": {
     "node": ">= 4.0.0",

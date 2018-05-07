@@ -65,6 +65,7 @@
 <script>
   import plan_trip from "../js/plantrip"
   import store from "../js/store"
+  import jsPDF from "jspdf";
 
   export default {
     name: 'main-view',
@@ -77,7 +78,7 @@
       //do something after mounting vue instance
     },
     created () {
-      plan_trip.getCurrencyData(store.currency_id);
+      // plan_trip.getCurrencyData(store.currency_id);
     },
     methods: {
       country_image_url(country_code){

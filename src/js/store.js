@@ -3,12 +3,20 @@ const store = {
   // service_url : 'http://103.253.25.103:5000',
   service_url : 'http://127.0.0.1:5000',
   user_id: 2,
+  user_name: 'Reynold Kevin',
+  email: 'kevin@gmail.com',
   currency_id: 'IDR',
+  currency_name: 'Indonesian Rupiah',
   currency_rate: 1,
   currency_symbol: '$',
+  list_currency: [],
   //mytrip
   list_my_trip: [],
-  plan_trip_mode: "plan", //plan || edit || past
+  plan_trip_mode: "plan", //plan || edit || past.
+  trip_id: 0,
+  trip_plan_data_original: {},
+  trip_city_plan_data_original: [],
+  flight_plan_original: [],
   //createplan
   trip_id: 0,
   list_city_all: [],

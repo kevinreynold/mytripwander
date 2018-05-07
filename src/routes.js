@@ -94,5 +94,9 @@ export default [
   {
       path: '/changepassword/',
       component: require('./pages/changepassword.vue')
+  },
+  {
+      path: '/changecurrency/',
+      component: require('./pages/changecurrency.vue')
   }
 ]

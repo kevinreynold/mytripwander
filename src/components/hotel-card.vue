@@ -1,31 +1,33 @@
 <template>
-  <f7-card class="hotel-result">
-    <f7-card-header>
-      <div class="hotel-header">
-        <div class="hotel-name">{{hotel_detail.name}}</div>
-        <div class="hotel-address">{{hotel_detail.address}}</div>
-      </div>
-      <div class="hotel-guest-rating"><span>{{guest_rating}}</span></div>
-    </f7-card-header>
-    <f7-card-content :inner="false">
-      <div class="hotel-display" :style="hotel_image_url" valign="bottom">
-        <div class="hotel-price">
-            <div class="hotel-price-from">From</div>
-            <div class="hotel-price-value">{{currency_symbol}}{{convertPrice(hotel_detail.minPriceTotal)}}</div>
+  <div v-on:click="showHotelDetail(hotel_detail)">
+    <f7-card class="hotel-result">
+      <f7-card-header>
+        <div class="hotel-header">
+          <div class="hotel-name">{{hotel_detail.name}}</div>
+          <div class="hotel-address">{{hotel_detail.address}}</div>
         </div>
-      </div>
-    </f7-card-content>
-    <f7-card-footer>
-      <div class="hotel-star-rating">
-        <f7-icon :class="{ checked: stars[0] }" fa="star"></f7-icon>
-        <f7-icon :class="{ checked: stars[1] }" fa="star"></f7-icon>
-        <f7-icon :class="{ checked: stars[2] }" fa="star"></f7-icon>
-        <f7-icon :class="{ checked: stars[3] }" fa="star"></f7-icon>
-        <f7-icon :class="{ checked: stars[4] }" fa="star"></f7-icon>
-      </div>
-      <div class="hotel-clicked" v-on:click="showHotelDetail(hotel_detail)"><f7-icon f7="chevron_down" size="150%"></f7-icon></div>
-    </f7-card-footer>
-  </f7-card>
+        <div class="hotel-guest-rating"><span>{{guest_rating}}</span></div>
+      </f7-card-header>
+      <f7-card-content :inner="false">
+        <div class="hotel-display" :style="hotel_image_url" valign="bottom">
+          <div class="hotel-price">
+              <div class="hotel-price-from">From</div>
+              <div class="hotel-price-value">{{currency_symbol}}{{convertPrice(hotel_detail.minPriceTotal)}}</div>
+          </div>
+        </div>
+      </f7-card-content>
+      <f7-card-footer>
+        <div class="hotel-star-rating">
+          <f7-icon :class="{ checked: stars[0] }" fa="star"></f7-icon>
+          <f7-icon :class="{ checked: stars[1] }" fa="star"></f7-icon>
+          <f7-icon :class="{ checked: stars[2] }" fa="star"></f7-icon>
+          <f7-icon :class="{ checked: stars[3] }" fa="star"></f7-icon>
+          <f7-icon :class="{ checked: stars[4] }" fa="star"></f7-icon>
+        </div>
+        <!-- <div class="hotel-clicked" v-on:click="showHotelDetail(hotel_detail)"><f7-icon f7="chevron_down" size="150%"></f7-icon></div> -->
+      </f7-card-footer>
+    </f7-card>
+  </div>
 </template>
 
 <script>

@@ -1,46 +1,48 @@
 <template>
-  <f7-card class="ticket-result">
-    <f7-card-header>
-      <div class="ticket-carrier"><img class="carrier-logo" :src="flight_detail.image_url"></div>
-      <div class="ticket-price">{{currency_symbol}}{{convertPrice(flight_detail.unified_price)}}</div>
-    </f7-card-header>
-    <f7-card-content>
-      <div class="ticket-display" v-for="display in flight_detail.display">
-        <div class="ticket-destination">
-          <div class="flight-destination">{{display.departure_airport.airport.code}} - {{display.arrival_airport.airport.code}}</div>
-          <div class="flight-time">{{display.departure_airport.time}} - {{display.arrival_airport.time}}</div>
-        </div>
-        <div class="ticket-duration">
-          {{display.duration}}
-        </div>
-        <div class="ticket-etc">
-          <div class="flight-transit">
-            <span v-if="display.transit.length > 1">{{display.transit.length}} Transits</span>
-            <span v-else-if="display.transit.length == 1">1 Transit</span>
-            <span v-else-if="display.transit.length == 0">No Transit</span>
+  <div v-on:click="showTicketDetail(flight_detail)">
+    <f7-card class="ticket-result">
+      <f7-card-header>
+        <div class="ticket-carrier"><img class="carrier-logo" :src="flight_detail.image_url"></div>
+        <div class="ticket-price">{{currency_symbol}}{{convertPrice(flight_detail.unified_price)}}</div>
+      </f7-card-header>
+      <f7-card-content>
+        <div class="ticket-display" v-for="display in flight_detail.display">
+          <div class="ticket-destination">
+            <div class="flight-destination">{{display.departure_airport.airport.code}} - {{display.arrival_airport.airport.code}}</div>
+            <div class="flight-time">{{display.departure_airport.time}} - {{display.arrival_airport.time}}</div>
           </div>
-          <div class="flight-transit-list"><span v-for="transit in display.transit">{{transit}}</span></div>
+          <div class="ticket-duration">
+            {{display.duration}}
+          </div>
+          <div class="ticket-etc">
+            <div class="flight-transit">
+              <span v-if="display.transit.length > 1">{{display.transit.length}} Transits</span>
+              <span v-else-if="display.transit.length == 1">1 Transit</span>
+              <span v-else-if="display.transit.length == 0">No Transit</span>
+            </div>
+            <div class="flight-transit-list"><span v-for="transit in display.transit">{{transit}}</span></div>
+          </div>
         </div>
-      </div>
-      <!-- <div class="ticket-display">
-        <div class="ticket-destination">
-          <div class="flight-destination">SUB - NRT</div>
-          <div class="flight-time">06.00 - 11.25</div>
-        </div>
-        <div class="ticket-duration">
-          27h20m
-        </div>
-        <div class="ticket-etc">
-          <div class="flight-transit">2 Transits</div>
-          <div class="flight-transit-list"><span>SIN</span><span>KHH</span></div>
-        </div>
-      </div> -->
-    </f7-card-content>
-    <f7-card-footer>
-      <div class="ticket-host">{{flight_detail.host_name}}</div>
-      <div class="ticket-clicked" v-on:click="showTicketDetail(flight_detail)"><f7-icon f7="chevron_down" size="150%"></f7-icon></div>
-    </f7-card-footer>
-  </f7-card>
+        <!-- <div class="ticket-display">
+          <div class="ticket-destination">
+            <div class="flight-destination">SUB - NRT</div>
+            <div class="flight-time">06.00 - 11.25</div>
+          </div>
+          <div class="ticket-duration">
+            27h20m
+          </div>
+          <div class="ticket-etc">
+            <div class="flight-transit">2 Transits</div>
+            <div class="flight-transit-list"><span>SIN</span><span>KHH</span></div>
+          </div>
+        </div> -->
+      </f7-card-content>
+      <f7-card-footer>
+        <div class="ticket-host">{{flight_detail.host_name}}</div>
+        <!-- <div class="ticket-clicked" v-on:click="showTicketDetail(flight_detail)"><f7-icon f7="chevron_down" size="150%"></f7-icon></div> -->
+      </f7-card-footer>
+    </f7-card>
+  </div>
 </template>
 
 <script>

@@ -13,7 +13,7 @@
         Plan Overview
       </f7-nav-center>
       <f7-nav-right>
-        <f7-link><f7-icon f7="more_vertical"/></f7-link>
+        <f7-link @click="printPDFData"><f7-icon f7="download"/></f7-link>
       </f7-nav-right>
     </f7-navbar>
 
@@ -104,6 +104,7 @@
 import store from "../js/store"
 import travelpayouts from "../js/flightsearch"
 import plan_trip from "../js/plantrip"
+import jsPDF from "jspdf";
 
 let self;
 
@@ -240,6 +241,9 @@ export default {
       else{
         plan_trip.backFromEditTrip();
       }
+    },
+    printPDFData(){
+      plan_trip.makePDF();
     }
   }
 }

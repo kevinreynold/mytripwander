@@ -24,6 +24,7 @@ export default {
     clickThis() {
       if (this.mode === "logout") {
         window.f7.showPreloader();
+        localStorage.clear();
         setTimeout(function () {
           window.f7.hidePreloader();
           window.f7.closePanel("left");

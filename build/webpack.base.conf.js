@@ -54,6 +54,11 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
+      //TAMBAHAN UNTUK PDFKIT
+      // {
+      //   test: /.\/node_modules\/(pdfkit|brotli|fontkit|linebreak|png-js|unicode-properties)/,
+      //   loader: 'transform-loader?brfs'
+      // }
     ]
   },
   plugins: [

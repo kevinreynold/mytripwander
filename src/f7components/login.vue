@@ -6,14 +6,15 @@
           <f7-login-screen-title class="app-title">Trip Wander</f7-login-screen-title>
 
           <form_input_self :inputs="inputs" fontColor="white" lineColor="teal">
-            <f7-link href="/forgotpass/" view="#main-view" :animate-pages="false" close-login-screen><p class="forgot">Forgot Password?</p></f7-link>
           </form_input_self>
 
-          <f7-block>
+          <div class="forgot" @click="forgotPassword">Forgot Password?</div>
+
+          <f7-block style="clear: both;">
             <f7-button fill v-on:click="doLogin">Sign In</f7-button>
           </f7-block>
 
-          <f7-link href="/register/" view="#main-view" :animate-pages="false" close-login-screen><p class="sign-up">Don't have an account yet? Sign Up.</p></f7-link>
+          <div class="sign-up" @click="register">Don't have an account yet? Sign Up.</div>
 
           <f7-grid>
              <f7-col width="45"><hr></f7-col>
@@ -43,6 +44,10 @@
 
 <script>
 import form_input_self from '../components/form-input-self'
+import plan_trip from "../js/plantrip"
+import store from "../js/store"
+
+let self;
 
 export default {
   name: "login",
@@ -56,14 +61,14 @@ export default {
         name: 'email',
         title: 'Email Address',
         type: 'email',
-        value: '',
+        value: 'kevinreynold2296@gmail.com',
         req: true
       },
       {
         name: 'password',
         title: 'Password',
         type: 'password',
-        value: '',
+        value: 'qweqweqwe',
         req: true
       }
     ]
@@ -75,30 +80,41 @@ export default {
     }
   },
   methods: {
-    doLogin: function () {
+    doLogin() {
+      let email = self.inputs[0].value;
+      let password = self.inputs[1].value;
+
+      console.log(email);
+      console.log(password);
+
+      plan_trip.doLogin(self, email, password);
+    },
+    closeLoginScreen() {
       window.f7.showPreloader();
       setTimeout(function () {
         window.f7.hidePreloader();
         window.f7.closeModal('#login-screen', true);
-        var mainView = Dom7('#main-view')[0].f7View;
-        mainView.router.load({url: '/about/'});
-        // this.$f7.mainView.router.load({url: '/about/'});
       }, 1000);
     },
-    closeLoginScreen: function () {
+    forgotPassword(){
       window.f7.showPreloader();
+      var mainView = Dom7('#main-view')[0].f7View;
+      mainView.router.load({url: '/forgotpass/'});
       setTimeout(function () {
         window.f7.hidePreloader();
         window.f7.closeModal('#login-screen', true);
-      }, 1000);
+      }, 200);
     },
-    backHome: function () {
+    register(){
+      plan_trip.goSignUp();
+    },
+    backHome() {
       var mainView = Dom7('#main-view')[0].f7View;
       mainView.router.back();
     }
   },
   created(){
-
+    self = this;
   }
 }
 </script>
@@ -121,13 +137,16 @@ export default {
   }
 
   .forgot {
-    margin-top: -7%;
+    margin: -5% 5% 3% 0%;
+    overflow: hidden;
     text-align: right;
     color: #ffffff;
+    float: right;
   }
 
   .sign-up {
     margin-top: -4%;
+    margin-bottom: 3%;
     text-align: center;
     color: #ffffff;
   }

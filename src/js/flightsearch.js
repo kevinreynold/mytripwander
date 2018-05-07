@@ -392,22 +392,23 @@ travelpayouts.getFlightPlan = async function(){
     know_english: true
   };
 
-  for (var i = 0; i < dest_route.length; i++) {
-    let split_string_route = dest_route[i].split('-');
-    let origin_route = await this.getNearestAirport(split_string_route[0]);
-    let destination_route = await this.getNearestAirport(split_string_route[1]);
+  try {
+    for (var i = 0; i < dest_route.length; i++) {
+      let split_string_route = dest_route[i].split('-');
+      let origin_route = await this.getNearestAirport(split_string_route[0]);
+      let destination_route = await this.getNearestAirport(split_string_route[1]);
 
-    var flight_data = [];
-    var flight_from = {
-      origin: origin_route,
-      destination: destination_route,
-      date: current_date,
-    };
-    flight_data.push(flight_from);
-    // console.log(passenger_data);
-    // console.log(flight_data);
-    window.f7.showPreloader('Looking for flight from ' + origin_route + ' to ' + destination_route);
-    try {
+      var flight_data = [];
+      var flight_from = {
+        origin: origin_route,
+        destination: destination_route,
+        date: current_date,
+      };
+      flight_data.push(flight_from);
+      // console.log(passenger_data);
+      // console.log(flight_data);
+      window.f7.showPreloader('Looking for flight from ' + origin_route + ' to ' + destination_route);
+
       var data = await this.flight_search(flight_data,passenger_data);
       // console.log("Tunggu");
       if (data != null) {
@@ -455,18 +456,23 @@ travelpayouts.getFlightPlan = async function(){
         });
         goBack();
         window.f7.hidePreloader();
+        error = true;
+        break;
       }
-    } catch (e) {
-      console.log(e.message);
-      setTimeout(function () {
-        window.f7.hidePreloader();
-        window.f7.addNotification({
-            message: 'No Internet Connection..'
-        });
-        goBack();
-      }, 1000);
     }
+  } catch (e) {
+    console.log(e.message);
+    await sleep(1000);
+    window.f7.hidePreloader();
+    window.f7.addNotification({
+        message: 'No Internet Connection..'
+    });
+    goBack();
+    return 0;
   }
+
+  if(error){ return 0; }
+
   // console.log(store.flight_plan);
   window.f7.showPreloader();
 
@@ -710,7 +716,7 @@ travelpayouts.changeFlightPlan = async function(){
   window.f7.hidePreloader();
 };
 
-travelpayouts.researchFlightPlan = async function(start_index){
+travelpayouts.researchFlightPlan = async function(start_index){ //cek di hotelsearch.js
   store.flight_plan = store.flight_plan.slice(0, start_index);
   // store.flight_plan = [];
 
@@ -733,23 +739,27 @@ travelpayouts.researchFlightPlan = async function(start_index){
     know_english: true
   };
 
-  for (var i = start_index; i < dest_route.length; i++) {
-  // for (var i = 0; i < dest_route.length; i++) {
-    let split_string_route = dest_route[i].split('-');
-    let origin_route = await this.getNearestAirport(split_string_route[0]);
-    let destination_route = await this.getNearestAirport(split_string_route[1]);
+  let error = false;
 
-    var flight_data = [];
-    var flight_from = {
-      origin: origin_route,
-      destination: destination_route,
-      date: current_date,
-    };
-    flight_data.push(flight_from);
-    // console.log(passenger_data);
-    // console.log(flight_data);
-    window.f7.showPreloader('Looking for new flight from ' + origin_route + ' to ' + destination_route);
-    try {
+  try {
+    for (var i = start_index; i < dest_route.length; i++) {
+    // for (var i = 0; i < dest_route.length; i++) {
+      let split_string_route = dest_route[i].split('-');
+      let origin_route = await this.getNearestAirport(split_string_route[0]);
+      let destination_route = await this.getNearestAirport(split_string_route[1]);
+
+      var flight_data = [];
+      var flight_from = {
+        origin: origin_route,
+        destination: destination_route,
+        date: current_date,
+      };
+      flight_data.push(flight_from);
+      // console.log(passenger_data);
+      // console.log(flight_data);
+      window.f7.showPreloader('Looking for new flight from ' + origin_route + ' to ' + destination_route);
+
+
       var data = await this.flight_search(flight_data,passenger_data);
       // console.log("Tunggu");
       if (data != null) {
@@ -788,24 +798,22 @@ travelpayouts.researchFlightPlan = async function(start_index){
       }
       else{
         console.log("ERROR TICKET LIST");
-        window.f7.addNotification({
-            message: 'No Internet Connection..'
-        });
-        goBack();
         window.f7.hidePreloader();
+
+        error = true;
+        break;
       }
-    } catch (e) {
-      store.trip_city_plan_data[store.trip_city_plan_data_index].already_open = false;
-      console.log(e.message);
-      setTimeout(function () {
-        window.f7.hidePreloader();
-        window.f7.addNotification({
-            message: 'No Internet Connection..'
-        });
-        goBack();
-      }, 1000);
     }
+  } catch (e) {
+    store.trip_city_plan_data[store.trip_city_plan_data_index].already_open = false;
+    console.log(e.message);
+    await sleep(1000);
+    window.f7.hidePreloader();
+
+    return 0;
   }
+
+  if(error){ return 0; }
 
   //ubah goback_airport dan arrival_airport
   //airport
@@ -825,6 +833,8 @@ travelpayouts.researchFlightPlan = async function(start_index){
 
   console.log(store.trip_city_plan_data);
   console.log(store.flight_plan);
+
+  return 1;
 };
 
 export default travelpayouts;

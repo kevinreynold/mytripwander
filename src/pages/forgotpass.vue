@@ -16,6 +16,15 @@
 
 <script>
 import form_input_self from '../components/form-input-self'
+import plan_trip from "../js/plantrip"
+import store from "../js/store"
+
+let self;
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 export default {
   name: "forgotpass",
@@ -33,15 +42,22 @@ export default {
       }
     ]
   }),
+  created() {
+    //do something after creating vue instance
+    self = this;
+  },
   methods: {
     doForgot() {
-      window.f7.showPreloader();
-      setTimeout(function () {
-        window.f7.hidePreloader();
-        window.f7.alert('A link has been sent to your email. If no email has arrived, check your spam folder.', 'Password Reset Request Sent', function () {
-            window.f7.loginScreen();
+      let email = self.inputs[0].value;
+      if(validateEmail(email)){
+        plan_trip.forgotPassword(email);
+      }
+      else{
+        window.f7.addNotification({
+            message: 'Email address is not valid..',
+            hold: 2500
         });
-      }, 1000);
+      }
     }
   }
 }

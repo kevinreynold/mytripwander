@@ -360,86 +360,6 @@ function changeListDestTripData(run_down){
   store.trip_city_plan_data[country_index].cities[city_index].list_dest_trip[day_index].list_place = copy(run_down);
 }
 
-function initMap(markers) {
-  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  var labelIndex = 0;
-
-  console.log("MARKERS");
-  console.log(markers[0]);
-  var mapOptions = {
-      center: new google.maps.LatLng(markers[0].place.latitude, markers[0].place.longitude),
-      zoom: 10,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-  var infoWindow = new google.maps.InfoWindow();
-  var lat_lng = new Array();
-  var latlngbounds = new google.maps.LatLngBounds();
-
-  for (i = 0; i < markers.length; i++) {
-      var data = markers[i].place;
-      var myLatlng = new google.maps.LatLng(data.latitude, data.longitude);
-      lat_lng.push(myLatlng);
-
-      var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: data.name,
-          label: labels[labelIndex++ % labels.length]
-      });
-      latlngbounds.extend(marker.position);
-
-      (function (marker, data) {
-          google.maps.event.addListener(marker, "click", function (e) {
-              infoWindow.setContent(data.name);
-              infoWindow.open(map, marker);
-          });
-      })(marker, data);
-  }
-  map.setCenter(latlngbounds.getCenter());
-  map.fitBounds(latlngbounds);
-
-  //***********ROUTING****************//
-  //Intialize the Path Array
-  var path = new google.maps.MVCArray();
-  //Intialize the Direction Service
-  var service = new google.maps.DirectionsService();
-  //Set the Path Stroke Color
-  var poly = new google.maps.Polyline({ map: map, strokeColor: '#73b9ff' });
-
-  //Loop and Draw Path Route between the Points on MAP
-  for (var i = 0; i < lat_lng.length; i++) {
-    if ((i + 1) < lat_lng.length) {
-      var src = lat_lng[i];
-      var des = lat_lng[i + 1];
-      poly.setPath(path);
-      var current_status = google.maps.DirectionsStatus.OK
-      var try_mode = 0;
-      do {
-        var travel_mode = (try_mode==0)? google.maps.DirectionsTravelMode.TRANSIT : google.maps.DirectionsTravelMode.DRIVING;
-        service.route({
-          origin: src,
-          destination: des,
-          travelMode: travel_mode
-        }, function (result, status) {
-          current_status = status;
-          console.log(status);
-          //console.log(result);
-          if (status == google.maps.DirectionsStatus.OK) {
-            for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
-              // console.log(result.routes[0].overview_path[i]);
-              path.push(result.routes[0].overview_path[i]);
-            }
-          }
-        });
-        try_mode += 1;
-        console.log(try_mode);
-      } while (current_status != google.maps.DirectionsStatus.OK);
-    }
-  }
-}
-
 export default {
   components: {
   },
@@ -669,10 +589,10 @@ export default {
         function () {
           store.coba_run_down = self.new_run_down;
           changeListDestTripData(self.new_run_down);
-          plan_trip.addSchedule(false);
+          plan_trip.addSchedule(false, false);
         },
         function () {
-          plan_trip.addSchedule(false);
+          plan_trip.addSchedule(false, false);
         });
       }
     },
@@ -707,7 +627,7 @@ export default {
 
       store.coba_run_down = self.new_run_down;
       changeListDestTripData(self.new_run_down);
-      plan_trip.addSchedule(false);
+      plan_trip.addSchedule(false, false);
     },
     openChangeDuration(item){
       console.log(item.id);
@@ -759,7 +679,7 @@ export default {
       }
 
       window.f7.closeModal("#picker-modal-duration", true);
-      plan_trip.addSchedule(false);
+      plan_trip.addSchedule(false, false);
     },
     openChangeStartHour(){
       if(!self.change_start_hour){
@@ -786,7 +706,7 @@ export default {
       window.f7.closeModal("#picker-modal-start-hour", true);
       self.change_start_hour = false;
 
-      plan_trip.addSchedule(false);
+      plan_trip.addSchedule(false, false);
     },
     add_start_hour(mode){
       if(mode === 'h1'){

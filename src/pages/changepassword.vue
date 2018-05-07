@@ -8,13 +8,17 @@
     </f7-navbar>
     <form_input_self :inputs="inputs" fontColor="black" lineColor="teal"/>
     <f7-block>
-      <f7-button fill v-on:click="doSignUp">Submit</f7-button>
+      <f7-button fill v-on:click="doChangePassword">Submit</f7-button>
     </f7-block>
   </f7-page>
 </template>
 
 <script>
 import form_input_self from '../components/form-input-self'
+import plan_trip from "../js/plantrip"
+import store from "../js/store"
+
+let self;
 
 export default {
   name: "register",
@@ -46,14 +50,16 @@ export default {
       }
     ]
   }),
+  created() {
+    //do something after creating vue instance
+    self = this;
+  },
   methods: {
-    doSignUp() {
-      window.f7.showPreloader();
-      setTimeout(function () {
-        window.f7.hidePreloader();
-        var mainView = Dom7('#main-view')[0].f7View;
-        mainView.router.back();
-      }, 1000);
+    doChangePassword() {
+      let old_password = self.inputs[0].value;
+      let new_password = self.inputs[1].value;
+      let conf_password = self.inputs[2].value;
+      plan_trip.changePassword(self, old_password, new_password, conf_password);
     }
   }
 }

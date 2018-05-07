@@ -9,7 +9,7 @@
 
     <f7-tabs animated swipeable>
       <f7-tab id="tab-mytrip-1" active>
-        <div v-for="trip in list_my_trip_upcoming" :key="trip.id" class="trip-card">
+        <div v-for="trip in list_my_trip_upcoming" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'edit')">
           <div class="trip-display">
               <div class="passenger-trip">
                 <div class="passenger-img"><img src="../assets/flight-icon/adult-white.png" alt="adult" width="15px"></div>
@@ -28,13 +28,13 @@
           </div>
           <div class="trip-footer">
             <div class="trip-created-at">Created at : {{getDateString(trip.created_at)}}</div>
-            <div class="trip-click" @click="goToEditTrip(trip.id, 'edit')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div>
+            <!-- <div class="trip-click" @click="goToEditTrip(trip.id, 'edit')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div> -->
           </div>
         </div>
         <f7-button color="white">Blank Space</f7-button>
       </f7-tab>
       <f7-tab id="tab-mytrip-2">
-        <div v-for="trip in list_my_trip_past" :key="trip.id" class="trip-card">
+        <div v-for="trip in list_my_trip_past" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'edit')">
           <div class="trip-display">
               <div class="passenger-trip">
                 <div class="passenger-img"><img src="../assets/flight-icon/adult-white.png" alt="adult" width="15px"></div>
@@ -53,7 +53,7 @@
           </div>
           <div class="trip-footer">
             <div class="trip-created-at">Created at : {{getDateString(trip.created_at)}}</div>
-            <div class="trip-click" @click="goToEditTrip(trip.id, 'past')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div>
+            <!-- <div class="trip-click" @click="goToEditTrip(trip.id, 'past')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div> -->
           </div>
         </div>
         <f7-button color="white">Blank Space</f7-button>

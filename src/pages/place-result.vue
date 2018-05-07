@@ -208,7 +208,7 @@ export default {
       }
       store.coba_run_down.push(temp);
       changeListDestTripData(store.coba_run_down);
-      plan_trip.addSchedule();
+      plan_trip.addSchedule(true, false);
     }
   }
 }

@@ -21,25 +21,27 @@
         <div class="list-day">
 
           <slot v-if="trip_city_plan_data_one.already_open" v-for="city, city_index in trip_city_plan_data_one.cities">
-            <f7-card v-for="day, day_index in city.list_dest_trip" :key="day.key" class='city-card'>
-              <!-- <f7-card-header class="city-card-header">
-                <div>{{city_index}} - {{day_index}}</div>
-              </f7-card-header> -->
-              <f7-card-content :inner="false">
-                <div class="city-display" :style="city_image_url" valign="bottom">
-                  <div class="overlay">
-                    <div class="city-day">Day - {{getCurrentDay(city_index, day_index)}}</div>
-                    <div class="city-info">
-                      <div class="city-info-img"><img src="../assets/hotel-icon/location-white.png" alt="adult" width="30px"></div>
-                      <div class="city-info-value">{{day.list_place.length}}</div>
+            <div @click="showDayRoute(city_index, day_index)" v-for="day, day_index in city.list_dest_trip" :key="day.key">
+              <f7-card class='city-card'>
+                <!-- <f7-card-header class="city-card-header">
+                  <div>{{city_index}} - {{day_index}}</div>
+                </f7-card-header> -->
+                <f7-card-content :inner="false">
+                  <div class="city-display" :style="city_image_url" valign="bottom">
+                    <div class="overlay">
+                      <div class="city-day">Day - {{getCurrentDay(city_index, day_index)}}</div>
+                      <div class="city-info">
+                        <div class="city-info-img"><img src="../assets/hotel-icon/location-white.png" alt="adult" width="30px"></div>
+                        <div class="city-info-value">{{day.list_place.length}}</div>
+                      </div>
+                      <div class="city-title">{{city.city_name}}</div>
+                      <div class="city-date">{{getTripDate(city.booking_data.checkin, day_index)}}</div>
+                      <!-- <div class="city-clicked" @click="showDayRoute(city_index, day_index)"><f7-icon f7="chevron_down" color="white" size="125%"></f7-icon></div> -->
                     </div>
-                    <div class="city-title">{{city.city_name}}</div>
-                    <div class="city-date">{{getTripDate(city.booking_data.checkin, day_index)}}</div>
-                    <div class="city-clicked" @click="showDayRoute(city_index, day_index)"><f7-icon f7="chevron_down" color="white" size="125%"></f7-icon></div>
                   </div>
-                </div>
-              </f7-card-content>
-            </f7-card>
+                </f7-card-content>
+              </f7-card>
+            </div>
           </slot>
 
         </div>
@@ -178,7 +180,7 @@
           <div class="stay-duration-title">Stay duration :</div>
           <div class="stay-duration">
             <div class="duration-counter">
-              <div class="counter-dec" v-on:click="counter > 1 ? counter -= 1 : 1">-</div>
+              <div class="counter-dec" v-on:click="counter > 2 ? counter -= 1 : 2">-</div>
               <div class="counter-desc">{{counter}}</div>
               <div class="counter-inc" v-on:click="counter < 10 ? counter += 1 : 10">+</div>
             </div>
@@ -320,20 +322,30 @@ export default {
       let day = {
         day: 1,
         start_hour: "08:00",
-        hotel_data: undefined,
+        // hotel_data: undefined,
+        hotel_before_duration: 0,
+        hotel_now_duration: 0,
+        to_another_city: false,
+        list_place: []
+      };
+      let day2 = {
+        day: 2,
+        start_hour: "08:00",
+        // hotel_data: undefined,
         hotel_before_duration: 0,
         hotel_now_duration: 0,
         to_another_city: false,
         list_place: []
       };
       list_dest_trip.push(day);
+      list_dest_trip.push(day2);
 
       let temp = {
         id: self.last_city_id,
         city_name: item.city_name,
         city_code: item.city_code,
         hotel_city_id: item.hotel_city_id,
-        day: 1,
+        day: 2,
         hotel: undefined,
         hotel_data: undefined,
         booking_data: undefined,

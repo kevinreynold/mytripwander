@@ -3,6 +3,8 @@ import travelpayouts from "./flightsearch";
 import hotel_api from "./hotelsearch";
 import got from "got";
 import moment from "moment";
+import jsPDF from "jspdf";
+// import blobStream from 'blob-stream';
 
 var plan_trip = {};
 
@@ -42,11 +44,17 @@ plan_trip.getCurrencyData = async function(id){
 
       console.log(data);
       store.currency_rate = data.rate;
+      store.currency_name = data.name;
       store.currency_symbol = data.symbol;
+      store.currency_id = id;
+
+      localStorage.setItem('currency_id', store.currency_id);
+      localStorage.setItem('currency_name', store.currency_name);
+      localStorage.setItem('currency_rate', store.currency_rate);
+      localStorage.setItem('currency_symbol', store.currency_symbol);
 
       console.log(store.currency_rate);
       console.log(store.currency_symbol);
-      window.f7.hidePreloader();
 
   } catch (e) {
     console.log(e.message);
@@ -224,11 +232,12 @@ plan_trip.goToPerDayLocal = async function(city_code){
 
     goTo('/plan-overview-day/');
     await sleep(250);
-    await this.addSchedule(false);
+    await this.addSchedule(false, false);
 }
 
 plan_trip.goToPerDay = async function(){
     let city_code = store.per_day_data.city_code;
+    let error = false;
 
     window.f7.showPreloader('Fetch List Attraction Data');
     try {
@@ -243,6 +252,7 @@ plan_trip.goToPerDay = async function(){
         await sleep(500);
         window.f7.hidePreloader();
     } catch (e) {
+      error = true;
       return null;
     }
 
@@ -259,9 +269,18 @@ plan_trip.goToPerDay = async function(){
         await sleep(500);
         window.f7.hidePreloader();
     } catch (e) {
+      error = true;
       return null;
     }
     await sleep(250);
+
+    if(error){
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
+
+      return 0;
+    }
 
     //hotel_now
     store.coba_hotel1 = copy(store.hotel_now_data);
@@ -286,7 +305,7 @@ plan_trip.goToPerDay = async function(){
     await sleep(250);
     goTo('/plan-overview-day/');
     await sleep(250);
-    await this.addSchedule(false);
+    await this.addSchedule(false, false);
 }
 
 plan_trip.getDistance = async function(origin, destination){
@@ -318,7 +337,8 @@ function printCurrentPlace(curTime, curPlace, cur_day){
   let temp_time = curTime.clone();
   temp_time.add(curPlace.duration, 'm');
   let warning = (curPlace.travel_time_before.status === "N")? ' (NOT FOUND)' : '';
-  return (curPlace.place.name + ' | ' + curTime.format('LT') + ' - ' + temp_time.format('LT') + ' | ' + getOpeningHours(curPlace.place, cur_day) + warning);
+  // return (curPlace.place.name + ' | ' + curTime.format('LT') + ' - ' + temp_time.format('LT') + ' | ' + getOpeningHours(curPlace.place, cur_day) + warning);
+  return (curPlace.place.name + ' | ' + curTime.format('HH:mm') + ' - ' + temp_time.format('HH:mm') + ' | ' + getOpeningHours(curPlace.place, cur_day) + warning);
 }
 
 function getOpeningHours(place, cur_day){
@@ -390,7 +410,7 @@ function changeFormatDuration(duration){
   return result;
 }
 
-plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-result kalau false pertama kali buka
+plan_trip.addSchedule = async function(mode=true, get_data=false){ //kalau true itu dari place-result kalau false pertama kali buka - getdata kalau false jadi void/ kalau true jadi function
   let is_change_city = store.is_change_city;
   let airport_mode = store.airport_mode; //arrival | go_back | none
 
@@ -443,7 +463,7 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
   console.log('');
   console.log(is_change_city);
   console.log('MULAI');
-  window.f7.showPreloader('Fetch Schedule');
+  if(!get_data) { window.f7.showPreloader('Fetch Schedule'); }
 
   //airport
   if(airport_mode === 'arrival'){
@@ -599,6 +619,10 @@ plan_trip.addSchedule = async function(mode=true){ //kalau true itu dari place-r
     modified_run_down.push(temp_airport_go_back);
   }
 
+  if(get_data){
+    return modified_run_down;
+  }
+
   store.coba_modified_run_down = [];
   store.coba_modified_run_down = modified_run_down;
 
@@ -700,6 +724,7 @@ async function initMap(markers) {
   //Set the Path Stroke Color
   var poly = new google.maps.Polyline({ map: map, strokeColor: '#73b9ff' });
 
+  var error = false;
   //Loop and Draw Path Route between the Points on MAP
   for (var i = 0; i < lat_lng.length; i++) {
     if ((i + 1) < lat_lng.length) {
@@ -729,7 +754,12 @@ async function initMap(markers) {
           current_status = status;
           console.log(status);
           //console.log(result);
-          if (status == google.maps.DirectionsStatus.OK) {
+          // UNKNOWN_ERROR
+          if(status == google.maps.DirectionsStatus.UNKNOWN_ERROR){
+            console.log("RUSAK");
+            error = true;
+          }
+          else if (status == google.maps.DirectionsStatus.OK) {
             for (var i = 0, len = result.routes[0].overview_path.length; i < len; i++) {
               // console.log(result.routes[0].overview_path[i]);
               path.push(result.routes[0].overview_path[i]);
@@ -739,8 +769,10 @@ async function initMap(markers) {
         try_mode += 1;
         console.log(try_mode);
         await sleep(1000);
-      } while (current_status != google.maps.DirectionsStatus.OK);
+      } while (current_status != google.maps.DirectionsStatus.OK && !error);
     }
+
+    if(error){ return 0; }
   }
 }
 
@@ -842,6 +874,10 @@ plan_trip.saveTrip = async function(){
 
   store.trip_id = response.trip_id;
   console.log(response);
+
+  store.trip_plan_data_original = copy(store.trip_plan_data);
+  store.trip_city_plan_data_original = copy(store.trip_city_plan_data);
+  store.flight_plan_original = copy(store.flight_plan);
   // window.f7.hidePreloader();
 }
 
@@ -878,6 +914,11 @@ plan_trip.updateTrip = async function(){
     });
 
   console.log(response);
+
+  store.trip_plan_data_original = copy(store.trip_plan_data);
+  store.trip_city_plan_data_original = copy(store.trip_city_plan_data);
+  store.flight_plan_original = copy(store.flight_plan);
+
   await sleep(1000);
   window.f7.addNotification({
       message: 'Update plan success.',
@@ -888,6 +929,7 @@ plan_trip.updateTrip = async function(){
 
 plan_trip.loadingTrip = async function(id){
   window.f7.showPreloader('Loading Trip');
+  store.trip_id = id;
   try {
       var data = await got.get(store.service_url + "/trip/load/" + id, {
         retries: 2
@@ -903,6 +945,9 @@ plan_trip.loadingTrip = async function(id){
       store.trip_city_plan_data = result.city_plan_data;
       store.flight_plan = result.flight_data;
 
+      store.trip_plan_data_original = copy(store.trip_plan_data);
+      store.trip_city_plan_data_original = copy(store.trip_city_plan_data);
+      store.flight_plan_original = copy(store.flight_plan);
   } catch (e) {
     return null;
   }
@@ -948,6 +993,667 @@ plan_trip.backFromEditTrip = async function(){
   await sleep(500);
   window.f7.hidePreloader();
   this.goToMyTrip();
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+plan_trip.getAllCurrency = async function(){
+  window.f7.showPreloader();
+  try {
+    if(store.list_currency.length == 0){
+      let data = await got.get(store.service_url +"/currency", {
+        retries: 2
+      })
+      .then(res => {
+        var res = JSON.parse(res.body);
+        return res.result;
+      });
+
+      store.list_currency = data;
+      await sleep(500);
+    }
+
+    window.f7.hidePreloader();
+
+  } catch (e) {
+    window.f7.hidePreloader();
+    window.f7.addNotification({
+        message: 'No Internet Connection..'
+    });
+    await sleep(1000);
+  }
+}
+
+plan_trip.goSignUp = async function(){
+  await this.getAllCurrency();
+  window.f7.showPreloader();
+  var mainView = Dom7('#main-view')[0].f7View;
+  mainView.router.load({url: '/register/'});
+  await sleep(200);
+  window.f7.hidePreloader();
+  window.f7.closeModal('#login-screen', true);
+}
+
+plan_trip.goChooseCurrency = async function(){
+  await this.getAllCurrency();
+  window.f7.showPreloader();
+  var mainView = Dom7('#main-view')[0].f7View;
+  mainView.router.load({url: '/changecurrency/'});
+  await sleep(200);
+  window.f7.hidePreloader();
+}
+
+plan_trip.updateCurrency = async function(){
+  console.log(store.user_id);
+  console.log(store.currency_id);
+  let params = {
+    user_id: store.user_id,
+    currency_id: store.currency_id
+  };
+
+  let response = await got.post(store.service_url +"/currency/update", {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    })
+    .then(res => {
+      if (res.statusCode !== 200) {
+        return 'Error';
+      }
+      return JSON.parse(res.body);
+    })
+    .catch(err => {
+      return 'Error';
+    });
+
+  await sleep(250);
+}
+
+plan_trip.changeCurrency = async function(currency_id){
+  window.f7.showPreloader();
+  await this.getCurrencyData(currency_id);
+  await sleep(250);
+  goBack();
+  await sleep(500);
+  await this.updateCurrency();
+  await sleep(250);
+  var mainView = Dom7('#main-view')[0].f7View;
+  mainView.router.refreshPage();
+  await sleep(250);
+  window.f7.hidePreloader();
+}
+
+plan_trip.changePassword = async function(self, old_password, new_password, conf_password){
+  let validation = true;
+  let error_message =  "";
+
+  if(new_password.length < 6){
+    validation = false;
+    error_message += 'Password must have a minimum 6 characters.' + '<br>';
+  }
+  else if(new_password !== conf_password){
+    validation = false;
+    error_message += 'Password and confirmation password do not match.' + '<br>';
+  }
+
+  if(!validation){
+    window.f7.addNotification({
+        message: error_message,
+        hold: 5000
+    });
+
+    self.inputs[0].value = "";
+    self.inputs[1].value = "";
+    self.inputs[2].value = "";
+  }
+  else{
+    window.f7.showPreloader();
+    let params = {
+      email: store.email,
+      old_password: old_password,
+      new_password: new_password
+    };
+
+    let response = await got.post(store.service_url +"/user/changepass", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+      })
+      .then(res => {
+        if (res.statusCode !== 200) {
+          return 'Error';
+        }
+        return JSON.parse(res.body);
+      })
+      .catch(err => {
+        return 'Error';
+      });
+
+    console.log(JSON.stringify(response));
+    self.inputs[0].value = "";
+    self.inputs[1].value = "";
+    self.inputs[2].value = "";
+
+    if(response.status === 'OK'){
+      await sleep(500);
+      goBack();
+    }
+
+    window.f7.hidePreloader();
+    window.f7.addNotification({
+        message: response.message,
+        hold: 2000
+    });
+  }
+}
+
+plan_trip.forgotPassword = async function(email){
+  window.f7.showPreloader();
+  try {
+    let data = await got.get(store.service_url +"/forgot/" + email, {
+      retries: 2
+    })
+    .then(res => {
+      var res = JSON.parse(res.body);
+      return res;
+    });
+
+    await sleep(1000);
+    window.f7.hidePreloader();
+    window.f7.loginScreen();
+    await sleep(250);
+    goBack();
+    window.f7.alert('A link has been sent to your email. If no email has arrived, check your spam folder.', 'Password Reset Request Sent', function () {
+    });
+  } catch (e) {
+    await sleep(1000);
+    window.f7.hidePreloader();
+    window.f7.addNotification({
+        message: 'No Internet Connection..'
+    });
+    window.f7.loginScreen();
+    await sleep(250);
+    goBack();
+  }
+}
+
+plan_trip.doSignUp = async function(formData){
+  let validation = true;
+  let error_message =  "";
+  //mulai validation
+  if(formData.username.trim().length == 0){
+    validation = false;
+    error_message += 'Please fill username first.' + '<br>';
+  }
+
+  if(formData.email.trim().length == 0){
+    validation = false;
+    error_message += 'Please fill email first.' + '<br>';
+  }
+  else if(!validateEmail(formData.email)){
+    validation = false;
+    error_message += '"' + formData.email + '"' + ' is not an email address.' + '<br>';
+  }
+
+  console.log(formData.password.length);
+  if(formData.password.length < 6){
+    validation = false;
+    error_message += 'Password must have a minimum 6 characters.' + '<br>';
+  }
+  else if(formData.password !== formData.cpassword){
+    validation = false;
+    error_message += 'Password and confirmation password do not match.' + '<br>';
+  }
+
+  if(!validation){
+    window.f7.addNotification({
+        message: error_message,
+        hold: 5000
+    });
+
+    let newData = {
+      password : "",
+      cpassword: ""
+    }
+    window.f7.formFromData('#register-form', newData);
+  }
+  else{
+    window.f7.showPreloader();
+    let params = {
+      username: formData.username,
+      password: formData.password,
+      email: formData.email,
+      currency_id: formData.currency,
+    };
+
+    let response = await got.post(store.service_url +"/user/register", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+      })
+      .then(res => {
+        if (res.statusCode !== 200) {
+          return 'Error';
+        }
+        return JSON.parse(res.body);
+      })
+      .catch(err => {
+        return 'Error';
+      });
+
+      console.log(JSON.stringify(response));
+    if(response.status === 'OK'){
+      store.user_id = response.user_id;
+      store.user_name = params.username;
+      store.email = params.email;
+      store.currency_id = params.currency_id;
+      await this.getCurrencyData(store.currency_id);
+    }
+
+    let newData = {
+      password : "",
+      cpassword: "",
+      email: ""
+    }
+    window.f7.formFromData('#register-form', newData);
+
+    await sleep(1000);
+
+    if(response.status === 'OK'){
+      this.saveUserData();
+      let leftpanel = window.Dom7("#left-panel")[0];
+      let profile = window.Dom7(".profile")[0];
+      profile.innerHTML = "Hi, " + store.user_name;
+      await sleep(500);
+      goBack();
+    }
+
+    window.f7.hidePreloader();
+    window.f7.addNotification({
+        message: response.message,
+        hold: 2000
+    });
+  }
+}
+
+plan_trip.doLogin = async function(self, email, password){
+  let validation = true;
+  let error_message =  "";
+  //mulai validation
+  if(email.trim().length == 0){
+    validation = false;
+    error_message += 'Please fill username first.' + '<br>';
+  }
+  else if(!validateEmail(email)){
+    validation = false;
+    error_message += '"' + email + '"' + ' is not an email address.' + '<br>';
+  }
+
+  if(!validation){
+    window.f7.addNotification({
+        message: error_message,
+        hold: 5000
+    });
+
+    self.inputs[0].value = "";
+    self.inputs[1].value = "";
+  }
+  else{
+    window.f7.showPreloader();
+    let params = {
+      email: email,
+      password: password,
+    };
+
+    let response = await got.post(store.service_url +"/login", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+      })
+      .then(res => {
+        if (res.statusCode !== 200) {
+          return 'Error';
+        }
+        return JSON.parse(res.body);
+      })
+      .catch(err => {
+        return 'Error';
+      });
+
+    console.log(JSON.stringify(response));
+    if(response.status === 'OK'){
+      let user = response.user;
+
+      store.user_id = user.id;
+      store.user_name = user.username;
+      store.email = email;
+      store.currency_id = user.currency_id;
+      await this.getCurrencyData(store.currency_id);
+    }
+
+    self.inputs[0].value = "";
+    self.inputs[1].value = "";
+
+    await sleep(1000);
+
+    if(response.status === 'OK'){
+      this.saveUserData();
+      let leftpanel = window.Dom7("#left-panel")[0];
+      let profile = window.Dom7(".profile")[0];
+      profile.innerHTML = "Hi, " + store.user_name;
+      await sleep(500);
+      window.f7.closeModal('#login-screen', true);
+    }
+    else{
+      window.f7.addNotification({
+          message: response.message,
+          hold: 2000
+      });
+    }
+
+    window.f7.hidePreloader();
+  }
+}
+
+plan_trip.saveUserData = function(){
+  localStorage.setItem('user_id', store.user_id);
+  localStorage.setItem('user_name', store.user_name);
+  localStorage.setItem('email', store.email);
+  localStorage.setItem('currency_id', store.currency_id);
+  localStorage.setItem('currency_name', store.currency_name);
+  localStorage.setItem('currency_rate', store.currency_rate);
+  localStorage.setItem('currency_symbol', store.currency_symbol);
+}
+
+plan_trip.loadUserData = async function(){
+  store.user_id = localStorage.getItem('user_id');
+  store.user_name = localStorage.getItem('user_name');
+  store.email = localStorage.getItem('email');
+  store.currency_id = localStorage.getItem('currency_id');
+  store.currency_name = localStorage.getItem('currency_name');
+  store.currency_rate = localStorage.getItem('currency_rate');
+  store.currency_symbol = localStorage.getItem('currency_symbol');
+}
+
+plan_trip.getPDFData = async function(){
+
+  let trip_city_plan_data = copy(store.trip_city_plan_data);
+  let trip_plan_data = copy(store.trip_plan_data);
+
+  console.log(trip_city_plan_data);
+  console.log(trip_plan_data);
+
+  let day = 1;
+
+  let result = [];
+
+  for (var country_index = 0; country_index < trip_city_plan_data.length; country_index++) { //PER NEGARA
+    let self = {};
+    let country = {};
+    self.trip_city_plan_data_one = trip_city_plan_data[country_index];
+    console.log('COUNTRY INDEX : '  + country_index);
+
+    country.country_name = trip_plan_data.list_destination[country_index].country_name;
+    country.cities = [];
+
+    for (var city_index = 0; city_index < self.trip_city_plan_data_one.cities.length; city_index++) { //PER KOTA
+      console.log('CITY INDEX : '  + city_index);
+      let per_city_data = {
+        city: self.trip_city_plan_data_one.cities[city_index].city_name,
+        list_dest: []
+      };
+
+      country.cities.push(per_city_data);
+
+      for (var day_index = 0; day_index < self.trip_city_plan_data_one.cities[city_index].list_dest_trip.length; day_index++) { //PER HARI
+        console.log('DAY INDEX : '  + day_index);
+
+        let cur_date = new Date(self.trip_city_plan_data_one.cities[city_index].booking_data.checkin);
+        let date_after = new Date(cur_date.getTime() + day_index * 24 * 60 * 60 * 1000);
+        let cur_date_string =  date_after.getFullYear() + "-" + ("00" + (date_after.getMonth()+1)).slice(-2) + "-" + ("00" + (date_after.getDate())).slice(-2);
+
+        //run_down
+        store.coba_run_down = copy(self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].list_place);
+
+        store.per_day_data = {
+          city_index: city_index,
+          day_index: day_index,
+          city_code: self.trip_city_plan_data_one.cities[city_index].city_code,
+          cur_date: cur_date_string,
+          start_hour: self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].start_hour
+        };
+
+        //airport_mode
+        if(city_index == 0 && day_index == 0){
+          store.airport_mode = 'arrival';
+          store.airport_arrival_data = copy(self.trip_city_plan_data_one.arrival_airport);
+          store.per_day_data.arrival_duration = self.trip_city_plan_data_one.arrival_duration;
+          console.log(store.airport_arrival_data.name);
+        }
+        else if(city_index === self.trip_city_plan_data_one.cities.length - 1 && day_index === self.trip_city_plan_data_one.cities[self.trip_city_plan_data_one.cities.length-1].list_dest_trip.length - 1){
+          if(self.trip_city_plan_data_one.go_back_airport){
+            store.airport_mode = 'go_back';
+            store.airport_go_back_data = copy(self.trip_city_plan_data_one.go_back_airport);
+            store.per_day_data.go_back_duration = self.trip_city_plan_data_one.go_back_duration;
+            store.per_day_data.hotel_go_back_duration = self.trip_city_plan_data_one.hotel_go_back_duration;
+            store.per_day_data.go_back_time = self.trip_city_plan_data_one.go_back.departure_airport.time;
+            console.log(store.airport_go_back_data.name);
+          }
+        }
+        else{
+          store.airport_mode = 'none';
+        }
+
+        store.is_change_city = self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].to_another_city;
+
+        console.log('AIRPORT MODE : ' + store.airport_mode);
+        console.log('CHANGE CITY : ' + store.is_change_city);
+        //hotel_now
+        store.hotel_now_data = copy(self.trip_city_plan_data_one.cities[city_index].hotel_data);
+        store.per_day_data.hotel_now_duration = self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].hotel_now_duration;
+
+        //hotel_before
+        console.log(store.hotel_now_data.name);
+        if(store.is_change_city){
+          store.hotel_before_data = copy(self.trip_city_plan_data_one.cities[city_index-1].hotel_data);
+          store.per_day_data.hotel_before_duration = self.trip_city_plan_data_one.cities[city_index].list_dest_trip[day_index].hotel_before_duration;
+          console.log(store.hotel_before_data.name);
+        }
+
+        console.log(JSON.stringify(store.per_day_data));
+
+        //hotel_now
+        store.coba_hotel1 = copy(store.hotel_now_data);
+        //hotel_before
+        if(store.is_change_city){
+          store.coba_hotel2 = copy(store.hotel_before_data);
+        }
+
+        if(store.airport_mode === 'arrival'){
+          store.coba_airport = copy(store.airport_arrival_data);
+        }
+        else if(store.airport_mode === 'go_back'){
+          store.coba_airport = copy(store.airport_go_back_data);
+        }
+
+        let route_data = await this.addSchedule(false, true);
+
+        let date = moment(new Date(store.per_day_data.cur_date)).format('dddd, DD MMMM YYYY');
+
+        let per_day_data = {
+          day: day++,
+          date: date,
+          route_data: route_data
+        };
+
+        country.cities[country.cities.length-1].list_dest.push(per_day_data);
+      }
+    }
+
+    result.push(country);
+  }
+
+  await sleep(500);
+  return result
+}
+
+plan_trip.makePDF = async function(){
+  window.f7.showPreloader("Generate PDF Data");
+  let print_data = await this.getPDFData();
+  console.log(JSON.stringify(print_data));
+  let doc = new jsPDF();
+
+  let page = 1;
+  let cur_height = 10;
+  //A4
+  //width 210
+  //height 297
+
+  //header
+  let total_days_trip = 0;
+  for (var i = 0; i < store.trip_plan_data.list_destination.length; i++) {
+    total_days_trip += store.trip_plan_data.list_destination[i].stay;
+  }
+
+  let destTitle = "";
+  for (var i = 0; i < store.trip_plan_data.list_destination.length; i++) {
+    destTitle += store.trip_plan_data.list_destination[i].country_name;
+    if(i !== store.trip_plan_data.list_destination.length-1){
+      destTitle += ' - ';
+    }
+  }
+
+  let total_budget = convertPrice(this.getTotalBudget());
+  let total_budget_string = store.currency_symbol + total_budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+  doc.setFontSize(18);
+  doc.text(105, cur_height+=10, total_days_trip + ' Days Trip', null, null, 'center');
+  doc.text(105, cur_height+=10, destTitle, null, null, 'center');
+  doc.text(105, cur_height+=10, 'From', null, null, 'center');
+  doc.text(105, cur_height+=10, store.trip_plan_data.first_city, null, null, 'center');
+  doc.text(105, cur_height+=10, store.trip_plan_data.start_date, null, null, 'center');
+
+  doc.setFontSize(14);
+  doc.text(200, cur_height+=10, 'Total Budget :', null, null, 'right');
+  doc.text(200, cur_height+=7.5, total_budget_string, null, null, 'right');
+  cur_height+=2.5;
+  //header selesai
+
+  for (var i = 0; i < print_data.length; i++) {
+    doc.setFontSize(18);
+    doc.text(105, cur_height+=10, print_data[i].country_name, null, null, 'center');
+    if(cur_height > 275){
+      page++;
+      doc.addPage('a4');
+      cur_height = 10;
+    }
+
+    for (var j = 0; j < print_data[i].cities.length; j++) {
+      doc.setFontSize(16);
+      doc.text(10, cur_height+=7.5, print_data[i].cities[j].city);
+      if(cur_height > 275){
+        page++;
+        doc.addPage('a4');
+        cur_height = 10;
+      }
+
+      for (var k = 0; k < print_data[i].cities[j].list_dest.length; k++) {
+        doc.setFontSize(12);
+        let per_day_data = print_data[i].cities[j].list_dest[k];
+        let day_title = 'Day ' + per_day_data.day + ' - ' + per_day_data.date;
+        doc.setFontType("bold");
+        doc.text(10, cur_height+=7.5, day_title);
+        if(cur_height > 275){
+          page++;
+          doc.addPage('a4');
+          cur_height = 10;
+        }
+
+        doc.setFontType("normal");
+        let offset_place = 1;
+
+        //mulai tulis per tempatnya
+        for (var m = 0; m < per_day_data.route_data.length; m++) {
+          let info = per_day_data.route_data[m].string_format.split(' | ');
+          let place_name = info[0];
+          let time = info[1];
+
+          doc.text(12.5, cur_height+=7.5, offset_place++ + '. ' + place_name);
+          doc.text(200, cur_height, time, null, null, 'right');
+          if(cur_height > 275){
+            page++;
+            doc.addPage('a4');
+            cur_height = 10;
+          }
+        }
+        cur_height+=2.5;
+      }
+      cur_height+=5;
+    }
+    cur_height+=2.5;
+  }
+
+  //file_name
+  let file_name = 'trip_' + getDateAfterDays(0) + '_' + store.trip_id;
+  doc.save(file_name + '.pdf');
+  window.f7.hidePreloader();
+}
+
+function getDateAfterDays(day){
+  var date = new Date(new Date().getTime() + day * 24 * 60 * 60 * 1000);
+  return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2);
+}
+
+plan_trip.goAutoPlan = async function(){
+  window.f7.showPreloader();
+  let user_id = store.user_id;
+  let plan_data = JSON.stringify(store.trip_plan_data);
+
+  let descTitle = store.trip_plan_data.first_city_code + ' - ';
+  for (var i = 0; i < store.trip_plan_data.list_destination.length; i++) {
+    descTitle += store.trip_plan_data.list_destination[i].country_code + ' ' + store.trip_plan_data.list_destination[i].stay;
+    if(i !== store.trip_plan_data.list_destination.length-1){
+      descTitle += ' + ';
+    }
+  }
+  descTitle += '\n';
+  descTitle += 'MS:' + store.trip_plan_data.interests[0].value + ' C:' + store.trip_plan_data.interests[1].value + ' N:' + store.trip_plan_data.interests[2].value + ' R:' + store.trip_plan_data.interests[3].value;
+
+  let params = {
+    user_id: user_id,
+    plan_data: plan_data,
+    description: descTitle,
+  };
+
+  let response = await got.post(store.service_url +"/trip/auto", {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    })
+    .then(res => {
+      if (res.statusCode !== 200) {
+        return 'Error';
+      }
+      return JSON.parse(res.body);
+    })
+    .catch(err => {
+      return 'Error';
+    });
+
+  console.log(response);
+  await sleep(500);
+  window.f7.hidePreloader();
+  window.f7.alert("We received your customised trip query.<br>Trip plan will be done within 1 day.<br>We'll let you know via notification if it's already done.<br>Thank you for your patience", 'Automatic Trip Plan', function(){
+    goBack();
+  });
 }
 
 export default plan_trip;

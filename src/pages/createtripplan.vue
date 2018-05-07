@@ -2,13 +2,13 @@
   <f7-page>
     <f7-navbar title="Plan Trip" back-link="Back" sliding></f7-navbar>
     <form-wizard ref="trip_plan_wizard" stepSize="xs" color="#009688" @on-change="stepInfo" @on-complete="onComplete">
-       <!-- <wizard-step
+       <wizard-step
            slot-scope="props"
            slot="step"
            :tab="props.tab"
            :transition="props.transition"
            :index="props.index">
-       </wizard-step> -->
+       </wizard-step>
 
        <tab-content ref="trip_plan_tab_0" title="Personal Details" icon="fa fa-user">
           <f7-block class="less-margin" inner>Travelers</f7-block>
@@ -736,11 +736,8 @@ export default {
       // console.log(JSON.stringify(store.trip_plan_data));
       // console.log(self.start_date);
 
-      var mainView = Dom7('#main-view')[0].f7View;
       if(!self.mode){ //otomatis
-        window.f7.alert("We received your customised trip query.<br>Trip plan will be done within 2 days.<br>We'll let you know via notification if it's already done.<br>Thank you for your patience", 'Automatic Trip Plan', function(){
-          mainView.router.back();
-        });
+        plan_trip.goAutoPlan();
       }else{
         travelpayouts.getFlightPlan();
       }
@@ -765,7 +762,7 @@ export default {
         let dest = {
           country_code : first_dest.country_code,
           country_name : first_dest.country_name,
-          max_stay : (first_dest.country_code === 'HK')? 6 : first_dest.total_city * 3,
+          max_stay : (first_dest.country_code === 'HK')? 5 : (first_dest.total_city + 1) * 2,
           stay : 3,
           cities: first_dest.cities,
           city_combination : [first_dest.cities[0].city_code, first_dest.cities[0].hotel_city_id].join(';'),
@@ -802,14 +799,14 @@ export default {
     },
     changeMode(mode){
       self.mode = mode;
-      if(self.mode) { //manual
-        self.$refs.trip_plan_tab_3.checked = false;
-        self.$refs.trip_plan_tab_4.checked = false;
-      }
-      else{
-        self.$refs.trip_plan_tab_3.checked = true;
-        self.$refs.trip_plan_tab_4.checked = true;
-      }
+      // if(self.mode) { //manual
+      //   self.$refs.trip_plan_tab_3.checked = false;
+      //   self.$refs.trip_plan_tab_4.checked = false;
+      // }
+      // else{
+      //   self.$refs.trip_plan_tab_3.checked = true;
+      //   self.$refs.trip_plan_tab_4.checked = true;
+      // }
       $(document).ready(function(){
         $(".content-block-inner").css("margin-left","0px");
       });

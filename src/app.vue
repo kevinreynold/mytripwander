@@ -7,7 +7,7 @@
     <main_view/>
 
     <!-- LOGIN -->
-    <login :shown='false'/>
+    <login :shown='loginScreenShown'/>
 
     <!-- LEFT PANEL -->
     <left_panel/>
@@ -26,6 +26,9 @@
   import left_panel from './f7components/left-panel'
   import right_panel from './f7components/right-panel'
 
+  import store from "./js/store"
+  import plan_trip from "./js/plantrip"
+
   export default {
     components: {
       login,
@@ -33,14 +36,22 @@
       left_panel,
       right_panel,
     },
-    data () {
-      return {
-
-      }
-    },
+    data: () => ({
+      loginScreenShown: false
+    }),
     methods: {
     },
+    mounted() {
+      //do something after mounting vue instance
+    },
     created () {
+      if(localStorage.getItem('user_id')){
+        plan_trip.loadUserData();
+        this.loginScreenShown = false;
+      }
+      else{
+        this.loginScreenShown = true;
+      }
     },
   }
 </script>
