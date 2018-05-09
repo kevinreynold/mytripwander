@@ -61,14 +61,14 @@ export default {
         name: 'email',
         title: 'Email Address',
         type: 'email',
-        value: 'kevinreynold2296@gmail.com',
+        value: '',
         req: true
       },
       {
         name: 'password',
         title: 'Password',
         type: 'password',
-        value: 'qweqweqwe',
+        value: '',
         req: true
       }
     ]

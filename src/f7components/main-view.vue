@@ -20,10 +20,10 @@
           <div class="slider-menu">
             <f7-swiper pagination>
               <f7-swiper-slide>
-                <div class="slider-background" :style="country_image_url('HK')"></div>
+                <div class="slider-background" :style="country_image_url('TW')"></div>
               </f7-swiper-slide>
               <f7-swiper-slide>
-                <div class="slider-background" :style="country_image_url('TW')"></div>
+                <div class="slider-background" :style="country_image_url('HK')"></div>
               </f7-swiper-slide>
               <f7-swiper-slide>
                 <div class="slider-background" :style="country_image_url('KR')"></div>

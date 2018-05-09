@@ -3,13 +3,14 @@
     <f7-navbar title="My Trip" back-link="Back" sliding no-shadow></f7-navbar>
 
     <f7-toolbar tabbar>
-      <f7-link href="#tab-mytrip-1" tab-link active text="Upcoming"></f7-link>
-      <f7-link href="#tab-mytrip-2" tab-link text="Past"></f7-link>
+      <f7-link href="#tab-mytrip-1" tab-link active text="Upcoming in 2 Weeks" style="font-size:0.65em;"></f7-link>
+      <f7-link href="#tab-mytrip-2" tab-link active text="Upcoming"></f7-link>
+      <f7-link href="#tab-mytrip-3" tab-link text="Past"></f7-link>
     </f7-toolbar>
 
     <f7-tabs animated swipeable>
       <f7-tab id="tab-mytrip-1" active>
-        <div v-for="trip in list_my_trip_upcoming" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'edit')">
+        <div v-for="trip in list_my_trip_upcoming_2_weeks" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'edit-place')">
           <div class="trip-display">
               <div class="passenger-trip">
                 <div class="passenger-img"><img src="../assets/flight-icon/adult-white.png" alt="adult" width="15px"></div>
@@ -34,7 +35,32 @@
         <f7-button color="white">Blank Space</f7-button>
       </f7-tab>
       <f7-tab id="tab-mytrip-2">
-        <div v-for="trip in list_my_trip_past" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'edit')">
+        <div v-for="trip in list_my_trip_upcoming" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'edit')">
+          <div class="trip-display">
+              <div class="passenger-trip">
+                <div class="passenger-img"><img src="../assets/flight-icon/adult-white.png" alt="adult" width="15px"></div>
+                <div>{{trip.plan_data.passenger.adults}}</div>
+                <div class="passenger-img"><img src="../assets/flight-icon/child-white.png" alt="child" width="15px"></div>
+                <div>{{trip.plan_data.passenger.children}}</div>
+              </div>
+              <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip - {{trip.id}}</div>
+              <div class="country-trip">{{destTitle(trip.plan_data)}}</div>
+              <div class="from-trip">From</div>
+              <div class="from-trip">{{trip.plan_data.first_city}}</div>
+              <div class="from-trip">{{trip.plan_data.start_date}}</div>
+              <div class="returned-trip" v-if="trip.plan_data.return_here">* returned to hometown</div>
+              <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip">Automatic</div>
+          </div>
+          <div class="trip-footer">
+            <div class="trip-created-at">Created at : {{getDateString(trip.created_at)}}</div>
+            <!-- <div class="trip-click" @click="goToEditTrip(trip.id, 'edit')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div> -->
+          </div>
+        </div>
+        <f7-button color="white">Blank Space</f7-button>
+      </f7-tab>
+      <f7-tab id="tab-mytrip-3">
+        <div v-for="trip in list_my_trip_past" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'past')">
           <div class="trip-display">
               <div class="passenger-trip">
                 <div class="passenger-img"><img src="../assets/flight-icon/adult-white.png" alt="adult" width="15px"></div>
@@ -79,12 +105,23 @@ function copy(o) {
    return output;
 }
 
+function getDiffDays(cur_date, end_date){
+  cur_date.setHours(0,0,0,0);
+  end_date.setHours(0,0,0,0);
+
+  let timeDiff = Math.abs(end_date.getTime() - cur_date.getTime());
+  let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  return diffDays;
+}
+
 export default {
   components: {
   },
   data: () => ({
     list_my_trip: [],
     list_my_trip_upcoming: [],
+    list_my_trip_upcoming_2_weeks: [],
     list_my_trip_past: [],
     currency_symbol: store.currency_symbol
   }),
@@ -99,6 +136,12 @@ export default {
     self = this;
     self.list_my_trip = copy(store.list_my_trip);
     self.list_my_trip_upcoming = self.list_my_trip.filter(x => new Date() < new Date(x.plan_data.start_date));
+
+    self.list_my_trip_upcoming_2_weeks = copy(self.list_my_trip_upcoming);
+    self.list_my_trip_upcoming_2_weeks = self.list_my_trip_upcoming_2_weeks.filter(x => getDiffDays(new Date(), new Date(x.plan_data.start_date)) <= 14);
+
+    self.list_my_trip_upcoming  = self.list_my_trip_upcoming.filter(x => !self.list_my_trip_upcoming_2_weeks.some(x2 => x.id.toString() == x2.id.toString()));
+
     self.list_my_trip_past = self.list_my_trip.filter(x => new Date() >= new Date(x.plan_data.start_date));
   },
   methods: {

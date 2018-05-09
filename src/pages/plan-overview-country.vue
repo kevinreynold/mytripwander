@@ -88,7 +88,7 @@
             </f7-card-content>
             <f7-card-footer>
               <div class="empty"></div>
-              <div class="flight-change" @click="changeFlightTicket(flight_detail, index)">Change</div>
+              <div v-if="plan_trip_mode === 'edit'" class="flight-change" @click="changeFlightTicket(flight_detail, index)">Change</div>
               <div class="flight-desc" @click="showFlightDetail(flight_detail, index)">Detail</div>
             </f7-card-footer>
           </f7-card>

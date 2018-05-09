@@ -4,7 +4,6 @@ import hotel_api from "./hotelsearch";
 import got from "got";
 import moment from "moment";
 import jsPDF from "jspdf";
-// import blobStream from 'blob-stream';
 
 var plan_trip = {};
 
@@ -1601,8 +1600,74 @@ plan_trip.makePDF = async function(){
   }
 
   //file_name
-  let file_name = 'trip_' + getDateAfterDays(0) + '_' + store.trip_id;
-  doc.save(file_name + '.pdf');
+  let filename = 'trip_' + getDateAfterDays(0) + '_' + store.trip_id + '.pdf';
+
+  doc.save(filename);
+
+  // var pdfContent = doc.output('datauri');
+
+  // var buffer = new ArrayBuffer(pdfContent.length);
+  // var array = new Uint8Array(buffer);
+  // for (var i = 0; i < pdfContent.length; i++) {
+  //   array[i] = pdfContent.charCodeAt(i);
+  // }
+  //
+  // // window.open('data:application/pdf;base64,' + Base64.encode(buffer));
+  // window.open('data:application/pdf;base64,' + btoa(pdfContent));
+
+  // var string = doc.output('datauristring');
+  // var iframe = "<iframe width='100%' height='100%' src='" + string + "'></iframe>"
+  // var x = window.open();
+  // x.document.open();
+  // x.document.write(iframe);
+  // x.document.close();
+
+  // console.log(uristring);
+  // let uristring_new;
+  //
+  // // the email plugin uses a non-standard URI format, so the filename can be specified.
+  // if (filename) {
+  //   let uristringparts = uristring.split(',');
+  //   console.log(uristringparts[0]);
+  //   // uristringparts[0] = "base64:" + escape(filename) + "//";
+  //   uristringparts[0] = 'data:application/pdf;base64,';
+  //
+  //   let moddeduristring =  uristringparts.join("");
+  //   uristring_new = moddeduristring;
+  // } else {
+  //   uristring_new = uristring;
+  // }
+
+  // console.log(uristring_new);
+
+  //displayPDF
+  // var ref = window.open(uristring_new, "_blank", "EnableViewPortScale=yes,location=no,disallowoverscroll=yes,allowInlineMediaPlayback=yes,toolbarposition=top,transitionstyle=fliphorizontal");
+  // var ref = window.open(uristring, "_blank");
+
+  // let uristring = doc.output('datauristring');
+  // await sleep(250);
+  // window.open(uristring, "_blank",  "EnableViewPortScale=yes,location=no,disallowoverscroll=yes,allowInlineMediaPlayback=yes,toolbarposition=top,transitionstyle=fliphorizontal");
+
+  let myBaseString = doc.output('datauristring');
+  // Split the base64 string in data and contentType
+  let block = myBaseString.split(";");
+  // Get the content type
+  let dataType = block[0].split(":")[1];// In this case "application/pdf"
+  // get the real base64 content of the file
+  let realData = block[1].split(",")[1];// In this case "JVBERi0xLjcKCjE...."
+
+  // The path where the file will be created
+  let folderpath = "file:///storage/emulated/0/download";
+
+  savebase64AsPDF(folderpath,filename,realData,dataType);
+
+  await sleep(250);
+
+  window.f7.addNotification({
+      message: 'Download complete, please check at download folder..',
+      hold: 3000
+  });
+
   window.f7.hidePreloader();
 }
 
@@ -1654,6 +1719,67 @@ plan_trip.goAutoPlan = async function(){
   window.f7.alert("We received your customised trip query.<br>Trip plan will be done within 1 day.<br>We'll let you know via notification if it's already done.<br>Thank you for your patience", 'Automatic Trip Plan', function(){
     goBack();
   });
+}
+
+/**
+ * Convert a base64 string in a Blob according to the data and contentType.
+ *
+ * @param b64Data {String} Pure base64 string without contentType
+ * @param contentType {String} the content type of the file i.e (application/pdf - text/plain)
+ * @param sliceSize {Int} SliceSize to process the byteCharacters
+ * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+ * @return Blob
+ */
+function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+      var blob = new Blob(byteArrays, {type: contentType});
+      return blob;
+}
+
+
+/**
+ * Create a PDF file according to its database64 content only.
+ *
+ * @param folderpath {String} The folder where the file will be created
+ * @param filename {String} The name of the file that will be created
+ * @param content {Base64 String} Important : The content can't contain the following string (data:application/pdf;base64). Only the base64 string is expected.
+ */
+function savebase64AsPDF(folderpath,filename,content,contentType){
+    // Convert the base64 string in a Blob
+    var DataBlob = b64toBlob(content,contentType);
+
+    console.log("Starting to write the file :3");
+
+    window.resolveLocalFileSystemURL(folderpath, function(dir) {
+      console.log("Access to the directory granted succesfully");
+  		dir.getFile(filename, {create:true}, function(file) {
+              console.log("File created succesfully.");
+              file.createWriter(function(fileWriter) {
+                  console.log("Writing content to file");
+                  fileWriter.write(DataBlob);
+              }, function(){
+                  alert('Unable to save file in path '+ folderpath);
+              });
+  		});
+    });
 }
 
 export default plan_trip;

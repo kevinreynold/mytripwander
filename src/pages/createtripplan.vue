@@ -450,9 +450,9 @@ export default {
   },
   data: () => ({
     page: 0,
-    today: getDateAfterDays(7),
+    today: getDateAfterDays(30),
     limit_date: getDateAfterDays(372),
-    start_date: getDateAfterDays(7),
+    start_date: getDateAfterDays(30),
     list_destination_original: [],
     list_destination: [],
     list_destination_idx: [],

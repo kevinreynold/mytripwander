@@ -49,7 +49,7 @@
         <f7-button fill big color="white">Blank Space</f7-button>
       </f7-tab>
       <f7-tab id="tab-city-2">
-        <div class="change-city">
+        <div v-if="plan_trip_mode === 'edit'" class="change-city">
           <f7-button fill @click="showOrderCity">Change City and Day</f7-button>
         </div>
         <div class="list-hotel">
@@ -263,7 +263,8 @@ export default {
     list_city_all: [],
     list_city_available: [],
     country_code: "TW",
-    currency_symbol: store.currency_symbol
+    currency_symbol: store.currency_symbol,
+    plan_trip_mode: 'edit'
   }),
   computed: {
     totalDaysTrip(){
@@ -286,6 +287,8 @@ export default {
   },
   created() {
     self = this;
+    self.plan_trip_mode = store.plan_trip_mode;
+
     self.trip_city_plan_data_one = copy(store.trip_city_plan_data[store.trip_city_plan_data_index]);
     console.log(self.trip_city_plan_data_one);
 
