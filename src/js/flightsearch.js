@@ -1,6 +1,7 @@
 import store from "./store";
 import got from "got";
 import plan_trip from "./plantrip";
+import moment from "moment";
 
 var travelpayouts = {};
 
@@ -308,7 +309,7 @@ travelpayouts.getNearestAirport = async function(city_code){
 
 function filterArrivalFlight(x){
   let answer = false;
-  if((new Date('1970/01/01 ' + x.display[0].arrival_airport.time) >= new Date('1970/01/01 01:00') && new Date('1970/01/01 ' + x.display[0].arrival_airport.time) <= new Date('1970/01/01 12:00'))){
+  if((new Date('1970/01/01 ' + x.display[0].arrival_airport.time) >= new Date('1970/01/01 05:00') && new Date('1970/01/01 ' + x.display[0].arrival_airport.time) <= new Date('1970/01/01 16:00'))){
     answer = true;
   }
   return answer;
@@ -547,11 +548,20 @@ travelpayouts.getFlightPlan = async function(){
         if(j == 0){
           store.trip_city_plan_data[k].cities[i].list_dest_trip[j].hotel_now_duration = 60;
         }
+
+        //kalau ada next country - ubah jam pulang
+        if(j == store.trip_city_plan_data[k].cities[i].list_dest_trip.length-1 && k < store.trip_city_plan_data.length-1){
+          let departure_date = new Date(store.trip_city_plan_data[k].go_back.departure_airport.date);
+          let departure_time = store.trip_city_plan_data[k].go_back.departure_airport.time;
+          let departure_date_time = moment(getDateString(departure_date, departure_time));
+          departure_date_time.subtract(3, 'hours');
+          store.trip_city_plan_data[k].cities[i].list_dest_trip[j].start_hour = departure_date_time.format('HH:mm');
+        }
       }
     }
   }
 
-  store.plan_trip_mode = "plan";
+  store.plan_trip_mode = "edit";
   //simpan database
   // window.f7.hidePreloader();
   await plan_trip.saveTrip();
@@ -669,6 +679,10 @@ travelpayouts.searchAgain = async function(mode = false){
   }
 };
 
+function getDateString(date, time){
+  return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2) + " " + time;
+}
+
 travelpayouts.changeFlightPlan = async function(){
   window.f7.showPreloader();
   store.flight_plan.splice(store.flight_plan_index, 1);
@@ -699,6 +713,17 @@ travelpayouts.changeFlightPlan = async function(){
 
         if(j == 0){
           store.trip_city_plan_data[k].cities[i].list_dest_trip[j].hotel_now_duration = 60;
+        }
+
+        //kalau ada next country - ubah jam pulang
+        if(j == store.trip_city_plan_data[k].cities[i].list_dest_trip.length-1 && k < store.trip_city_plan_data.length-1){
+          let departure_date = new Date(store.trip_city_plan_data[k].go_back.departure_airport.date);
+          let departure_time = store.trip_city_plan_data[k].go_back.departure_airport.time;
+          let departure_date_time = moment(getDateString(departure_date, departure_time));
+          console.log(departure_date_time);
+          departure_date_time.subtract(3, 'hours');
+          store.trip_city_plan_data[k].cities[i].list_dest_trip[j].start_hour = departure_date_time.format('HH:mm');
+          console.log(departure_date_time.format('HH:mm'));
         }
       }
     }

@@ -1,6 +1,7 @@
 import store from "./store";
 import got from "got";
 import travelpayouts from "./flightsearch";
+import moment from "moment";
 
 var hotel_api = {};
 
@@ -437,6 +438,15 @@ hotel_api.getHotelPlan = async function(){
           if(j == 0){
             store.trip_city_plan_data[k].cities[i].list_dest_trip[j].hotel_now_duration = 60;
           }
+
+          //kalau ada next country - ubah jam pulang
+          if(j == store.trip_city_plan_data[k].cities[i].list_dest_trip.length-1 && k < store.trip_city_plan_data.length-1){
+            let departure_date = new Date(store.trip_city_plan_data[k].go_back.departure_airport.date);
+            let departure_time = store.trip_city_plan_data[k].go_back.departure_airport.time;
+            let departure_date_time = moment(getDateString(departure_date, departure_time));
+            departure_date_time.subtract(3, 'hours');
+            store.trip_city_plan_data[k].cities[i].list_dest_trip[j].start_hour = departure_date_time.format('HH:mm');
+          }
         }
       }
     }
@@ -464,6 +474,10 @@ hotel_api.getHotelPlan = async function(){
       window.f7.hidePreloader();
     }, 1500);
   }
+}
+
+function getDateString(date, time){
+  return date.getFullYear() + "-" + ("00" + (date.getMonth()+1)).slice(-2) + "-" + ("00" + (date.getDate())).slice(-2) + " " + time;
 }
 
 hotel_api.searchAgain = async function(mode = false){

@@ -308,6 +308,7 @@ plan_trip.goToPerDay = async function(){
 }
 
 plan_trip.getDistance = async function(origin, destination){
+    await sleep(250);
     let dest_data = {
       origin: origin,
       destination: destination

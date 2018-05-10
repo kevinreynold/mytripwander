@@ -71,11 +71,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="hotel-last-search">Last Search : {{city.search_at}}</div>
+                <!-- <div class="hotel-last-search">Last Search : {{city.search_at}}</div> -->
               </f7-card-content>
               <f7-card-footer>
                 <div class="empty"></div>
-                <div class="hotel-change" @click="changeHotelBooking(city.hotel, index)">Change</div>
+                <div v-if="plan_trip_mode === 'edit'" class="hotel-change" @click="changeHotelBooking(city.hotel, index)">Change</div>
                 <div class="hotel-desc" @click="showHotelDetail(city.hotel, index)">Detail</div>
               </f7-card-footer>
             </slot>
@@ -91,7 +91,7 @@
               </f7-card-content>
               <f7-card-footer>
                 <div class="empty"></div>
-                <div class="hotel-change" @click="changeHotelBooking(city.hotel, index)">Change</div>
+                <div v-if="plan_trip_mode === 'edit'" class="hotel-change" @click="changeHotelBooking(city.hotel, index)">Change</div>
               </f7-card-footer>
             </slot>
           </f7-card>
