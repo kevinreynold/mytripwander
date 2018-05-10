@@ -392,6 +392,8 @@ travelpayouts.getFlightPlan = async function(){
     know_english: true
   };
 
+  let error = false;
+
   try {
     for (var i = 0; i < dest_route.length; i++) {
       let split_string_route = dest_route[i].split('-');

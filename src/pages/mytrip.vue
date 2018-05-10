@@ -4,7 +4,7 @@
 
     <f7-toolbar tabbar>
       <f7-link href="#tab-mytrip-1" tab-link active text="Upcoming in 2 Weeks" style="font-size:0.65em;"></f7-link>
-      <f7-link href="#tab-mytrip-2" tab-link active text="Upcoming"></f7-link>
+      <f7-link href="#tab-mytrip-2" tab-link text="Upcoming"></f7-link>
       <f7-link href="#tab-mytrip-3" tab-link text="Past"></f7-link>
     </f7-toolbar>
 
@@ -18,7 +18,8 @@
                 <div class="passenger-img"><img src="../assets/flight-icon/child-white.png" alt="child" width="15px"></div>
                 <div>{{trip.plan_data.passenger.children}}</div>
               </div>
-              <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip - {{trip.id}}</div>
+              <!-- <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip - {{trip.id}}</div> -->
+              <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip</div>
               <div class="country-trip">{{destTitle(trip.plan_data)}}</div>
               <div class="from-trip">From</div>
               <div class="from-trip">{{trip.plan_data.first_city}}</div>
@@ -43,7 +44,8 @@
                 <div class="passenger-img"><img src="../assets/flight-icon/child-white.png" alt="child" width="15px"></div>
                 <div>{{trip.plan_data.passenger.children}}</div>
               </div>
-              <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip - {{trip.id}}</div>
+              <!-- <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip - {{trip.id}}</div> -->
+              <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip</div>
               <div class="country-trip">{{destTitle(trip.plan_data)}}</div>
               <div class="from-trip">From</div>
               <div class="from-trip">{{trip.plan_data.first_city}}</div>
@@ -68,7 +70,8 @@
                 <div class="passenger-img"><img src="../assets/flight-icon/child-white.png" alt="child" width="15px"></div>
                 <div>{{trip.plan_data.passenger.children}}</div>
               </div>
-              <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip - {{trip.id}}</div>
+              <!-- <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip - {{trip.id}}</div> -->
+              <div class="day-trip">{{totalDaysTrip(trip.plan_data)}} Days Trip</div>
               <div class="country-trip">{{destTitle(trip.plan_data)}}</div>
               <div class="from-trip">From</div>
               <div class="from-trip">{{trip.plan_data.first_city}}</div>

@@ -18,7 +18,7 @@
 
           <f7-grid>
              <f7-col width="45"><hr></f7-col>
-             <f7-col width="10"><img class="or" src="../assets/OR.png"></f7-col>
+             <f7-col width="10"><img class="or" src="../assets/OR.png" @click="debugMode"></f7-col>
              <f7-col width="45"><hr></f7-col>
           </f7-grid>
 
@@ -111,6 +111,16 @@ export default {
     backHome() {
       var mainView = Dom7('#main-view')[0].f7View;
       mainView.router.back();
+    },
+    debugMode(){
+      console.log("debug mode");
+      window.f7.showPreloader();
+      var mainView = Dom7('#main-view')[0].f7View;
+      mainView.router.load({url: '/debugservice/'});
+      setTimeout(function () {
+        window.f7.hidePreloader();
+        window.f7.closeModal('#login-screen', true);
+      }, 200);
     }
   },
   created(){

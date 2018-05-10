@@ -387,6 +387,7 @@ export default {
     /*margin-top: -40px;*/
     text-align: right;
     font-weight: bold;
+    font-size: 0.9em;
     color: #2C3E50;
   }
 

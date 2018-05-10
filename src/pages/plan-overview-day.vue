@@ -213,12 +213,30 @@
         <f7-fab-speed-dial v-if="can_add_place">
           <!-- Actions -->
           <f7-fab-actions>
-            <f7-fab-action @click="searchPlace('attraction')" close-speed-dial><img src="../assets/place-icon/eiffel.png" alt="attraction" width="25"></f7-fab-action>
-            <f7-fab-action @click="searchPlace('food')" close-speed-dial><img src="../assets/place-icon/food.png" alt="food" width="15"></f7-fab-action>
-            <f7-fab-action @click="searchPlace('must_see')" close-speed-dial><img src="../assets/interest-icon/must_see1.png" alt="must_see" width="20"></f7-fab-action>
-            <f7-fab-action @click="searchPlace('culture')" close-speed-dial><img src="../assets/interest-icon/culture1.png" alt="culture" width="20"></f7-fab-action>
-            <f7-fab-action @click="searchPlace('nature')" close-speed-dial><img src="../assets/interest-icon/nature1.png" alt="nature" width="20"></f7-fab-action>
-            <f7-fab-action @click="searchPlace('recreation')" close-speed-dial><img src="../assets/interest-icon/recreation1.png" alt="recreation" width="20"></f7-fab-action>
+            <div class='fab-label'>Attractions</div>
+            <div class='fab-label'>Food</div>
+            <div class='fab-label'>Must See</div>
+            <div class='fab-label'>Culture</div>
+            <div class='fab-label'>Nature</div>
+            <div class='fab-label'>Recreation</div>
+            <f7-fab-action @click="searchPlace('attraction')" close-speed-dial>
+              <img src="../assets/place-icon/eiffel.png" alt="attraction" width="25">
+            </f7-fab-action>
+            <f7-fab-action @click="searchPlace('food')" close-speed-dial>
+              <img src="../assets/place-icon/food.png" alt="food" width="15">
+            </f7-fab-action>
+            <f7-fab-action @click="searchPlace('must_see')" close-speed-dial>
+              <img src="../assets/interest-icon/must_see1.png" alt="must_see" width="20">
+            </f7-fab-action>
+            <f7-fab-action @click="searchPlace('culture')" close-speed-dial>
+              <img src="../assets/interest-icon/culture1.png" alt="culture" width="20">
+            </f7-fab-action>
+            <f7-fab-action @click="searchPlace('nature')" close-speed-dial>
+              <img src="../assets/interest-icon/nature1.png" alt="nature" width="20">
+            </f7-fab-action>
+            <f7-fab-action @click="searchPlace('recreation')" close-speed-dial>
+              <img src="../assets/interest-icon/recreation1.png" alt="recreation" width="20">
+            </f7-fab-action>
           </f7-fab-actions>
           <!-- FAB -->
           <f7-fab @click="resetSearchBarQuery">
@@ -1060,6 +1078,39 @@ export default {
     height: 100%;
     /* border: 1px solid black; */
   }
+
+  .fab-label{
+    width: 70px;
+    padding: 2px 3px;
+    position: absolute;
+    right: 55px;
+    /* background: rgba(0,0,0,0.75); */
+    /* color: white; */
+    background: white;
+    border: 2px solid #009688;
+    color: #009688;
+    text-align: center;
+  }
+
+  .fab-label:nth-child(1){
+    bottom: 10px;
+  }
+  .fab-label:nth-child(2){
+    bottom: 65px;
+  }
+  .fab-label:nth-child(3){
+    bottom: 120px;
+  }
+  .fab-label:nth-child(4){
+    bottom: 175px;
+  }
+  .fab-label:nth-child(5){
+    bottom: 230px;
+  }
+  .fab-label:nth-child(6){
+    bottom: 285px;
+  }
+
 </style>
 
 <style scoped child-component="f7-tabs">

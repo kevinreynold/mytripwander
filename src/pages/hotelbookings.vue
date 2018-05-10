@@ -48,7 +48,7 @@
         <f7-col width="40">
           <!-- <div class="col-date" v-on:click="changePassenger"> -->
           <div class="col-date">
-            <div class="col-title">TRAVELERS</div>
+            <div class="col-title" v-on:click="changePassenger">TRAVELERS</div>
             <div class="grid-head">
               <div class="grid-user">
                 <div class="grid-passenger">

@@ -1782,4 +1782,19 @@ function savebase64AsPDF(folderpath,filename,content,contentType){
     });
 }
 
+plan_trip.debugMode = async function(service_url){
+  window.f7.showPreloader();
+  store.service_url = service_url;
+  await sleep(500);
+  window.f7.hidePreloader();
+  window.f7.loginScreen();
+  await sleep(250);
+  goBack();
+
+  window.f7.addNotification({
+      message: service_url,
+      hold: 3500
+  });
+}
+
 export default plan_trip;

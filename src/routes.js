@@ -98,5 +98,9 @@ export default [
   {
       path: '/changecurrency/',
       component: require('./pages/changecurrency.vue')
+  },
+  {
+      path: '/debugservice/',
+      component: require('./pages/debugservice.vue')
   }
 ]
