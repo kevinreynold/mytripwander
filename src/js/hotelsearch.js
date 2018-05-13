@@ -440,12 +440,13 @@ hotel_api.getHotelPlan = async function(){
           }
 
           //kalau ada next country - ubah jam pulang
-          if(j == store.trip_city_plan_data[k].cities[i].list_dest_trip.length-1 && k < store.trip_city_plan_data.length-1){
+          if(j == store.trip_city_plan_data[k].cities[i].list_dest_trip.length-1 && k < store.trip_city_plan_data.length-1 && i == store.trip_city_plan_data[k].cities.length-1){
             let departure_date = new Date(store.trip_city_plan_data[k].go_back.departure_airport.date);
             let departure_time = store.trip_city_plan_data[k].go_back.departure_airport.time;
             let departure_date_time = moment(getDateString(departure_date, departure_time));
             departure_date_time.subtract(3, 'hours');
             store.trip_city_plan_data[k].cities[i].list_dest_trip[j].start_hour = departure_date_time.format('HH:mm');
+            store.trip_city_plan_data[k].cities[i].list_dest_trip[j].list_place = [];
           }
         }
       }

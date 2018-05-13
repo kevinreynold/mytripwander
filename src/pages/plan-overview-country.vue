@@ -84,7 +84,7 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="flight-last-search">Last Search : {{flight_detail.search_at}}</div> -->
+              <div class="flight-last-search">Last Search : {{flight_detail.search_at}}</div>
             </f7-card-content>
             <f7-card-footer>
               <div class="empty"></div>

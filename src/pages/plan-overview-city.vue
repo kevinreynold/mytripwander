@@ -71,7 +71,7 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="hotel-last-search">Last Search : {{city.search_at}}</div> -->
+                <div class="hotel-last-search">Last Search : {{city.search_at}}</div>
               </f7-card-content>
               <f7-card-footer>
                 <div class="empty"></div>

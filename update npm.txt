@@ -23,6 +23,10 @@ Tambahan
   vue-resource (http request)
 
 
+
+The connection to the server was unsuccessful. (file:///android_asset/www/index.html)
+<preference name="loadUrlTimeoutValue" value="60000" />
+
 //CORDOVA
 di config.xml
 <access origin="*" />

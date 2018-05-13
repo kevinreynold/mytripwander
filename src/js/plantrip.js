@@ -65,7 +65,8 @@ plan_trip.getDestinationList = async function(){
     try {
       if(store.list_dest_all.length === 0){
         var data = await got.get(store.service_url +"/city/dest", {
-          retries: 2
+          retries: 2,
+          timeout: 5000
         })
         .then(res => {
           var res = JSON.parse(res.body);
@@ -241,7 +242,8 @@ plan_trip.goToPerDay = async function(){
     window.f7.showPreloader('Fetch List Attraction Data');
     try {
         var data = await got.get(store.service_url + "/attraction/" + city_code, {
-          retries: 2
+          retries: 2,
+          timeout: 7000
         })
         .then(res => {
           var res = JSON.parse(res.body);
@@ -258,7 +260,8 @@ plan_trip.goToPerDay = async function(){
     window.f7.showPreloader('Fetch List Restaurant Data');
     try {
         var data = await got.get(store.service_url + "/food/" + city_code, {
-          retries: 2
+          retries: 2,
+          timeout: 7000
         })
         .then(res => {
           var res = JSON.parse(res.body);
@@ -308,7 +311,7 @@ plan_trip.goToPerDay = async function(){
 }
 
 plan_trip.getDistance = async function(origin, destination){
-    await sleep(250);
+    // await sleep(250);
     let dest_data = {
       origin: origin,
       destination: destination
@@ -967,7 +970,8 @@ plan_trip.goToMyTrip = async function(){
   try {
       var data = await got.get(store.service_url +"/trip/load/all", {
         query: user_data,
-        retries: 2
+        retries: 2,
+        timeout: 5000
       })
       .then(res => {
         var res = JSON.parse(res.body);
@@ -976,13 +980,17 @@ plan_trip.goToMyTrip = async function(){
 
       store.list_my_trip = data.result;
 
+      await sleep(500);
+      goTo('/mytrip/');
+      window.f7.hidePreloader();
   } catch (e) {
-    return null;
+    await sleep(500);
+    window.f7.addNotification({
+          message: 'No internet connection...',
+          hold: 3500
+      });
+    window.f7.hidePreloader();
   }
-
-  await sleep(500);
-  goTo('/mytrip/');
-  window.f7.hidePreloader();
 }
 
 plan_trip.backFromEditTrip = async function(){
@@ -1506,15 +1514,11 @@ plan_trip.getPDFData = async function(){
 
 plan_trip.makePDF = async function(){
   window.f7.showPreloader("Generate PDF Data");
-  let print_data = await this.getPDFData();
-  console.log(JSON.stringify(print_data));
-  let doc = new jsPDF();
 
-  let page = 1;
-  let cur_height = 10;
-  //A4
-  //width 210
-  //height 297
+  //file_name
+  let filename = 'trip_' + getDateAfterDays(0) + '_' + store.trip_id + '.pdf';
+
+  let print_data = await this.getPDFData();
 
   //header
   let total_days_trip = 0;
@@ -1522,152 +1526,148 @@ plan_trip.makePDF = async function(){
     total_days_trip += store.trip_plan_data.list_destination[i].stay;
   }
 
-  let destTitle = "";
+  let dest_title = "";
   for (var i = 0; i < store.trip_plan_data.list_destination.length; i++) {
-    destTitle += store.trip_plan_data.list_destination[i].country_name;
+    dest_title += store.trip_plan_data.list_destination[i].country_name;
     if(i !== store.trip_plan_data.list_destination.length-1){
-      destTitle += ' - ';
+      dest_title += ' - ';
     }
   }
 
   let total_budget = convertPrice(this.getTotalBudget());
   let total_budget_string = store.currency_symbol + total_budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  doc.setFontSize(18);
-  doc.text(105, cur_height+=10, total_days_trip + ' Days Trip', null, null, 'center');
-  doc.text(105, cur_height+=10, destTitle, null, null, 'center');
-  doc.text(105, cur_height+=10, 'From', null, null, 'center');
-  doc.text(105, cur_height+=10, store.trip_plan_data.first_city, null, null, 'center');
-  doc.text(105, cur_height+=10, store.trip_plan_data.start_date, null, null, 'center');
+  let params = {
+    filename: filename,
+    print_data: JSON.stringify(print_data),
+    total_days_trip: total_days_trip,
+    dest_title: dest_title,
+    total_budget: total_budget_string,
+    first_city: store.trip_plan_data.first_city,
+    start_date: store.trip_plan_data.start_date
+  };
 
-  doc.setFontSize(14);
-  doc.text(200, cur_height+=10, 'Total Budget :', null, null, 'right');
-  doc.text(200, cur_height+=7.5, total_budget_string, null, null, 'right');
-  cur_height+=2.5;
-  //header selesai
-
-  for (var i = 0; i < print_data.length; i++) {
-    doc.setFontSize(18);
-    doc.text(105, cur_height+=10, print_data[i].country_name, null, null, 'center');
-    if(cur_height > 275){
-      page++;
-      doc.addPage('a4');
-      cur_height = 10;
-    }
-
-    for (var j = 0; j < print_data[i].cities.length; j++) {
-      doc.setFontSize(16);
-      doc.text(10, cur_height+=7.5, print_data[i].cities[j].city);
-      if(cur_height > 275){
-        page++;
-        doc.addPage('a4');
-        cur_height = 10;
+  let response = await got.post(store.service_url +"/make/pdf", {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+      retries: 2,
+      timeout: 15000
+    })
+    .then(res => {
+      if (res.statusCode !== 200) {
+        return 'Error';
       }
+      return JSON.parse(res.body);
+    })
+    .catch(err => {
+      return 'Error';
+    });
 
-      for (var k = 0; k < print_data[i].cities[j].list_dest.length; k++) {
-        doc.setFontSize(12);
-        let per_day_data = print_data[i].cities[j].list_dest[k];
-        let day_title = 'Day ' + per_day_data.day + ' - ' + per_day_data.date;
-        doc.setFontType("bold");
-        doc.text(10, cur_height+=7.5, day_title);
-        if(cur_height > 275){
-          page++;
-          doc.addPage('a4');
-          cur_height = 10;
-        }
+  console.log(JSON.stringify(response))
 
-        doc.setFontType("normal");
-        let offset_place = 1;
+  // let url = 'http://127.0.0.1/pdf_result/' + filename;
+  let url = 'http://103.253.25.103/pdf/' + filename;
+  window.open(url, '_system', 'location=yes')
 
-        //mulai tulis per tempatnya
-        for (var m = 0; m < per_day_data.route_data.length; m++) {
-          let info = per_day_data.route_data[m].string_format.split(' | ');
-          let place_name = info[0];
-          let time = info[1];
-
-          doc.text(12.5, cur_height+=7.5, offset_place++ + '. ' + place_name);
-          doc.text(200, cur_height, time, null, null, 'right');
-          if(cur_height > 275){
-            page++;
-            doc.addPage('a4');
-            cur_height = 10;
-          }
-        }
-        cur_height+=2.5;
-      }
-      cur_height+=5;
-    }
-    cur_height+=2.5;
-  }
-
-  //file_name
-  let filename = 'trip_' + getDateAfterDays(0) + '_' + store.trip_id + '.pdf';
-
-  doc.save(filename);
-
-  // var pdfContent = doc.output('datauri');
-
-  // var buffer = new ArrayBuffer(pdfContent.length);
-  // var array = new Uint8Array(buffer);
-  // for (var i = 0; i < pdfContent.length; i++) {
-  //   array[i] = pdfContent.charCodeAt(i);
+  // console.log(JSON.stringify(print_data));
+  // let doc = new jsPDF();
+  //
+  // let page = 1;
+  // let cur_height = 10;
+  // //A4
+  // //width 210
+  // //height 297
+  //
+  // doc.setFontSize(18);
+  // doc.text(105, cur_height+=10, total_days_trip + ' Days Trip', null, null, 'center');
+  // doc.text(105, cur_height+=10, destTitle, null, null, 'center');
+  // doc.text(105, cur_height+=10, 'From', null, null, 'center');
+  // doc.text(105, cur_height+=10, store.trip_plan_data.first_city, null, null, 'center');
+  // doc.text(105, cur_height+=10, store.trip_plan_data.start_date, null, null, 'center');
+  //
+  // doc.setFontSize(14);
+  // doc.text(200, cur_height+=10, 'Total Budget :', null, null, 'right');
+  // doc.text(200, cur_height+=7.5, total_budget_string, null, null, 'right');
+  // cur_height+=2.5;
+  // //header selesai
+  //
+  // for (var i = 0; i < print_data.length; i++) {
+  //   doc.setFontSize(18);
+  //   doc.text(105, cur_height+=10, print_data[i].country_name, null, null, 'center');
+  //   if(cur_height > 275){
+  //     page++;
+  //     doc.addPage('a4');
+  //     cur_height = 10;
+  //   }
+  //
+  //   for (var j = 0; j < print_data[i].cities.length; j++) {
+  //     doc.setFontSize(16);
+  //     doc.text(10, cur_height+=7.5, print_data[i].cities[j].city);
+  //     if(cur_height > 275){
+  //       page++;
+  //       doc.addPage('a4');
+  //       cur_height = 10;
+  //     }
+  //
+  //     for (var k = 0; k < print_data[i].cities[j].list_dest.length; k++) {
+  //       doc.setFontSize(12);
+  //       let per_day_data = print_data[i].cities[j].list_dest[k];
+  //       let day_title = 'Day ' + per_day_data.day + ' - ' + per_day_data.date;
+  //       doc.setFontType("bold");
+  //       doc.text(10, cur_height+=7.5, day_title);
+  //       if(cur_height > 275){
+  //         page++;
+  //         doc.addPage('a4');
+  //         cur_height = 10;
+  //       }
+  //
+  //       doc.setFontType("normal");
+  //       let offset_place = 1;
+  //
+  //       //mulai tulis per tempatnya
+  //       for (var m = 0; m < per_day_data.route_data.length; m++) {
+  //         let info = per_day_data.route_data[m].string_format.split(' | ');
+  //         let place_name = info[0];
+  //         let time = info[1];
+  //
+  //         doc.text(12.5, cur_height+=7.5, offset_place++ + '. ' + place_name);
+  //         doc.text(200, cur_height, time, null, null, 'right');
+  //         if(cur_height > 275){
+  //           page++;
+  //           doc.addPage('a4');
+  //           cur_height = 10;
+  //         }
+  //       }
+  //       cur_height+=2.5;
+  //     }
+  //     cur_height+=5;
+  //   }
+  //   cur_height+=2.5;
   // }
   //
-  // // window.open('data:application/pdf;base64,' + Base64.encode(buffer));
-  // window.open('data:application/pdf;base64,' + btoa(pdfContent));
-
-  // var string = doc.output('datauristring');
-  // var iframe = "<iframe width='100%' height='100%' src='" + string + "'></iframe>"
-  // var x = window.open();
-  // x.document.open();
-  // x.document.write(iframe);
-  // x.document.close();
-
-  // console.log(uristring);
-  // let uristring_new;
   //
-  // // the email plugin uses a non-standard URI format, so the filename can be specified.
-  // if (filename) {
-  //   let uristringparts = uristring.split(',');
-  //   console.log(uristringparts[0]);
-  //   // uristringparts[0] = "base64:" + escape(filename) + "//";
-  //   uristringparts[0] = 'data:application/pdf;base64,';
+  // doc.save(filename);
+  // let myBaseString = doc.output('datauristring');
+  // // Split the base64 string in data and contentType
+  // let block = myBaseString.split(";");
+  // // Get the content type
+  // let dataType = block[0].split(":")[1];// In this case "application/pdf"
+  // // get the real base64 content of the file
+  // let realData = block[1].split(",")[1];// In this case "JVBERi0xLjcKCjE...."
   //
-  //   let moddeduristring =  uristringparts.join("");
-  //   uristring_new = moddeduristring;
-  // } else {
-  //   uristring_new = uristring;
-  // }
-
-  // console.log(uristring_new);
-
-  //displayPDF
-  // var ref = window.open(uristring_new, "_blank", "EnableViewPortScale=yes,location=no,disallowoverscroll=yes,allowInlineMediaPlayback=yes,toolbarposition=top,transitionstyle=fliphorizontal");
-  // var ref = window.open(uristring, "_blank");
-
-  // let uristring = doc.output('datauristring');
+  // // The path where the file will be created
+  // let folderpath = "file:///storage/emulated/0/download";
+  //
+  // savebase64AsPDF(folderpath,filename,realData,dataType);
+  //
   // await sleep(250);
-  // window.open(uristring, "_blank",  "EnableViewPortScale=yes,location=no,disallowoverscroll=yes,allowInlineMediaPlayback=yes,toolbarposition=top,transitionstyle=fliphorizontal");
-
-  let myBaseString = doc.output('datauristring');
-  // Split the base64 string in data and contentType
-  let block = myBaseString.split(";");
-  // Get the content type
-  let dataType = block[0].split(":")[1];// In this case "application/pdf"
-  // get the real base64 content of the file
-  let realData = block[1].split(",")[1];// In this case "JVBERi0xLjcKCjE...."
-
-  // The path where the file will be created
-  let folderpath = "file:///storage/emulated/0/download";
-
-  savebase64AsPDF(folderpath,filename,realData,dataType);
-
-  await sleep(250);
-
-  window.f7.addNotification({
-      message: 'Download complete, please check at download folder..',
-      hold: 3000
-  });
+  //
+  // window.f7.addNotification({
+  //     message: 'Download complete, please check at download folder..',
+  //     hold: 3000
+  // });
 
   window.f7.hidePreloader();
 }

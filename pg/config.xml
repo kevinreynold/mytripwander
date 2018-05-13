@@ -1,15 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Trip Wander (Online)</name>
+<widget id="com.phonegap.tripwander" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>TripWander</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Trip Planning Application.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="admin@mytripwander.com" href="http://mytripwander.com">
+        Reynold Kevin
     </author>
     <content src="index.html" />
+    <preference name="orientation" value="portrait" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="14" />
+    <preference name="android-minSdkVersion" value="19" />
+    <preference name="loadUrlTimeoutValue" value="60000" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
