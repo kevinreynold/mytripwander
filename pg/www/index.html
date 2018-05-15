@@ -1,1 +1,23 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><title>My App</title><link rel=stylesheet href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"><link href=static/css/app.f720f35e86381292d821b91d6386d33e.css rel=stylesheet></head><body><div id=app></div><script src=cordova.js></script><script type=text/javascript src=static/js/manifest.4ea61687ba59f02cf176.js></script><script type=text/javascript src=static/js/vendor.a6f9dff18da5c9943622.js></script><script type=text/javascript src=static/js/app.0f8640e56d46042ae518.js></script></body></html>
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><title>My App</title><link rel=stylesheet href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"><link href=static/css/app.ba211ba35bcefd77ceba93d3a97693a6.css rel=stylesheet></head><body><div id=app></div><script src=cordova.js></script><script>var lastTimeBackPress=0;
+    var timePeriodToExit=2000;
+
+    function onBackKeyDown(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if(new Date().getTime() - lastTimeBackPress < timePeriodToExit){
+          navigator.app.exitApp();
+      }else{
+          window.plugins.toast.showWithOptions(
+              {
+                message: "Press again to exit.",
+                duration: "short", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+                position: "bottom",
+                addPixelsY: -40  // added a negative value to move it up a bit (default 0)
+              }
+            );
+
+          lastTimeBackPress=new Date().getTime();
+      }
+    };
+
+    document.addEventListener("backbutton", onBackKeyDown, false);</script><script type=text/javascript src=static/js/manifest.ab89088a54d834ac798d.js></script><script type=text/javascript src=static/js/vendor.a6f9dff18da5c9943622.js></script><script type=text/javascript src=static/js/app.f47ab5f79461fd747d07.js></script></body></html>

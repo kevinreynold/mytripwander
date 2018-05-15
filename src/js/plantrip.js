@@ -151,7 +151,8 @@ plan_trip.goToNearbyPlaces = async function(origin){
     try {
         var data = await got.get(store.service_url +"/place/nearby", {
           query: dest_data,
-          retries: 2
+          retries: 2,
+          timeout: 7000
         })
         .then(res => {
           var res = JSON.parse(res.body);
@@ -161,14 +162,17 @@ plan_trip.goToNearbyPlaces = async function(origin){
         store.list_search = data.result;
         store.place_mode = "nearby";
 
+        await sleep(500);
+        var mainView = Dom7('#main-view')[0].f7View;
+        mainView.router.load({url: '/search-place/'});
+        window.f7.hidePreloader();
     } catch (e) {
+      window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No Internet Connection..'
+      });
       return null;
     }
-
-    await sleep(500);
-    var mainView = Dom7('#main-view')[0].f7View;
-    mainView.router.load({url: '/search-place/'});
-    window.f7.hidePreloader();
 }
 
 plan_trip.goToPerDayLocal = async function(city_code){
@@ -864,6 +868,7 @@ plan_trip.saveTrip = async function(){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(params),
+      timeout: 10000
     })
     .then(res => {
       if (res.statusCode !== 200) {
@@ -875,13 +880,20 @@ plan_trip.saveTrip = async function(){
       return 'Error';
     });
 
-  store.trip_id = response.trip_id;
-  console.log(response);
+  if (response != 'Error') {
+    store.trip_id = response.trip_id;
+    console.log(response);
 
-  store.trip_plan_data_original = copy(store.trip_plan_data);
-  store.trip_city_plan_data_original = copy(store.trip_city_plan_data);
-  store.flight_plan_original = copy(store.flight_plan);
-  // window.f7.hidePreloader();
+    store.trip_plan_data_original = copy(store.trip_plan_data);
+    store.trip_city_plan_data_original = copy(store.trip_city_plan_data);
+    store.flight_plan_original = copy(store.flight_plan);
+    // window.f7.hidePreloader();
+  }
+  else{
+    window.f7.addNotification({
+        message: 'No Internet Connection..'
+    });
+  }
 }
 
 plan_trip.updateTrip = async function(){
@@ -905,6 +917,7 @@ plan_trip.updateTrip = async function(){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(params),
+      timeout: 10000
     })
     .then(res => {
       if (res.statusCode !== 200) {
@@ -918,16 +931,24 @@ plan_trip.updateTrip = async function(){
 
   console.log(response);
 
-  store.trip_plan_data_original = copy(store.trip_plan_data);
-  store.trip_city_plan_data_original = copy(store.trip_city_plan_data);
-  store.flight_plan_original = copy(store.flight_plan);
+  if(response != 'Error'){
+    store.trip_plan_data_original = copy(store.trip_plan_data);
+    store.trip_city_plan_data_original = copy(store.trip_city_plan_data);
+    store.flight_plan_original = copy(store.flight_plan);
 
-  await sleep(1000);
-  window.f7.addNotification({
-      message: 'Update plan success.',
-      hold: 2500
-  });
-  window.f7.hidePreloader();
+    await sleep(1000);
+    window.f7.addNotification({
+        message: 'Update plan success.',
+        hold: 2500
+    });
+    window.f7.hidePreloader();
+  }
+  else{
+    window.f7.addNotification({
+        message: 'No Internet Connection..'
+    });
+    window.f7.hidePreloader();
+  }
 }
 
 plan_trip.loadingTrip = async function(id){
@@ -935,7 +956,8 @@ plan_trip.loadingTrip = async function(id){
   store.trip_id = id;
   try {
       var data = await got.get(store.service_url + "/trip/load/" + id, {
-        retries: 2
+        retries: 2,
+        timeout: 7000
       })
       .then(res => {
         var res = JSON.parse(res.body);
@@ -952,6 +974,10 @@ plan_trip.loadingTrip = async function(id){
       store.trip_city_plan_data_original = copy(store.trip_city_plan_data);
       store.flight_plan_original = copy(store.flight_plan);
   } catch (e) {
+    window.f7.addNotification({
+        message: 'No Internet Connection..'
+    });
+    window.f7.hidePreloader();
     return null;
   }
 
@@ -1013,7 +1039,8 @@ plan_trip.getAllCurrency = async function(){
   try {
     if(store.list_currency.length == 0){
       let data = await got.get(store.service_url +"/currency", {
-        retries: 2
+        retries: 2,
+        timeout: 7000
       })
       .then(res => {
         var res = JSON.parse(res.body);
@@ -1025,13 +1052,10 @@ plan_trip.getAllCurrency = async function(){
     }
 
     window.f7.hidePreloader();
+    return 1;
 
   } catch (e) {
-    window.f7.hidePreloader();
-    window.f7.addNotification({
-        message: 'No Internet Connection..'
-    });
-    await sleep(1000);
+    return 0;
   }
 }
 
@@ -1046,7 +1070,14 @@ plan_trip.goSignUp = async function(){
 }
 
 plan_trip.goChooseCurrency = async function(){
-  await this.getAllCurrency();
+  if(await this.getAllCurrency()){
+    window.f7.hidePreloader();
+    window.f7.addNotification({
+        message: 'No Internet Connection..'
+    });
+    return 0;
+  }
+
   window.f7.showPreloader();
   var mainView = Dom7('#main-view')[0].f7View;
   mainView.router.load({url: '/changecurrency/'});
@@ -1164,7 +1195,8 @@ plan_trip.forgotPassword = async function(email){
   window.f7.showPreloader();
   try {
     let data = await got.get(store.service_url +"/forgot/" + email, {
-      retries: 2
+      retries: 2,
+      timeout: 7000
     })
     .then(res => {
       var res = JSON.parse(res.body);
@@ -1244,6 +1276,7 @@ plan_trip.doSignUp = async function(formData){
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(params),
+        timeout: 7000
       })
       .then(res => {
         if (res.statusCode !== 200) {
@@ -1255,38 +1288,46 @@ plan_trip.doSignUp = async function(formData){
         return 'Error';
       });
 
-      console.log(JSON.stringify(response));
-    if(response.status === 'OK'){
-      store.user_id = response.user_id;
-      store.user_name = params.username;
-      store.email = params.email;
-      store.currency_id = params.currency_id;
-      await this.getCurrencyData(store.currency_id);
+    console.log(JSON.stringify(response));
+    if(response != 'Error'){
+      if(response.status === 'OK'){
+        store.user_id = response.user_id;
+        store.user_name = params.username;
+        store.email = params.email;
+        store.currency_id = params.currency_id;
+        await this.getCurrencyData(store.currency_id);
+      }
+
+      let newData = {
+        password : "",
+        cpassword: "",
+        email: ""
+      }
+      window.f7.formFromData('#register-form', newData);
+
+      await sleep(1000);
+
+      if(response.status === 'OK'){
+        this.saveUserData();
+        let leftpanel = window.Dom7("#left-panel")[0];
+        let profile = window.Dom7(".profile")[0];
+        profile.innerHTML = "Hi, " + store.user_name;
+        await sleep(500);
+        goBack();
+      }
+
+      window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: response.message,
+          hold: 2000
+      });
     }
-
-    let newData = {
-      password : "",
-      cpassword: "",
-      email: ""
+    else{
+      window.f7.hidePreloader();
+      window.f7.addNotification({
+          message: 'No internet connection..'
+      });
     }
-    window.f7.formFromData('#register-form', newData);
-
-    await sleep(1000);
-
-    if(response.status === 'OK'){
-      this.saveUserData();
-      let leftpanel = window.Dom7("#left-panel")[0];
-      let profile = window.Dom7(".profile")[0];
-      profile.innerHTML = "Hi, " + store.user_name;
-      await sleep(500);
-      goBack();
-    }
-
-    window.f7.hidePreloader();
-    window.f7.addNotification({
-        message: response.message,
-        hold: 2000
-    });
   }
 }
 
@@ -1324,6 +1365,7 @@ plan_trip.doLogin = async function(self, email, password){
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(params),
+        timeout: 7000
       })
       .then(res => {
         if (res.statusCode !== 200) {
@@ -1336,38 +1378,88 @@ plan_trip.doLogin = async function(self, email, password){
       });
 
     console.log(JSON.stringify(response));
-    if(response.status === 'OK'){
-      let user = response.user;
+    if(response != 'Error'){
+      if(response.status === 'OK'){
+        let user = response.user;
 
-      store.user_id = user.id;
-      store.user_name = user.username;
-      store.email = email;
-      store.currency_id = user.currency_id;
-      await this.getCurrencyData(store.currency_id);
-    }
+        store.user_id = user.id;
+        store.user_name = user.username;
+        store.email = email;
+        store.currency_id = user.currency_id;
+        await this.getCurrencyData(store.currency_id);
+      }
 
-    self.inputs[0].value = "";
-    self.inputs[1].value = "";
+      self.inputs[0].value = "";
+      self.inputs[1].value = "";
 
-    await sleep(1000);
+      await sleep(1000);
 
-    if(response.status === 'OK'){
-      this.saveUserData();
-      let leftpanel = window.Dom7("#left-panel")[0];
-      let profile = window.Dom7(".profile")[0];
-      profile.innerHTML = "Hi, " + store.user_name;
-      await sleep(500);
-      window.f7.closeModal('#login-screen', true);
+      if(response.status === 'OK'){
+        this.saveUserData();
+        let leftpanel = window.Dom7("#left-panel")[0];
+        let profile = window.Dom7(".profile")[0];
+        profile.innerHTML = "Hi, " + store.user_name;
+        await sleep(500);
+        window.f7.closeModal('#login-screen', true);
+      }
+      else{
+        window.f7.addNotification({
+            message: response.message,
+            hold: 2000
+        });
+      }
+
+      window.f7.hidePreloader();
     }
     else{
       window.f7.addNotification({
-          message: response.message,
-          hold: 2000
+          message: 'No internet connection'
       });
+      window.f7.hidePreloader();
     }
-
-    window.f7.hidePreloader();
   }
+}
+
+plan_trip.doGoogleLogin = async function(email, username){
+  window.f7.showPreloader();
+  let params = {
+    email: email,
+    username: username,
+  };
+
+  let response = await got.post(store.service_url +"/login/google", {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+    })
+    .then(res => {
+      if (res.statusCode !== 200) {
+        return 'Error';
+      }
+      return JSON.parse(res.body);
+    })
+    .catch(err => {
+      return 'Error';
+    });
+
+  console.log(JSON.stringify(response));
+  let user = response.user;
+
+  store.user_id = user.id;
+  store.user_name = user.username;
+  store.email = email;
+  store.currency_id = user.currency_id;
+  await this.getCurrencyData(store.currency_id);
+
+  this.saveUserData();
+  let leftpanel = window.Dom7("#left-panel")[0];
+  let profile = window.Dom7(".profile")[0];
+  profile.innerHTML = "Hi, " + store.user_name;
+  await sleep(500);
+  window.f7.closeModal('#login-screen', true);
+
+  window.f7.hidePreloader();
 }
 
 plan_trip.saveUserData = function(){

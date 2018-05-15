@@ -38,4 +38,5 @@ di config.xml
 
 tambah Plugin
 $ cordova plugin add cordova-plugin-whitelist
+$ cordova plugin add cordova-plugin-googleplus --save --variable REVERSED_CLIENT_ID=com.googleusercontent.apps.381713071305-3a9erm1qhk0t5cvecdd2eps7k1pl04mq
 $ cordova prepare

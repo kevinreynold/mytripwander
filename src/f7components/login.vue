@@ -23,18 +23,18 @@
           </f7-grid>
 
           <f7-block>
-            <a class="button-fill button btn-social-media" v-on:click="closeLoginScreen" href="#">
+            <!-- <a class="button-fill button btn-social-media" v-on:click="doFacebookLogin" href="#">
               <f7-grid>
                 <f7-col width="10"><f7-icon fa="facebook"></f7-icon></f7-col>
                 <f7-col width="90">Sign in With Facebook</f7-col>
               </f7-grid>
-            </a>
-            <p><a class="button-fill button btn-social-media" v-on:click="closeLoginScreen" href="#">
+            </a> -->
+            <a class="button-fill button btn-social-media" v-on:click="doGoogleLogin" href="#">
               <f7-grid>
                 <f7-col width="10"><f7-icon fa="google-plus"></f7-icon></f7-col>
                 <f7-col width="90">Sign in With Google+</f7-col>
               </f7-grid>
-            </a></p>
+            </a>
           </f7-block>
         </f7-page>
       </f7-pages>
@@ -88,6 +88,33 @@ export default {
       console.log(password);
 
       plan_trip.doLogin(self, email, password);
+    },
+    doGoogleLogin(){
+      // window.plugins.googleplus.disconnect(
+      //     function (msg) {
+      //       console.log(msg); // do something useful instead of alerting
+      //     }
+      // );
+
+      window.plugins.googleplus.login(
+        {
+          'webClientId': '381713071305-g4fka0qrhpff7qbbt898cl5tf3j7i2mh.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+          'offline': true, // optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
+        },
+        function (obj) {
+          // alert(JSON.stringify(obj)); // do something useful instead of alerting
+          let email = obj.email;
+          let username = obj.displayName;
+
+          plan_trip.doGoogleLogin(email, username);
+        },
+        function (msg) {
+          console.log('error: ' + msg);
+        }
+      );
+    },
+    doFacebookLogin(){
+      alert('Facebook Login');
     },
     closeLoginScreen() {
       window.f7.showPreloader();

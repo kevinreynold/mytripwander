@@ -47,7 +47,8 @@ hotel_api.hotelSearch = async function(passenger_data){
     try {
       var data = await got.get(store.service_url +"/hotel/search", {
         query: passenger_data,
-        retries: 2
+        retries: 2,
+        timeout: 60000
       })
       .then(res => {
         var res = JSON.parse(res.body);
@@ -145,7 +146,7 @@ hotel_api.hotelSeachLocal = async function(json = "hotel_search_hongkong_city"){
 hotel_api.getRedirectLink = async function(url){
   window.f7.showPreloader();
   try {
-    var result = await got.get(url, {retries: 2})
+    var result = await got.get(url, {retries: 2, timeout:10000})
     .then(res => {
       var res = JSON.parse(res.body);
       return res;

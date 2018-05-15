@@ -1,0 +1,112 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-x-toast",
+        "scope": null,
+        "escapedName": "cordova-plugin-x-toast",
+        "name": "cordova-plugin-x-toast",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\Source Tree\\mytripwander\\pg"
+    ]
+  ],
+  "_from": "cordova-plugin-x-toast@latest",
+  "_id": "cordova-plugin-x-toast@2.6.2",
+  "_inCache": true,
+  "_location": "/cordova-plugin-x-toast",
+  "_nodeVersion": "6.12.3",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/cordova-plugin-x-toast_2.6.2_1521183403159_0.262904456903589"
+  },
+  "_npmUser": {
+    "name": "eddyverbruggen",
+    "email": "eddyverbruggen@gmail.com"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-x-toast",
+    "scope": null,
+    "escapedName": "cordova-plugin-x-toast",
+    "name": "cordova-plugin-x-toast",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-x-toast/-/cordova-plugin-x-toast-2.6.2.tgz",
+  "_shasum": "0a58fcff95708b786d3151a5a7f2a0a7be067b98",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-x-toast",
+  "_where": "D:\\Source Tree\\mytripwander\\pg",
+  "author": {
+    "name": "Eddy Verbruggen",
+    "email": "eddyverbruggen@gmail.com",
+    "url": "https://github.com/EddyVerbruggen"
+  },
+  "bugs": {
+    "url": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-x-toast",
+    "platforms": [
+      "ios",
+      "android",
+      "wp8",
+      "windows",
+      "blackberry10"
+    ]
+  },
+  "dependencies": {},
+  "description": "This plugin allows you to show a Toast. A Toast is a little non intrusive buttonless popup which automatically disappears.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "0a58fcff95708b786d3151a5a7f2a0a7be067b98",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-x-toast/-/cordova-plugin-x-toast-2.6.2.tgz",
+    "fileCount": 59,
+    "unpackedSize": 5123897
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "gitHead": "fde8da464f9efb62786a2af7ea5a92ec7113c679",
+  "homepage": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin#readme",
+  "keywords": [
+    "Toast",
+    "Notification",
+    "Message",
+    "Alert",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android",
+    "cordova-wp8",
+    "cordova-windows",
+    "cordova-blackberry10"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "eddyverbruggen",
+      "email": "eddyverbruggen@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-x-toast",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git"
+  },
+  "scripts": {},
+  "version": "2.6.2"
+}

@@ -267,7 +267,7 @@
     <f7-picker-modal id="picker-modal-duration" theme="teal" overlay>
       <f7-navbar>
         <f7-nav-left>
-          <f7-link>Select Duration</f7-link>
+          <f7-link>Select Duration (in minutes)</f7-link>
         </f7-nav-left>
         <f7-nav-right>
           <f7-link close-picker="picker-modal-duration"><f7-icon f7="close"/></f7-link>
@@ -275,7 +275,7 @@
       </f7-navbar>
 
       <f7-block class="modal-container" inner no-hairlines>
-        <div class="stay-dur">
+        <!-- <div class="stay-dur">
           <div class="stay-dur-row stay-dur-action">
             <div class="stay-dur-col text-green" v-on:click="temp_duration.h < 9 ? temp_duration.h += 1 : 9">+</div>
             <div class="stay-dur-col text-green" v-on:click="temp_duration.m < 9 ? temp_duration.m += 1 : 9">+</div>
@@ -291,6 +291,9 @@
             <div class="stay-dur-col text-red" v-on:click="temp_duration.m > 0 ? temp_duration.m -= 1 : 0">-</div>
             <div class="stay-dur-col text-red" v-on:click="temp_duration.s > 0 ? temp_duration.s -= 1 : 0">-</div>
           </div>
+        </div> -->
+        <div class="new-stay-dur">
+          <input class="new-dur-input" type="number" min=0 onKeyPress="if(this.value.length==3) return false;" v-model.number="temp_duration.full">
         </div>
         <div class="stay-dur-button">
           <f7-button fill @click="doneChangeDuration">Change</f7-button>
@@ -411,7 +414,8 @@ export default {
     temp_duration: {
       h: 0,
       m: 1,
-      s: 0
+      s: 0,
+      full: 45
     },
     temp_start_hour: {
       h1: 0,
@@ -657,11 +661,16 @@ export default {
         self.temp_duration.h = parseInt(string_duration[0]);
         self.temp_duration.m = parseInt(string_duration[1]);
         self.temp_duration.s = parseInt(string_duration[2]);
+        self.temp_duration.full = parseInt(string_duration);
+
+        console.log(self.temp_duration.full);
         window.f7.pickerModal("#picker-modal-duration", true);
       }
     },
     doneChangeDuration(){
-      let new_duration = parseInt("" + self.temp_duration.h + self.temp_duration.m + self.temp_duration.s);
+      // let new_duration = parseInt("" + self.temp_duration.h + self.temp_duration.m + self.temp_duration.s);
+      self.temp_duration.full = (self.temp_duration.full.length === 0)? 0 : self.temp_duration.full;
+      let new_duration = parseInt(self.temp_duration.full);
       console.log(new_duration);
       console.log(self.cur_item_id);
 
@@ -990,6 +999,19 @@ export default {
     margin-left: 26%;
   }
 
+  .new-stay-dur{
+    width: 45%;
+    margin: auto;
+    overflow: auto;
+  }
+
+  .new-dur-input{
+    width: 99%;
+    font-size: 1.5em;
+    border: 1px solid black;
+    text-align: center;
+  }
+
   /***/
   .start-hour{
     width: 100%;
@@ -997,7 +1019,7 @@ export default {
   }
 
   .start-hour-row{
-    /* width: 90%; */
+    width: 90%;
     overflow: auto;
     margin-left: 18.5%;
   }
@@ -1012,6 +1034,11 @@ export default {
     font-size: 1.25em;
     font-weight: bold;
   }
+
+  .start-hour-row .start-hour-col:nth-child(1), .start-hour-row .start-hour-col:nth-child(4){
+    margin-right: 0;
+  }
+
 
   .start-hour-action .active-state{
     background-color: rgba(0,0,0,0.3);

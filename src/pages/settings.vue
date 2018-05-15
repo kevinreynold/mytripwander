@@ -60,6 +60,15 @@ export default {
     },
     doLogOut() {
       window.f7.showPreloader();
+
+      localStorage.clear();
+
+      window.plugins.googleplus.disconnect(
+          function (msg) {
+            console.log(msg); // do something useful instead of alerting
+          }
+      );
+
       setTimeout(function () {
         window.f7.hidePreloader();
         window.f7.loginScreen();

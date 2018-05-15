@@ -1,6 +1,7 @@
 const store = {
   _url : 'http://103.253.25.103',
-  service_url : 'http://103.253.25.103:5000',
+  // service_url : 'http://103.253.25.103:5000',
+  service_url : 'http://192.168.100.17:5000',
   // service_url : 'http://127.0.0.1:5000',
   user_id: 2,
   user_name: 'Reynold Kevin',
