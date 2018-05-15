@@ -98,6 +98,15 @@ import form_input_self from '../components/form-input-self'
 import plan_trip from "../js/plantrip"
 import store from "../js/store"
 
+function getDeviceToken(){
+  window.FirebasePlugin.onTokenRefresh(function(token) {
+      // save this server-side and use it to push notifications to this device
+      store.device_token = token;
+  }, function(error) {
+      console.log(error);
+  });
+}
+
 export default {
   name: "register",
   components: {
@@ -148,6 +157,7 @@ export default {
       let formData = window.f7.formToData('#register-form');
       formData.currency = formData.currency.split('-')[0].trim();
 
+      getDeviceToken();
       plan_trip.doSignUp(formData);
 
       // window.f7.showPreloader();

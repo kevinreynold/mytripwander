@@ -385,6 +385,14 @@ module.exports = [
     "clobbers": [
       "window.plugins.toast"
     ]
+  },
+  {
+    "id": "cordova-plugin-firebase.FirebasePlugin",
+    "file": "plugins/cordova-plugin-firebase/www/firebase.js",
+    "pluginId": "cordova-plugin-firebase",
+    "clobbers": [
+      "FirebasePlugin"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -403,7 +411,9 @@ module.exports.metadata =
   "cordova-plugin-vibration": "2.1.6",
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-googleplus": "5.3.0",
-  "cordova-plugin-x-toast": "2.6.2"
+  "cordova-plugin-x-toast": "2.6.2",
+  "cordova-plugin-firebase": "0.1.20",
+  "cordova-android-play-services-gradle-release": "1.4.1"
 };
 // BOTTOM OF METADATA
 });

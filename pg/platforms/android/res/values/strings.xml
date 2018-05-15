@@ -3,4 +3,7 @@
     <string name="app_name">TripWander</string>
     <string name="launcher_name">@string/app_name</string>
     <string name="activity_name">@string/launcher_name</string>
+    
+    <string name="google_app_id">1:381713071305:android:4b7391f7097d20cf</string>
+    <string name="google_api_key">AIzaSyBLKP80-e4PXQeMCnkUy_JG20Y5v_8zBi4</string>
 </resources>

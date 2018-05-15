@@ -63,6 +63,8 @@ export default {
 
       localStorage.clear();
 
+      // window.FirebasePlugin.unregister();
+
       window.plugins.googleplus.disconnect(
           function (msg) {
             console.log(msg); // do something useful instead of alerting

@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "381713071305",
+    "firebase_url": "https://mytripwander.firebaseio.com",
+    "project_id": "mytripwander",
+    "storage_bucket": "mytripwander.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381713071305:android:4b7391f7097d20cf",
+        "android_client_info": {
+          "package_name": "com.phonegap.tripwander"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381713071305-3a9erm1qhk0t5cvecdd2eps7k1pl04mq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phonegap.tripwander",
+            "certificate_hash": "e66f4df50f8a355949d384eb85622ca9070daf68"
+          }
+        },
+        {
+          "client_id": "381713071305-7vlhu1gu1oi6q4t10g1qlol08an294g4.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "381713071305-g4fka0qrhpff7qbbt898cl5tf3j7i2mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLKP80-e4PXQeMCnkUy_JG20Y5v_8zBi4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "381713071305-7vlhu1gu1oi6q4t10g1qlol08an294g4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

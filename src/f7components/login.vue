@@ -49,6 +49,15 @@ import store from "../js/store"
 
 let self;
 
+function getDeviceToken(){
+  window.FirebasePlugin.onTokenRefresh(function(token) {
+      // save this server-side and use it to push notifications to this device
+      store.device_token = token;
+  }, function(error) {
+      console.log(error);
+  });
+}
+
 export default {
   name: "login",
   components: {
@@ -87,15 +96,11 @@ export default {
       console.log(email);
       console.log(password);
 
+      getDeviceToken();
       plan_trip.doLogin(self, email, password);
     },
     doGoogleLogin(){
-      // window.plugins.googleplus.disconnect(
-      //     function (msg) {
-      //       console.log(msg); // do something useful instead of alerting
-      //     }
-      // );
-
+      getDeviceToken();
       window.plugins.googleplus.login(
         {
           'webClientId': '381713071305-g4fka0qrhpff7qbbt898cl5tf3j7i2mh.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
@@ -112,6 +117,12 @@ export default {
           console.log('error: ' + msg);
         }
       );
+
+      // window.plugins.googleplus.disconnect(
+      //     function (msg) {
+      //       console.log(msg); // do something useful instead of alerting
+      //     }
+      // );
     },
     doFacebookLogin(){
       alert('Facebook Login');

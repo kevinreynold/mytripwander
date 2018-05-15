@@ -1291,6 +1291,7 @@ plan_trip.doSignUp = async function(formData){
     console.log(JSON.stringify(response));
     if(response != 'Error'){
       if(response.status === 'OK'){
+        await this.updateDeviceToken(formData.email);
         store.user_id = response.user_id;
         store.user_name = params.username;
         store.email = params.email;
@@ -1329,6 +1330,43 @@ plan_trip.doSignUp = async function(formData){
       });
     }
   }
+}
+
+plan_trip.getDeviceToken = function(){
+}
+
+plan_trip.updateDeviceToken = async function(email, offline=store.offline){
+  if(!offline){
+    let device_token = store.device_token;
+
+    window.f7.addNotification({
+        message: device_token,
+        hold: 2500
+    });
+    await sleep(1000);
+
+    let update_token_params = {
+      email: email,
+      device_token: device_token,
+    };
+
+    let update_token_response = await got.post(store.service_url +"/update/token", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(update_token_params),
+        timeout: 7000
+      })
+      .then(res => {
+        if (res.statusCode !== 200) {
+          return 'Error';
+        }
+        return JSON.parse(res.body);
+      })
+      .catch(err => {
+        return 'Error';
+      });
+    }
 }
 
 plan_trip.doLogin = async function(self, email, password){
@@ -1380,6 +1418,7 @@ plan_trip.doLogin = async function(self, email, password){
     console.log(JSON.stringify(response));
     if(response != 'Error'){
       if(response.status === 'OK'){
+        await this.updateDeviceToken(email);
         let user = response.user;
 
         store.user_id = user.id;
@@ -1413,7 +1452,7 @@ plan_trip.doLogin = async function(self, email, password){
     }
     else{
       window.f7.addNotification({
-          message: 'No internet connection'
+          message: 'No internet connection..'
       });
       window.f7.hidePreloader();
     }
@@ -1422,6 +1461,7 @@ plan_trip.doLogin = async function(self, email, password){
 
 plan_trip.doGoogleLogin = async function(email, username){
   window.f7.showPreloader();
+
   let params = {
     email: email,
     username: username,
@@ -1432,6 +1472,7 @@ plan_trip.doGoogleLogin = async function(email, username){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(params),
+      timeout: 7000
     })
     .then(res => {
       if (res.statusCode !== 200) {
@@ -1442,6 +1483,8 @@ plan_trip.doGoogleLogin = async function(email, username){
     .catch(err => {
       return 'Error';
     });
+
+  await this.updateDeviceToken(email);
 
   console.log(JSON.stringify(response));
   let user = response.user;
@@ -1659,9 +1702,14 @@ plan_trip.makePDF = async function(){
 
   console.log(JSON.stringify(response))
 
-  // let url = 'http://127.0.0.1/pdf_result/' + filename;
-  let url = 'http://103.253.25.103/pdf/' + filename;
-  window.open(url, '_system', 'location=yes')
+  if(store.offline){
+    let url = store._local_url + '/pdf_result/' + filename;
+    window.open(url, '_system', 'location=yes')
+  }
+  else{
+    let url = 'http://103.253.25.103/pdf/' + filename;
+    window.open(url, '_system', 'location=yes')
+  }
 
   // console.log(JSON.stringify(print_data));
   // let doc = new jsPDF();

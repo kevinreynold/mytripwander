@@ -1,8 +1,10 @@
 const store = {
   _url : 'http://103.253.25.103',
-  // service_url : 'http://103.253.25.103:5000',
-  service_url : 'http://192.168.100.17:5000',
+  _local_url: 'http://192.168.100.17',
+  service_url : 'http://103.253.25.103:5000',
+  // service_url : 'http://192.168.100.17:5000',
   // service_url : 'http://127.0.0.1:5000',
+  offline: false,
   user_id: 2,
   user_name: 'Reynold Kevin',
   email: 'kevin@gmail.com',
@@ -11,6 +13,7 @@ const store = {
   currency_rate: 1,
   currency_symbol: '$',
   list_currency: [],
+  device_token: "",
   //mytrip
   list_my_trip: [],
   plan_trip_mode: "plan", //plan || edit || past.
