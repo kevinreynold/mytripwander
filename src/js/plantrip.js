@@ -66,7 +66,7 @@ plan_trip.getDestinationList = async function(){
       if(store.list_dest_all.length === 0){
         var data = await got.get(store.service_url +"/city/dest", {
           retries: 2,
-          timeout: 5000
+          // timeout: 5000
         })
         .then(res => {
           var res = JSON.parse(res.body);
@@ -152,7 +152,7 @@ plan_trip.goToNearbyPlaces = async function(origin){
         var data = await got.get(store.service_url +"/place/nearby", {
           query: dest_data,
           retries: 2,
-          timeout: 7000
+          // timeout: 7000
         })
         .then(res => {
           var res = JSON.parse(res.body);
@@ -247,7 +247,7 @@ plan_trip.goToPerDay = async function(){
     try {
         var data = await got.get(store.service_url + "/attraction/" + city_code, {
           retries: 2,
-          timeout: 7000
+          // timeout: 7000
         })
         .then(res => {
           var res = JSON.parse(res.body);
@@ -265,7 +265,7 @@ plan_trip.goToPerDay = async function(){
     try {
         var data = await got.get(store.service_url + "/food/" + city_code, {
           retries: 2,
-          timeout: 7000
+          // timeout: 7000
         })
         .then(res => {
           var res = JSON.parse(res.body);
@@ -799,12 +799,12 @@ function convertPrice(price){
 
 plan_trip.getTotalBudget = function(){
   let flight_budget = 0;
-  for (var i = 0; i < store.flight_plan.length; i++) {
+  for (let i = 0; i < store.flight_plan.length; i++) {
     flight_budget += store.flight_plan[i].unified_price;
   }
 
   let hotel_budget = 0;
-  for (var i = 0; i < store.trip_city_plan_data.length; i++) {
+  for (let i = 0; i < store.trip_city_plan_data.length; i++) {
     for (let j = 0; j < store.trip_city_plan_data[i].cities.length; j++) {
       if(store.trip_city_plan_data[i].cities[j].hotel){
         if(store.trip_city_plan_data[i].cities[j].hotel.rooms){
@@ -868,7 +868,8 @@ plan_trip.saveTrip = async function(){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(params),
-      timeout: 10000
+      retries: 2,
+      // timeout: 10000
     })
     .then(res => {
       if (res.statusCode !== 200) {
@@ -917,7 +918,8 @@ plan_trip.updateTrip = async function(){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(params),
-      timeout: 10000
+      retries: 2,
+      // timeout: 10000
     })
     .then(res => {
       if (res.statusCode !== 200) {
@@ -957,7 +959,7 @@ plan_trip.loadingTrip = async function(id){
   try {
       var data = await got.get(store.service_url + "/trip/load/" + id, {
         retries: 2,
-        timeout: 7000
+        // timeout: 7000
       })
       .then(res => {
         var res = JSON.parse(res.body);
@@ -997,9 +999,12 @@ plan_trip.goToMyTrip = async function(){
       var data = await got.get(store.service_url +"/trip/load/all", {
         query: user_data,
         retries: 2,
-        timeout: 5000
+        // timeout: 5000
       })
       .then(res => {
+        console.log(res.url);
+        console.log(res.statusCode);
+        console.log(res.statusMessage);
         var res = JSON.parse(res.body);
         return res;
       });
@@ -1040,7 +1045,7 @@ plan_trip.getAllCurrency = async function(){
     if(store.list_currency.length == 0){
       let data = await got.get(store.service_url +"/currency", {
         retries: 2,
-        timeout: 7000
+        // timeout: 7000
       })
       .then(res => {
         var res = JSON.parse(res.body);
@@ -1070,13 +1075,15 @@ plan_trip.goSignUp = async function(){
 }
 
 plan_trip.goChooseCurrency = async function(){
-  if(await this.getAllCurrency()){
+  if(!await this.getAllCurrency()){
     window.f7.hidePreloader();
     window.f7.addNotification({
         message: 'No Internet Connection..'
     });
     return 0;
   }
+
+  console.log("test");
 
   window.f7.showPreloader();
   var mainView = Dom7('#main-view')[0].f7View;
@@ -1196,7 +1203,7 @@ plan_trip.forgotPassword = async function(email){
   try {
     let data = await got.get(store.service_url +"/forgot/" + email, {
       retries: 2,
-      timeout: 7000
+      // timeout: 7000
     })
     .then(res => {
       var res = JSON.parse(res.body);
@@ -1276,7 +1283,8 @@ plan_trip.doSignUp = async function(formData){
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(params),
-        timeout: 7000
+        retries: 2,
+        // timeout: 7000
       })
       .then(res => {
         if (res.statusCode !== 200) {
@@ -1355,7 +1363,8 @@ plan_trip.updateDeviceToken = async function(email, offline=store.offline){
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(update_token_params),
-        timeout: 7000
+        retries: 2,
+        // timeout: 7000
       })
       .then(res => {
         if (res.statusCode !== 200) {
@@ -1403,7 +1412,8 @@ plan_trip.doLogin = async function(self, email, password){
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(params),
-        timeout: 7000
+        retries: 2,
+        // timeout: 7000
       })
       .then(res => {
         if (res.statusCode !== 200) {
@@ -1472,7 +1482,8 @@ plan_trip.doGoogleLogin = async function(email, username){
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(params),
-      timeout: 7000
+      retries: 2,
+      // timeout: 7000
     })
     .then(res => {
       if (res.statusCode !== 200) {
@@ -1647,169 +1658,189 @@ plan_trip.getPDFData = async function(){
   return result
 }
 
-plan_trip.makePDF = async function(){
-  window.f7.showPreloader("Generate PDF Data");
-
-  //file_name
-  let filename = 'trip_' + getDateAfterDays(0) + '_' + store.trip_id + '.pdf';
-
-  let print_data = await this.getPDFData();
-
-  //header
-  let total_days_trip = 0;
-  for (var i = 0; i < store.trip_plan_data.list_destination.length; i++) {
-    total_days_trip += store.trip_plan_data.list_destination[i].stay;
-  }
-
-  let dest_title = "";
-  for (var i = 0; i < store.trip_plan_data.list_destination.length; i++) {
-    dest_title += store.trip_plan_data.list_destination[i].country_name;
-    if(i !== store.trip_plan_data.list_destination.length-1){
-      dest_title += ' - ';
+plan_trip.isHotelFilled = function(){
+  for (let i = 0; i < store.trip_city_plan_data.length; i++) {
+    for (let j = 0; j < store.trip_city_plan_data[i].cities.length; j++) {
+      if(!store.trip_city_plan_data[i].cities[j].hotel){
+        return false;
+      }
     }
   }
+  return true;
+}
 
-  let total_budget = convertPrice(this.getTotalBudget());
-  let total_budget_string = store.currency_symbol + total_budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-  let params = {
-    filename: filename,
-    print_data: JSON.stringify(print_data),
-    total_days_trip: total_days_trip,
-    dest_title: dest_title,
-    total_budget: total_budget_string,
-    first_city: store.trip_plan_data.first_city,
-    start_date: store.trip_plan_data.start_date
-  };
-
-  let response = await got.post(store.service_url +"/make/pdf", {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(params),
-      retries: 2,
-      timeout: 15000
-    })
-    .then(res => {
-      if (res.statusCode !== 200) {
-        return 'Error';
-      }
-      return JSON.parse(res.body);
-    })
-    .catch(err => {
-      return 'Error';
+plan_trip.makePDF = async function(){
+  if(!this.isHotelFilled()){
+    window.f7.addNotification({
+        message: "Please fill at least all of the hotel's information before try to generate PDF data..",
+        hold: 5000
     });
-
-  console.log(JSON.stringify(response))
-
-  if(store.offline){
-    let url = store._local_url + '/pdf_result/' + filename;
-    window.open(url, '_system', 'location=yes')
   }
   else{
-    let url = 'http://103.253.25.103/pdf/' + filename;
-    window.open(url, '_system', 'location=yes')
+    window.f7.showPreloader("Generate PDF Data");
+
+    //file_name
+    let filename = 'trip_' + getDateAfterDays(0) + '_' + store.trip_id + '.pdf';
+
+    let print_data = await this.getPDFData();
+
+    //header
+    let total_days_trip = 0;
+    for (var i = 0; i < store.trip_plan_data.list_destination.length; i++) {
+      total_days_trip += store.trip_plan_data.list_destination[i].stay;
+    }
+
+    let dest_title = "";
+    for (var i = 0; i < store.trip_plan_data.list_destination.length; i++) {
+      dest_title += store.trip_plan_data.list_destination[i].country_name;
+      if(i !== store.trip_plan_data.list_destination.length-1){
+        dest_title += ' - ';
+      }
+    }
+
+    let total_budget = convertPrice(this.getTotalBudget());
+    let total_budget_string = store.currency_symbol + total_budget.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    let params = {
+      filename: filename,
+      print_data: JSON.stringify(print_data),
+      total_days_trip: total_days_trip,
+      dest_title: dest_title,
+      total_budget: total_budget_string,
+      first_city: store.trip_plan_data.first_city,
+      start_date: store.trip_plan_data.start_date,
+      offline: store.offline
+    };
+
+    let response = await got.post(store.service_url +"/make/pdf", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params),
+        retries: 2,
+        // timeout: 15000
+      })
+      .then(res => {
+        if (res.statusCode !== 200) {
+          return 'Error';
+        }
+        return JSON.parse(res.body);
+      })
+      .catch(err => {
+        return 'Error';
+      });
+
+    console.log(JSON.stringify(response))
+
+    if(store.offline){
+      let url = store._local_url + '/pdf_result/' + filename;
+      window.open(url, '_system', 'location=yes')
+    }
+    else{
+      let url = store._url + '/pdf/' + filename;
+      window.open(url, '_system', 'location=yes')
+    }
+
+    // console.log(JSON.stringify(print_data));
+    // let doc = new jsPDF();
+    //
+    // let page = 1;
+    // let cur_height = 10;
+    // //A4
+    // //width 210
+    // //height 297
+    //
+    // doc.setFontSize(18);
+    // doc.text(105, cur_height+=10, total_days_trip + ' Days Trip', null, null, 'center');
+    // doc.text(105, cur_height+=10, destTitle, null, null, 'center');
+    // doc.text(105, cur_height+=10, 'From', null, null, 'center');
+    // doc.text(105, cur_height+=10, store.trip_plan_data.first_city, null, null, 'center');
+    // doc.text(105, cur_height+=10, store.trip_plan_data.start_date, null, null, 'center');
+    //
+    // doc.setFontSize(14);
+    // doc.text(200, cur_height+=10, 'Total Budget :', null, null, 'right');
+    // doc.text(200, cur_height+=7.5, total_budget_string, null, null, 'right');
+    // cur_height+=2.5;
+    // //header selesai
+    //
+    // for (var i = 0; i < print_data.length; i++) {
+    //   doc.setFontSize(18);
+    //   doc.text(105, cur_height+=10, print_data[i].country_name, null, null, 'center');
+    //   if(cur_height > 275){
+    //     page++;
+    //     doc.addPage('a4');
+    //     cur_height = 10;
+    //   }
+    //
+    //   for (var j = 0; j < print_data[i].cities.length; j++) {
+    //     doc.setFontSize(16);
+    //     doc.text(10, cur_height+=7.5, print_data[i].cities[j].city);
+    //     if(cur_height > 275){
+    //       page++;
+    //       doc.addPage('a4');
+    //       cur_height = 10;
+    //     }
+    //
+    //     for (var k = 0; k < print_data[i].cities[j].list_dest.length; k++) {
+    //       doc.setFontSize(12);
+    //       let per_day_data = print_data[i].cities[j].list_dest[k];
+    //       let day_title = 'Day ' + per_day_data.day + ' - ' + per_day_data.date;
+    //       doc.setFontType("bold");
+    //       doc.text(10, cur_height+=7.5, day_title);
+    //       if(cur_height > 275){
+    //         page++;
+    //         doc.addPage('a4');
+    //         cur_height = 10;
+    //       }
+    //
+    //       doc.setFontType("normal");
+    //       let offset_place = 1;
+    //
+    //       //mulai tulis per tempatnya
+    //       for (var m = 0; m < per_day_data.route_data.length; m++) {
+    //         let info = per_day_data.route_data[m].string_format.split(' | ');
+    //         let place_name = info[0];
+    //         let time = info[1];
+    //
+    //         doc.text(12.5, cur_height+=7.5, offset_place++ + '. ' + place_name);
+    //         doc.text(200, cur_height, time, null, null, 'right');
+    //         if(cur_height > 275){
+    //           page++;
+    //           doc.addPage('a4');
+    //           cur_height = 10;
+    //         }
+    //       }
+    //       cur_height+=2.5;
+    //     }
+    //     cur_height+=5;
+    //   }
+    //   cur_height+=2.5;
+    // }
+    //
+    //
+    // doc.save(filename);
+    // let myBaseString = doc.output('datauristring');
+    // // Split the base64 string in data and contentType
+    // let block = myBaseString.split(";");
+    // // Get the content type
+    // let dataType = block[0].split(":")[1];// In this case "application/pdf"
+    // // get the real base64 content of the file
+    // let realData = block[1].split(",")[1];// In this case "JVBERi0xLjcKCjE...."
+    //
+    // // The path where the file will be created
+    // let folderpath = "file:///storage/emulated/0/download";
+    //
+    // savebase64AsPDF(folderpath,filename,realData,dataType);
+    //
+    // await sleep(250);
+    //
+    // window.f7.addNotification({
+    //     message: 'Download complete, please check at download folder..',
+    //     hold: 3000
+    // });
+
+    window.f7.hidePreloader();
   }
-
-  // console.log(JSON.stringify(print_data));
-  // let doc = new jsPDF();
-  //
-  // let page = 1;
-  // let cur_height = 10;
-  // //A4
-  // //width 210
-  // //height 297
-  //
-  // doc.setFontSize(18);
-  // doc.text(105, cur_height+=10, total_days_trip + ' Days Trip', null, null, 'center');
-  // doc.text(105, cur_height+=10, destTitle, null, null, 'center');
-  // doc.text(105, cur_height+=10, 'From', null, null, 'center');
-  // doc.text(105, cur_height+=10, store.trip_plan_data.first_city, null, null, 'center');
-  // doc.text(105, cur_height+=10, store.trip_plan_data.start_date, null, null, 'center');
-  //
-  // doc.setFontSize(14);
-  // doc.text(200, cur_height+=10, 'Total Budget :', null, null, 'right');
-  // doc.text(200, cur_height+=7.5, total_budget_string, null, null, 'right');
-  // cur_height+=2.5;
-  // //header selesai
-  //
-  // for (var i = 0; i < print_data.length; i++) {
-  //   doc.setFontSize(18);
-  //   doc.text(105, cur_height+=10, print_data[i].country_name, null, null, 'center');
-  //   if(cur_height > 275){
-  //     page++;
-  //     doc.addPage('a4');
-  //     cur_height = 10;
-  //   }
-  //
-  //   for (var j = 0; j < print_data[i].cities.length; j++) {
-  //     doc.setFontSize(16);
-  //     doc.text(10, cur_height+=7.5, print_data[i].cities[j].city);
-  //     if(cur_height > 275){
-  //       page++;
-  //       doc.addPage('a4');
-  //       cur_height = 10;
-  //     }
-  //
-  //     for (var k = 0; k < print_data[i].cities[j].list_dest.length; k++) {
-  //       doc.setFontSize(12);
-  //       let per_day_data = print_data[i].cities[j].list_dest[k];
-  //       let day_title = 'Day ' + per_day_data.day + ' - ' + per_day_data.date;
-  //       doc.setFontType("bold");
-  //       doc.text(10, cur_height+=7.5, day_title);
-  //       if(cur_height > 275){
-  //         page++;
-  //         doc.addPage('a4');
-  //         cur_height = 10;
-  //       }
-  //
-  //       doc.setFontType("normal");
-  //       let offset_place = 1;
-  //
-  //       //mulai tulis per tempatnya
-  //       for (var m = 0; m < per_day_data.route_data.length; m++) {
-  //         let info = per_day_data.route_data[m].string_format.split(' | ');
-  //         let place_name = info[0];
-  //         let time = info[1];
-  //
-  //         doc.text(12.5, cur_height+=7.5, offset_place++ + '. ' + place_name);
-  //         doc.text(200, cur_height, time, null, null, 'right');
-  //         if(cur_height > 275){
-  //           page++;
-  //           doc.addPage('a4');
-  //           cur_height = 10;
-  //         }
-  //       }
-  //       cur_height+=2.5;
-  //     }
-  //     cur_height+=5;
-  //   }
-  //   cur_height+=2.5;
-  // }
-  //
-  //
-  // doc.save(filename);
-  // let myBaseString = doc.output('datauristring');
-  // // Split the base64 string in data and contentType
-  // let block = myBaseString.split(";");
-  // // Get the content type
-  // let dataType = block[0].split(":")[1];// In this case "application/pdf"
-  // // get the real base64 content of the file
-  // let realData = block[1].split(",")[1];// In this case "JVBERi0xLjcKCjE...."
-  //
-  // // The path where the file will be created
-  // let folderpath = "file:///storage/emulated/0/download";
-  //
-  // savebase64AsPDF(folderpath,filename,realData,dataType);
-  //
-  // await sleep(250);
-  //
-  // window.f7.addNotification({
-  //     message: 'Download complete, please check at download folder..',
-  //     hold: 3000
-  // });
-
-  window.f7.hidePreloader();
 }
 
 function getDateAfterDays(day){

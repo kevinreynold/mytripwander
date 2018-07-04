@@ -48,7 +48,7 @@ hotel_api.hotelSearch = async function(passenger_data){
       var data = await got.get(store.service_url +"/hotel/search", {
         query: passenger_data,
         retries: 2,
-        timeout: 60000
+        // timeout: 60000
       })
       .then(res => {
         var res = JSON.parse(res.body);
@@ -146,7 +146,10 @@ hotel_api.hotelSeachLocal = async function(json = "hotel_search_hongkong_city"){
 hotel_api.getRedirectLink = async function(url){
   window.f7.showPreloader();
   try {
-    var result = await got.get(url, {retries: 2, timeout:10000})
+    var result = await got.get(url, {
+      retries: 2,
+      // timeout:10000
+    })
     .then(res => {
       var res = JSON.parse(res.body);
       return res;
@@ -236,8 +239,7 @@ hotel_api.getHotelPlan = async function(){
       //   check_out = new Date(getDateAfter(current_date, trip_city_plan_data_one.cities[i].day));
       // }
 
-      console.log(current_date);
-      console.log(check_out);
+      console.log('CheckIn: ' + current_date + ' || CheckOut: ' + check_out);
       let passenger_data = {};
       if(trip_city_plan_data_one.cities[i].hotel == undefined || trip_city_plan_data_one.cities[i].hotel == null){
         console.log('case 1');

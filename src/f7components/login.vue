@@ -96,11 +96,17 @@ export default {
       console.log(email);
       console.log(password);
 
-      getDeviceToken();
+      if(!store.offline){
+        getDeviceToken();
+      }
+
       plan_trip.doLogin(self, email, password);
     },
     doGoogleLogin(){
-      getDeviceToken();
+      if(!store.offline){
+        getDeviceToken();
+      }
+
       window.plugins.googleplus.login(
         {
           'webClientId': '381713071305-g4fka0qrhpff7qbbt898cl5tf3j7i2mh.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.

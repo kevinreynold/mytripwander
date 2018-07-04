@@ -8,6 +8,7 @@ npm install --only=dev
 
 npm view <package> version
 
+vue yang dipakai sebelumnya 2.2.4
 
 
 "brfs": "1.5.0",
@@ -28,6 +29,8 @@ The connection to the server was unsuccessful. (file:///android_asset/www/index.
 <preference name="loadUrlTimeoutValue" value="60000" />
 
 //CORDOVA
+cordova platform add android@6.3.0
+
 cordova plugin list
 cordova plugin remove <>
 cordova prepare
@@ -46,5 +49,7 @@ $ cordova plugin add cordova-plugin-whitelist
 $ cordova plugin add cordova-plugin-googleplus --save --variable REVERSED_CLIENT_ID=com.googleusercontent.apps.381713071305-3a9erm1qhk0t5cvecdd2eps7k1pl04mq
 $ cordova plugin add cordova-plugin-firebase@0.1.20 --save
 buat gabungin 2 google plugins
-$ cordova plugin add cordova-android-play-services-gradle-release --variable PLAY_SERVICES_VERSION=10.+
+$ cordova plugin add cordova-android-play-services-gradle-release --variable PLAY_SERVICES_VERSION=15.+
 $ cordova prepare
+
+cordova plugin add cordova-android-support-gradle-release

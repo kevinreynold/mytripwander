@@ -130,7 +130,22 @@
        <tab-content ref="trip_plan_tab_3" title="Interests" icon="fa fa-heart">
           <f7-block class="less-margin" inner>
             Interests <span @click="showHelp('popover-interest', 'interest-help')" id="interest-help"><f7-icon f7="help" size="100%"/></span>
+            <!-- Interests <span @click="interestHelp"><f7-icon f7="help" size="100%"/></span> -->
           </f7-block>
+
+          <!-- <transition name="return-fade" mode="out-in">
+            <div class="interest-help" v-if="interest_help">
+              <div>
+                <ul>
+                  <li>Every interest has range from -2 to 2.</li>
+                  <li>0 means neutral.</li>
+                  <li>Below than 0 means travelers are not interested.</li>
+                  <li>More than 0 means travelers are really interested.</li>
+                  <li>The More/Lower points means degree level of interest.</li>
+                </ul>
+              </div>
+            </div>
+          </transition> -->
           <f7-block class="modal-container" inner no-hairlines>
             <div v-for="interest in interests" :key="interest.id" class="interest-input">
               <div class="interest-icon">
@@ -381,10 +396,10 @@
       <div class="popover-body">
         <ul>
           <li>Travelers currently can travel to 3 countries : Hong Kong, Taiwan and South Korea</li>
-          <li>Travelers can travel at least 3 days country.</li>
-          <li>Travelers can travel to Hong Kong up to 6 days.</li>
-          <li>Travelers can travel to Taiwan up to 15 days</li>
-          <li>Travelers can travel to South Korea up to 9 days</li>
+          <li>Travelers can travel at least for 3 days.</li>
+          <li>Travelers can travel to Hong Kong up to 5 days.</li>
+          <li>Travelers can travel to Taiwan up to 12 days</li>
+          <li>Travelers can travel to South Korea up to 8 days</li>
           <li>Travelers can travel to Taipei, Tainan, Hsinchu, Taichung and Kaohsiung at Taiwan.</li>
           <li>Travelers can travel to Seoul, Busan, Hsinchu, Gyeongju at South Korea.</li>
         </ul>
@@ -393,8 +408,8 @@
     <f7-popover id="popover-interest">
       <div class="popover-body">
         <ul>
-          <li>Every interest has range from -2 to 2</li>
-          <li>0 means neutral</li>
+          <li>Every interest has range from -2 to 2.</li>
+          <li>0 means neutral.</li>
           <li>Below than 0 means travelers are not interested.</li>
           <li>More than 0 means travelers are really interested.</li>
           <li>The More/Lower points means degree level of interest.</li>
@@ -500,7 +515,8 @@ export default {
     budget: "",
     start_hour: "",
     end_hour: "",
-    last_tab_index: 0
+    last_tab_index: 0,
+    interest_help: true
   }),
   filters:{
     interestIcon(icon){
@@ -813,6 +829,9 @@ export default {
     },
     showHelp(popover, target){
       window.f7.popover("#"+popover, "#"+target, true);
+    },
+    interestHelp(){
+      self.interest_help = !self.interest_help;
     },
     onComplete(){
       console.log("finish");
@@ -1145,5 +1164,23 @@ export default {
    margin-top: 9px;
    font-size: 1.2em;
    font-weight: bold;
+ }
+
+ .interest-help{
+   margin-top: -20px;
+   margin-bottom: 16px;
+   padding: 0 32px;
+ }
+
+ .interest-help div{
+   border: 1px solid rgba(0, 0, 0, 0.4);
+   border-radius: 2px;
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+   font-size: 0.9em;
+ }
+
+ .interest-help div ul{
+   padding-left: 25px;
+   margin: 8px 0;
  }
 </style>

@@ -294,22 +294,26 @@ travelpayouts.getRedirectLink = async function(url){
 
 travelpayouts.getNearestAirport = async function(city_code){
     try {
+        window.f7.showPreloader();
         var data = await got.get(store.service_url + "/airport/nearest/" + city_code, {
-          retries: 2
+          retries: 0
         })
         .then(res => {
           var res = JSON.parse(res.body);
           return res;
         });
+
+        window.f7.hidePreloader();
         return data.result;
     } catch (e) {
+      window.f7.hidePreloader();
       return city_code;
     }
 }
 
 function filterArrivalFlight(x){
   let answer = false;
-  if((new Date('1970/01/01 ' + x.display[0].arrival_airport.time) >= new Date('1970/01/01 05:00') && new Date('1970/01/01 ' + x.display[0].arrival_airport.time) <= new Date('1970/01/01 16:00'))){
+  if((new Date('1970/01/01 ' + x.display[0].arrival_airport.time) >= new Date('1970/01/01 10:00') && new Date('1970/01/01 ' + x.display[0].arrival_airport.time) <= new Date('1970/01/01 16:00'))){
     answer = true;
   }
   return answer;
@@ -465,6 +469,7 @@ travelpayouts.getFlightPlan = async function(){
     }
   } catch (e) {
     console.log(e.message);
+    console.log("NO INTERNET!!!");
     await sleep(1000);
     window.f7.hidePreloader();
     window.f7.addNotification({
