@@ -1340,41 +1340,60 @@ plan_trip.doSignUp = async function(formData){
   }
 }
 
-plan_trip.getDeviceToken = function(){
+plan_trip.getDeviceToken = async function(){
+  await sleep(1500);
+
+  window.FirebasePlugin.onTokenRefresh(function(token) {
+      // save this server-side and use it to push notifications to this device
+      store.device_token = token;
+  }, function(error) {
+      console.log(error);
+  });
 }
 
 plan_trip.updateDeviceToken = async function(email, offline=store.offline){
   if(!offline){
-    let device_token = store.device_token;
+    await this.getDeviceToken();
 
-    window.f7.addNotification({
-        message: device_token,
-        hold: 2500
-    });
-    await sleep(1000);
+    if(store.device_token != undefined && store.device_token != null){
 
-    let update_token_params = {
-      email: email,
-      device_token: device_token,
-    };
+      let device_token = store.device_token;
 
-    let update_token_response = await got.post(store.service_url +"/update/token", {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(update_token_params),
-        retries: 2,
-        // timeout: 7000
-      })
-      .then(res => {
-        if (res.statusCode !== 200) {
-          return 'Error';
-        }
-        return JSON.parse(res.body);
-      })
-      .catch(err => {
-        return 'Error';
+      window.f7.addNotification({
+          message: device_token,
+          hold: 2500
       });
+      await sleep(1000);
+
+      let update_token_params = {
+        email: email,
+        device_token: device_token,
+      };
+
+      let update_token_response = await got.post(store.service_url +"/update/token", {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(update_token_params),
+          retries: 2,
+          // timeout: 7000
+        })
+        .then(res => {
+          if (res.statusCode !== 200) {
+            return 'Error';
+          }
+          return JSON.parse(res.body);
+        })
+        .catch(err => {
+          return 'Error';
+        });
+      }
+      else{
+        window.f7.addNotification({
+            message: 'token undefined blm dapet',
+            hold: 2500
+        });
+      }
     }
 }
 

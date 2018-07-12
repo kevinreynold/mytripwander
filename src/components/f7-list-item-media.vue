@@ -9,6 +9,7 @@
 
 <script>
 import plan_trip from "../js/plantrip"
+import store from "../js/store"
 
 export default {
   name: "f7-list-item-media",
@@ -27,13 +28,15 @@ export default {
 
         localStorage.clear();
 
-        // window.FirebasePlugin.unregister();
+        if(!store.offline){
+          // window.FirebasePlugin.unregister();
 
-        window.plugins.googleplus.disconnect(
-            function (msg) {
-              console.log(msg); // do something useful instead of alerting
-            }
-        );
+          window.plugins.googleplus.disconnect(
+              function (msg) {
+                console.log(msg); // do something useful instead of alerting
+              }
+          );
+        }
 
         setTimeout(function () {
           window.f7.hidePreloader();

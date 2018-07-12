@@ -412,8 +412,7 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-googleplus": "5.3.0",
   "cordova-plugin-x-toast": "2.6.2",
-  "cordova-plugin-firebase": "0.1.20",
-  "cordova-android-play-services-gradle-release": "1.4.1"
+  "cordova-plugin-firebase": "0.1.20"
 };
 // BOTTOM OF METADATA
 });

@@ -17,7 +17,7 @@
             <f7_list_item_media link="/hotel/" link_view="#main-view" icon="hotel" title="Book Hotel"/>
             <f7_list_item_media link="/settings/" link_view="#main-view" icon="gear" title="Settings"/>
             <!-- <f7_list_item_media link="/form/" link_view="#main-view" icon="question-circle" title="Tutorial"/> -->
-            <f7_list_item_media mode="logout" icon="sign-out" title="Logout"/>
+            <f7_list_item_media mode="logout" icon="sign-out" title="Sign Out"/>
           </f7-list>
         </f7-page>
       </f7-pages>

@@ -48,10 +48,6 @@
         },
         "cordova-plugin-firebase": {
             "PACKAGE_NAME": "com.phonegap.tripwander"
-        },
-        "cordova-android-play-services-gradle-release": {
-            "PLAY_SERVICES_VERSION": "15.+",
-            "PACKAGE_NAME": "com.phonegap.tripwander"
         }
     },
     "dependent_plugins": {

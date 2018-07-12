@@ -93,7 +93,6 @@ ext {
 
 // PLUGIN GRADLE EXTENSIONS START
 apply from: "cordova-plugin-firebase/tripwander-build.gradle"
-apply from: "cordova-android-play-services-gradle-release/tripwander-cordova-android-play-services-gradle-release.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
@@ -256,8 +255,8 @@ dependencies {
     debugCompile(project(path: "CordovaLib", configuration: "debug"))
     releaseCompile(project(path: "CordovaLib", configuration: "release"))
     compile "com.android.support:support-v4:24.1.1+"
-    compile "com.google.android.gms:play-services-auth:11.8.0"
-    compile "com.google.android.gms:play-services-identity:11.8.0"
+    compile "com.google.android.gms:play-services-auth:+"
+    compile "com.google.android.gms:play-services-identity:+"
     compile "com.google.firebase:firebase-core:+"
     compile "com.google.firebase:firebase-messaging:+"
     compile "com.google.firebase:firebase-crash:+"

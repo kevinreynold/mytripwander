@@ -23,15 +23,11 @@
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.381713071305-3a9erm1qhk0t5cvecdd2eps7k1pl04mq"
       },
       "cordova-plugin-x-toast": {},
-      "cordova-plugin-firebase": {},
-      "cordova-android-play-services-gradle-release": {
-        "PLAY_SERVICES_VERSION": "15.+"
-      }
+      "cordova-plugin-firebase": {}
     }
   },
   "dependencies": {
     "cordova-android": "~6.3.0",
-    "cordova-android-play-services-gradle-release": "^1.4.1",
     "cordova-plugin-battery-status": "~1.2.4",
     "cordova-plugin-camera": "~2.4.1",
     "cordova-plugin-device": "~1.1.6",

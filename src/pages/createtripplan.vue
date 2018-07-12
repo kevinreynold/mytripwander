@@ -129,11 +129,11 @@
        </tab-content>
        <tab-content ref="trip_plan_tab_3" title="Interests" icon="fa fa-heart">
           <f7-block class="less-margin" inner>
-            Interests <span @click="showHelp('popover-interest', 'interest-help')" id="interest-help"><f7-icon f7="help" size="100%"/></span>
-            <!-- Interests <span @click="interestHelp"><f7-icon f7="help" size="100%"/></span> -->
+            <!-- Interests <span @click="showHelp('popover-interest', 'interest-help')" id="interest-help"><f7-icon f7="help" size="100%"/></span> -->
+            Interests <span @click="interestHelp"><f7-icon f7="help" size="100%"/></span>
           </f7-block>
 
-          <!-- <transition name="return-fade" mode="out-in">
+          <transition name="return-fade" mode="out-in">
             <div class="interest-help" v-if="interest_help">
               <div>
                 <ul>
@@ -145,7 +145,7 @@
                 </ul>
               </div>
             </div>
-          </transition> -->
+          </transition>
           <f7-block class="modal-container" inner no-hairlines>
             <div v-for="interest in interests" :key="interest.id" class="interest-input">
               <div class="interest-icon">
