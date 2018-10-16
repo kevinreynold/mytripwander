@@ -31,7 +31,7 @@
                     <div class="overlay">
                       <div class="city-day">Day - {{getCurrentDay(city_index, day_index)}}</div>
                       <div class="city-info">
-                        <div class="city-info-img"><img src="../assets/hotel-icon/location-white.png" alt="adult" width="30px"></div>
+                        <div class="city-info-img"><img src="../assets/hotel-icon/location-white.png" alt="locwhite" width="30px"></div>
                         <div class="city-info-value">{{day.list_place.length}}</div>
                       </div>
                       <div class="city-title">{{city.city_name}}</div>

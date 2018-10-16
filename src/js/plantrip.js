@@ -944,6 +944,7 @@ plan_trip.updateTrip = async function(){
         hold: 2500
     });
     window.f7.hidePreloader();
+    await this.refreshMyTrip();
   }
   else{
     window.f7.addNotification({
@@ -1024,14 +1025,51 @@ plan_trip.goToMyTrip = async function(){
   }
 }
 
+plan_trip.refreshMyTrip = async function(){
+  window.f7.showPreloader();
+  let user_id = store.user_id;
+  let user_data = {
+    user_id: user_id
+  };
+
+  try {
+      var data = await got.get(store.service_url +"/trip/load/all", {
+        query: user_data,
+        retries: 2,
+        // timeout: 5000
+      })
+      .then(res => {
+        console.log(res.url);
+        console.log(res.statusCode);
+        console.log(res.statusMessage);
+        var res = JSON.parse(res.body);
+        return res;
+      });
+
+      store.list_my_trip = data.result;
+
+      await sleep(750);
+      window.f7.hidePreloader();
+  } catch (e) {
+    await sleep(500);
+    window.f7.addNotification({
+          message: 'No internet connection...',
+          hold: 3500
+      });
+    window.f7.hidePreloader();
+  }
+}
+
 plan_trip.backFromEditTrip = async function(){
   window.f7.showPreloader();
   goBack();
+  // await sleep(500);
+  // goBack();
   await sleep(500);
-  goBack();
-  await sleep(500);
+  var mainView = Dom7('#main-view')[0].f7View;
+  mainView.router.refreshPage();
   window.f7.hidePreloader();
-  this.goToMyTrip();
+  // this.goToMyTrip();
 }
 
 function validateEmail(email) {
@@ -1359,10 +1397,10 @@ plan_trip.updateDeviceToken = async function(email, offline=store.offline){
 
       let device_token = store.device_token;
 
-      window.f7.addNotification({
-          message: device_token,
-          hold: 2500
-      });
+      // window.f7.addNotification({
+      //     message: device_token,
+      //     hold: 2500
+      // });
       await sleep(1000);
 
       let update_token_params = {

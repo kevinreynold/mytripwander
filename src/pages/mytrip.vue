@@ -9,6 +9,7 @@
     </f7-toolbar>
 
     <f7-tabs animated swipeable>
+      <!-- Upcoming 2 Weeks -->
       <f7-tab id="tab-mytrip-1" active>
         <div v-for="trip in list_my_trip_upcoming_2_weeks" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'edit-place')">
           <div class="trip-display">
@@ -25,16 +26,30 @@
               <div class="from-trip">{{trip.plan_data.first_city}}</div>
               <div class="from-trip">{{trip.plan_data.start_date}}</div>
               <div class="returned-trip" v-if="trip.plan_data.return_here">* returned to hometown</div>
-              <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
-              <div v-else class="budget-trip">Automatic</div>
+              <!-- <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip">Automatic</div> -->
+              <div v-if="trip.plan_data.mode == true" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip interest-trip">
+                <div class="interest-img"><img src="../assets/interest-icon/must_see1.png" alt="must_see" width="15px"></div>
+                <div>{{trip.plan_data.interests[0].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/culture1.png" alt="culture" width="15px"></div>
+                <div>{{trip.plan_data.interests[1].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/nature1.png" alt="nature" width="15px"></div>
+                <div>{{trip.plan_data.interests[2].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/recreation1.png" alt="recreation" width="15px"></div>
+                <div>{{trip.plan_data.interests[3].value}}</div>
+              </div>
           </div>
           <div class="trip-footer">
             <div class="trip-created-at">Created at : {{getDateString(trip.created_at)}}</div>
+            <div v-if="trip.plan_data.mode == true" class="trip-mode">Self Made</div>
+            <div v-else class="trip-mode">Suggested by TripWander</div>
             <!-- <div class="trip-click" @click="goToEditTrip(trip.id, 'edit')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div> -->
           </div>
         </div>
         <f7-button color="white">Blank Space</f7-button>
       </f7-tab>
+      <!-- Upcoming -->
       <f7-tab id="tab-mytrip-2">
         <div v-for="trip in list_my_trip_upcoming" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'edit')">
           <div class="trip-display">
@@ -51,16 +66,30 @@
               <div class="from-trip">{{trip.plan_data.first_city}}</div>
               <div class="from-trip">{{trip.plan_data.start_date}}</div>
               <div class="returned-trip" v-if="trip.plan_data.return_here">* returned to hometown</div>
-              <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
-              <div v-else class="budget-trip">Automatic</div>
+              <!-- <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip">Automatic</div>-->
+              <div v-if="trip.plan_data.mode == true" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip interest-trip">
+                <div class="interest-img"><img src="../assets/interest-icon/must_see1.png" alt="must_see" width="15px"></div>
+                <div>{{trip.plan_data.interests[0].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/culture1.png" alt="culture" width="15px"></div>
+                <div>{{trip.plan_data.interests[1].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/nature1.png" alt="nature" width="15px"></div>
+                <div>{{trip.plan_data.interests[2].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/recreation1.png" alt="recreation" width="15px"></div>
+                <div>{{trip.plan_data.interests[3].value}}</div>
+              </div>
           </div>
           <div class="trip-footer">
             <div class="trip-created-at">Created at : {{getDateString(trip.created_at)}}</div>
+            <div v-if="trip.plan_data.mode == true" class="trip-mode">Self Made</div>
+            <div v-else class="trip-mode">Suggested by TripWander</div>
             <!-- <div class="trip-click" @click="goToEditTrip(trip.id, 'edit')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div> -->
           </div>
         </div>
         <f7-button color="white">Blank Space</f7-button>
       </f7-tab>
+      <!-- Past -->
       <f7-tab id="tab-mytrip-3">
         <div v-for="trip in list_my_trip_past" :key="trip.id" class="trip-card" @click="goToEditTrip(trip.id, 'past')">
           <div class="trip-display">
@@ -77,11 +106,24 @@
               <div class="from-trip">{{trip.plan_data.first_city}}</div>
               <div class="from-trip">{{trip.plan_data.start_date}}</div>
               <div class="returned-trip" v-if="trip.plan_data.return_here">* returned to hometown</div>
-              <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
-              <div v-else class="budget-trip">Automatic</div>
+              <!-- <div v-if="trip.total_budget > 0" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip">Automatic</div> -->
+              <div v-if="trip.plan_data.mode == true" class="budget-trip"><f7-icon fa="money"/> {{currency_symbol}}{{convertPrice(trip.total_budget)}}</div>
+              <div v-else class="budget-trip interest-trip">
+                <div class="interest-img"><img src="../assets/interest-icon/must_see1.png" alt="must_see" width="15px"></div>
+                <div>{{trip.plan_data.interests[0].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/culture1.png" alt="culture" width="15px"></div>
+                <div>{{trip.plan_data.interests[1].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/nature1.png" alt="nature" width="15px"></div>
+                <div>{{trip.plan_data.interests[2].value}}</div>
+                <div class="interest-img"><img src="../assets/interest-icon/recreation1.png" alt="recreation" width="15px"></div>
+                <div>{{trip.plan_data.interests[3].value}}</div>
+              </div>
           </div>
           <div class="trip-footer">
             <div class="trip-created-at">Created at : {{getDateString(trip.created_at)}}</div>
+            <div v-if="trip.plan_data.mode == true" class="trip-mode">Self Made</div>
+            <div v-else class="trip-mode">Suggested by TripWander</div>
             <!-- <div class="trip-click" @click="goToEditTrip(trip.id, 'past')"><f7-icon f7="chevron_down" size="125%"></f7-icon></div> -->
           </div>
         </div>
@@ -210,6 +252,18 @@ export default {
     left: 10px;
   }
 
+  .trip-created-at{
+    position: absolute;
+    top: 7px;
+    left: 10px;
+  }
+
+  .trip-mode{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+  }
+
   .trip-click{
     position: absolute;
     padding: 5px 10px 5px 35px;
@@ -231,16 +285,24 @@ export default {
 
   .passenger-trip{
     position: absolute;
-    top: 7px;
+    top: 5px;
     left: 7px;
   }
 
-  .passenger-img{
+  .interest-trip{
+    position: absolute;
+    top: 5px !important;
+    right: 5px !important;
+    font-size: 1em !important;
+  }
+
+
+  .passenger-img, .interest-img{
     padding-right: 3px;
     padding-top: 2px;
   }
 
-  .passenger-trip div{
+  .passenger-trip div, .interest-trip div{
     width: 15px;
     overflow: auto;
     float: left;
@@ -248,7 +310,7 @@ export default {
   }
 
   .day-trip{
-    padding-top: 6%;
+    padding-top: 11%;
     text-align: center;
     font-size: 1.1em;
   }
@@ -268,16 +330,16 @@ export default {
 
   .returned-trip{
     position: absolute;
-    bottom: 12px;
-    left: 10px;
+    bottom: 7px;
+    left: 7px;
     font-size: 0.8em;
   }
 
   .budget-trip{
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     right: 10px;
-    font-size: 1.15em;
+    font-size: 1.1em;
   }
 
   .budget-trip .icon{
