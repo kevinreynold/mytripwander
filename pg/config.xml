@@ -115,7 +115,7 @@
     <plugin name="cordova-plugin-vibration" spec="~2.1.5" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-googleplus" spec="^5.3.0">
-        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.381713071305-3a9erm1qhk0t5cvecdd2eps7k1pl04mq" />
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.key" />
     </plugin>
     <plugin name="cordova-plugin-x-toast" />
     <plugin name="cordova-plugin-firebase" spec="^0.1.20" />

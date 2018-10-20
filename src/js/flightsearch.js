@@ -7,7 +7,7 @@ var travelpayouts = {};
 
 var TravelPayouts = require('travelpayouts-api');
 var search_timeout = 5;
-var api = new TravelPayouts('0852ce5f48b5d4158ed28dd23e7ddd44', '143764',{url: 'http://api.travelpayouts.com', timeout: (search_timeout * 1000)});
+var api = new TravelPayouts('key', 'marker',{url: 'http://api.travelpayouts.com', timeout: (search_timeout * 1000)});
 
 function goTo(url_link = '/flight-result/'){
   var mainView = Dom7('#main-view')[0].f7View;
